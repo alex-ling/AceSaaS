@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Core", "Acesoft.Core\Acesoft.Core.csproj", "{19D1E198-C609-4358-A645-F42349A07CF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Web", "Acesoft.Web\Acesoft.Web.csproj", "{0DC7A69E-EE05-4690-9B30-C72A78F8B3C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19D1E198-C609-4358-A645-F42349A07CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D1E198-C609-4358-A645-F42349A07CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D1E198-C609-4358-A645-F42349A07CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D1E198-C609-4358-A645-F42349A07CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC7A69E-EE05-4690-9B30-C72A78F8B3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC7A69E-EE05-4690-9B30-C72A78F8B3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC7A69E-EE05-4690-9B30-C72A78F8B3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC7A69E-EE05-4690-9B30-C72A78F8B3C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15C56BF2-C468-45C5-B13D-00FA80AD2CD4}
+	EndGlobalSection
+EndGlobal
