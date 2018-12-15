@@ -30,7 +30,7 @@ namespace Acesoft.Web.Modules
 
         public ModuleContainer ConfigureServices(IServiceCollection services)
         {
-            // 按给定排序加载startup
+            // Add startup by order
             Startups.OrderBy(s => s.Order).Each(startup =>
             {
                 startup.ConfigureServices(services);
@@ -41,7 +41,7 @@ namespace Acesoft.Web.Modules
 
         public ModuleContainer Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
-            // 按给定排序加载startup
+            // Configure startup by order
             Startups.OrderBy(s => s.Order).Each(startup =>
             {
                 startup.Configure(app, routes, services);

@@ -28,7 +28,7 @@ namespace Acesoft.Web.Multitenancy
 
         public async Task Invoke(HttpContext context)
         {
-            Check.Require(context != null, $"{nameof(context)}不能为Null");
+            Check.Require(context != null, $"{nameof(context)} must not null");
 
             var tenantContext = context.GetTenantContext<T>();
             if (tenantContext != null)

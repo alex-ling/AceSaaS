@@ -38,7 +38,7 @@ namespace Acesoft.Web.Mvc
                 app.UseHsts();
             }
 
-            // 注册saas服务及中间件
+            // Use SaaS middleware
             app.UseMultitenancy();
             app.UsePerTenant((ctx, builder) =>
             {
