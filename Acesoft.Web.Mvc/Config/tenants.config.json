@@ -1,0 +1,19 @@
+{
+  "defaultTenant": "default",
+  "unresolvedRedirect": "http://www.miniplat.com",
+  "RedirectPermanent": false,
+  "tenants": [
+    {
+      "name": "saas",
+      "hostnames": [
+        "localhost:5000",
+        "localhost:5001"
+      ],
+      "modules": [
+        "admin",
+        "platform"
+      ],
+      "theme": "default"
+    }
+  ]
+}

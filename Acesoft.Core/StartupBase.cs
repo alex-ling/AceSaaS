@@ -1,10 +1,10 @@
 ﻿using System;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Acesoft.Core.Modules
+namespace Acesoft.Core
 {
     public abstract class StartupBase : IStartup
     {
@@ -17,7 +17,7 @@ namespace Acesoft.Core.Modules
         }
 
         /// <inheritdoc />
-        public virtual void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider serviceProvider)
+        public virtual void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
         }
     }

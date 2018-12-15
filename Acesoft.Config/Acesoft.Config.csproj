@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AppConfig.cs" />
+    <Compile Remove="BaseConfig.cs" />
+    <Compile Remove="BaseXmlConfig.cs" />
+    <Compile Remove="ConfigFactory.cs" />
+    <Compile Remove="IXmlConfig.cs" />
+    <Compile Remove="IXmlConfigData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Core\Acesoft.Core.csproj" />
+  </ItemGroup>
+
+</Project>

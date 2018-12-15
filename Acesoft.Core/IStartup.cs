@@ -1,13 +1,13 @@
 ﻿using System;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Acesoft.Core.Modules
+namespace Acesoft.Core
 {
     /// <summary>
-    /// 模块启动接口，用于初始化一个HTTP中间件/管道
+    /// Plugin启动接口，用于配置一个Plugin
     /// </summary>
     public interface IStartup
     {
@@ -17,17 +17,17 @@ namespace Acesoft.Core.Modules
         int Order { get; }
 
         /// <summary>
-        /// 由框架调用，用于应用配置、注入等
+        /// 由框架调用，用于Plugin配置、注入等
         /// </summary>
         /// <param name="services"><seealso cref="IServiceCollection"/></param>
         void ConfigureServices(IServiceCollection services);
 
         /// <summary>
-        /// 由框架调用，用于应用启动、配置、加载中间件等
+        /// 由框架调用，用于Plugin启动、配置、加载中间件等
         /// </summary>
-        /// <param name="builder"><seealso cref="IApplicationBuilder"/></param>
+        /// <param name="app"><seealso cref="IApplicationBuilder"/></param>
         /// <param name="routes"><seealso cref="IRouteBuilder"/></param>
-        /// <param name="serviceProvider"><seealso cref="IServiceProvider"/></param>
-        void Configure(IApplicationBuilder builder, IRouteBuilder routes, IServiceProvider serviceProvider);
+        /// <param name="services"><seealso cref="IServiceProvider"/></param>
+        void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services);
     }
 }

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Helper\DiskHelper.cs" />
+    <Compile Remove="Helper\RegistryHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

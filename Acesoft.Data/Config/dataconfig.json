@@ -1,0 +1,21 @@
+{
+  "default": "platform",
+  "databases": {
+    "app": {
+      "connectstring": "sqlserver_conn",
+      "provider": "035"
+    },
+    "platform": {
+      "connectstring": "sqlserver_conn",
+      "provider": "23"
+    }
+  },
+  "sqlmaps": {
+    "home": [
+      "pages/home/_maps"
+    ],
+    "platform": [
+      "pages/platform/_maps"
+    ]
+  }
+}

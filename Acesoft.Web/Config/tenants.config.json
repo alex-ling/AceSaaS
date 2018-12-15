@@ -1,0 +1,18 @@
+{
+  "defaultTenant": "default",
+  "tenants": [
+    {
+      "name": "saas",
+      "hostnames": [
+        "localhost:54321",
+        "localhost/saas",
+        "localhost/admin"
+      ],
+      "plugins": [
+        "admin",
+        "platform"
+      ],
+      "theme": "default"
+    }
+  ]
+}

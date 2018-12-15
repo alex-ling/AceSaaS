@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Cache\Acesoft.Cache.csproj" />
+    <ProjectReference Include="..\Acesoft.Util\Acesoft.Util.csproj" />
+  </ItemGroup>
+
+</Project>

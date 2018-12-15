@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Config\tenants.config.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modules\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Config\tenants.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PublishModules" BeforeTargets="Build">
+    <ItemGroup>
+      <ModuleProject Include="..\Acesoft.Web.HR\Acesoft.Web.HR.csproj" />
+    </ItemGroup>
+    <MSBuild Projects="@(ModuleProject)" Targets="Publish" Properties="PublishDir=$(TargetDir)Modules\%(FileName)\" />
+  </Target>
+
+</Project>
