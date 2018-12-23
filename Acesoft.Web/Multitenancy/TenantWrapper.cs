@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Acesoft.Web.Multitenancy
 {
-    public class TenantWrapper<T> : ITenant<T>
+    public class TenantWrapper : ITenant
     {
-        public TenantWrapper(T tenant)
+        public TenantWrapper(Tenant tenant)
         {
             Value = tenant;
         }
 
-		public T Value { get; }
+		public Tenant Value { get; }
     }
 }

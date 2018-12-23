@@ -11,32 +11,29 @@ using Microsoft.Extensions.Primitives;
 
 namespace Acesoft.Web.Multitenancy
 {
-    public abstract class MemoryTenantResolver<T> : ITenantResolver<T>
+    public abstract class MemoryTenantResolver : ITenantResolver
     {
         protected readonly IMemoryCache cache;
         protected readonly ILogger logger;
         protected readonly MemoryTenantResolverOptions options;
 
-        public TenantsConfig TenantsConfig { get; private set; }
-
-        public MemoryTenantResolver(IMemoryCache cache, 
-            TenantsConfig tenantsConfig, ILogger<MemoryTenantResolver<T>> logger)
-            : this(cache, tenantsConfig, logger, new MemoryTenantResolverOptions())
+        public MemoryTenantResolver(IMemoryCache cache,
+            ILogger<MemoryTenantResolver> logger)
+            : this(cache, logger, new MemoryTenantResolverOptions())
         {
         }
 
-        public MemoryTenantResolver(IMemoryCache cache, TenantsConfig tenantsConfig,
-            ILogger<MemoryTenantResolver<T>> logger, MemoryTenantResolverOptions options)
+        public MemoryTenantResolver(IMemoryCache cache,
+            ILogger<MemoryTenantResolver> logger, MemoryTenantResolverOptions options)
         {
             this.cache = cache;
-            this.TenantsConfig = tenantsConfig;
             this.logger = logger;
             this.options = options;
         }
 
         protected abstract string GetContextIdentifier(HttpContext context);
-        protected abstract IEnumerable<string> GetTenantIdentifiers(TenantContext<T> context);
-        protected abstract Task<TenantContext<T>> ResolveAsync(HttpContext context);
+        protected abstract IEnumerable<string> GetTenantIdentifiers(Tenant tenant);
+        protected abstract Task<Tenant> ResolveAsync(HttpContext context);
 
         protected virtual MemoryCacheEntryOptions CreateCacheEntryOptions()
         {
@@ -44,7 +41,7 @@ namespace Acesoft.Web.Multitenancy
                 .SetSlidingExpiration(new TimeSpan(1, 0, 0));
         }
 
-        protected virtual void DisposeTenantContext(object cacheKey, TenantContext<T> tenantContext)
+        protected virtual void DisposeTenantContext(object cacheKey, TenantContext tenantContext)
         {
             if (tenantContext != null)
             {
@@ -53,7 +50,7 @@ namespace Acesoft.Web.Multitenancy
             }
         }
 
-        async Task<TenantContext<T>> ITenantResolver<T>.ResolveAsync(HttpContext context)
+        async Task<Tenant> ITenantResolver.ResolveAsync(HttpContext context)
         {
             // Obtain the key used to identify cached tenants from the current request
             var cacheKey = GetContextIdentifier(context);
@@ -62,34 +59,34 @@ namespace Acesoft.Web.Multitenancy
                 return null;
             }
 
-            var tenantContext = cache.Get(cacheKey) as TenantContext<T>;
-            if (tenantContext == null)
+            var tenant = cache.Get(cacheKey) as Tenant;
+            if (tenant == null)
             {
-                logger.LogDebug("TenantContext not present in cache with key \"{cacheKey}\". Attempting to resolve.", cacheKey);
-                tenantContext = await ResolveAsync(context);
+                logger.LogDebug("Tenant not present in cache with key \"{cacheKey}\". Attempting to resolve.", cacheKey);
+                tenant = await ResolveAsync(context);
 
-                if (tenantContext != null)
+                if (tenant != null)
                 {
-                    var tenantIdentifiers = GetTenantIdentifiers(tenantContext);
+                    var tenantIdentifiers = GetTenantIdentifiers(tenant);
                     if (tenantIdentifiers != null)
                     {
                         var cacheEntryOptions = GetCacheEntryOptions();
 
-                        logger.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
+                        logger.LogDebug($"Tenant \"{tenant.Name}\" resolved. Caching with keys \"{tenantIdentifiers.Join()}\".");
 
                         foreach (var identifier in tenantIdentifiers)
                         {
-                            cache.Set(identifier, tenantContext, cacheEntryOptions);
+                            cache.Set(identifier, tenant, cacheEntryOptions);
                         }
                     }
                 }
             }
             else
             {
-                logger.LogDebug("TenantContext:{id} retrieved from cache with key \"{cacheKey}\".", tenantContext.Id, cacheKey);
+                logger.LogDebug($"Tenant \"{tenant.Name}\" retrieved from cache with key \"{cacheKey}\".");
             }
 
-            return tenantContext;
+            return tenant;
         }
 
         private MemoryCacheEntryOptions GetCacheEntryOptions()
@@ -114,7 +111,7 @@ namespace Acesoft.Web.Multitenancy
                     .RegisterPostEvictionCallback(
                         (key, value, reason, state) =>
                         {
-                            DisposeTenantContext(key, value as TenantContext<T>);
+                            DisposeTenantContext(key, value as TenantContext);
                         });
             }
 

@@ -37,7 +37,7 @@ namespace Acesoft.Util
         public static string GetMatchValue(string str, string pattern)
         {
             if (!str.HasValue()) return string.Empty;
-            Check.Require(IsMatch(str, pattern), $"字符串未匹配表达式[{pattern}]");
+            Check.Require(IsMatch(str, pattern), $"字符串未匹配表达式{pattern}");
 
             return Regex.Match(str, pattern, options).Value;
         }
@@ -50,6 +50,11 @@ namespace Acesoft.Util
         public static string Replace(string str, string pattern, string replace)
         {
             return Regex.Replace(str, pattern, replace, options);
+        }
+
+        public static string Replace(string str, string pattern, Func<Match, string> func)
+        {
+            return Regex.Replace(str, pattern, new MatchEvaluator(func), options);
         }
     }
 }

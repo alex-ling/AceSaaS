@@ -10,6 +10,15 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="Dapper.Contrib" Version="1.50.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Config\Acesoft.Config.csproj" />
+    <ProjectReference Include="..\Acesoft.Core\Acesoft.Core.csproj" />
+    <ProjectReference Include="..\Acesoft.Data.Model\Acesoft.Data.Model.csproj" />
+    <ProjectReference Include="..\Acesoft.Logger\Acesoft.Logger.csproj" />
+    <ProjectReference Include="..\Acesoft.Util\Acesoft.Util.csproj" />
   </ItemGroup>
 
 </Project>

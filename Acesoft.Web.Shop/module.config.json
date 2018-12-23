@@ -1,0 +1,8 @@
+﻿{
+  "name": "shop",
+  "description": "电子商务",
+  "mainAssembly": "Acesoft.Web.Shop.dll",
+  "category": "application",
+  "version": "v1.0.1",
+  "dependencies": []
+}

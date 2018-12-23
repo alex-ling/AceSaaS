@@ -32,7 +32,7 @@ namespace Acesoft.Data.SqlMapper
         public ISqlMapper GetSqlMapper()
         {
             var mapperName = "default";
-            logger.LogDebug($"Get ISqlMapper for name: [{mapperName}]");
+            logger.LogDebug($"Get ISqlMapper for name: {mapperName}");
             return mappers.GetOrAdd(mapperName, (key) =>
             {
                 var config = ConfigFactory.GetConfig<DataConfig>();

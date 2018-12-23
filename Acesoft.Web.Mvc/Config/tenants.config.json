@@ -4,15 +4,21 @@
   "RedirectPermanent": false,
   "tenants": [
     {
-      "name": "saas",
+      "name": "default",
       "hostnames": [
         "localhost:5000",
-        "localhost:5001"
+        "localhost:6000"
       ],
-      "modules": [
-        "admin",
-        "platform"
+      "modules": [ "hr" ],
+      "theme": "default"
+    },
+    {
+      "name": "saas",
+      "hostnames": [
+        "localhost:5001",
+        "localhost:6001"
       ],
+      "modules": [ "shop" ],
       "theme": "default"
     }
   ]

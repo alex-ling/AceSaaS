@@ -8,18 +8,18 @@ using Microsoft.AspNetCore.Http;
 
 namespace Acesoft.Web.Multitenancy
 {
-    public class TenantPipelineMiddleware<T>
+    public class TenantPipelineMiddleware
     {
         private readonly RequestDelegate next;
         private readonly IApplicationBuilder rootApp;
-        private readonly Action<TenantPipelineBuilderContext<T>, IApplicationBuilder> configure;
-        private readonly ConcurrentDictionary<T, Lazy<RequestDelegate>> pipelines
-            = new ConcurrentDictionary<T, Lazy<RequestDelegate>>();
+        private readonly Action<TenantContext, IApplicationBuilder> configure;
+        private readonly ConcurrentDictionary<string, Lazy<RequestDelegate>> pipelines
+            = new ConcurrentDictionary<string, Lazy<RequestDelegate>>();
 
         public TenantPipelineMiddleware(
             RequestDelegate next,
             IApplicationBuilder rootApp,
-            Action<TenantPipelineBuilderContext<T>, IApplicationBuilder> configure)
+            Action<TenantContext, IApplicationBuilder> configure)
         {
             this.next = next;
             this.rootApp = rootApp;
@@ -28,29 +28,22 @@ namespace Acesoft.Web.Multitenancy
 
         public async Task Invoke(HttpContext context)
         {
-            Check.Require(context != null, $"{nameof(context)} must not null");
-
-            var tenantContext = context.GetTenantContext<T>();
+            var tenantContext = context.GetTenantContext();
             if (tenantContext != null)
             {
                 var tenantPipeline = pipelines.GetOrAdd(
-                    tenantContext.Tenant,
+                    tenantContext.Tenant.Name,
                     new Lazy<RequestDelegate>(() => BuildTenantPipeline(tenantContext)));
 
                 await tenantPipeline.Value(context);
             }
         }
 
-        private RequestDelegate BuildTenantPipeline(TenantContext<T> tenantContext)
+        private RequestDelegate BuildTenantPipeline(TenantContext tenantContext)
         {
             var tenantBuilder = rootApp.New();
-            var builderContext = new TenantPipelineBuilderContext<T>
-            {
-                TenantContext = tenantContext,
-                Tenant = tenantContext.Tenant
-            };
 
-            configure(builderContext, tenantBuilder);
+            configure(tenantContext, tenantBuilder);
 
             // register root pipeline at the end of the tenant branch
             tenantBuilder.Run(next);

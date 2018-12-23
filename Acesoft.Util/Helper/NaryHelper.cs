@@ -80,7 +80,7 @@ namespace Acesoft.Util
             var str = FromNary(value, 16);
             if (str.Length > length)
             {
-                throw new AceException($"值[{value}]转换后大于给定的长度[{length}]");
+                throw new AceException($"值{value}]转换后大于给定的长度{length}]");
             }
 
             return str.PadLeft(length, '0');

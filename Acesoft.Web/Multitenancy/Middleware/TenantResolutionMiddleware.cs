@@ -5,28 +5,29 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Acesoft.Web.Multitenancy
 {
     public class TenantResolutionMiddleware<T>
     {
         private readonly RequestDelegate next;
+        private readonly TenantsConfig tenantsConfig;
         private readonly ILogger logger;
 
-        public TenantResolutionMiddleware(
-            RequestDelegate next,
-            ILogger<TenantResolutionMiddleware<T>> logger)
+        public TenantResolutionMiddleware(RequestDelegate next, IOptions<TenantsConfig> tenantsOption,
+            ITenantsHost tenantsHost, ILogger<TenantResolutionMiddleware<T>> logger)
         {
             this.next = next;
+            this.tenantsConfig = tenantsOption.Value;
             this.logger = logger;
         }
 
-        public async Task Invoke(HttpContext context, ITenantResolver<T> tenantResolver)
+        public async Task Invoke(HttpContext context, ITenantResolver tenantResolver)
         {
             logger.LogDebug("Resolving TenantContext using {loggerType}.", tenantResolver.GetType().Name);
 
             var tenantContext = await tenantResolver.ResolveAsync(context);
-            var tenantsConfig = tenantResolver.TenantsConfig;
             if (tenantContext != null)
             {
                 logger.LogDebug("TenantContext resolved successful. Adding to HttpContext.");

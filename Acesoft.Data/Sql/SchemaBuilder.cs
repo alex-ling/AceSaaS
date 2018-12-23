@@ -19,24 +19,15 @@ namespace Acesoft.Data.Sql
         {
             Session = session;
             _builder = CommandInterpreterFactory.For(session.Connection);
-            //_dialect = session.Dialect;
-            //_tablePrefix = session.Store.Configuration.TablePrefix;
-        }
-
-        public SchemaBuilder(IDbConnection connection, IDbTransaction transaction, string tablePrefix)
-        {
-            _builder = CommandInterpreterFactory.For(connection);
-            _dialect = SqlDialectFactory.For(connection);
-            _tablePrefix = tablePrefix;
-            Connection = connection;
-            Transaction = transaction;
+            _dialect = session.Store.Dialect;
+            _tablePrefix = session.Store.Configuration.TablePrefix;
         }
 
         private void Execute(IEnumerable<string> statements)
         {
             foreach (var statement in statements)
             {
-                Connection.Execute(statement, null, Transaction);
+                Session.Execute(statement);
             }
         }
 

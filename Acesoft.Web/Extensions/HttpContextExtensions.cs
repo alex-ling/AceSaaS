@@ -12,40 +12,30 @@ namespace Acesoft.Web
     {
         private const string TenantContextKey = "Ace.TenantContext";
 
-        public static void SetTenantContext<T>(this HttpContext context, TenantContext<T> tenantContext)
+        public static void SetTenantContext(this HttpContext context, TenantContext tenantContext)
         {
             context.Items[TenantContextKey] = tenantContext;
         }
 
-        public static TenantContext<T> GetTenantContext<T>(this HttpContext context)
+        public static TenantContext GetTenantContext(this HttpContext context)
         {
             if (context.Items.TryGetValue(TenantContextKey, out object tenantContext))
             {
-                return tenantContext as TenantContext<T>;
+                return tenantContext as TenantContext;
             }
 
             return null;
         }
 
-        public static T GetTenant<T>(this HttpContext context)
+        public static Tenant GetTenant(this HttpContext context)
         {
-            var tenantContext = GetTenantContext<T>(context);
+            var tenantContext = GetTenantContext(context);
             if (tenantContext != null)
             {
                 return tenantContext.Tenant;
             }
 
-            return default(T);
-        }
-
-        public static TenantContext<Tenant> GetTenantContext(this HttpContext context)
-        {
-            return context.GetTenantContext<Tenant>();
-        }
-
-        public static Tenant GetTenant(this HttpContext context)
-        {
-            return context.GetTenant<Tenant>();
+            return null;
         }
     }
 }

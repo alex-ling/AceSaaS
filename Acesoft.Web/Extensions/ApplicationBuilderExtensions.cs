@@ -20,22 +20,42 @@ namespace Acesoft.Web
         {
             var services = app.ApplicationServices;
             var env = services.GetRequiredService<IHostingEnvironment>();
-            var routes = new RouteBuilder(app);
 
-            // 加载modules
-            services.GetService<ModuleContainer>().Configure(app, routes, services);
+            // use common
+            //app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            // 注册multitenant中间件
-            app.UseMiddleware<TenantResolutionMiddleware<Tenant>>();
+            // use multitenant
+            app.UseMiddleware<TenantContainerMiddleware>();
+
+            // use multitenant route
+            app.UseMiddleware<TenantRouterMiddleware>();
+
+            // use mvc
+            app.UseMvc(routes =>
+            {
+                // use internal/core modules
+                ModuleLoader.Configure(app, routes, services);
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
+
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
 
             return app;
         }
 
         public static IApplicationBuilder UsePerTenant(this IApplicationBuilder app,       
-            Action<TenantPipelineBuilderContext<Tenant>, IApplicationBuilder> configure)
+            Action<TenantContext, IApplicationBuilder> configure)
         {
             // 按每个tenant进行注册、配置
-            return app.Use(next => new TenantPipelineMiddleware<Tenant>(next, app, configure).Invoke);
+            return app.Use(next => new TenantPipelineMiddleware(next, app, configure).Invoke);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@page
+@inject Tenant Tenant
 @{
     ViewData["Title"] = "Home page";
 }
@@ -8,7 +9,7 @@
 </div>
 <div style="padding-top:50px;padding-left:20%">
     <h3 style="margin-left:-5%">Current Request Tenant:</h3>
-    <h4>Name: @HttpContext.GetTenant().Name</h4>
+    <h4>Name: @Tenant.Name</h4>
     <h4>Hostnames: @HttpContext.GetTenant().Hostnames.Join()</h4>
     <h4>Modules: @HttpContext.GetTenant().Modules.Join()</h4>
     <h4>Theme: @HttpContext.GetTenant().Theme</h4>

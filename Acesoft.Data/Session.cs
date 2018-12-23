@@ -12,18 +12,27 @@ namespace Acesoft.Data
     public class Session : ISession
     { 
         #region ISession
-        public IDbProvider Provider { get; private set; }
+        public IStore Store { get; private set; }
         public IDbConnection Connection { get; private set; }
         public IDbTransaction Transaction { get; private set; }
         public bool IsInTransaction => Transaction != null;
 
-        public Session(IDbProvider provider)
+        private IsolationLevel isolationLevel;
+
+        public Session(IStore store, IsolationLevel isolationLevel)
         {
-            Provider = provider;
-            Connection = provider.GetConnection();
+            this.Store = store;
+            this.isolationLevel = isolationLevel;
+
+            Connection = store.Configuration.ConnectionFactory.CreateConnection();
         }
 
-        public void BeginTransaction(IsolationLevel il = IsolationLevel.ReadCommitted)
+        public void BeginTranscation()
+        {
+            BeginTransaction(isolationLevel);
+        }
+
+        public void BeginTransaction(IsolationLevel il)
         {
             if (Connection.State == ConnectionState.Closed)
             {
@@ -48,10 +57,11 @@ namespace Acesoft.Data
         {
             EndTransaction();
 
-            Connection.Dispose();
-            Connection = null;
-
-            DbContext.Dispose();
+            if (Connection != null)
+            {
+                Store.Configuration.ConnectionFactory.CloseConnection(Connection);
+                Connection = null;
+            }
         }
 
         private void EndTransaction()
@@ -159,7 +169,7 @@ namespace Acesoft.Data
             {
                 Total = @params.Get<int>("@count"),
                 PageCount = @params.Get<int>("@pagecount"),
-                Datas = datas
+                Data = datas
             };
         }
 
@@ -180,7 +190,7 @@ namespace Acesoft.Data
             {
                 Total = @params.Get<int>("@count"),
                 PageCount = @params.Get<int>("@pagecount"),
-                Datas = datas
+                Data = datas
             };
         }
 

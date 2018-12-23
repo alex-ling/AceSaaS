@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Acesoft.Util
+namespace Acesoft
 {
     public static class Extensions
     {

@@ -154,7 +154,7 @@ namespace Acesoft.Data.SqlMapper
                     var orders = grid.Order.Split(',');
                     for (var i = 0; i < sorts.Length; i++)
                     {
-                        sb.Append($",{sorts[i]} {orders[i]}");
+                        sb.Append($",{sorts[i} {orders[i}");
                     }
                     if (sb.Length > 1)
                     {

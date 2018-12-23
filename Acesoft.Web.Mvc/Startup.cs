@@ -40,12 +40,11 @@ namespace Acesoft.Web.Mvc
 
             // Use SaaS middleware
             app.UseMultitenancy();
-            app.UsePerTenant((ctx, builder) =>
+            /*app.UsePerTenant((ctx, builder) =>
             {
                 // for per tenant config
-            });
-
-            app.UseMvc();
+                
+            });*/
         }
     }
 }

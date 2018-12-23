@@ -10,7 +10,7 @@ namespace Acesoft
     {
         public static T GetValue<T>(this IDictionary<string, string> dict, string key)
         {
-            Check.Require(dict.ContainsKey(key), $"字典中不包含查询项[{key}]");
+            Check.Require(dict.ContainsKey(key), $"字典中不包含查询项{key}");
 
             return dict[key].ToObject<T>();
         }
@@ -26,7 +26,7 @@ namespace Acesoft
 
         public static T GetValue<T>(this IDictionary<string, object> dict, string key)
         {
-            Check.Require(dict.ContainsKey(key), $"字典中不包含查询项[{key}]");
+            Check.Require(dict.ContainsKey(key), $"字典中不包含查询项{key}");
 
             return dict[key].ToObject<T>();
         }
@@ -42,7 +42,7 @@ namespace Acesoft
 
         public static T GetValue<T>(this IDictionary<string, T> dict, string key)
         {
-            Check.Require(dict.ContainsKey(key), $"字典中不包含查询项[{key}]");
+            Check.Require(dict.ContainsKey(key), $"字典中不包含查询项{key}");
 
             return dict[key];
         }
