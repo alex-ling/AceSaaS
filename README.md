@@ -68,7 +68,5 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
     // Use SaaS middleware
     app.UseMultitenancy();
-
-    app.UseMvc();
 }
 ```
