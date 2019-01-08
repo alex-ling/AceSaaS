@@ -19,10 +19,10 @@ namespace Acesoft.Web.Shop
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
-            routes.MapRoute("", async (context) =>
-            {
-                await context.Response.WriteAsync("Hello Shop!");
-            });
+            //routes.MapRoute("", async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello Shop!");
+            //});
         }
     }
 

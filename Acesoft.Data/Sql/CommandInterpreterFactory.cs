@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Data;
 
-namespace Acesoft.Data
+namespace Acesoft.Data.Sql
 {
     public class CommandInterpreterFactory
     {

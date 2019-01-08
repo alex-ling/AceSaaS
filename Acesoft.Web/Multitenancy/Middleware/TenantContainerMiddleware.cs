@@ -47,6 +47,7 @@ namespace Acesoft.Web.Multitenancy
 
                 using (var scope = tenantContext.EnterServiceScope())
                 {
+                    // for test only.
                     var entity = context.RequestServices.GetService<IEntity>();
 
                     await next.Invoke(context);

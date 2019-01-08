@@ -4,7 +4,7 @@ using System.Text;
 
 using Acesoft.Data.Sql.Schema;
 
-namespace Acesoft.Data
+namespace Acesoft.Data.Sql
 {
     public interface ICommandInterpreter
     {
