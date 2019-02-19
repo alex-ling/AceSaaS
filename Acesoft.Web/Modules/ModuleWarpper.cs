@@ -10,13 +10,13 @@ namespace Acesoft.Web.Modules
     {
         public string Name { get; }
         public ModuleConfig ModuleConfig { get; }
-        public Type StartupType { get; }
+        public IStartup Startup { get; }
 
-        public ModuleWarpper(ModuleConfig module, Type startupType)
+        public ModuleWarpper(ModuleConfig module, IStartup startup)
         {
             Name = module.Name;
             ModuleConfig = module;
-            StartupType = startupType;
+            Startup = startup;
         }
     }
 }

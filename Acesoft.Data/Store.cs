@@ -4,15 +4,17 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
 using Dapper;
-
-using Acesoft.Data.Config;
+using Acesoft.Logger;
 
 namespace Acesoft.Data
 {
     public class Store : IStore
     {
-        public IConfiguration Configuration { get; set; }
+        private static ILogger<Store> logger = LoggerContext.GetLogger<Store>();
+
+        public IStoreOption Option { get; set; }
         public ISqlDialect Dialect { get; private set; }
         public IIdGenerator IdGenerator { get; private set; }
 
@@ -23,33 +25,37 @@ namespace Acesoft.Data
             // Add Type Handlers here
         }
 
-        public Store(Action<IConfiguration> config)
+        public Store(Action<IStoreOption> optionAction)
         {
-            Configuration = new Configuration();
-            config?.Invoke(Configuration);
+            Option = new StoreOption();
+            optionAction?.Invoke(Option);
 
-            AfterConfigurationAssigned();
+            AfterOptionAssigned();
         }
 
-        public Store(IConfiguration configuration)
+        public Store(IStoreOption option)
         {
-            Configuration = configuration;
+            Option = option;
 
-            AfterConfigurationAssigned();
+            AfterOptionAssigned();
         }
 
-        public void AfterConfigurationAssigned()
+        public void AfterOptionAssigned()
         {
-            Dialect = SqlDialectFactory.For(Configuration.ConnectionFactory.DbConnectionType);
+            Dialect = SqlDialectFactory.For(Option.ConnectionFactory.DbConnectionType);
+
+            logger.LogDebug($"Store has initlialized with database \"{Option.Name}\"");
         }        
 
         public ISession OpenSession()
         {
-            return OpenSession(Configuration.IsolationLevel);
+            return OpenSession(Option.IsolationLevel);
         }
 
         public ISession OpenSession(IsolationLevel isolationLevel)
         {
+            logger.LogDebug($"Open new session with database \"{Option.Name}\"");
+
             return new Session(this, isolationLevel);
         }
 

@@ -4,46 +4,45 @@ using System.Data;
 using System.Text;
 
 using Microsoft.Data.Sqlite;
-using Acesoft.Data.Config;
 using Acesoft.Data.Sql;
 
 namespace Acesoft.Data.Sqlite
 {
     public static class SqliteExtensions
     {
-        public static IConfiguration RegisterSqLite(this IConfiguration configuration)
+        public static IStoreOption RegisterSqLite(this IStoreOption option)
         {
             SqlDialectFactory.SqlDialects["sqliteconnection"] = new SqliteDialect();
             CommandInterpreterFactory.CommandInterpreters["sqliteconnection"] = d => new SqliteCommandInterpreter(d);
 
-            return configuration;
+            return option;
         }
 
-        public static IConfiguration UseInMemory(this IConfiguration configuration)
+        public static IStoreOption UseInMemory(this IStoreOption option)
         {
             const string inMemoryConnectionString = "Data Source=:memory:";
-            return UseSqLite(configuration, inMemoryConnectionString, IsolationLevel.Serializable, shareConnection: true);
+            return UseSqLite(option, inMemoryConnectionString, IsolationLevel.Serializable, shareConnection: true);
         }
 
-        public static IConfiguration UseSqLite(
-            this IConfiguration configuration,
+        public static IStoreOption UseSqLite(
+            this IStoreOption option,
             string connectionString)
         {
             return UseSqLite(
-                configuration,
+                option,
                 connectionString,
                 IsolationLevel.Serializable);
         }
 
-        public static IConfiguration UseSqLite(
-            this IConfiguration configuration,
+        public static IStoreOption UseSqLite(
+            this IStoreOption option,
             string connectionString,
             IsolationLevel isolationLevel,
             bool shareConnection = false)
         {
-            if (configuration == null)
+            if (option == null)
             {
-                throw new ArgumentNullException(nameof(configuration));
+                throw new ArgumentNullException(nameof(option));
             }
 
             if (String.IsNullOrWhiteSpace(connectionString))
@@ -51,11 +50,11 @@ namespace Acesoft.Data.Sqlite
                 throw new ArgumentException(nameof(connectionString));
             }
 
-            RegisterSqLite(configuration);
-            configuration.ConnectionFactory = new DbConnectionFactory<SqliteConnection>(connectionString, shareConnection);
-            configuration.IsolationLevel = isolationLevel;
+            RegisterSqLite(option);
+            option.ConnectionFactory = new DbConnectionFactory<SqliteConnection>(connectionString, shareConnection);
+            option.IsolationLevel = isolationLevel;
 
-            return configuration;
+            return option;
         }
     }
 }

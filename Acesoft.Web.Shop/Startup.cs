@@ -14,19 +14,14 @@ namespace Acesoft.Web.Shop
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IEntity, Test>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
-            //routes.MapRoute("", async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello Shop!");
-            //});
+            routes.MapRoute("", async (context) =>
+            {
+                await context.Response.WriteAsync("Hello Shop!");
+            });
         }
-    }
-
-    public class Test : EntityBase
-    {
-    }
+    }    
 }

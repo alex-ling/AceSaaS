@@ -11,27 +11,27 @@ namespace Acesoft.Data
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddStore(this IServiceCollection services, Action<IConfiguration> setupAction)
+        public static IServiceCollection AddDataAccess(this IServiceCollection services, Action<IStoreOption> optionAction)
         {
-            if (setupAction == null)
+            if (optionAction == null)
             {
-                throw new ArgumentNullException(nameof(setupAction));
+                throw new ArgumentNullException(nameof(optionAction));
             }
 
-            var config = new Configuration();
-            setupAction.Invoke(config);
-            services.AddSingleton<IStore>(new Store(config));
+            var option = new StoreOption();
+            optionAction.Invoke(option);
+            services.AddSingleton<IStore>(new Store(option));
 
             return services;
         }
 
-        public static IServiceCollection AddStroeConfig(this IServiceCollection services)
+        public static IServiceCollection AddDataConfig(this IServiceCollection services)
         {
             // 添加数据访问配置data.config.json
             services.AddJsonConfig<DataConfig>(opts =>
             {
                 opts.ConfigFile = "data.config.json";
-                opts.TenantConfig = true;
+                opts.IsTenantConfig = true;
             });
 
             return services;

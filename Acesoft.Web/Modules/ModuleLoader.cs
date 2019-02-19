@@ -49,6 +49,8 @@ namespace Acesoft.Web.Modules
                 Startups.Add(new Acesoft.Config.Startup());
                 Startups.Add(new Acesoft.Cache.Startup());
                 Startups.Add(new Acesoft.Data.Startup());
+                // Web plugin must add tenant's pipeline DI
+                //Startups.Add(new Acesoft.Web.Startup());
                 loaded = true;
             }
         }

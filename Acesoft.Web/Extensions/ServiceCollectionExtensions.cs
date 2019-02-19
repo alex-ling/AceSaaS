@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,7 +28,7 @@ namespace Acesoft.Web
         {
             var mvcBuilder = AddDefaultServices(services);
             services.AddSingleton(mvcBuilder);
-            
+
             // add Modules
             AddModules(services, mvcBuilder);
 
@@ -56,9 +57,8 @@ namespace Acesoft.Web
 
         private static IMvcBuilder AddDefaultServices(IServiceCollection services)
         {
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRouting();
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // AddMvc
             return services.AddMvc(opts =>

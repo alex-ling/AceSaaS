@@ -18,12 +18,15 @@ namespace Acesoft.Data
         {
             // 初始化全局Id实例
             services.AddSingleton<IIdWorker>(new IdWorker(0, 0));
+
+            // 初始化数据配置
+            services.AddDataConfig();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
             // 设置全局上下文
-            services.UseIdWorker();
+            services.UseDataContext();
         }
     }
 }

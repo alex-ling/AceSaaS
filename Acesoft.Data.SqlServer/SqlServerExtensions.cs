@@ -4,36 +4,35 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
-using Acesoft.Data.Config;
 using Acesoft.Data.Sql;
 
 namespace Acesoft.Data.SqlServer
 {
     public static class SqlServerExtensions
     {
-        public static IConfiguration RegisterSqlServer(this IConfiguration configuration)
+        public static IStoreOption RegisterSqlServer(this IStoreOption option)
         {
             SqlDialectFactory.SqlDialects["sqlconnection"] = new SqlServerDialect();
             CommandInterpreterFactory.CommandInterpreters["sqlconnection"] = d => new SqlServerCommandInterpreter(d);
 
-            return configuration;
+            return option;
         }
 
-        public static IConfiguration UseSqlServer(
-            this IConfiguration configuration,
+        public static IStoreOption UseSqlServer(
+            this IStoreOption option,
             string connectionString)
         {
-            return UseSqlServer(configuration, connectionString, IsolationLevel.ReadUncommitted);
+            return UseSqlServer(option, connectionString, IsolationLevel.ReadUncommitted);
         }
 
-        public static IConfiguration UseSqlServer(
-            this IConfiguration configuration,
+        public static IStoreOption UseSqlServer(
+            this IStoreOption option,
             string connectionString,
             IsolationLevel isolationLevel)
         {
-            if (configuration == null)
+            if (option == null)
             {
-                throw new ArgumentNullException(nameof(configuration));
+                throw new ArgumentNullException(nameof(option));
             }
 
             if (String.IsNullOrWhiteSpace(connectionString))
@@ -41,11 +40,11 @@ namespace Acesoft.Data.SqlServer
                 throw new ArgumentException(nameof(connectionString));
             }
 
-            RegisterSqlServer(configuration);
-            configuration.ConnectionFactory = new DbConnectionFactory<SqlConnection>(connectionString);
-            configuration.IsolationLevel = isolationLevel;
+            RegisterSqlServer(option);
+            option.ConnectionFactory = new DbConnectionFactory<SqlConnection>(connectionString);
+            option.IsolationLevel = isolationLevel;
 
-            return configuration;
+            return option;
         }
     }
 }

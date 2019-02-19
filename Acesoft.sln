@@ -49,13 +49,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Test", "Acesoft.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.Shop", "Acesoft.Web.Shop\Acesoft.Web.Shop.csproj", "{5A1BAFBC-A6AB-4533-A491-658DA30CDA7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Data.MySql", "Acesoft.Data.MySql\Acesoft.Data.MySql.csproj", "{D3C0B15D-1A0B-49D1-B076-80D16A224A27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Data.MySql", "Acesoft.Data.MySql\Acesoft.Data.MySql.csproj", "{D3C0B15D-1A0B-49D1-B076-80D16A224A27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Data.PostgreSql", "Acesoft.Data.PostgreSql\Acesoft.Data.PostgreSql.csproj", "{0A753676-0D6F-4450-AC1D-A1216A0A982C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Data.PostgreSql", "Acesoft.Data.PostgreSql\Acesoft.Data.PostgreSql.csproj", "{0A753676-0D6F-4450-AC1D-A1216A0A982C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Data.Sqlite", "Acesoft.Data.Sqlite\Acesoft.Data.Sqlite.csproj", "{1A208826-8E58-4411-BB2D-7491D0E377AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Data.Sqlite", "Acesoft.Data.Sqlite\Acesoft.Data.Sqlite.csproj", "{1A208826-8E58-4411-BB2D-7491D0E377AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Data.SqlServer", "Acesoft.Data.SqlServer\Acesoft.Data.SqlServer.csproj", "{C498F0F3-93A5-4AED-A463-A5C7B041F729}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Data.SqlServer", "Acesoft.Data.SqlServer\Acesoft.Data.SqlServer.csproj", "{C498F0F3-93A5-4AED-A463-A5C7B041F729}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.Cms", "Acesoft.Web.Cms\Acesoft.Web.Cms.csproj", "{02AE0DE3-E6E3-4572-8F60-971EBEF3C49A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Rbac", "Acesoft.Rbac\Acesoft.Rbac.csproj", "{C626AC93-BC67-408E-B5C3-A457715E9431}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.Iot", "Acesoft.Web.Iot\Acesoft.Web.Iot.csproj", "{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Web.Plat", "Acesoft.Web.Plat\Acesoft.Web.Plat.csproj", "{8C5E99A4-B9EB-4F29-9EF5-6F60C38C70B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +155,22 @@ Global
 		{C498F0F3-93A5-4AED-A463-A5C7B041F729}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C498F0F3-93A5-4AED-A463-A5C7B041F729}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C498F0F3-93A5-4AED-A463-A5C7B041F729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02AE0DE3-E6E3-4572-8F60-971EBEF3C49A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02AE0DE3-E6E3-4572-8F60-971EBEF3C49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02AE0DE3-E6E3-4572-8F60-971EBEF3C49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02AE0DE3-E6E3-4572-8F60-971EBEF3C49A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C626AC93-BC67-408E-B5C3-A457715E9431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C626AC93-BC67-408E-B5C3-A457715E9431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C626AC93-BC67-408E-B5C3-A457715E9431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C626AC93-BC67-408E-B5C3-A457715E9431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C5E99A4-B9EB-4F29-9EF5-6F60C38C70B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C5E99A4-B9EB-4F29-9EF5-6F60C38C70B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C5E99A4-B9EB-4F29-9EF5-6F60C38C70B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C5E99A4-B9EB-4F29-9EF5-6F60C38C70B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,6 +197,10 @@ Global
 		{0A753676-0D6F-4450-AC1D-A1216A0A982C} = {E48C31DD-0FE3-4322-BDAA-C71CD13270AE}
 		{1A208826-8E58-4411-BB2D-7491D0E377AC} = {E48C31DD-0FE3-4322-BDAA-C71CD13270AE}
 		{C498F0F3-93A5-4AED-A463-A5C7B041F729} = {E48C31DD-0FE3-4322-BDAA-C71CD13270AE}
+		{02AE0DE3-E6E3-4572-8F60-971EBEF3C49A} = {BE7D65F7-BABE-4CE6-98AA-3F20D6C4592D}
+		{C626AC93-BC67-408E-B5C3-A457715E9431} = {DEB81B93-6D3D-4446-A4CA-AD993C8E1F4B}
+		{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE} = {BE7D65F7-BABE-4CE6-98AA-3F20D6C4592D}
+		{8C5E99A4-B9EB-4F29-9EF5-6F60C38C70B5} = {BE7D65F7-BABE-4CE6-98AA-3F20D6C4592D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15C56BF2-C468-45C5-B13D-00FA80AD2CD4}

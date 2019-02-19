@@ -15,7 +15,7 @@ namespace Acesoft.Console.Test
             var services = new ServiceCollection()
                 .AddJsonConfig<TestConfig>(opts =>
                 {
-                    opts.TenantConfig = true;
+                    opts.IsTenantConfig = true;
                     opts.ConfigFile = "tenant.json";
                 })
                 .BuildServiceProvider()

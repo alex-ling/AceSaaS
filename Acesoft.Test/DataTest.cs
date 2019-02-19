@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Acesoft.Core
+namespace Acesoft.Test
 {
-    //public class AppContext
-    //{
-    //}
+    public class DataTest
+    {
+    }
 }

@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Threading.Tasks;
 using System.Text;
 
+using Microsoft.Extensions.Logging;
 using Dapper;
 using static Dapper.SqlMapper;
-using Microsoft.Extensions.Logging;
-using Acesoft.NetCore.Logging;
+using Acesoft.Logger;
 using Acesoft.Data.SqlMapper.Caching;
-using Acesoft.NetCore.Config;
-using Acesoft.NetCore.Web;
-using System.Data;
+using Acesoft.Core;
+using Acesoft.Config;
 
 namespace Acesoft.Data.SqlMapper
 {
     public class SqlMapper : ISqlMapper
     {
-        private readonly ILogger logger;
+        private readonly ILogger logger = LoggerContext.GetLogger<SqlMapper>();
         public ICacheManager CacheManager { get; }
         public IDictionary<string, SqlScope> MappedScopes { get; }
 
         #region ctor
         public SqlMapper(IList<string> directories)
         {
-            logger = LoggerContext.GetLogger<SqlMapper>();
             MappedScopes = new Dictionary<string, SqlScope>();
 
             // 先执行scope和sqlmap初始化，再初始化缓存
@@ -36,7 +35,7 @@ namespace Acesoft.Data.SqlMapper
         {
             foreach (var dir in directories)
             {
-                var path = WebHelper.LocalPath(dir);
+                var path = App.GetLocalPath(dir);
                 if (!Directory.Exists(path))
                 {
                     throw new AceException($"Not found the folder: {path}");
@@ -46,7 +45,7 @@ namespace Acesoft.Data.SqlMapper
                 var files = Directory.EnumerateFiles(path, "*.config");
                 foreach (var file in files)
                 {
-                    var scope = ConfigFactory.GetXmlConfig<SqlScope>(file, (s) =>
+                    var scope = ConfigContext.GetXmlConfig<SqlScope>(file, (s) =>
                     {
                         logger.LogDebug($"SqlScope has changed with id: {s.Id}");
                         MappedScopes[s.Id] = s;
@@ -154,7 +153,7 @@ namespace Acesoft.Data.SqlMapper
                     var orders = grid.Order.Split(',');
                     for (var i = 0; i < sorts.Length; i++)
                     {
-                        sb.Append($",{sorts[i} {orders[i}");
+                        sb.Append($",{sorts[i]} {orders[i]}");
                     }
                     if (sb.Length > 1)
                     {
@@ -382,7 +381,7 @@ namespace Acesoft.Data.SqlMapper
             {
                 var res = s.QueryPageTable(param);
                 res.Request = request;
-                res.Map = map;
+                //res.Map = map;
                 return res;
             });
         }

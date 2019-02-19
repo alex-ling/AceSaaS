@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace Acesoft.Data.Config
+namespace Acesoft.Data
 {
-    public class Configuration : IConfiguration
+    public class StoreOption : IStoreOption
     {
-        public Configuration()
+        public StoreOption()
         {
             IsolationLevel = IsolationLevel.ReadCommitted;
             TablePrefix = "";
@@ -15,10 +15,12 @@ namespace Acesoft.Data.Config
             QueryGatingEnabled = true;
         }
 
+        public string Name { get; set; }
         public IsolationLevel IsolationLevel { get; set; }
         public IConnectionFactory ConnectionFactory { get; set; }
         public string TablePrefix { get; set; }
         public int SessionPoolSize { get; set; }
         public bool QueryGatingEnabled { get; set; }
+        public string[] SqlMaps { get; set; }
     }
 }

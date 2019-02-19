@@ -14,7 +14,6 @@ namespace Acesoft.Web.HR
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IEntity, User>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
@@ -24,9 +23,5 @@ namespace Acesoft.Web.HR
             //    await context.Response.WriteAsync("Hello HR!");
             //});
         }
-    }
-
-    public class User : EntityBase
-    {
     }
 }

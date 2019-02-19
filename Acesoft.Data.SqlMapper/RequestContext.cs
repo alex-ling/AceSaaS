@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-
+using Acesoft.Util;
 using Dapper;
 
 namespace Acesoft.Data.SqlMapper
@@ -31,7 +31,7 @@ namespace Acesoft.Data.SqlMapper
                 }
 
                 DapperParams = new DynamicParameters(param);
-                Params = new SortedDictionary<string, object>(DictEx.FromObject(param));
+                Params = new SortedDictionary<string, object>(ConvertHelper.ObjectToDictionary(param));
             }
         }
 

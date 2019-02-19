@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-using Acesoft.NetCore.Core;
-using Acesoft.NetCore.Config;
+using Acesoft.Config;
+using Acesoft.Config.Xml;
 using Acesoft.Data.SqlMapper.Caching;
 
 namespace Acesoft.Data.SqlMapper
@@ -52,8 +52,8 @@ namespace Acesoft.Data.SqlMapper
 
             this.Id = config.GetAttribute("id");
             this.Type = config.GetAttribute("type");
-            this.Params = ConfigFactory.GetConfigParams(config, "param");
-            this.FlushOnExecutes = ConfigFactory.GetConfigList(config, "flushonexecute", "sqlmap");
+            this.Params = ConfigContext.GetXmlConfigParams(config, "param");
+            this.FlushOnExecutes = ConfigContext.GetXmlConfigList(config, "flushonexecute", "sqlmap");
             this.Provider = CreateCacheProvider();
 
             var flushinterval = Params.GetValue("flushinterval", 0);

@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
+using Acesoft.Config.Xml;
+using Acesoft.Logger;
+using Acesoft.Util;
+using System.Xml;
+using Acesoft.Core;
 
 namespace Acesoft.Config
 {
@@ -16,7 +22,10 @@ namespace Acesoft.Config
     {
         static IServiceProvider _serviceProvider;
         static readonly ConcurrentDictionary<string, bool> _events = new ConcurrentDictionary<string, bool>();
+        static readonly ILogger logger = LoggerContext.GetLogger(nameof(ConfigContext));
+        static FileWatcher _watcher = null;
 
+        #region json
         public static T GetJsonConfig<T>(Action<ConfigOption> options) where T : class, new()
         {
             var opts = new ConfigOption();
@@ -42,12 +51,12 @@ namespace Acesoft.Config
         {
             if (changed == null)
             {
-                var options = _serviceProvider.GetRequiredService<IOptionsSnapshot<T>>();
+                var options = (App.Context?.RequestServices ?? _serviceProvider).GetService<IOptionsSnapshot<T>>();
                 return options.Get(nameOrTenant);
             }
             else
             {
-                var options = _serviceProvider.GetRequiredService<IOptionsMonitor<T>>();
+                var options = (App.Context?.RequestServices ?? _serviceProvider).GetService<IOptionsMonitor<T>>();
                 options.OnChange((config, key) => 
                 {
                     if (key == nameOrTenant)
@@ -73,10 +82,62 @@ namespace Acesoft.Config
                 return options.Get(nameOrTenant);
             }
         }
+        #endregion
 
-        public static IServiceProvider UseConfigContext(this IServiceProvider serviceProvider)
+        #region xml
+        public static T GetXmlConfig<T>(string configFile, Action<T> changed = null) where T : class, IXmlConfig, new()
         {
-            return _serviceProvider = serviceProvider;
+            logger.LogDebug($"Read XML config file from: {configFile}");
+
+            if (changed != null)
+            {
+                _watcher.Watch(configFile, (fileInfo) =>
+                {
+                    changed(GetXmlConfig<T>(configFile));
+                });
+            }
+
+            var config = new T();
+            config.LoadConfig(configFile);
+            return config;
+        }
+
+        public static T GetXmlConfigData<T>(XmlElement ele, Func<T> action = null) where T : class, IXmlConfigData, new()
+        {
+            var config = action?.Invoke();
+            if (config == null) config = new T();
+            config.Load(ele);
+
+            logger.LogDebug($"Get config data [{ele.Name}.{ele.GetAttribute("id")}] to: {typeof(T)}");
+            return config;
+        }
+
+        public static IDictionary<string, string> GetXmlConfigParams(XmlElement ele, string name)
+        {
+            var dict = new Dictionary<string, string>();
+            foreach (XmlElement e in ele.SelectNodes($"./{name}"))
+            {
+                dict.Add(e.GetAttribute("name"), e.GetAttribute("value"));
+            }
+            return dict;
+        }
+
+        public static IList<string> GetXmlConfigList(XmlElement ele, string name, string attr)
+        {
+            var list = new List<string>();
+            foreach (XmlElement e in ele.SelectNodes($"./{name}"))
+            {
+                list.Add(e.GetAttribute(attr));
+            }
+            return list;
+        }
+        #endregion
+
+        public static IServiceProvider UseConfigContext(this IServiceProvider service)
+        {
+            _watcher = service.GetRequiredService<FileWatcher>();
+
+            return _serviceProvider = service;
         }
     }
 }

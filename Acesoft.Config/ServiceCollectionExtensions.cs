@@ -20,7 +20,7 @@ namespace Acesoft.Config
                 .AddJsonFile(option.ConfigFile, optional: false, reloadOnChange: true)
                 .Build();
 
-            if (option.TenantConfig)
+            if (option.IsTenantConfig)
             {
                 foreach (var section in configuration.GetChildren())
                 {

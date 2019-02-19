@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Acesoft.Data
 {
-    public interface IRespository<T> where T : EntityBase
+    public interface IService<T> where T : IEntity
     {
         ISession Session { get; }
 

@@ -8,9 +8,17 @@ namespace Acesoft.Web.Mvc.Controllers
 {
     public class TestController : Controller
     {
+        private readonly IApplicationContext ctx;
+
+        public TestController(IApplicationContext ctx)
+        {
+            this.ctx = ctx;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var id = ctx.DbSession.ExecuteScalar("select 1");
+            return Json(id);
         }
     }
 }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-using Acesoft.NetCore.Config;
+
+using Acesoft.Config;
+using Acesoft.Config.Xml;
 
 namespace Acesoft.Data.SqlMapper
 {
@@ -25,7 +27,7 @@ namespace Acesoft.Data.SqlMapper
             this.Id = config.GetAttribute("id");
             foreach (XmlElement cfg in config.SelectNodes("//cache"))
             {
-                var cache = ConfigFactory.GetConfigData(cfg, () =>
+                var cache = ConfigContext.GetXmlConfigData(cfg, () =>
                 {
                     return new Cache { Scope = this };
                 });
@@ -33,7 +35,7 @@ namespace Acesoft.Data.SqlMapper
             }
             foreach (XmlElement cfg in config.SelectNodes("//sqlmap"))
             {
-                var sqlMap = ConfigFactory.GetConfigData(cfg, () =>
+                var sqlMap = ConfigContext.GetXmlConfigData(cfg, () =>
                 {
                     return new SqlMap { Scope = this };
                 });

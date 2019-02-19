@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="Dapper.Contrib" Version="1.50.5" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

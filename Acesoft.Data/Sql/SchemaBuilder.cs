@@ -20,7 +20,7 @@ namespace Acesoft.Data.Sql
             Session = session;
             _builder = CommandInterpreterFactory.For(session.Connection);
             _dialect = session.Store.Dialect;
-            _tablePrefix = session.Store.Configuration.TablePrefix;
+            _tablePrefix = session.Store.Option.TablePrefix;
         }
 
         private void Execute(IEnumerable<string> statements)

@@ -5,10 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using Acesoft.Rbac;
+
 namespace Acesoft.Web.Mvc.Controllers
 {
     public class ValueController : Controller
     {
+        private readonly IApplicationContext ctx;
+
+        public ValueController(IApplicationContext ctx)
+        {
+            this.ctx = ctx;
+        }
+
         // GET: Value
         public ActionResult Index()
         {

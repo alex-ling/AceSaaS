@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace Acesoft.NetCore.Config
+namespace Acesoft.Config.Xml
 {
     public abstract class BaseXmlConfig : XmlConfigData, IXmlConfig
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Acesoft.NetCore.Config
+namespace Acesoft.Config.Xml
 {
     public interface IXmlConfig : IXmlConfigData
     {

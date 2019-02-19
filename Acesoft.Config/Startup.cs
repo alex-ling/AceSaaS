@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
 
 using Acesoft.Core;
+using Acesoft.Util;
 
 namespace Acesoft.Config
 {
@@ -15,6 +16,7 @@ namespace Acesoft.Config
     {
         public override void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<FileWatcher>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)

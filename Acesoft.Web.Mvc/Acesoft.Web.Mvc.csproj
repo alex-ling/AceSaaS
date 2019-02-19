@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Config\data.config.json" />
     <Content Remove="Config\tenants.config.json" />
   </ItemGroup>
 
@@ -32,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Config\data.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Config\tenants.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

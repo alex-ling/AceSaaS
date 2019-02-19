@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 
-using Acesoft.Util;
+using Acesoft.Core;
 using Acesoft.Web.Multitenancy;
 using Acesoft.Web.Modules;
 
@@ -20,6 +20,9 @@ namespace Acesoft.Web
         {
             var services = app.ApplicationServices;
             var env = services.GetRequiredService<IHostingEnvironment>();
+
+            // set global HttpContext
+            services.UseAppContext();
 
             // use common
             //app.UseHttpsRedirection();

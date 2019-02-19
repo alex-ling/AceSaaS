@@ -22,8 +22,19 @@
     <ProjectReference Include="..\Acesoft.Cache\Acesoft.Cache.csproj" />
     <ProjectReference Include="..\Acesoft.Config\Acesoft.Config.csproj" />
     <ProjectReference Include="..\Acesoft.Core\Acesoft.Core.csproj" />
+    <ProjectReference Include="..\Acesoft.Data.MySql\Acesoft.Data.MySql.csproj" />
+    <ProjectReference Include="..\Acesoft.Data.PostgreSql\Acesoft.Data.PostgreSql.csproj" />
+    <ProjectReference Include="..\Acesoft.Data.Sqlite\Acesoft.Data.Sqlite.csproj" />
+    <ProjectReference Include="..\Acesoft.Data.SqlMapper\Acesoft.Data.SqlMapper.csproj" />
+    <ProjectReference Include="..\Acesoft.Data.SqlServer\Acesoft.Data.SqlServer.csproj" />
     <ProjectReference Include="..\Acesoft.Data\Acesoft.Data.csproj" />
     <ProjectReference Include="..\Acesoft.Logger\Acesoft.Logger.csproj" />
+    <ProjectReference Include="..\Acesoft.Rbac\Acesoft.Rbac.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resource\" />
+    <Folder Include="Authorize\" />
   </ItemGroup>
 
 </Project>

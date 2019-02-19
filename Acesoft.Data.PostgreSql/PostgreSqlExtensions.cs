@@ -4,36 +4,35 @@ using System.Data;
 using System.Text;
 
 using Npgsql;
-using Acesoft.Data.Config;
 using Acesoft.Data.Sql;
 
 namespace Acesoft.Data.PostgreSql
 {
     public static class PostgreSqlExtensions
     {
-        public static IConfiguration RegisterPostgreSql(this IConfiguration configuration)
+        public static IStoreOption RegisterPostgreSql(this IStoreOption option)
         {
             SqlDialectFactory.SqlDialects["npgsqlconnection"] = new PostgreSqlDialect();
             CommandInterpreterFactory.CommandInterpreters["npgsqlconnection"] = d => new PostgreSqlCommandInterpreter(d);
 
-            return configuration;
+            return option;
         }
 
-        public static IConfiguration UsePostgreSql(
-            this IConfiguration configuration,
+        public static IStoreOption UsePostgreSql(
+            this IStoreOption option,
             string connectionString)
         {
-            return UsePostgreSql(configuration, connectionString, IsolationLevel.ReadUncommitted);
+            return UsePostgreSql(option, connectionString, IsolationLevel.ReadUncommitted);
         }
 
-        public static IConfiguration UsePostgreSql(
-            this IConfiguration configuration,
+        public static IStoreOption UsePostgreSql(
+            this IStoreOption option,
             string connectionString,
             IsolationLevel isolationLevel)
         {
-            if (configuration == null)
+            if (option == null)
             {
-                throw new ArgumentNullException(nameof(configuration));
+                throw new ArgumentNullException(nameof(option));
             }
 
             if (String.IsNullOrWhiteSpace(connectionString))
@@ -41,11 +40,11 @@ namespace Acesoft.Data.PostgreSql
                 throw new ArgumentException(nameof(connectionString));
             }
 
-            RegisterPostgreSql(configuration);
-            configuration.ConnectionFactory = new DbConnectionFactory<NpgsqlConnection>(connectionString);
-            configuration.IsolationLevel = isolationLevel;
+            RegisterPostgreSql(option);
+            option.ConnectionFactory = new DbConnectionFactory<NpgsqlConnection>(connectionString);
+            option.IsolationLevel = isolationLevel;
 
-            return configuration;
+            return option;
         }
     }
 }

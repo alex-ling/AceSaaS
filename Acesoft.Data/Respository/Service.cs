@@ -8,7 +8,7 @@ using Dapper.Contrib.Extensions;
 
 namespace Acesoft.Data
 {
-    public class Repository<T> : IRespository<T> where T : EntityBase
+    public class Service<T> : IService<T> where T : EntityBase
     {
         public ISession Session => DataContext.Session;
 

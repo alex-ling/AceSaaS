@@ -4,36 +4,35 @@ using System.Data;
 using System.Text;
 
 using MySql.Data.MySqlClient;
-using Acesoft.Data.Config;
 using Acesoft.Data.Sql;
 
 namespace Acesoft.Data.MySql
 {
     public static class MySqlExtensions
     {
-        public static IConfiguration RegisterMySql(this IConfiguration configuration)
+        public static IStoreOption RegisterMySql(this IStoreOption option)
         {
             SqlDialectFactory.SqlDialects["mysqlconnection"] = new MySqlDialect();
             CommandInterpreterFactory.CommandInterpreters["mysqlconnection"] = d => new MySqlCommandInterpreter(d);
 
-            return configuration;
+            return option;
         }
 
-        public static IConfiguration UseMySql(
-            this IConfiguration configuration,
+        public static IStoreOption UseMySql(
+            this IStoreOption option,
             string connectionString)
         {
-            return UseMySql(configuration, connectionString, IsolationLevel.ReadUncommitted);
+            return UseMySql(option, connectionString, IsolationLevel.ReadUncommitted);
         }
 
-        public static IConfiguration UseMySql(
-            this IConfiguration configuration,
+        public static IStoreOption UseMySql(
+            this IStoreOption option,
             string connectionString,
             IsolationLevel isolationLevel)
         {
-            if (configuration == null)
+            if (option == null)
             {
-                throw new ArgumentNullException(nameof(configuration));
+                throw new ArgumentNullException(nameof(option));
             }
 
             if (String.IsNullOrWhiteSpace(connectionString))
@@ -41,12 +40,12 @@ namespace Acesoft.Data.MySql
                 throw new ArgumentException(nameof(connectionString));
             }
 
-            RegisterMySql(configuration);
+            RegisterMySql(option);
 
-            configuration.ConnectionFactory = new DbConnectionFactory<MySqlConnection>(connectionString);
-            configuration.IsolationLevel = isolationLevel;
+            option.ConnectionFactory = new DbConnectionFactory<MySqlConnection>(connectionString);
+            option.IsolationLevel = isolationLevel;
 
-            return configuration;
+            return option;
         }
     }
 }

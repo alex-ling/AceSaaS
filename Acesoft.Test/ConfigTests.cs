@@ -56,7 +56,7 @@ namespace Acesoft.Core.Tests
         {
             _services.AddJsonConfig<TestConfig>(opts =>
             {
-                opts.TenantConfig = true;
+                opts.IsTenantConfig = true;
                 opts.ConfigFile = "tenant.json";
             })
             .BuildServiceProvider()

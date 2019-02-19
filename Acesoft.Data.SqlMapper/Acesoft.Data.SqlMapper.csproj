@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Config\Acesoft.Config.csproj" />
+    <ProjectReference Include="..\Acesoft.Data\Acesoft.Data.csproj" />
+  </ItemGroup>
+
 </Project>

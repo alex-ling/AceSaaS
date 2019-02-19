@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-
-using Acesoft.NetCore.Config;
+using Acesoft.Config;
+using Acesoft.Config.Xml;
+using Acesoft.Core;
 using Acesoft.Data.SqlMapper.Caching;
+using Acesoft.Util;
 
 namespace Acesoft.Data.SqlMapper
 {
@@ -18,8 +20,24 @@ namespace Acesoft.Data.SqlMapper
         public IDictionary<string, string> Query { get; private set; }
         public IDictionary<string, string> Actions { get; private set; }
 
-        //public ICacheProvider CacheProvider => Cache.Provider;
+        public override void Load(XmlElement config)
+        {
+            base.Load(config);
 
+            this.Id = config.GetAttribute("id");
+            this.Params = ConfigContext.GetXmlConfigParams(config, "param");
+            this.Query = ConfigContext.GetXmlConfigParams(config, "query");
+            this.Actions = ConfigContext.GetXmlConfigParams(config, "action");
+
+            var cache = config.GetAttribute("cache");
+            if (cache.HasValue())
+            {
+                this.Cache = Scope.Caches[cache];
+            }
+        }
+
+        public ICacheProvider CacheProvider => Cache.Provider;
+        
         public void AppendSqlParams(RequestContext ctx)
         {
             // 处理查询语句中的参数
@@ -62,7 +80,7 @@ namespace Acesoft.Data.SqlMapper
 
         public string BuildSql(ISession session, RequestContext ctx)
         {
-            var provider = session.Provider;
+            var provider = session.Store.Dialect;
             var sql = "";
 
             if (ctx.OpType == OpType.get)
@@ -134,14 +152,11 @@ namespace Acesoft.Data.SqlMapper
             }
         }
 
-        private string BuildSelectSql(IDbProvider provider, RequestContext ctx)
+        private string BuildSelectSql(ISqlDialect dialect, RequestContext ctx)
         {
-            var start = provider.StartQuote;
-            var end = provider.CloseQuote;
-            var table = Params.GetValue("table", "");
+            var props = ConvertHelper.ObjectToDictionary(ctx.NewObj);
+            var sb = new StringBuilder($"select {dialect.QuoteForColumnName("id")}, ");
 
-            var props = DictEx.FromObject(ctx.NewObj);
-            var sbSel = new StringBuilder($"select {start}id{end},");
             foreach (var key in props.Keys)
             {
                 if (key.StartsWith("__"))
@@ -152,43 +167,41 @@ namespace Acesoft.Data.SqlMapper
                 if (key.StartsWith("ar_"))
                 {
                     // ar表示数组
-                    sbSel.Append($"{start}{key.Substring(3)}{end} as {key},");
+                    sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key}, ");
                 }
                 else
                 {
-                    sbSel.Append($"{start}{key}{end},");
+                    sb.Append($"{dialect.QuoteForColumnName(key)}, ");
                 }
             }
-            sbSel.Remove().Append($" from {start}{table}{end} where {start}id{end}={provider.ParamChar}id");
+            sb.Remove(2).Append($" from {dialect.QuoteForTableName(GetTableName())} where {dialect.QuoteForColumnName("id")}=@id");
 
-            return sbSel.ToString();
+            return sb.ToString();
         }
 
-        private string BuildInsertSql(IDbProvider provider, RequestContext ctx)
+        private string BuildInsertSql(ISqlDialect dialect, RequestContext ctx)
         {
-            var start = provider.StartQuote;
-            var end = provider.CloseQuote;
-            var table = Params.GetValue("table", "");
-            table = Params.GetValue("writetable", table);
             var insertId = Params.GetValue("insertid", true);
             var insertTime = Params.GetValue("inserttime", true);
 
-            var sbIns = new StringBuilder($"insert into {table}(");
-            var sbVal = new StringBuilder("values(");
+            var sbIns = new StringBuilder($"insert into {dialect.QuoteForTableName(GetTableName())} (");
+            var sbVal = new StringBuilder(" values (");
+
             if (insertId)
             {
                 // 自动插入id列
-                sbIns.Append($"{start}id{end},");
-                sbVal.Append($"{provider.ParamChar}id,");
-                ctx.DapperParams.AddDynamicParams(new { id = App.IdWorker.NextId() });
+                sbIns.Append($"{dialect.QuoteForColumnName("id")}, ");
+                sbVal.Append($"@id, ");
+                ctx.DapperParams.AddDynamicParams(new { id = DataContext.IdWorker.NextId() });
             }
             if (insertTime)
             {
                 // 自动插入dcreate列
-                sbIns.Append($"{start}dcreate{end},");
-                sbVal.Append("getdate(),");
+                sbIns.Append($"{dialect.QuoteForColumnName("dcreate")}, ");
+                sbVal.Append("getdate(), ");
                 //ctx.DapperParams.AddDynamicParams(new { dcreate = DateTime.Now });
             }
+
             foreach (var key in ctx.Params.Keys)
             {
                 var obj = ctx.Params[key];
@@ -202,30 +215,27 @@ namespace Acesoft.Data.SqlMapper
                     // rd表示只读列
                     continue;
                 }
-                sbIns.Append($"{start}{key}{end},");
-                sbVal.Append($"{provider.ParamChar}{key},");
+                sbIns.Append($"{dialect.QuoteForColumnName(key)}, ");
+                sbVal.Append($"@{key}, ");
             }
-            sbIns.Remove().Append(")");
-            sbVal.Remove().Append(")");
+            sbIns.Remove(2).Append(")");
+            sbVal.Remove(2).Append(")");
 
             return $"{sbIns}{sbVal}";
         }
 
-        private string BuildUpdateSql(IDbProvider provider, RequestContext ctx)
+        private string BuildUpdateSql(ISqlDialect dialect, RequestContext ctx)
         {
-            var start = provider.StartQuote;
-            var end = provider.CloseQuote;
-            var table = Params.GetValue("table", "");
-            table = Params.GetValue("writetable", table);
             var updateTime = Params.GetValue("updatetime", false);
+            var sb = new StringBuilder($"update {dialect.QuoteForTableName(GetTableName())} set ");
 
-            var sbUpd = new StringBuilder($"update {start}{table}{end} set ");
             if (updateTime)
             {
                 // 自动更新dupdate列
-                sbUpd.Append($"{start}dupdate{end}=getdate(),");
+                sb.Append($"{dialect.QuoteForColumnName("dupdate")}=getdate(), ");
                 //ctx.DapperParams.AddDynamicParams(new { dupdate = DateTime.Now });
             }
+
             foreach (var key in ctx.Params.Keys)
             {
                 if (key == "id" || key.StartsWith("rd_"))
@@ -237,43 +247,33 @@ namespace Acesoft.Data.SqlMapper
                 var obj = ctx.Params[key];
                 if (obj is string str && !str.HasValue())
                 {
-                    sbUpd.Append($"{start}{key}{end}=null,");
+                    sb.Append($"{dialect.QuoteForColumnName(key)}=null, ");
                 }
                 else
                 {
-                    sbUpd.Append($"{start}{key}{end}={provider.ParamChar}{key},");
+                    sb.Append($"{dialect.QuoteForColumnName(key)}=@{key}, ");
                 }
             }
-            sbUpd.Remove().Append($" where {start}id{end}={provider.ParamChar}id");
 
-            return sbUpd.ToString();
+            sb.Remove(2).Append($" where {dialect.QuoteForColumnName("id")}=@id");
+            return sb.ToString();
         }
 
-        private string BuildDeleteSql(IDbProvider provider, RequestContext ctx)
+        private string BuildDeleteSql(ISqlDialect dialect, RequestContext ctx)
         {
-            var start = provider.StartQuote;
-            var end = provider.CloseQuote;
-            var table = Params.GetValue("table", "");
-            table = Params.GetValue("writetable", table);
-
             // 默认的删除语句用in，支付多个id
-            return $"delete from {start}{table}{end} where {start}id{end} in {provider.ParamChar}ids";
+            return $"delete from {dialect.QuoteForTableName(GetTableName())} where {dialect.QuoteForColumnName("id")} in @ids";
         }
 
-        public override void Load(XmlElement config)
+        private string GetTableName()
         {
-            base.Load(config);
-
-            this.Id = config.GetAttribute("id");
-            this.Params = ConfigFactory.GetConfigParams(config, "param");
-            this.Query = ConfigFactory.GetConfigParams(config, "query");
-            this.Actions = ConfigFactory.GetConfigParams(config, "action");
-
-            var cache = config.GetAttribute("cache");
-            if (cache.HasValue())
+            var table = Params.GetValue("writetable", Params.GetValue("table", ""));
+            if (!table.HasValue())
             {
-                this.Cache = Scope.Caches[cache];
+                throw new AceException($"SqlMap must have \"table\" or \"writetable\" params");
             }
+
+            return table;
         }
     }
 }

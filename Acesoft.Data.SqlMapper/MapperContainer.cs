@@ -3,16 +3,16 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
-using Acesoft.Data.Config;
-using Acesoft.NetCore.Config;
 using Microsoft.Extensions.Logging;
-using Acesoft.NetCore.Logging;
+using Acesoft.Data.Config;
+using Acesoft.Logger;
+using Acesoft.Config;
 
 namespace Acesoft.Data.SqlMapper
 {
     public class MapperContainer
     {
-        private ILogger logger;
+        private ILogger logger = LoggerContext.GetLogger<MapperContainer>();
 
         static MapperContainer instance = null;
         static readonly ConcurrentDictionary<string, SqlMapper> mappers = new ConcurrentDictionary<string, SqlMapper>();
@@ -21,7 +21,6 @@ namespace Acesoft.Data.SqlMapper
 
         private MapperContainer()
         {
-            logger = LoggerContext.GetLogger<MapperContainer>();
         }
 
         static MapperContainer()
@@ -29,17 +28,13 @@ namespace Acesoft.Data.SqlMapper
             instance = new MapperContainer();
         }
 
-        public ISqlMapper GetSqlMapper()
+        public ISqlMapper GetSqlMapper(IStoreOption option)
         {
-            var mapperName = "default";
-            logger.LogDebug($"Get ISqlMapper for name: {mapperName}");
-            return mappers.GetOrAdd(mapperName, (key) =>
+            logger.LogDebug($"Get ISqlMapper for name: {option.Name}");
+            return mappers.GetOrAdd(option.Name, (key) =>
             {
-                var config = ConfigFactory.GetConfig<DataConfig>();
-                var dirs = config.SqlMaps[mapperName];
-
-                logger.LogDebug($"Initalize ISqlMapper for name: {mapperName}");
-                return new SqlMapper(dirs);
+                logger.LogDebug($"Initalize ISqlMapper for name: {option.Name}");
+                return new SqlMapper(option.SqlMaps);
             });
         }
     }

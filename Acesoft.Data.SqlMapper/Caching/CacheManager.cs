@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 
 using Microsoft.Extensions.Logging;
-using Acesoft.NetCore.Logging;
+using Acesoft.Logger;
 
 namespace Acesoft.Data.SqlMapper.Caching
 {
     public class CacheManager : ICacheManager
     {
-        readonly ILogger logger;
+        readonly ILogger logger = LoggerContext.GetLogger<CacheManager>();
 
         // #MDY#.ON 2018-03-16 简化缓存失效机制，由存储SqlMap改为存储Cache
         //readonly ConcurrentDictionary<string, IList<SqlMap>> flushSqlMaps = new ConcurrentDictionary<string, IList<SqlMap>>();
@@ -74,7 +74,6 @@ namespace Acesoft.Data.SqlMapper.Caching
         #region ctor
         public CacheManager(ISqlMapper sqlMapper)
         {
-            logger = LoggerContext.GetLogger<CacheManager>();
             SqlMapper = sqlMapper;
 
             this.LoadFlushSqlMaps();

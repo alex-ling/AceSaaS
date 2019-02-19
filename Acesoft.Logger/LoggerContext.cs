@@ -21,10 +21,10 @@ namespace Acesoft.Logger
             return factory.CreateLogger<T>();
         }
 
-        public static IServiceProvider UseLoggerContext(this IServiceProvider serviceProvider)
+        public static IServiceProvider UseLoggerContext(this IServiceProvider service)
         {
-            factory = serviceProvider.GetService<ILoggerFactory>();
-            return serviceProvider;
+            factory = service.GetService<ILoggerFactory>();
+            return service;
         }
     }
 }

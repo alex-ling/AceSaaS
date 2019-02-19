@@ -44,11 +44,11 @@ namespace Acesoft.Web.Modules
                 });
 
                 var assembly = Assembly.LoadFrom(Path.Combine(moduleFolder, module.MainAssembly));
-                var startupType = assembly.GetTypes().FirstOrDefault(t => 
-                    typeof(IStartup).IsAssignableFrom(t) && !t.IsAbstract);
+                var startupType = assembly.GetTypes().FirstOrDefault(t => typeof(IStartup).IsAssignableFrom(t));
+                var startup = (IStartup)Dynamic.GetInstanceCreator(startupType)();
 
                 // this simple add/replace module.
-                Modules[module.Name] = new ModuleWarpper(module, startupType);
+                Modules[module.Name] = new ModuleWarpper(module, startup);
                 logger.LogDebug($"Found module {module.Name} with type: {startupType.FullName}.");
                 
                 var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);

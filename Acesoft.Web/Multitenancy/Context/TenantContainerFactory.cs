@@ -36,25 +36,26 @@ namespace Acesoft.Web.Multitenancy
         public IServiceProvider CreateContainer(Tenant tenant)
         {
             var tenantServices = serviceProvider.CreateChildContainer(applicationServices);
+            var startups = new List<IStartup>();
 
-            // Execute external module's IStartup registrations
+            // Add Acesoft.Web IStartup to first
+            startups.Add(new Startup());
+
+            // Execute external module's IStartup
             foreach (var moduleName in tenant.Modules)
             {
                 if (modulesHost.Modules.TryGetValue(moduleName, out ModuleWarpper module))
                 {
                     // add IStartup
-                    tenantServices.AddSingleton(typeof(IStartup), module.StartupType);
+                    startups.Add(module.Startup);
                 }
             }
 
-            // build
-            var tenantProvider = tenantServices.BuildServiceProvider(true);
-
-            // configuare startups.
-            var startups = tenantProvider.GetServices<IStartup>();
+            // configure services
             startups.OrderBy(s => s.Order).Each(s => s.ConfigureServices(tenantServices));
 
-            return tenantProvider;
+            // build
+            return tenantServices.BuildServiceProvider(true);
         }
     }
 }

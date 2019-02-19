@@ -4,13 +4,13 @@
   "RedirectPermanent": false,
   "tenants": [
     {
-      "name": "default",
+      "name": "plat",
       "hostnames": [
         "localhost:5000",
         "localhost:6000"
       ],
       "modules": [ "hr" ],
-      "theme": "default"
+      "theme": "plat"
     },
     {
       "name": "saas",
@@ -19,7 +19,7 @@
         "localhost:6001"
       ],
       "modules": [ "shop" ],
-      "theme": "default"
+      "theme": "saas"
     }
   ]
 }

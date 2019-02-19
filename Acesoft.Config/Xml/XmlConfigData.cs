@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace Acesoft.NetCore.Config
+namespace Acesoft.Config.Xml
 {
-    public interface IXmlConfigData
-    {
-        XmlElement Config { get; }
-
-        void Load(XmlElement config);
-    }
-
     public abstract class XmlConfigData : IXmlConfigData
     {
         public XmlElement Config { get; private set; }

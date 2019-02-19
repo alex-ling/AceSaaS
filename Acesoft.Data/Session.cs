@@ -5,12 +5,16 @@ using System.Threading.Tasks;
 
 using Dapper;
 using Dapper.Contrib.Extensions;
+using Microsoft.Extensions.Logging;
 using static Dapper.SqlMapper;
+using Acesoft.Logger;
 
 namespace Acesoft.Data
 {
     public class Session : ISession
-    { 
+    {
+        private static ILogger<Session> logger = LoggerContext.GetLogger<Session>();
+
         #region ISession
         public IStore Store { get; private set; }
         public IDbConnection Connection { get; private set; }
@@ -24,7 +28,7 @@ namespace Acesoft.Data
             this.Store = store;
             this.isolationLevel = isolationLevel;
 
-            Connection = store.Configuration.ConnectionFactory.CreateConnection();
+            Connection = store.Option.ConnectionFactory.CreateConnection();
         }
 
         public void BeginTranscation()
@@ -39,16 +43,22 @@ namespace Acesoft.Data
                 Connection.Open();
             }
             Transaction = Connection.BeginTransaction(il);
+
+            logger.LogDebug($"Begin {il} transcation with database \"{Store.Option.Name}\"");
         }
 
         public void Commit()
         {
+            logger.LogDebug($"Commit transcation with database \"{Store.Option.Name}\"");
+
             Transaction.Commit();
             EndTransaction();
         }
 
         public void Rollback()
         {
+            logger.LogDebug($"Rollback transcation with database \"{Store.Option.Name}\"");
+
             Transaction.Rollback();
             EndTransaction();
         }
@@ -59,9 +69,11 @@ namespace Acesoft.Data
 
             if (Connection != null)
             {
-                Store.Configuration.ConnectionFactory.CloseConnection(Connection);
+                Store.Option.ConnectionFactory.CloseConnection(Connection);
                 Connection = null;
             }
+
+            logger.LogDebug($"Dispose session with database \"{Store.Option.Name}\"");
         }
 
         private void EndTransaction()
@@ -71,6 +83,8 @@ namespace Acesoft.Data
                 Transaction.Dispose();
                 Transaction = null;
             }
+
+            logger.LogDebug($"End transcation with database \"{Store.Option.Name}\"");
         }
         #endregion
 
