@@ -1,0 +1,30 @@
+namespace Acesoft.Web.UI
+{
+	public enum Event
+	{
+		blur,
+		change,
+		click,
+		dblclick,
+		error,
+		focus,
+		focusin,
+		focusout,
+		hover,
+		keydown,
+		keypress,
+		keyup,
+		mousedown,
+		mouseenter,
+		mouseleave,
+		mousemove,
+		mouseout,
+		mouseover,
+		mouseup,
+		resize,
+		scroll,
+		select,
+		submit,
+		unload
+	}
+}

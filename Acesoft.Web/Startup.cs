@@ -5,11 +5,9 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-
-using Acesoft.Core;
 using Acesoft.Data;
-using Acesoft.Web.Data;
-using Acesoft.Web.StateProviders;
+using Acesoft.Web.DataAccess;
+using Acesoft.Web.Database;
 
 namespace Acesoft.Web
 {
@@ -19,9 +17,8 @@ namespace Acesoft.Web
         {
             services.AddDataAccess();
 
-            services.AddSingleton<IApplicationStateProvider, UserStateProvider>();
             services.AddSingleton<IApplicationContext, ApplicationContext>();
-            //services.AddScoped<IApplicationContext, ApplicationContext>();
+            services.AddSingleton<ISchemaStore, SchemaStore>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)

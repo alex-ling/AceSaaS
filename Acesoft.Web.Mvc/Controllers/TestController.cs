@@ -2,23 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using Acesoft.Web.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Acesoft.Web.Mvc.Controllers
 {
+    [Route("api/[controller]/[action]")]
     public class TestController : Controller
     {
-        private readonly IApplicationContext ctx;
-
-        public TestController(IApplicationContext ctx)
+        private IDatabaseStore store;
+        public TestController(IDatabaseStore store)
         {
-            this.ctx = ctx;
+            this.store = store;
         }
 
-        public IActionResult Index()
+        public IActionResult Get()
         {
-            var id = ctx.DbSession.ExecuteScalar("select 1");
-            return Json(id);
+            this.store.CreateTables();
+            return Ok("ok");
+        }
+
+        public IActionResult Delete()
+        {
+            this.store.DropTables();
+            return Ok("ok");
         }
     }
 }

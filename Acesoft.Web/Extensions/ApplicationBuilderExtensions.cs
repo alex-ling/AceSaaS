@@ -7,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
-
-using Acesoft.Core;
 using Acesoft.Web.Multitenancy;
 using Acesoft.Web.Modules;
 

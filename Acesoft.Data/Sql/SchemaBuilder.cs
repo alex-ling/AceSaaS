@@ -13,11 +13,12 @@ namespace Acesoft.Data.Sql
         private string _tablePrefix;
         private ISqlDialect _dialect;
         public ISession Session { get; private set; }
-        public bool ThrowOnError { get; set; } = true;
+        public bool ThrowOnError { get; set; }
 
-        public SchemaBuilder(ISession session)
+        public SchemaBuilder(ISession session, bool throwOnError = true)
         {
             Session = session;
+            ThrowOnError = throwOnError;
             _builder = CommandInterpreterFactory.For(session.Connection);
             _dialect = session.Store.Dialect;
             _tablePrefix = session.Store.Option.TablePrefix;
@@ -27,7 +28,7 @@ namespace Acesoft.Data.Sql
         {
             foreach (var statement in statements)
             {
-                Session.Execute(statement);
+                Session.Execute(statement, null);
             }
         }
 
@@ -92,61 +93,25 @@ namespace Acesoft.Data.Sql
             return this;
         }
 
+        public SchemaBuilder CreateForeignKey(string name, string srcTable, string srcColumn, string destTable, string destColumn)
+        {
+            try
+            {
+                var command = new CreateForeignKeyCommand(Prefix(name), Prefix(srcTable), new string[] { srcColumn }, Prefix(destTable), new string[] { destColumn });
+                Execute(_builder.CreateSql(command));
+            }
+            catch
+            {
+                if (ThrowOnError)
+                {
+                    throw;
+                }
+            }
+
+            return this;
+        }
+
         public SchemaBuilder CreateForeignKey(string name, string srcTable, string[] srcColumns, string destTable, string[] destColumns)
-        {
-            try
-            {
-                var command = new CreateForeignKeyCommand(Prefix(name), Prefix(srcTable), srcColumns, Prefix(destTable), destColumns);
-                Execute(_builder.CreateSql(command));
-            }
-            catch
-            {
-                if (ThrowOnError)
-                {
-                    throw;
-                }
-            }
-
-            return this;
-        }
-
-        public SchemaBuilder CreateForeignKey(string name, string srcModule, string srcTable, string[] srcColumns, string destTable, string[] destColumns)
-        {
-            try
-            {
-                var command = new CreateForeignKeyCommand(Prefix(name), Prefix(srcTable), srcColumns, Prefix(destTable), destColumns);
-                Execute(_builder.CreateSql(command));
-            }
-            catch
-            {
-                if (ThrowOnError)
-                {
-                    throw;
-                }
-            }
-            return this;
-        }
-
-        public SchemaBuilder CreateForeignKey(string name, string srcTable, string[] srcColumns, string destModule, string destTable, string[] destColumns)
-        {
-            try
-            {
-                var command = new CreateForeignKeyCommand(Prefix(name), Prefix(srcTable), srcColumns, Prefix(destTable), destColumns);
-                Execute(_builder.CreateSql(command));
-
-            }
-            catch
-            {
-                if (ThrowOnError)
-                {
-                    throw;
-                }
-            }
-
-            return this;
-        }
-
-        public SchemaBuilder CreateForeignKey(string name, string srcModule, string srcTable, string[] srcColumns, string destModule, string destTable, string[] destColumns)
         {
             try
             {

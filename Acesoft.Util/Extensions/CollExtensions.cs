@@ -38,14 +38,18 @@ namespace Acesoft
             return sb.ToString();
         }
 
-        public static string Join(this IEnumerable<string> list, string separator = ",")
+        public static string Join<T>(this IEnumerable<T> list, Func<T, object> itemFunc, string separator = ",")
         {
-            return string.Join(separator, list);
-        }
-
-        public static string Join<T>(this IEnumerable<T> list, string separator = ",")
-        {
-            return string.Join(separator, list);
+            var sb = new StringBuilder();
+            foreach (var item in list)
+            {
+                sb.AppendFormat("{0}{1}", separator, itemFunc(item));
+            }
+            if (sb.Length > 0)
+            {
+                sb.Remove(0, separator.Length);
+            }
+            return sb.ToString();
         }
 
         public static IList<T> CloneRange<T>(this IList<T> list, int offset, int length)

@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Area4\**" />
+    <Content Remove="Areas\Area4\**" />
+    <EmbeddedResource Remove="Areas\Area4\**" />
+    <None Remove="Areas\Area4\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Config\data.config.json" />
     <Content Remove="Config\tenants.config.json" />
   </ItemGroup>
@@ -19,17 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Web.UI\Acesoft.Web.UI.csproj" />
     <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Area3\Data\" />
-    <Folder Include="Areas\Area3\Models\" />
-    <Folder Include="Areas\Area4\Controllers\" />
-    <Folder Include="Areas\Area4\Data\" />
-    <Folder Include="Areas\Area4\Models\" />
-    <Folder Include="Areas\Area4\Views\" />
     <Folder Include="Modules\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 
   <ItemGroup>

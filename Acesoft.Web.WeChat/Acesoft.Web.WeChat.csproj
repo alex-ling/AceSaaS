@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.9.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Senparc.Weixin.MP.MVC" Version="7.2.6" />
+    <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Data.SqlMapper\Acesoft.Data.SqlMapper.csproj" />
+    <ProjectReference Include="..\Acesoft.Platform\Acesoft.Platform.csproj" />
+    <ProjectReference Include="..\Acesoft.Rbac\Acesoft.Rbac.csproj" />
+    <ProjectReference Include="..\Acesoft.Web.UI\Acesoft.Web.UI.csproj" />
+    <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -28,5 +28,37 @@ namespace Acesoft.Util.Helper
             }
             return defaultValue;
         }
+
+        public static string Append(string url, string name, string value)
+        {
+            var query = $"{name}={value}";
+            var items = url.Split('#');
+            var str = items[0];
+            var hash = (items.Length > 1) ? items[1] : "";
+
+            if (str.IndexOf("?") > 0)
+            {
+                var st = str.IndexOf(name + "=");
+                if (st > 0)
+                {
+                    var ed = str.IndexOf("&", st);
+                    str = (ed <= 0) ? (str.Substring(0, st) + query) : (str.Substring(0, st) + query + str.Substring(ed));
+                }
+                else
+                {
+                    str += "&" + query;
+                }
+            }
+            else
+            {
+                str += "?" + query;
+            }
+
+            if (hash.HasValue())
+            {
+                str += "#" + hash;
+            }
+            return str;
+        }
     }
 }

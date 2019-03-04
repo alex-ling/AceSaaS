@@ -11,6 +11,12 @@ namespace Acesoft.Data
 {
     public static class ISessionExtensions
     {
+        public static SqlMap GetSqlMap(this ISession s, string sqlScope, string sqlId)
+        {
+            var mapper = MapperContainer.Instance.GetSqlMapper(s.Store.Option);
+            return mapper.GetSqlMap(sqlScope, sqlId);
+        }
+
         #region execute
         public static int Execute(this ISession s, RequestContext ctx)
         {

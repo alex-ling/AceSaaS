@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.AspNetCore.Routing;
 
-using Acesoft.Core;
-
 namespace Acesoft.Web.Multitenancy
 {
     public class TenantRouterMiddleware

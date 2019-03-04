@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
 using Acesoft.Core;
-using Acesoft.Config;
-using Acesoft.Data.Config;
 
 namespace Acesoft.Data
 {
@@ -25,8 +23,6 @@ namespace Acesoft.Data
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
-            // 设置全局上下文
-            services.UseDataContext();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using static Dapper.SqlMapper;
 
 namespace Acesoft.Data.SqlMapper.Caching
 {
@@ -25,9 +26,9 @@ namespace Acesoft.Data.SqlMapper.Caching
             }
 
             var sb = new StringBuilder();
-            foreach (var reqParam in RequestContext.Params)
+            foreach (var reqParam in RequestContext.Params.ParameterNames)
             {
-                BuildQueryString(sb, reqParam.Key, reqParam.Value);
+                BuildQueryString(sb, reqParam, RequestContext.Params.Get<object>(reqParam));
             }
             return sb.ToString().Trim('&');
         }

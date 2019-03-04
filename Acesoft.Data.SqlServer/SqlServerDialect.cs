@@ -75,17 +75,22 @@ namespace Acesoft.Data.SqlServer
                 {
                     if (dbType == DbType.String)
                     {
-                        return "NVARCHAR(" + length + ")";
+                        return $"NVARCHAR({length})";
                     }
 
                     if (dbType == DbType.AnsiString)
                     {
-                        return "VARCHAR(" + length + ")";
+                        return $"VARCHAR({length})";
                     }
 
                     if (dbType == DbType.Binary)
                     {
-                        return "VARBINARY(" + length + ")";
+                        return $"VARBINARY({length})";
+                    }
+
+                    if (dbType == DbType.Decimal)
+                    {
+                        return $"DECIMAL({length},2)";
                     }
                 }
             }

@@ -1,31 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Web;
-using Microsoft.AspNetCore.Builder;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+
+using Acesoft.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Acesoft.Core
+namespace Acesoft
 {
     public static class App
     {
         private static IHttpContextAccessor httpContextAccessor;
 
+        public static HtmlEncoder DefaultEncoder => HtmlEncoder.Create(UnicodeRanges.All);
         public static HttpContext Context => httpContextAccessor?.HttpContext;
+        public static IIdWorker IdWorker { get; private set; }
 
         public static IServiceProvider UseAppContext(this IServiceProvider service)
         {
             httpContextAccessor = service.GetService<IHttpContextAccessor>();
+            IdWorker = service.GetService<IIdWorker>();
 
             return service;
-        }
+        }        
 
         #region path
-        public static string GetWebPath()
+        public static string GetWebRoot(bool fullPath = false)
         {
-            return "";
+            if (fullPath)
+            {
+                return Context.Request.WebRoot();
+            }
+            return "/";
+        }
+
+        public static string GetWebPath(string path, bool fullPath = false)
+        {
+            path = path.TrimStart(',', '~', '/');
+            if (path.StartsWith("http"))
+            {
+                return path;
+            }
+            return GetWebRoot(fullPath) + path;
+        }
+
+        public static string GetWebPhoto(string path, bool fullPath = false, string none = "images/none.jpg")
+        {
+            if (path.HasValue())
+            {
+                return GetWebPath(path, fullPath);
+            }
+            return GetWebPath(none, fullPath);
+        }
+
+        public static string GetLocalRoot()
+        {
+            return AppContext.BaseDirectory;
         }
 
         public static string GetLocalPath(string virtualPath, bool mustCreatePath = false)
@@ -39,7 +70,17 @@ namespace Acesoft.Core
                 }
                 return path;
             }
-            return AppContext.BaseDirectory;
+            return GetLocalRoot();
+        }
+
+        public static string GetLocalResource(string path)
+        {
+            if (path.StartsWith("~"))
+            {
+                path = path.Substring(1);
+            }
+            path = path.TrimStart(',', '/');
+            return Path.Combine(GetLocalRoot(), "wwwroot/" + path);
         }
         #endregion
 

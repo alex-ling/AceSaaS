@@ -4,67 +4,74 @@ using System.Reflection;
 using Acesoft.Util;
 using Dapper;
 
-namespace Acesoft.Data.SqlMapper
+namespace Acesoft.Data
 {
     public class RequestContext
     {
-        private object param;
-        internal DynamicParameters DapperParams { get; set; }
-        public IDictionary<string, object> Params { get; set; }
-        public IDictionary<string, object> ExtraParams { get; set; }
-
         public string Scope { get; set; }
         public string SqlId { get; set; }
-        public OpType OpType { get; set; }
+        public DynamicParameters Params { get; private set; }
+        public IDictionary<string, object> ExtraParams { get; set; }
+        public CmdType CmdType { get; set; }
         public object NewObj { get; set; }
-        public object Param
-        {
-            get { return param; }
-            set
-            {
-                param = value;
-                if (param == null)
-                {
-                    DapperParams = null;
-                    Params = null;
-                    return;
-                }
-
-                DapperParams = new DynamicParameters(param);
-                Params = new SortedDictionary<string, object>(ConvertHelper.ObjectToDictionary(param));
-            }
-        }
-
-        public RequestContext()
-        { }
 
         public RequestContext(string sqlFullId)
         {
             var index = sqlFullId.IndexOf(".");
-            if (index <= 0)
+            if (index <= 0 || index >= sqlFullId.Length - 1)
             {
-                throw new AceException("未设置SqlFullId参数，格式：SqlScope.SqlId");
+                throw new AceException("The SqlFullId must as：SqlScope.SqlId");
             }
-            Scope = sqlFullId.Substring(0, index);
-            SqlId = sqlFullId.Substring(index + 1);
-        }
 
-        public RequestContext(string sqlFullId, object param, OpType type = OpType.exe) : this(sqlFullId)
-        {
-            Param = param;
-            OpType = type;
+            Init(sqlFullId.Substring(0, index), sqlFullId.Substring(index + 1));
         }
 
         public RequestContext(string scope, string sqlId)
         {
-            Scope = scope;
-            SqlId = sqlId;
+            Init(scope, sqlId);
         }
 
-        public RequestContext(string scope, string sqlId, object param, OpType type = OpType.exe) : this(scope, sqlId)
+        public RequestContext SetCmdType(CmdType cmdType)
         {
-            Param = param;
-            OpType = type;
+            CmdType = cmdType;
+            return this;
+        }
+
+        public RequestContext SetParam(object param)
+        {
+            if (param != null)
+            {
+                Params.AddDynamicParams(param);
+            }
+            return this;
+        }
+
+        public RequestContext SetExtraParam(object param)
+        {
+            ExtraParams.Merge(param);
+            return this;
+        }
+
+        public RequestContext SetNewObj(object newObj)
+        {
+            NewObj = newObj;
+            return this;
+        }
+
+        public RequestContext SetParam(string name, object value)
+        {
+            Params.Add(name, value);
+            return this;
+        }
+
+        private void Init(string scope, string sqlId)
+        {
+            Scope = scope;
+            SqlId = sqlId;
+            
+            Params = new DynamicParameters();
+            ExtraParams = new Dictionary<string, object>();
+            CmdType = CmdType.sql;
         }
     }
 }

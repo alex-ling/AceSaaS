@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Acesoft.Core;
-
 namespace Acesoft.Web.Modules
 {
     public class ModuleWarpper

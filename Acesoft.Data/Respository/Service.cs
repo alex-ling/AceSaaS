@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 using Dapper;
 using Dapper.Contrib.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Acesoft.Data
 {
     public class Service<T> : IService<T> where T : EntityBase
     {
-        public ISession Session => DataContext.Session;
+        public ISession Session => App.Context.RequestServices.GetService<ISession>();
 
         #region Get
         public T Get(long id)
@@ -31,13 +32,6 @@ namespace Acesoft.Data
         public Task<IEnumerable<T>> GetAllAsync()
         {
             return Session.GetAllAsync<T>();
-        }
-        #endregion
-
-        #region Gets
-        public IEnumerable<T> GetList(string sql, object param)
-        {
-            return Session.Query<T>(sql, param);
         }
         #endregion
 

@@ -10,6 +10,11 @@ namespace Acesoft.Data.Sql.Schema
         {
         }
 
+        public ICreateTableCommand PrimaryKey()
+        {
+            return Column<long>("id", c => c.PrimaryKey());
+        }
+
         public ICreateTableCommand Column(string columnName, DbType dbType, Action<ICreateColumnCommand> column = null)
         {
             var command = new CreateColumnCommand(Name, columnName);

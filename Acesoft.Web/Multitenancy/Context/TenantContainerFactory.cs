@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
-using Acesoft.Core;
 using Acesoft.Web.Modules;
 
 namespace Acesoft.Web.Multitenancy

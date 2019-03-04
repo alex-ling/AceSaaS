@@ -5,9 +5,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Http;
 
-using Acesoft.Core;
 using Acesoft.Util;
 
 namespace Acesoft.Config

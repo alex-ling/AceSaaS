@@ -5,15 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-
-using Acesoft.Core;
-using Acesoft.Config;
-using Acesoft.Util;
 
 namespace Acesoft.Web.Modules
 {
@@ -49,8 +43,11 @@ namespace Acesoft.Web.Modules
                 Startups.Add(new Acesoft.Config.Startup());
                 Startups.Add(new Acesoft.Cache.Startup());
                 Startups.Add(new Acesoft.Data.Startup());
+                Startups.Add(new Acesoft.Rbac.Startup());
+
                 // Web plugin must add tenant's pipeline DI
                 //Startups.Add(new Acesoft.Web.Startup());
+
                 loaded = true;
             }
         }

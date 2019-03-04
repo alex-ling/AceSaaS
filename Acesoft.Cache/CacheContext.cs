@@ -1,10 +1,8 @@
 ﻿using System;
 
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
-using Acesoft.Core;
 
 namespace Acesoft.Cache
 {

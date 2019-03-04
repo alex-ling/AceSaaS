@@ -82,9 +82,9 @@ namespace Acesoft.Data
             {
                 Transaction.Dispose();
                 Transaction = null;
-            }
 
-            logger.LogDebug($"End transcation with database \"{Store.Option.Name}\"");
+                logger.LogDebug($"End transcation with database \"{Store.Option.Name}\"");
+            }
         }
         #endregion
 

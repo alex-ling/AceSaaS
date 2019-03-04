@@ -5,12 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entity\" />
-    <Folder Include="Services\" />
+    <Compile Remove="Entity\Rbac_Client.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Data.SqlMapper\Acesoft.Data.SqlMapper.csproj" />
     <ProjectReference Include="..\Acesoft.Data\Acesoft.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Store\" />
   </ItemGroup>
 
 </Project>

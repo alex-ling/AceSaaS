@@ -7,9 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
-using Acesoft.Core;
 using Acesoft.Config;
 using Acesoft.Web.Modules;
 using Acesoft.Web.Multitenancy;

@@ -7,19 +7,16 @@ namespace Acesoft
 {
     public sealed class Check
     {
-        public static void Require(bool assertion, string message)
+        public static void Require(bool assertion, string msg, string negativeMsg = null)
         {
-            if (!assertion) throw new AceException(message);
+            if (!assertion) throw new AceException(msg);
+            else if (negativeMsg.HasValue()) throw new AceException(negativeMsg);
         }
 
-        public static void Require(bool assertion, string message, Exception inner)
+        public static void Assert(bool assertion, string msg, string negativeMsg = null)
         {
-            if (!assertion) throw new AceException(message, inner);
-        }
-        
-        public static void Require(bool assertion, string message, params string[] paramNames)
-        {
-            if (!assertion) throw new AceException(string.Format(message, paramNames));
+            if (assertion) throw new AceException(msg);
+            else if (negativeMsg.HasValue()) throw new AceException(negativeMsg);
         }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
-namespace Acesoft.Core
+namespace Acesoft
 {
     /// <summary>
     /// Plugin启动接口，用于配置一个Plugin

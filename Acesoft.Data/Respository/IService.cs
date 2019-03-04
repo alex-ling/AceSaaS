@@ -14,8 +14,6 @@ namespace Acesoft.Data
         IEnumerable<T> GetAll();
         Task<IEnumerable<T>> GetAllAsync();
 
-        IEnumerable<T> GetList(string query, object param);
-
         long Insert(T obj);
         Task<int> InsertAsync(T obj);
         long Insert(IEnumerable<T> objs);

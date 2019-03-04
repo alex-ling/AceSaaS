@@ -4,8 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
-
-using Acesoft.Core;
 using Acesoft.Data;
 
 namespace Acesoft.Web.Shop

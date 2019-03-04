@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,8 +14,6 @@ using Microsoft.Extensions.Logging;
 using Acesoft.Config.Xml;
 using Acesoft.Logger;
 using Acesoft.Util;
-using System.Xml;
-using Acesoft.Core;
 
 namespace Acesoft.Config
 {
