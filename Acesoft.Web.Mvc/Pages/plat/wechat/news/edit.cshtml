@@ -1,0 +1,60 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.news").Form(new {
+        title = "",
+        content = "",
+        thumburl = "",
+        digest = "",
+        author = Ace.AC.User.NickName,
+        sourceurl = "",
+        orderno = "100"
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r">标题：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("title").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 标题图片：</div>
+                <div class="col-xs-6" style="min-height:60px">
+                    @(Ace.UploadBox().Name("thumburl").Width("100%").Max(1).Filters(f =>
+                    {
+                        f.max_file_size = "500kb";
+                        f.mime_types.Add(new MineType 
+                        {
+                            title = "图片文件",
+                            extensions = "jpg,jpeg,gif,png,bmp"
+                        });
+                    }).OssBucket("mp-yqyy").Dir("img"))
+                </div>
+                <div class="col-xs-4"><span class="text-warning">单个文件不要超过500K</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">内容：</div>
+                <div class="col-xs-9">@Ace.KindEditor().Name("content").Width("100%").Height("230px")</div>
+                <div class="col-xs-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">作者：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("author").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">原文链接：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("sourceurl").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">排序号：</div>
+                <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Width("100%").Required().Increment(100)</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

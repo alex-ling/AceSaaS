@@ -9,5 +9,7 @@ namespace Acesoft.Rbac
 {
     public interface IRoleService : IService<Rbac_Role>
     {
+        int Delete(long id);
+        void Delete(string roleIds);
     }
 }

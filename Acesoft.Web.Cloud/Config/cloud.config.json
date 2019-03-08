@@ -1,0 +1,20 @@
+{
+  "accesses": {
+    "aliyunoss": {
+      "endpoint": "oss-cn-beijing.aliyuncs.com",
+      "accessKeyId": "LTAIwYP4daI9blue",
+      "accessKeySecret": "NZkfQvDIHuj5lloVmytr6bmQrmILPs"
+    },
+    "aliyunsms": {
+      "endpoint": "cn-beijing",
+      "accessKeyId": "LTAIwYP4daI9blue",
+      "accessKeySecret": "NZkfQvDIHuj5lloVmytr6bmQrmILPs"
+    }
+  },
+  "settings": {
+    "mojiweather": {
+      "appcode": "2d5ed303a5e14d8caf17e0c1ffcdc576",
+      "refreshMinutes": 120
+    }
+  }
+}

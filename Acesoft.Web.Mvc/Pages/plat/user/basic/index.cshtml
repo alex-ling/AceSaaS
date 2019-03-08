@@ -1,0 +1,73 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "基本资料";
+    Layout = "_shared/bodyct";
+}
+<div class="alert alert-info">请完善以下信息，方便我们更好的为您服务！</div>
+@{ 
+    Ace.View().Id("view").Css("front").Ajax(ds => ds.Load("user", "regist").HttpPut("auth", "putuser")).Content(
+    @<div class="container-fluid">
+        <div class="pt20 pb10 bd-b-dashed">基本信息</div>
+        <div class="row">
+            <div class="col-md-2 text-r"><span class="cr-red">*</span> 昵称：</div>
+            <div class="col-md-5">
+                @Ace.TextBox().Name("nickname").Required().Width("100%")
+            </div>
+            <div class="col-md-5">
+                <span class="text-warning">
+                    用于网页显示和在线交流等。
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-r"><span class="cr-red">*</span> 真实姓名：</div>
+            <div class="col-md-5">
+                @Ace.TextBox().Name("username").Required().Width("100%")
+            </div>
+            <div class="col-md-5">
+                <span class="text-warning">
+                    请务必准确填写本人的真实姓名。
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-r"><span class="cr-red"></span> 手机号码：</div>
+            <div class="col-md-5">
+                @Ace.TextBox().Name("mobile").ValidType("length[11,11]").Width("100%").Prompt("请输入11位手机号")
+            </div>
+            <div class="col-md-5">
+                <span class="text-warning">
+                    可用来登录、找回密码和接收各类业务通知。
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-r"><span class="cr-red"></span> 安全邮箱：</div>
+            <div class="col-md-5">
+                @Ace.TextBox().Name("mail").ValidType("email").Width("100%").Prompt("请输入电子邮箱")
+            </div>
+            <div class="col-md-5">
+                <span class="text-warning">
+                    可用来登录、找回密码和接收各类业务通知与活动信息。
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-r"><span class="cr-red"></span> 个人简介：</div>
+            <div class="col-md-5">
+                @Ace.TextArea().Name("remark").Width("100%").Height("50px")
+            </div>
+            <div class="col-md-5">
+                <span class="text-warning">
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-2">
+                <button type="button" class="btn btn-primary btn-sm w150" data-cmd="save">保存</button>
+            </div>
+        </div>
+    </div>
+    ).Render();
+}

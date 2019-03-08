@@ -1,0 +1,63 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.app").Form(new {
+        name = "",
+        appid = "",
+        appsecret = "",
+        token = "",
+        aeskey = "",
+        remark = "",
+        secret = "",
+        type = ""
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 类别：</div>
+                <div class="col-xs-6">
+                    @Ace.ComboBox().Name("type").Width("100%").Required().Ajax(a => a.Dict("WXTYPE").HttpGet())
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> AppId：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("appid").Width("100%").Required()</div>
+                <div class="col-xs-4"><div class="text-warning">请在公众号后台开发信息中查看！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> AppSecret：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("appsecret").Width("100%").Required()</div>
+                <div class="col-xs-4"><div class="text-warning">请在公众号后台开发信息中查看！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">Token：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("token").Width("100%").Required()</div>
+                <div class="col-xs-4"><div class="text-warning">请在公众号后台开发信息中查看！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">AES Key：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("aeskey").Width("100%").Required()</div>
+                <div class="col-xs-4"><div class="text-warning">请在公众号后台开发信息中查看！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">Secret：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("secret").Width("100%")</div>
+                <div class="col-xs-4"><div class="text-warning">第三方派发Token时请求密码！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

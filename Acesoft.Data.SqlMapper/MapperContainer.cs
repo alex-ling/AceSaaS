@@ -28,13 +28,14 @@ namespace Acesoft.Data.SqlMapper
             instance = new MapperContainer();
         }
 
-        public ISqlMapper GetSqlMapper(IStoreOption option)
+        public ISqlMapper GetSqlMapper(ISession session)
         {
-            logger.LogDebug($"Get ISqlMapper for name: {option.Name}");
-            return mappers.GetOrAdd(option.Name, (key) =>
+            var database = session.Store.Option.Name;
+            logger.LogDebug($"Get ISqlMapper for name: {database}");
+            return mappers.GetOrAdd(database, (key) =>
             {
-                logger.LogDebug($"Initalize ISqlMapper for name: {option.Name}");
-                return new SqlMapper(option.SqlMaps);
+                logger.LogDebug($"Initalize ISqlMapper for name: {database}");
+                return new SqlMapper(session.Store.Option.SqlMaps);
             });
         }
     }

@@ -1,0 +1,52 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "接收队列";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("清空").IconCls("fa fa-remove").Click("clrAll()");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination().PageSize(50)
+            .DataSource("iot.reclog").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("dcreate").Title("接收时间").Width(10).Format("date:MM-dd HH:mm:ss");
+                c.Add().Field("sbno").Title("设备编号").Width(10);
+                c.Add().Field("mac").Title("设备MAC").Width(10);
+                c.Add().Field("name").Title("操作").Width(5);
+                c.Add().Field("cmd").Title("命令").Width(5);
+                //c.Add().Field("body").Title("内容").Width(10);
+                c.Add().Field("json").Title("内容").Width(40);
+                //c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function clrAll() {
+        AX.ajax({
+            url: AX.api({
+                api: 'exec/execsql',
+                ds: 'iot.exe_iot_recclr'
+            }),
+            data: {},
+            type: 'post',
+            cb: function () {
+                $('#grid').datagrid('reload');
+            }
+        });
+    }
+</script>

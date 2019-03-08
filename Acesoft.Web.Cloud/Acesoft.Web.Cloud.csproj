@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aliyun.Net.SDK.Dysmsapi" Version="1.0.3" />
+    <PackageReference Include="Aliyun.OSS.DotNetCore" Version="2.8.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Util\Acesoft.Util.csproj" />
+    <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
+  </ItemGroup>
+
+</Project>

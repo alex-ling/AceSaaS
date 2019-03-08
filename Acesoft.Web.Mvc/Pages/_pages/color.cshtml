@@ -1,0 +1,51 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "选择图片";   
+}
+<link rel="stylesheet" href="~/scripts/colorpicker/dist/css/bootstrap-colorpicker.min.css" />
+<style>
+    .cp .colorpicker-saturation {
+        width: 200px;
+        height: 200px;
+    }
+    .cp .colorpicker-hue,
+    .cp .colorpicker-alpha {
+        width: 30px;
+        height: 200px;
+    }
+    .cp .colorpicker-color,
+    .cp .colorpicker-color div {
+        height: 30px;
+    }
+</style>
+<div id="picker" style="display:inline-block"></div>
+@section startup {
+<script src="~/scripts/colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script>
+    function onSubmit(cb) {
+        cb($('#picker').colorpicker('getValue'))
+    }
+    $(function () {
+        $('#picker').colorpicker({
+            customClass: 'cp',
+            sliders: {
+                saturation: {
+                    maxLeft: 200,
+                    maxTop: 200
+                },
+                hue: {
+                    maxTop: 200
+                },
+                alpha: {
+                    maxTop: 200
+                }
+            },
+            color: '@App.GetQuery("clr", "")',
+            container: true,
+            inline: true
+        })
+    })
+</script>
+}

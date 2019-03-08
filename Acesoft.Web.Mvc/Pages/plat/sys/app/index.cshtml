@@ -1,0 +1,37 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "应用管理";
+    Layout = "_shared/body";
+    Ace.RenderAuthOptions = true;
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("AX.gridAdd('#grid')");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination()
+            .DataSource("rbac.app").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("code").Title("应用编码").Width(10);
+                c.Add().Field("name").Title("应用名称").Width(10);
+                c.Add().Field("type_name").Title("应用类别").Width(10);
+                c.Add().Field("remark").Title("备注").Width(25);
+                c.Add().Field("orderno").Title("排序");
+                c.Add().Field("system").Title("系统").Format("bool");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}

@@ -159,9 +159,9 @@ namespace Acesoft.Data
         }
 
         public abstract void Page(ISqlBuilder sqlBuilder, string offset, string limit);
-        public virtual ISqlBuilder CreateBuilder(string tablePrefix)
+        public virtual ISqlBuilder CreateBuilder(string tablePrefix = "")
         {
-            return new SqlBuilder(tablePrefix, this);
+            return new SqlBuilder(this, tablePrefix);
         }
 
         public string RenderMethod(string name, string[] args)

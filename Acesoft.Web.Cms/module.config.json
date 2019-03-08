@@ -1,0 +1,8 @@
+﻿{
+  "name": "cms",
+  "description": "内容管理",
+  "mainAssembly": "Acesoft.Web.Cms.dll",
+  "category": "application",
+  "version": "v1.0.0",
+  "dependencies": [ ]
+}

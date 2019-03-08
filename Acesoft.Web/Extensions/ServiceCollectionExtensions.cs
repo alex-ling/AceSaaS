@@ -15,6 +15,14 @@ namespace Acesoft.Web
 {
     public static class ServiceCollectionExtensions
     {
+        public static IServiceCollection AddAppConfig(this IServiceCollection services)
+        {
+            return services.AddJsonConfig<AppConfig>(opts =>
+            {
+                opts.ConfigFile = "app.config.json";
+            });
+        }
+
         public static IServiceCollection AddMultitenancy(this IServiceCollection services)
         {
             return services.AddMultitenancy<DefaultTenantResolver>();

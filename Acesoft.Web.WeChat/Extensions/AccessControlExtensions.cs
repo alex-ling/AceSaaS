@@ -57,35 +57,43 @@ namespace Acesoft.Web.WeChat
                 needSaveUser = true;
             }
 
-            ac.UpdateUser(app.Id, openId, "wechat", needSaveUser);
+            ac.UpdateAuth(app.Id, openId, "wechat", needSaveUser);
         }
 
-        public static void WeChatAuthorize(this IAccessControl ac, string openIdParamName)
+        public static bool WeChatAuthorize(this IAccessControl ac, string openIdParamName)
         {
             var context = ac.HttpContext;
-            if (!context.SideInWeixinBrowser()) return;
+            if (!context.SideInWeixinBrowser()) return true;
 
-            if (ac.Logined && ac.Auths.ContainsKey("wechat"))
+            try
             {
-                var returnUrl2 = App.GetQuery("ReturnUrl", "/wechat");
-                if (returnUrl2.StartsWith("http"))
+                if (ac.Logined && ac.Auths.ContainsKey("wechat"))
                 {
-                    returnUrl2 = UrlHelper.Append(returnUrl2, openIdParamName, ac.Auths["wechat"]);
+                    var returnUrl2 = App.GetQuery("ReturnUrl", "/wechat");
+                    if (returnUrl2.StartsWith("http"))
+                    {
+                        returnUrl2 = UrlHelper.Append(returnUrl2, openIdParamName, ac.Auths["wechat"]);
+                    }
+                    context.Response.Redirect(returnUrl2);
+                    return true;
                 }
-                context.Response.Redirect(returnUrl2);
-                return;
+
+                if (ac.Logined) ac.Logout();
+
+                var app = ac.HttpContext.RequestServices.GetService<IWeChatContainer>().GetApp();
+                var returnUrl = App.GetQuery("ReturnUrl", "/wechat");
+                var state = App.GetQuery("state", "state");
+                var scope = (OAuthScope)App.GetQuery("scope", 0);
+
+                var redirectUrl = $"{App.GetWebRoot(true)}plat/account/wechat?appid={app.Id}&redirect_uri={returnUrl}";
+                var authorizeUrl = OAuthApi.GetAuthorizeUrl(app.AppId, redirectUrl, state, scope);
+                context.Response.Redirect(authorizeUrl);
+                return true;
             }
-
-            if (ac.Logined) ac.Logout();
-
-            var app = ac.HttpContext.RequestServices.GetService<IWeChatContainer>().GetApp();
-            var returnUrl = App.GetQuery("ReturnUrl", "/wechat");
-            var state = App.GetQuery("state", "state");
-            var scope = (OAuthScope)App.GetQuery("scope", 0);
-
-            var redirectUrl = $"{App.GetWebRoot(true)}plat/account/wechat?appid={app.Id}&redirect_uri={returnUrl}";
-            var authorizeUrl = OAuthApi.GetAuthorizeUrl(app.AppId, redirectUrl, state, scope);
-            context.Response.Redirect(authorizeUrl);
+            catch
+            {
+                return false;
+            }
         }
 
         public static JsApiToken GetJsApiToken(this IAccessControl ac, bool resetUrl)

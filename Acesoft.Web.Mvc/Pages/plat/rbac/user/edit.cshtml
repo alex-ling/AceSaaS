@@ -1,0 +1,99 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    var isEdit = false;
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("rbac.user").Form(new {
+        scale_id = App.GetQuery("scaleid", ""),
+        creator = App.GetQuery("creator", ""),
+        type = App.GetQuery("type", "0"),
+        loginname = "",
+        password = "",
+        username = "",
+        nickname = "",
+        mobile = "",
+        mail = "",
+        //refcode = "",
+        remark = "",
+        enable = 1,
+        system = 0
+    }).HttpSave("auth", "user")).Do(x => isEdit = x.Component.DataSource.IsEdit).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 登录名：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("loginname").Width("100%").Required().Disabled(isEdit)</div>
+                <div class="col-xs-4"><span class="text-warning">4-20位字母、数字或下划线！</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 密码：</div>
+                <div class="col-xs-6">                    
+                @if (isEdit)
+                {
+                    @Ace.Button().Text("重置密码").IconCls("fa fa-key").Selected().Click("onResetPwd()")
+                }
+                else
+                {
+                    @Ace.PasswordBox().Name("password").Width("100%").Required()
+                }
+                </div>
+                <div class="col-xs-4"><span class="text-warning">4-20位，区分大小写！</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 姓名：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("username").Width("100%").Required()</div>
+                <div class="col-xs-4"><span class="text-warning">真实的姓名！</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 昵称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("nickname").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @*<div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 关联单位：</div>
+                <div class="col-xs-6">@Ace.ComboTree().Name("refcode").Width("100%").Required().Ajax(a => a.DataSource("hr.depart_tree").HttpGet())</div>
+                <div class="col-xs-4"></div>
+            </div>*@
+            <div class="row">
+                <div class="col-xs-2 text-r">手机：</div>
+                <div class="col-xs-6">@Ace.NumberBox().Name("mobile").Width("100%")</div>
+                <div class="col-xs-4"><span class="text-warning">绑定后可用手机登录！</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">邮箱：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("mail").Width("100%").ValidType("email")</div>
+                <div class="col-xs-4"><span class="text-warning">绑定后可用邮箱登录！</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">设置：</div>
+                <div class="col-xs-6">
+                    @Ace.CheckBox().Name("enable").Text("启用　")
+                    @Ace.CheckBox().Name("system").Text("系统")
+                </div>
+                <div class="col-xs-4"><span class="text-warning">系统属性不能删除！</span></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+<script>
+    function onResetPwd() {
+        $.messager.confirm('提示', '确定要【重置】当前用户密码？<br/><span class="cr fwb">重置后密码将和帐户名相同！<br/>请务必及时修改密码！<br/></span>', function (r) {
+            if (r) {
+                AX.ajax({
+                    url: AX.api({ api: 'auth/resetpwd', q: 'userid=' + AX.query('id') }),
+                    type: 'put',
+                    cb: function () {
+                        $.messager.info({ msg: '密码重置成功，请务必及时修改！' });
+                    }
+                });
+            }
+        });
+    }
+</script>

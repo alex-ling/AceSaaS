@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Acesoft.Core.Provider
+namespace Acesoft.Core
 {
     public interface IProviders
     {

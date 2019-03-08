@@ -15,7 +15,7 @@ namespace Acesoft.Web.UI
         public IApplicationContext AppCtx { get; }
 		public HttpContext Context { get; }
         public Acesoft.Data.ISession Session => AppCtx.Session;
-        public IAccessControl AC => AppCtx.AccessControl;
+        public IAccessControl AC => AppCtx.AC;
 
 		public RazorPageBase Page { get; }
         public string AppName { get; }
@@ -31,9 +31,7 @@ namespace Acesoft.Web.UI
 
             string text = page.Path.Substring(6);
 			Path = text.Substring(0, text.LastIndexOf('/') + 1);
-
-			//string appName = App.Context.Request.GetAppName();
-			//AppName = (appName.HasValue() ? appName : App.DefaultApplication);
+			AppName = App.Context.Request.GetAppName();
 		}
 
 		public virtual AccordionBuilder Accordion()

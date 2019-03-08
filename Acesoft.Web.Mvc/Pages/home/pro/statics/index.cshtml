@@ -1,0 +1,25 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "产品统计";
+    Layout = "_shared/bodyct";
+}
+<div class="container-fluid pt15">
+    @{
+        Ace.EChart().Id("chart").Height("480px")
+        .Dataset()
+        .Option(opt =>
+        {
+            opt.AddTitle().Text("按产品设备数量统计");
+            opt.AddLegend();
+            opt.AddXAxis().TypeCate();
+            opt.AddYAxis();
+            opt.AddSeries(ChartType.bar).Name("数量");
+        })
+        .Ajax(ds => ds.DataSource("iot.chart_pro_sl").HttpGet())
+        .Render();
+    }
+</div>
+@section startup {
+    <script src="~/scripts/echarts/dist/echarts.min.js"></script>
+}

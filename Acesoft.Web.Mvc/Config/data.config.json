@@ -1,12 +1,7 @@
 {
-  "home": {
-    "connectionString": "server=.;database=acecms;uid=sa;pwd=sasa;multipleactiveresultsets=true",
+  "default": {
+    "connectionString": "server=59.110.17.56;database=acecms;uid=sa;pwd=lb+cb=17&22;multipleactiveresultsets=true",
     "databaseType": "SqlServer",
-    "sqlMaps": []
-  },
-  "plat": {
-    "connectionString": "server=.;database=acecms;uid=sa;pwd=sasa;multipleactiveresultsets=true",
-    "databaseType": "SqlServer",
-    "sqlMaps": []
+    "sqlMaps": [ "SqlMaps" ]
   }
 }

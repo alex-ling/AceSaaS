@@ -1,0 +1,88 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信素材";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.ComboBox().Id("appid").AppendTo(query).Label("公众号：").Width("220px")
+                    .Ajax(ds => ds.DataSource("wx.appgzh_list").Events(e => e.OnLoadSuccess("onAppLoad")).HttpGet())
+                    .Events(e => e.OnChange("onAppChange"));
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("　关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("素材上传").IconCls("fa fa-upload").Click("onUpload()");
+                Ace.Button().AppendTo(tools).Text("素材删除").IconCls("fa fa-upload").Click("onDelete()");
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("onGridAdd()");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination()
+            .DataSource("wx.media").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("name").Title("素材名称").Width(10);
+                c.Add().Field("type").Title("素材类别").Width(5);
+                c.Add().Field("url").Title("素材URL").Width(5).Format("href:查看");
+                c.Add().Field("mediaid").Title("素材微信Id").Width(10);
+                c.Add().Field("wxurl").Title("素材微信Url").Width(5).Format("href:查看");
+                c.Add().Field("remark").Title("备注").Width(15);
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function getAppId() {
+        var appid = $('#appid').combobox('getValue');
+        if (appid == '') {
+            $.messager.error({ msg: '请选择左侧某一公众号！' });
+        }
+        return appid;
+    }
+    function onUpload() {
+        var appid = getAppId();
+        if (appid != '') {
+            AX.ajax({
+                url: AX.api({
+                    api: 'wechat/uploadmedia',
+                    q: 'appid=' + appid
+                }),
+                type: 'get',
+                cb: AX.ok
+            });
+        }
+    }
+    function onDelete() {
+        var appid = getAppId();
+        if (appid != '') {
+            AX.ajax({
+                url: AX.api({
+                    api: 'wechat/delmedia',
+                    q: 'appid=' + appid
+                }),
+                type: 'delete',
+                cb: AX.ok
+            });
+        }
+    }
+    function onAppLoad() {
+        $('#appid').combobox('setIndex', 0);
+    }
+    function onAppChange(val) {
+        $('#grid').datagrid('load', { _appid: val });
+    }
+    function onGridAdd() {
+        var appid = getAppId();
+        if (appid != '') {
+            AX.gridAdd('#grid', 'appid=' + appid);
+        }
+    }
+</script>

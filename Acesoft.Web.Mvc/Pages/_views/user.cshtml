@@ -1,0 +1,61 @@
+﻿@model WidgetFactory
+@{ 
+    var ac = Model.AC;
+    var sql = "select * from sys_stat_view";
+    var data = DbContext.Current.Query(sql).First();
+}
+<div class="row pt10">
+    <div class="col-md-4">
+        <div class="bg-body">
+            <div class="fl w60 bg-head h150 text-c pt60">
+                <span class="fa fa-user fa-lg"></span>
+            </div>
+            <div class="fl pl20 pt30 lh25">
+                <div>
+                    <h3>Hi，</h3>
+                    <a href="javascript:AX.go('plat/user|basic')"><h3>@ac.User.NickName</h3></a>
+                </div>
+                <div class="pt15">
+                    登录时间：@ac.User.DLogin.Value.ToString("yyyy-MM-dd HH:mm")
+                </div>
+                <div>
+                    登录地点：@App.Context.GetClientIp()
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="bg-body">
+            <div class="fl w60 bg-head h150 text-c pt60">
+                <span class="fa fa-users fa-lg"></span>
+            </div>
+            <div class="pl60 lh50 cr-9">
+                <div class="pl20 bd-b-f5">
+                    <span>注册用户总数：</span>@*AX.go('home/user|list')*@
+                    <a class="ml5 mr5" href="javascript:;"><h4>@data.user_cnt</h4></a>
+                </div>
+                <div class="pl20 bd-b-f5">
+                    <span>客户端用户数：</span>
+                    <a class="ml5 mr5" href="javascript:"><h4>@data.user_android_cnt</h4></a>(安卓)
+                    <a class="ml5 mr5" href="javascript:"><h4>@data.user_ios_cnt</h4></a>(苹果)
+                </div>
+                <div class="pl20">
+                    <span>微信端用户数：</span>@*AX.go('home/user|device')*@
+                    <a class="ml5 mr5" href="javascript:;"><h4>@data.user_wechat_cnt</h4></a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="bg-body">
+            <div class="fl w60 bg-head h150 text-c pt60">
+                <span class="fa fa-tasks fa-lg"></span>
+            </div>
+            <div class="pl60 lh50 cr-9">
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

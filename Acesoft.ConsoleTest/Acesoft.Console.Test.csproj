@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Acesoft.Config\Acesoft.Config.csproj" />
     <ProjectReference Include="..\Acesoft.Util\Acesoft.Util.csproj" />
   </ItemGroup>
 

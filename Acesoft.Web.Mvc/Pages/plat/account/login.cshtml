@@ -1,0 +1,98 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@inject IConfigService ConfigService
+@{
+    var cfg = ConfigService.GetConfig(1);
+    ViewData["Title"] = "登录";
+    Ace.RenderAuthOptions = true;
+
+    var success =  Ace.AC.WeChatAuthorize(Membership.Auth_OpenID);
+}
+@if (success)
+{
+    <link rel="stylesheet" href="~/scripts/swiper/dist/css/swiper.min.css">
+    <script src="~/scripts/swiper/dist/js/swiper.min.js"></script>
+    <div class="header" style="position:relative">
+        <div class="container pt30 pb5">
+            <div class="col-md-6">
+                <a class="logo" href="/">
+                    <img class="fl" src="@cfg["sys_logo"]" style="height:60px" />
+                    <div class="fl ft30 fwb" style="line-height:60px;color:@cfg["sys_name_color"]">@cfg["sys_name"]</div>
+                </a>
+            </div>
+            <div class="col-md-6 text-r">
+                <div class="ft30 fwb" style="line-height:60px;color:@cfg["sys_tip_color"]">@cfg["sys_tip"]</div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-container" style="height:440px">
+        <div class="swiper-wrapper">
+            @foreach (var photo in cfg["sys_login_photos"].Split('|'))
+            {
+                <div class="swiper-slide" style="background-image:url(@photo)"></div>
+            }
+        </div>
+        <div style="position:absolute;left:0;right:0;top:0;z-index:9999">
+            <div class="container">
+                <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
+                    <div style="margin:50px 0;padding:30px;background:#fff;opacity:0.90">
+                        <h3 style="color:#08c">平台登录</h3>
+                        @{
+                            Ace.Form().Id("log").Ajax(a => a.RouteQuery("ReturnUrl").HttpPost("auth", "login")).Content(
+                                @<div class="pt15 pb15">
+                                    @if (Ace.AC.Logined)
+                                    {
+                                        <div class="pt20 ft16 lh35">
+                                            欢迎您，<span style="color:#09c;font-weight:bold">@Ace.AC.User.NickName</span>！
+                                        </div>
+                                        <div class="pt15 ft16 lh35">
+                                            本次于 @Ace.AC.User.DLogin.Value.ToString("yyyy-MM-dd HH:mm") 登录！
+                                        </div>
+                                        <div class="pt25">
+                                            <a class="btn btn-primary" style="width:100%" onclick="AX.enter()">进入</a>
+                                        </div>
+                                        <div class="pt15">
+                                            <a class="btn btn-success" style="width:100%" onclick="AX.logout()">注销</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="pt15">
+                                            @Ace.TextBox().Name("username").Required().IconCls("icon-man").IconAlign(Align.left).IconWidth(30).Width("100%").Height(35)
+                                        </div>
+                                        <div class="pt15">
+                                            @Ace.PasswordBox().Name("password").Required().IconCls("icon-lock").IconAlign(Align.left).IconWidth(30).Width("100%").Height(35).ShowEye(false)
+                                        </div>
+                                        <div class="pt15">
+                                            @Ace.CheckBox().Name("persistent").Text("保持登录状态").Checked().Value("true")
+                                            <span class="fr">
+                                                <a href="regist">用户注册</a>
+                                            </span>
+                                        </div>
+                                        <div class="pt15">
+                                            <a class="btn btn-primary" style="width:100%" onclick="login()">登录</a>
+                                        </div>
+                                    }
+                                </div>
+                            ).Render();
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function login() {
+            AX.formSubmit('#log', function (url) {
+                $.messager.info({ msg: '登录成功' });
+                if (url == '') url = '/plat/account/enter?x=' + AX.tick();
+                window.location = url;
+            });
+        }
+        new Swiper('.swiper-container', { direction: 'vertical', loop: true, autoplay: true });
+    </script>
+}
+else
+{
+    <div class="p15">非法访问，微信内请从菜单进入！</div>
+}

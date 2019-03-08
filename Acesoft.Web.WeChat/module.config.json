@@ -1,0 +1,8 @@
+﻿{
+  "name": "wechat",
+  "description": "微信平台",
+  "mainAssembly": "Acesoft.Web.WeChat.dll",
+  "category": "application",
+  "version": "v1.0.0",
+  "dependencies": [ ]
+}

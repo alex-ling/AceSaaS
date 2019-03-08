@@ -39,10 +39,9 @@ namespace Acesoft.Web.Modules
             if (!loaded)
             {
                 // load modules in references
-                Startups.Add(new Acesoft.Logger.Startup());
-                Startups.Add(new Acesoft.Config.Startup());
-                Startups.Add(new Acesoft.Cache.Startup());
+                Startups.Add(new Acesoft.Startup());
                 Startups.Add(new Acesoft.Data.Startup());
+                Startups.Add(new Acesoft.Platform.Startup());
                 Startups.Add(new Acesoft.Rbac.Startup());
 
                 // Web plugin must add tenant's pipeline DI

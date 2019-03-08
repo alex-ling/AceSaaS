@@ -1,0 +1,58 @@
+﻿// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  {
+    "outputFileName": "wwwroot/content/front.min.css",
+    "inputFiles": [
+      "wwwroot/content/site.css",
+      "wwwroot/content/front.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/content/back.min.css",
+    "inputFiles": [
+      "wwwroot/content/site.css",
+      "wwwroot/content/back.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/scripts/ace/css/aceui.min.css",
+    "inputFiles": [
+      "wwwroot/scripts/ace/css/aceui.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/scripts/ace/css/acewe.min.css",
+    "inputFiles": [
+      "wwwroot/scripts/ace/css/acewe.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/scripts/ace/js/ace.min.js",
+    "inputFiles": [
+      "wwwroot/scripts/ace/aceui*.js",
+      "wwwroot/scripts/ace/ace.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/scripts/ace/js/acewe.min.js",
+    "inputFiles": [
+      "wwwroot/scripts/ace/aceweui*.js",
+      "wwwroot/scripts/ace/acewe.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  }
+]

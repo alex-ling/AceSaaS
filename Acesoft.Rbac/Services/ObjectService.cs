@@ -21,7 +21,7 @@ namespace Acesoft.Rbac.Services
             );
         }
 
-        public IList<Rbac_Object> Gets(IList<long> roleIds, int type, string user)
+        public IList<Rbac_Object> Gets(IList<long> roleIds, ObjectType type, string user)
         {
             return Session.Query<Rbac_Object>(
                 new RequestContext("rbac", "get_objects_by_roles")

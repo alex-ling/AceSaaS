@@ -1,25 +1,14 @@
 {
   "defaultTenant": "default",
-  "unresolvedRedirect": "http://www.miniplat.com",
+  "unresolvedRedirect": "",
   "RedirectPermanent": false,
   "tenants": [
     {
-      "name": "plat",
-      "hostnames": [
-        "localhost:5000",
-        "localhost:6000"
-      ],
-      "modules": [ "hr" ],
-      "theme": "plat"
-    },
-    {
-      "name": "saas",
-      "hostnames": [
-        "localhost:5001",
-        "localhost:6001"
-      ],
-      "modules": [ "shop" ],
-      "theme": "saas"
+      "name": "default",
+      "hostnames": [ "localhost:5000" ],
+      "indexpage": "plat/index",
+      "modules": [ "plat", "cms", "hr", "iot", "shop", "wechat" ],
+      "theme": ""
     }
   ]
 }

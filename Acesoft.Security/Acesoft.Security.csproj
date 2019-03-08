@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Acesoft.Cache\Acesoft.Cache.csproj" />
     <ProjectReference Include="..\Acesoft.Util\Acesoft.Util.csproj" />
   </ItemGroup>
 

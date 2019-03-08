@@ -19,9 +19,6 @@ namespace Acesoft.Web
             var services = app.ApplicationServices;
             var env = services.GetRequiredService<IHostingEnvironment>();
 
-            // set global HttpContext
-            services.UseAppContext();
-
             // use common
             //app.UseHttpsRedirection();
             app.UseStaticFiles();

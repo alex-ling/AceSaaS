@@ -1,0 +1,79 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "字典管理";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit().Items(lay =>
+    {
+        lay.Add().Region(Region.west).Border(false).Split().MinWidth(200).Width(250).MaxWidth(300).Controls(wst =>
+        {
+            Ace.Layout().AppendTo(wst).Fit().Items(layout =>
+            {
+                layout.Add().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Toolbar().AppendTo(ctls).Controls(c =>
+                    {
+                        Ace.Button().AppendTo(c).Text("添加").IconCls("fa fa-plus").Click("AX.treeAdd('#tree',2)");
+                        Ace.Button().AppendTo(c).Text("编辑").IconCls("fa fa-edit").Click("AX.treeEdit('#tree',3)");
+                        Ace.Button().AppendTo(c).Text("删除").IconCls("fa fa-remove").Click("AX.treeDel('#tree',3)");
+                    });
+                });
+                layout.Add().Css("oy").Region(Region.center).Controls(ctls =>
+                {
+                    Ace.Tree().AppendTo(ctls).Id("tree").Root("字典类").Edit("dict")
+                        .DataSource("sys.dict").Ajax(ds => ds.HttpGet())
+                        .Events(e => e.OnSelect("onSelect"));
+                });
+            });
+        });
+
+        lay.Add().Region(Region.center).Border(false).Controls(cnt =>
+        {
+            Ace.Layout().AppendTo(cnt).Fit().Items(layout =>
+            {
+                layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+                    {
+                        Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+                    })
+                    .Tools(tools =>
+                    {
+                        Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("gridAdd('')");
+                        Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+                    });
+                });
+                layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+                {
+                    Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination()
+                    .DataSource("sys.dictitem").Ajax(ds => ds.HttpGet()).Columns(c =>
+                    {
+                        c.Add().Field("value").Title("项编码").Width(6);
+                        c.Add().Field("name").Title("项名称").Width(10);
+                        c.Add().Field("parentid").Title("父编码").Width(6);
+                        c.Add().Field("remark").Title("备注").Width(25);
+                        c.Add().Field("orderno").Title("排序");
+                        c.Add().Field("system").Title("系统").Format("bool");
+                        c.Add().Field("action").Title("操作").Format("button");
+                    });
+                });
+            });
+        });
+    }).Render();
+}
+<script>
+    function onSelect(node) {
+        var level = $('#tree').tree('getLevel', node.target);
+        if (level == 3) $('#grid').datagrid('load', { _dict: node.id });
+    }
+    function gridAdd(pid) {
+        var id = $('#tree').tree('getSelectedId', { level: 3 });
+        if (id != null) AX.gridAdd('#grid', AX.format('dict={0}&parentid={1}', id, pid));
+    }
+    function event_grid_add(cid, id) {
+        var row = $('#grid').datagrid('getRow', id);
+        var dictid = $('#tree').tree('getSelectedId', { level: 3 });
+        AX.gridAdd('#grid', AX.format('dict={0}&parentid={1}', dictid, row.value));
+    }
+</script>

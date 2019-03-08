@@ -1,0 +1,44 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "概述";
+    Layout = "_shared/bodyct";
+}
+<div class="alert alert-info">请认真阅读以下信息，按照操作说明进行数据维护和管理！</div>
+<div class="container-fluid">
+    <div class="pt20 pb10 bd-b-dashed">操作说明</div>
+    <ul class="pt5" style="list-style:decimal;padding-left:2em">
+        <li class="pt10">
+            <b>注册用户</b>
+            <div class="pt10 pb10 lh25">
+                注册用户是指经手机APP客户端（Android、iOS）、微信小程序或云平台注册的终端用户；<br/>
+                注册采用 [手机号码+短信验证码] 方式，确保每个用户手机真实有效；<br />
+                每个注册用户可绑定新风等智能设备，在云端可以进行强制绑定、解绑等操作。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>用户设备</b>
+            <div class="pt10 pb10 lh25">
+                根据用户查询其拥有的设备清单。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>设备用户</b>
+            <div class="pt10 pb10 lh25">
+                根据设备查询其归属的用户清单。
+            </div>
+        </li>
+        @*<li class="pt10">
+            <b>用户反馈</b>
+            <div class="pt10 pb10 lh25">
+                对终端用户在客户端进行反馈登记的信息进行管理和跟踪。
+            </div>
+        </li>*@
+        <li class="pt10">
+            <b>用户统计</b>
+            <div class="pt10 pb10 lh25">
+                按注册方式对用户进行分类统计。
+            </div>
+        </li>
+    </ul>
+</div>

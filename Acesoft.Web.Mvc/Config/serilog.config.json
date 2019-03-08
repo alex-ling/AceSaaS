@@ -1,0 +1,30 @@
+{
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File", "Serilog.Sinks.Async" ],
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Information",
+        "System": "Information"
+      }
+    },
+    "WriteTo:Async": {
+      "Name": "Async",
+      "Args": {
+        "configure": [
+          {
+            "Name": "Console"
+          },
+          {
+            "Name": "File",
+            "Args": {
+              "path": "Logs/log.txt",
+              "rollingInterval": "Day",
+              "shared": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

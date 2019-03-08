@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Acesoft.Config\Acesoft.Config.csproj" />
     <ProjectReference Include="..\Acesoft.Data\Acesoft.Data.csproj" />
   </ItemGroup>
 

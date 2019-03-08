@@ -1,0 +1,118 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "新风主机";
+    Layout = "_shared/wechat";
+
+    // 初始化WechatJsApi
+    Ace.WechatInitJsApi((api) =>
+    {
+        api.Add("hideOptionMenu");
+    });
+    var sbno = App.GetQuery("sbno", "");
+}
+<div class="page">
+    <div class="hd">
+        <a class="btn fl fa fa-chevron-left" href="javascript:history.back()"></a>
+        <div class="title">分析报表</div>
+        <div class="clear"></div>
+    </div>
+    <div class="bd">
+        <div class="weui-tab">
+            <div class="weui-navbar">
+                <div class="weui-navbar__item weui-bar__item--on" href="#tab1" onclick="onChange('temp')">
+                    温度
+                </div>
+                <div class="weui-navbar__item" href="#tab2" onclick="onChange('hum')">
+                    湿度
+                </div>
+                <div class="weui-navbar__item" href="#tab3" onclick="onChange('pm25')">
+                    PM2.5
+                </div>
+            </div>
+            <div id="tab" class="weui-tab__bd">
+                <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    <div id="ch_temp" style="height:450px"></div>
+                </div>
+                <div id="tab2" class="weui-tab__bd-item">
+                    <div id="ch_hum" style="height:450px"></div>
+                </div>
+                <div id="tab3" class="weui-tab__bd-item">
+                    <div id="ch_pm25" style="height:450px"></div>
+                </div>
+            </div>
+        </div>
+        <div class="text-c">
+            <a class="weui-btn weui-btn_mini weui-btn_primary" href="javascript:;" onclick="onChange(0,1)">近一天</a>
+            <a class="weui-btn weui-btn_mini weui-btn_default" href="javascript:;" onclick="onChange(0,3)">近三天</a>
+            <a class="weui-btn weui-btn_mini weui-btn_default" href="javascript:;" onclick="onChange(0,7)">近一周</a>
+            <a class="weui-btn weui-btn_mini weui-btn_default" href="javascript:;" onclick="onChange(0,30)">近一月</a>
+            <a class="weui-btn weui-btn_mini weui-btn_default" href="javascript:;" onclick="onChange(0,90)">近三月</a>
+        </div>
+    </div>
+</div>
+@section startup {
+    <script src="~/scripts/echarts/dist/echarts.min.js"></script>
+    <script>
+        var chart, day = 1, name = 'temp';
+        function initChart(id) {
+            var c = echarts.init(document.getElementById('ch_' + id));
+            c.setOption({
+                legend: { top: 15 },
+                grid: { bottom: 30 },
+                xAxis: { type: 'category' },
+                yAxis: {},
+                series: [{
+                    name: '室内',
+                    type: 'line',
+                    smooth: true,
+                    label: { normal: { show: true } },
+                    itemStyle: { color: 'green' }
+                }, {
+                    name: '室外',
+                    type: 'line',
+                    smooth: true,
+                    label: { normal: { show: true } },
+                    itemStyle: { color: 'red' }
+                }]
+            });
+            return c;
+        }
+        function loadChart() {
+            chart.showLoading();
+            AX.ajax({
+                type: 'get',
+                url: AX.api({ api: 'chart/get', ds: 'iot.chart_dev_tj', q: 'sbno=@sbno&day=' + day + '&name=' + name }),
+                cb: function (res) {
+                    chart.hideLoading();
+                    chart.setOption({
+                        dataset: {
+                            dimensions: ['name', name, '_' + name],
+                            source: res.value
+                        }
+                    });
+                    chart.resize({ width: $('#tab').width() });
+                }
+            });
+        }
+        function onChange(id, d) {
+            if (id) {
+                name = id;
+                var target = document.getElementById('ch_' + id);
+                chart = echarts.getInstanceByDom(target);
+            }
+            if (d) {
+                day = d;
+                $('.weui-btn_mini').removeClass('weui-btn_primary').addClass('weui-btn_default');
+                $(event.target).removeClass('weui-btn_default').addClass('weui-btn_primary');
+            }
+            loadChart();
+        }
+        $(function () {
+            chart = initChart('temp');
+            initChart('hum');
+            initChart('pm25');
+            loadChart(1);
+        });
+    </script>
+}

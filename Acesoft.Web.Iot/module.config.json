@@ -1,0 +1,8 @@
+﻿{
+  "name": "iot",
+  "description": "物联网",
+  "mainAssembly": "Acesoft.Web.Iot.dll",
+  "category": "application",
+  "version": "v1.0.0",
+  "dependencies": [ ]
+}

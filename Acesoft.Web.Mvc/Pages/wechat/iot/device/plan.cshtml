@@ -1,0 +1,293 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "新风主机";
+    Layout = "_shared/wechat";
+
+    // 初始化WechatJsApi
+    Ace.WechatInitJsApi((api) =>
+    {
+        api.Add("hideOptionMenu");
+    });
+    var sbno = App.GetQuery("sbno", "");
+    var data = await IotContext.GetIotData(sbno);
+}
+<div class="page">
+    <div class="hd">
+        <a class="btn fl fa fa-chevron-left" href="javascript:history.back()"></a>
+        <div class="title">定时设置</div>
+        <div class="clear"></div>
+    </div>
+    <div class="bd">
+        <div class="weui-tab">
+            <div class="weui-navbar">
+                <div class="weui-navbar__item wk hand weui-bar__item--on" href="#tab">周一</div>
+                <div class="weui-navbar__item wk hand" href="#tab">周二</div>
+                <div class="weui-navbar__item wk hand" href="#tab">周三</div>
+                <div class="weui-navbar__item wk hand" href="#tab">周四</div>
+                <div class="weui-navbar__item wk hand" href="#tab">周五</div>
+                <div class="weui-navbar__item wk hand" href="#tab">周六</div>
+                <div class="weui-navbar__item wk hand" href="#tab">周日</div>
+            </div>
+            <div class="weui-tab__bd ph15">
+                <div id="tab" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    <div class="weui-flex bg-warning lh50 fwb mt15">
+                        <div class="weui-flex__item text-c">时段</div>
+                        <div class="weui-flex__item text-c">时点</div>
+                        <div class="weui-flex__item text-c">关/开</div>
+                        <div class="weui-flex__item text-c">模式</div>
+                        <div class="weui-flex__item text-c">风速</div>
+                    </div>
+                    <div class="weui-flex mt15 bg-body lh50">
+                        <div class="weui-flex__item text-c">时段1</div>
+                        <div class="weui-flex__item text-c"><input class="weui-input time text-c" type="text" /></div>
+                        <div class="weui-flex__item text-c lh30"><input class="weui-switch power mt10" type="checkbox"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input mode text-c" type="text"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input speed text-c" type="text"></div>
+                    </div>
+                    <div class="weui-flex mt15 bg-body lh50">
+                        <div class="weui-flex__item text-c">时段2</div>
+                        <div class="weui-flex__item text-c"><input class="weui-input time text-c" type="text" /></div>
+                        <div class="weui-flex__item text-c lh30"><input class="weui-switch power mt10" type="checkbox"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input mode text-c" type="text"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input speed text-c" type="text"></div>
+                    </div>
+                    <div class="weui-flex mt15 bg-body lh50">
+                        <div class="weui-flex__item text-c">时段3</div>
+                        <div class="weui-flex__item text-c"><input class="weui-input time text-c" type="text" /></div>
+                        <div class="weui-flex__item text-c lh30"><input class="weui-switch power dis mt10" type="checkbox"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input mode text-c" type="text"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input speed text-c" type="text"></div>
+                    </div>
+                    <div class="weui-flex mt15 bg-body lh50">
+                        <div class="weui-flex__item text-c">时段4</div>
+                        <div class="weui-flex__item text-c"><input class="weui-input time text-c" type="text" /></div>
+                        <div class="weui-flex__item text-c lh30"><input class="weui-switch power mt10" type="checkbox"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input mode text-c" type="text"></div>
+                        <div class="weui-flex__item text-c"><input class="weui-input speed text-c" type="text"></div>
+                    </div>
+                </div>
+                <div class="text-c mt20">
+                    <div class="cr-7 text-c pb15">“--”表示未设置，周一至周日全部设完再保存！</div>
+                    <a class="weui-btn weui-btn_primary" id="btnSave" href="javascript:;">保存</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section startup {
+<script>
+    $(function () {
+        AX._data = { ds: '@data.PlanData', modes: ['自动', '手动', '睡眠', '净化', '强净', '超净'], week: 0, weeks: [] };
+        var jqTime = $('.time'), jqPower = $('.power'), jqMode = $('.mode'), jqSpeed = $('.speed');
+        var planNull = '--:-------:-------:-------:-----';
+
+        var setTime = function (i, t) {
+            jqTime.eq(i).val(t).attr('data-values', t);
+            setPowerDis(i, t == '-- : --');
+        }
+        var setPowerDis = function (i, d) {
+            jqPower.eq(i).get(0).disabled = d;
+            if (d) setPower(i, false);
+        }
+        var setPower = function (i, c) {
+            jqPower.eq(i).get(0).checked = c;
+            if (!c) setMode(i, '-', '--');
+        }
+        var setMode = function (i, val, text) {
+            jqMode.eq(i).val(text).attr('data-values', val);
+            jqMode.eq(i).get(0).disabled = val == '-';
+            if (val != '1') setSpeed(i, '-', '--');
+        }
+        var setSpeed = function (i, val, text) {
+            jqSpeed.eq(i).val(text).attr('data-values', val);
+            jqSpeed.eq(i).get(0).disabled = val == '-';
+        }
+        var setWeek = function () {
+            var st = 0, data = AX._data.weeks[AX._data.week];
+            for (var i = 0; i < 4; i++) {
+                setTime(i, data.substr(st, 5).replace(/:/g, ' : '));
+                setPower(i, data.substr(st + 5, 1) == '1');
+                var m = data.substr(st + 6, 1); setMode(i, m, AX._data.modes[m] || '--');
+                var x = data.substr(st + 7, 1); setSpeed(i, x, x != '-' ? (x + 'X') : '--');
+                st += 8;
+            }
+        };
+        var saveWeek = function () {
+            var data = '';
+            for (var i = 0; i < 4; i++) {
+                var time = jqTime.eq(i).val().replace(/ /g, '');
+                data += time;
+                data += time == '--:--' ? '-' : (jqPower.eq(i).get(0).checked ? '1' : '0');
+                data += jqMode.eq(i).attr('data-values');
+                data += jqSpeed.eq(i).attr('data-values');
+            }
+            AX._data.weeks[AX._data.week] = data;
+        };
+        for (var i = 0; i < 7; i++) {
+            if (AX._data.ds.length == 224) {
+                AX._data.weeks.push(AX._data.ds.substr(i * 32, 32));
+            }
+            else {
+                AX._data.weeks.push(planNull);
+            }
+        }
+
+        $('#btnSave').click(function () {
+            saveWeek();
+            var plan = '', having = false;
+            for (var i = 0; i < AX._data.weeks.length; i++) {
+                if (AX._data.weeks[i] != planNull) {
+                    having = true;
+                }
+                plan += AX._data.weeks[i];
+            }
+            AX.ajax({
+                url: AX.api({ api: 'iot/putdevice' }),
+                data: { sbno: '@sbno', plandata: (having ? plan : ''), planenabled: (having ? 1 : 0) },
+                type: 'put',
+                cb: function () {
+                    AX.wxOk();
+                }
+            });
+        });
+        $('.wk').click(function () {
+            saveWeek();
+            AX._data.week = $(this).index();
+            setWeek();
+        });
+        setWeek(0);
+
+        $('.time').each(function (ix) {
+            $(this).picker({
+                title: "请选择开始时间",
+                cols: [
+                    {
+                        textAlign: 'center',
+                        values: ['--', '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+                    },
+                    {
+                        textAlign: 'center',
+                        values: [':']
+                    },
+                    {
+                        textAlign: 'center',
+                        values: ['--', '00', '15', '30', '45']
+                    }
+                ],
+                onClose: function () {
+                    var val = this.input.value;
+                    if (val.indexOf('-') >= 0 && val != '-- : --') {
+                        AX.wxWarn('设置的时间格式不正确，！');
+                        $(this.input).picker("setValue", ['--', ':', '--']);
+                        return;
+                    }
+                    if (ix > 0) {
+                        var preVal = jqTime.eq(ix - 1).val();
+                        if (preVal == '-- : --' || preVal >= val) {
+                            AX.wxWarn('设置的时间应按时段顺序增大！');
+                            $(this.input).picker("setValue", ['--', ':', '--']);
+                            return;
+                        }
+                    }
+                    if (ix < 3) {
+                        var nextVal = jqTime.eq(ix + 1).val();
+                        if (nextVal != '-- : --' && nextVal <= val) {
+                            AX.wxWarn('设置的时间应按时段顺序增大！');
+                            $(this.input).picker("setValue", ['--', ':', '--']);
+                            return;
+                        }
+                    }
+                    setPowerDis(ix, val == '-- : --');
+                }
+            });
+        });
+        jqPower.each(function (ix) {
+            $(this).click(function () {
+                setPower(ix, this.checked);
+                this.checked ? setMode(ix, '0', '自动') : setMode(ix, '-', '--');
+            });
+        });
+        $(".mode").each(function (ix) {
+            $(this).select({
+                title: "请选择模式",
+                items: [
+                    {
+                        title: "--",
+                        value: "-",
+                    },
+                    {
+                        title: "自动",
+                        value: "0",
+                    },
+                    {
+                        title: "手动",
+                        value: "1",
+                    },
+                    {
+                        title: "睡眠",
+                        value: "2",
+                    },
+                    {
+                        title: "净化",
+                        value: "3",
+                    },
+                    {
+                        title: "强净",
+                        value: "4",
+                    },
+                    {
+                        title: "超净",
+                        value: "5",
+                    }
+                ],
+                onChange: function () {
+                    var val = $(this.$input).attr('data-values');
+                    val == '1' ? setSpeed(ix, '1', '1X') : setSpeed(ix, '-', '--');
+                }
+            });
+        });
+        $(".speed").select({
+            title: "请选择风速",
+            items: [
+                {
+                    title: "--",
+                    value: "-",
+                },
+                {
+                    title: "1X",
+                    value: "1",
+                },
+                {
+                    title: "2X",
+                    value: "2",
+                },
+                {
+                    title: "3X",
+                    value: "3",
+                },
+                {
+                    title: "4X",
+                    value: "4",
+                },
+                {
+                    title: "5X",
+                    value: "5",
+                },
+                {
+                    title: "6X",
+                    value: "6",
+                },
+                {
+                    title: "7X",
+                    value: "7",
+                },
+                {
+                    title: "8X",
+                    value: "8",
+                }
+            ]
+        });
+    });
+</script>
+}

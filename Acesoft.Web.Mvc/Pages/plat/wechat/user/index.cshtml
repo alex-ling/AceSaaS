@@ -1,0 +1,34 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信用户";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("AX.gridAdd('#grid')");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination()
+            .DataSource("wx.user").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("name").Title("昵称").Width(10);
+                c.Add().Field("wxname").Title("微信号").Width(10);
+                c.Add().Field("mobile").Title("手机号").Width(10);
+                c.Add().Field("remark").Title("备注").Width(25);
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}

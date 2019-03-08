@@ -1,0 +1,112 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信群发";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.ComboBox().Id("appid").AppendTo(query).Label("公众号：").Width("220px")
+                    .Ajax(ds => ds.DataSource("wx.appgzh_list").Events(e => e.OnLoadSuccess("onAppLoad")).HttpGet())
+                    .Events(e => e.OnChange("onAppChange"));
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("　关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("图文上传").IconCls("fa fa-upload").Click("onUpload()");
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("AX.gridAdd('#grid')");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.TreeGrid().Id("grid").TreeField("title").AppendTo(ctls).Pagination().Edit("edit", 800, 550)
+            .DataSource("wx.news").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("dcreate").Title("日期").Width(4).Format("date:yyyy-MM-dd");
+                c.Add().Field("title").Title("标题").Width(15);
+                c.Add().Field("author").Title("作者").Width(3);
+                c.Add().Field("thumburl").Title("缩略图").Width(3).Format("href:查看");
+                c.Add().Field("mediaid").Title("微信素材Id").Width(8);
+                c.Add().Field("orderno").Title("排序号").Align(Align.center);
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function getAppId() {
+        return $('#appid').combobox('getValue');
+    }
+    function onUpload() {
+        var ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
+        AX.ajax({
+            url: AX.api({
+                api: 'wechat/uploadnews',
+                q: 'appid=' + getAppId()
+            }),
+            type: 'post',
+            data: { newsids: ids },
+            cb: function () {
+                AX.ok()
+                $('#grid').treegrid('reload')
+            }
+        });
+    }
+    function onAppLoad() {
+        $('#appid').combobox('setIndex', 0);
+    }
+    function onAppChange(val) {
+        $('#grid').treegrid('load', { _appid: val });
+    }
+    function event_grid_wxdel(cid, id) {
+        $.messager.confirm('提示', '确定要【删除】公众号对应的图文素材？', function (r) {
+            if (!r) return;
+            AX.ajax({
+                url: AX.api({
+                    api: 'wechat/delmedia',
+                    q: 'appid=' + getAppId()
+                }),
+                type: 'delete',
+                data: { mediaids: id },
+                cb: function () {
+                    AX.ok()
+                    $('#grid').treegrid('reload')
+                }
+            });
+        });
+    }
+    function event_grid_preview(cid, id) {
+        AX.dialog('选择微信用户', '../user/select?idfield=wxname&multi=1', function (ids) {            
+            AX.ajax({
+                url: AX.api({
+                    api: 'wechat/previewmedia',
+                    q: 'appid=' + getAppId()
+                }),
+                type: 'post',
+                data: { mediaid: id, wxname: ids },
+                cb: function () {
+                    AX.ok();
+                }
+            });
+        });
+    }
+    function event_grid_send(cid, id) {
+        AX.ajax({
+            url: AX.api({
+                api: 'wechat/sendmedia',
+                q: 'appid=' + getAppId()
+            }),
+            type: 'post',
+            data: { mediaid: id },
+            cb: function () {
+                AX.ok();
+            }
+        });
+    }
+</script>

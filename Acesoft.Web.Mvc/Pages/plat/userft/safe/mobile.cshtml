@@ -1,0 +1,144 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "安全设置 > 手机绑定";
+    Layout = "_shared/front";
+
+    var user = Ace.AC.User;
+}
+<div class="ct-title">
+    <h5 class="fl">安全设置 > 手机绑定</h5>
+    <button class="fl btn btn-default btn-xs ml20 mt5" onclick="AX.gourl('userft/safe')">
+        <span class="fa fa-chevron-left"></span> 返回
+    </button>
+</div>
+<div class="alert alert-info">请输入新的手机号，点击[获取验证码]后查看短信验证码，在15分钟内录入并提交！</div>
+@{
+    Ace.View().Id("view").Css("front").Ajax(ds => ds.HttpPost("auth", "postmobile")).Content(
+        @<div class="container-fluid pt10 pd20">
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red"></span> 当前手机号：</div>
+                @if (user.Mobile.HasValue())
+                {
+                    <div class="col-md-5">
+                        @Ace.AC.User.Mobile.Left(3)****@Ace.AC.User.Mobile.Right(4)
+                    </div>
+                    <div class="col-md-5">
+                        <span class="text-warning">
+                            当前绑定的手机号码。
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-5">
+                        XXX****XXXX
+                    </div>
+                    <div class="col-md-5">
+                        <span class="text-warning">
+                            当前未绑定的手机号码。
+                        </span>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 新的手机号：</div>
+                <div class="col-md-5">
+                    @Ace.TextBox().Name("mobile").Required().ValidType("length[11,11]").Width("100%").Prompt("请输入11位手机号")
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        绑定新的手机号成功后，将立即生效！
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 图片验证码：</div>
+                <div class="col-md-5">
+                    @Ace.TextBox().Id("code").Required().ValidType("length[5,5]").Width("100%").Prompt("5位验证码")
+                    <div class="mt5">
+                        <img id="vimg" src="/api/draw/getvalidimage" onclick="onRefresh(this)" class="hand" />
+                        @Ace.LinkButton().Name("btnc").Text("发送验证码").Width(100).Events(e => e.OnClick("onCode"))
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        请填入下方图片验证码。
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 短信验证码：</div>
+                <div class="col-md-5">
+                    @Ace.TextBox().Name("valid_code").Required().ValidType("length[6,6]").Width("100%").Prompt("6位数字短信验证码")
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        请在接收后15分钟内录入并提交。
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-2">
+                    <button type="button" class="btn btn-primary btn-sm w150" data-cmd="save-back" data-url="userft/safe">保存</button>
+                </div>
+            </div>
+        </div>
+    ).Render();
+}
+<script>
+    var count = 60, sb = false;
+    function getCode() {
+        $("#btnc").find('.l-btn-text').text("重新发送(" + count + ")")
+        count--;
+        if (count > 0) {
+            setTimeout(getCode, 1000);
+        }
+        else {
+            $("#btnc").find('.l-btn-text').text("获取验证码");
+            $("#btnc").linkbutton("enable");
+        }
+    }
+    function onRefresh(ele) {
+        $(ele).attr('src', AX.opts.root + 'api/draw/getvalidimage?d=' + Math.random());
+    }
+    function onCode() {
+        debugger
+        var mobile = $('#mobile').val();
+        if (mobile.length != 11) {
+            $.messager.error({ msg: '请输入有效的手机号！' });
+            $('#mobile').next().find('input').focus();
+            return;
+        }
+        var vcode = $('#code').val();
+        if (vcode.length != 5) {
+            $.messager.error({ msg: '请输入图片验证码！' });
+            $('#code').next().find('input').focus();
+            return;
+        }
+        if ($('#mobile').textbox('isValid')) {
+            $("#btnc").linkbutton("disable");
+            $("#btnc").find('.l-btn-text').text("正在发送…");
+            AX.ajax({
+                url: AX.api({ api: 'msg/getsms', ds: 'iot.sms' }),
+                data: { mobile: $('#mobile').val(), code: $('#code').val() },
+                type: 'get',
+                error: function (xhr) {
+                    AX.ajaxerror(xhr);
+                    onRefresh($('#vimg').get(0));
+                    count = 5;
+                    getCode();
+                },
+                cb: function () {
+                    $('#valid_code').next().find('input').focus();
+                    $.messager.info({ msg: '发送成功，请注意查收，15分钟内提交有效！' });
+                    onRefresh($('#vimg').get(0));
+                    count = 60;
+                    getCode();
+                }
+            });
+        } else {
+            $('#mobile').next().find('input').focus();
+        }
+    }
+</script>

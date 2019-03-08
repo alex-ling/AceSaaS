@@ -1,0 +1,8 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@{ 
+    ViewData["Title"] = "注销";
+
+    await Membership.SignOut();
+    App.Context.Response.Redirect("/plat/account/login", true);
+}

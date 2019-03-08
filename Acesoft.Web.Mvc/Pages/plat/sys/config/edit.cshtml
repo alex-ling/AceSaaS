@@ -1,0 +1,87 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+    
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("sys.cfgitem").Form(new {
+        cfg_id = App.GetQuery<long>("cfgid", 1),
+        name = "",
+        key = "",
+        value = "",
+        orderno = 10
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r">排序号：</div>
+                <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Width("100%").Increment(1)</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 配置名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 配置健：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("key").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 配置值：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("value").Width("100%").Required()</div>
+                <div class="col-xs-4">
+                    @Ace.LinkButton().Text("选择图片").Click("onSelect()").Css("c1").Width("80px")
+                    @Ace.LinkButton().Text("选择颜色").Click("onColor()").Css("c1").Width("80px")
+                </div>
+            </div>
+            <div>
+                <div class="ph15 pt20 pb10 bd-b-dashed">操作说明</div>
+                <ul class="pt5" style="list-style:decimal;padding-left:2em">
+                    <li class="pt10">
+                        <b>配置类型：</b>
+                        <span class="lh25 text-warning">
+                            back（背景）、color（颜色）、font/w/h（大小）、opactiry（透明度）
+                        </span>
+                    </li>
+                    <li class="pt10">
+                        <b>背景类设置：</b>
+                        <span class="lh25 text-warning">
+                            可以设置为颜色 [#FFFFFF] 或选择图片 [url(/viewer/default/xxx.png)]
+                        </span>
+                    </li>
+                    <li class="pt10">
+                        <b>透明度设置：</b>
+                        <span class="lh25 text-warning">
+                            透明度的范围为 [0.0-1]，1表示不透明，0表示完全透明，可设任意小数，如：0.55
+                        </span>
+                    </li>
+                    <li class="pt10">
+                        <b>大小类设置：</b>
+                        <span class="lh25 text-warning">
+                            高度、宽度、字体大小等，均可以设置为 [80px] 形式，前面数字可以修改
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+@section startup {
+<script>
+    function onSelect() {
+        AX.dialog('选择图片', '/_pages/photo', function (res) {
+            $('#value').textbox('setValue', res)
+        }, 650, 500)
+    }
+    function onColor() {
+        var clr = $('#value').val()
+        if (!clr.startsWith('#') && !clr.startsWith('rgb')) clr = ''
+        if (clr.startsWith('#')) clr = clr.substr(1)
+        AX.dialog('选择颜色', '/_pages/color?clr=' + clr, function (res) {
+            $('#value').textbox('setValue', res)
+        }, 310, 330)
+    }
+</script>
+}

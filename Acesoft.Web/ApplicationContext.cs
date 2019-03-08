@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using AD = Acesoft.Data;
 using Acesoft.Rbac;
 using Acesoft.Web.Multitenancy;
+using Acesoft.Config;
 
 namespace Acesoft.Web
 {
@@ -20,7 +21,7 @@ namespace Acesoft.Web
         public IHostingEnvironment HostingEnvironment { get; }
         public HttpContext HttpContext => httpContextAccessor.HttpContext;
         public TenantContext TenantContext => HttpContext.GetTenantContext();
-        public IAccessControl AccessControl => HttpContext.RequestServices.GetService<IAccessControl>();
+        public IAccessControl AC => HttpContext.RequestServices.GetService<IAccessControl>();
         public AD.ISession Session => HttpContext.RequestServices.GetService<AD.ISession>();
 
         public ApplicationContext(IHostingEnvironment hostingEnvironment, IHttpContextAccessor httpContextAccessor)

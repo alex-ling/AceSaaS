@@ -9,6 +9,7 @@ namespace Acesoft.Data
 {
     public class EntityBase : IEntity
     {
+        [Computed]
         public string HashId { get; private set; }
 
         private long id;

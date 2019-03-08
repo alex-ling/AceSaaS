@@ -1,0 +1,44 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    var isEdit = false;
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("iot.userdevice").Form(new {
+        sbno = App.GetQuery("sbno", ""),
+        user_id = "",
+        alias = "",
+        write = 1,
+        //state = 1,
+        owner = 1
+    }).Controller("iot").HttpSave()).Do(x => isEdit = x.Component.DataSource.IsEdit).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 关联用户：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("user_id").Width("100%").Required()</div>
+                <div class="col-xs-4"><span class="text-warning">请选择关联用户</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red"></span> 别名：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("alias").Width("100%")</div>
+                <div class="col-xs-4"><span class="text-warning">使用人别名</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red"></span> 可操控：</div>
+                <div class="col-xs-6">@Ace.CheckBox().Name("write").Text("是/否")</div>
+                <div class="col-xs-4"><span class="text-warning">选中表示对设备能完成控制</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red"></span> 拥有者：</div>
+                <div class="col-xs-6">@Ace.CheckBox().Name("owner").Text("是/否")</div>
+                <div class="col-xs-4"><span class="text-warning">选中表示是该设备拥有者</span></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+@section startup {
+    <script>
+    </script>
+}

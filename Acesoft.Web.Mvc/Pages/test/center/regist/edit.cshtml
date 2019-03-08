@@ -1,0 +1,90 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    var months = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C" };
+    var cpno = App.GetQuery("cpno", "");
+    var gcdh = Ace.AC.User.RefCode;
+    var year = DateTime.Now.ToString("yy");
+    var month = months[DateTime.Now.Month];
+    var isEdit = false;
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("iot.device").Form(new {
+        product_id = App.GetQuery("productid", ""),
+        user_id = Ace.AC.User.Id,
+        sbno = $"{cpno}{gcdh}{year}{month}",
+        mac = "",
+        rkrq = DateTime.Now.ToString("yyyy-MM-dd"),
+        sbzt = "0",
+        remark = ""
+    }).Controller("iot").HttpSave()).Build(c => isEdit = c.DataSource.IsEdit).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 设备编号：</div>
+                @if (isEdit)
+                {
+                    <div class="col-xs-6">
+                        产品编号 + 工厂代号 + 当前年度 + 月份 + 4位流水号<br />
+                        @Ace.TextBox().Name("sbno").Width("100%").Disabled()
+                    </div>
+                }
+                else
+                {
+                    <div class="col-xs-6">
+                        产品编号 + 工厂代号 + 当前年度 + 月份 + 4位流水号<br />
+                        @Ace.TextBox().Id("cpno").Disabled().Width(55) +
+                        @Ace.ComboBox().Id("gcdh").Items("A,B,C,D,E,F,G,H").Disabled().Width(56).Events(e => e.OnChange("change")) +
+                        @Ace.YearBox().Id("year").Start(18).End(25).Width(56).Events(e => e.OnChange("change")) +
+                        @Ace.ComboBox().Id("month").Items("1,2,3,4,5,6,7,8,9,A,B,C").Width(40).Events(e => e.OnChange("change")) +
+                        @Ace.TextBox().Id("no").Value("XXXX").Width(55).Disabled()
+                        @Ace.HiddenBox().Name("sbno")
+                    </div>
+                }
+                <div class="col-xs-4"><span class="text-warning">12位字符和数字</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 设备MAC：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("mac").Width("100%").Events(e => e.OnChange("onMac")).Required().ValidType("length[12,12]").Disabled(isEdit)</div>
+                <div class="col-xs-4"><span class="text-warning">12位16进制字符</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 入库日期：</div>
+                <div class="col-xs-6">@Ace.DateBox().Name("rkrq").Width("100%").Required()</div>
+                <div class="col-xs-4"><span class="text-warning"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 设备状态：</div>
+                <div class="col-xs-6">@Ace.ComboBox().Name("sbzt").Ajax(ds => ds.Dict("SBZT").HttpGet()).Width("100%").Required()</div>
+                <div class="col-xs-4"><span class="text-warning"></span></div>
+            </div>             
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("remark").Width("100%").Height(100)</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+@section startup {
+    <script>
+        $(function () {
+            var sbno = $('#sbno').val();
+            $('#cpno').textbox('setValue', sbno.substr(0, 4));
+            $('#gcdh').combobox('setValue', sbno.substr(4, 1));
+            $('#year').combobox('setValue', sbno.substr(5, 2));
+            $('#month').combobox('setValue', sbno.substr(7, 1));
+        });
+        function change() {
+            var gcdh = $('#gcdh').combobox('getValue');
+            var year = $('#year').combobox('getValue');
+            var month = $('#month').combobox('getValue');
+            $('#sbno').val('@cpno' + gcdh + year + month);
+        }
+        function onMac(val) {
+            $(this).textbox('setValue', val.toUpperCase());
+        }
+    </script>
+}

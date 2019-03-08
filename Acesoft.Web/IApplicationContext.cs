@@ -15,7 +15,7 @@ namespace Acesoft.Web
 
         HttpContext HttpContext { get; }
         TenantContext TenantContext { get; }
-        IAccessControl AccessControl { get; }
+        IAccessControl AC { get; }
         Acesoft.Data.ISession Session { get; }
 
         T As<T>() where T : class, IApplicationContext;

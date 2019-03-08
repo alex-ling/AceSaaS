@@ -1,0 +1,112 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@functions {
+    public bool CheckAgent()
+    {
+        bool flag = false;
+        string agent = Request.Headers["user-agent"];
+        string[] keywords = { "Android", "iPhone", "iPod", "iPad", "Windows Phone", "MQQBrowser" };
+        if (!agent.Contains("Windows NT") || (agent.Contains("Windows NT") && agent.Contains("compatible; MSIE 9.0;")))
+        {
+            if (!agent.Contains("Windows NT") && !agent.Contains("Macintosh"))
+            {
+                foreach (string item in keywords)
+                {
+                    if (agent.Contains(item))
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            flag = true;
+        }
+        return flag;
+    }
+}
+@{
+    ViewData["Title"] = "客户端下载";
+    ViewData["min-width"] = 480;
+    Layout = "_shared/page";
+
+    string u = Request.Headers["user-agent"];
+    var isAdr = u.IndexOf("Android") > -1 || u.IndexOf("Adr") > -1;
+    var isMobile = CheckAgent();
+    var clientId = App.GetQuery<long>("clientid");
+    var client = Ace.DbSession.QueryFirst<APP_Client>(new RequestContext("sys", "get_app_client", new { id = clientId }));
+    var url = WebHelper.WebPath("/home/down?clientid=" + clientId, true);
+}
+<style>
+    .header { background:#ecf0f3 }
+    .body { background:#85b8de }
+    .android { background:url(/images/android.png) }
+    .ios { background:url(/images/ios.png) }
+    a.android:hover { background:url(/images/android_hover.png) }
+    a.ios:hover { background:url(/images/ios_hover.png) }
+    .android_null { background:url(/images/android_null.png) }
+    .ios_null { background:url(/images/ios_null.png) }
+    .android,.ios,a.android:hover,a.ios:hover { display:inline-block;height:70px;width:235px;background-size:100% }
+</style>
+<div class="header" style="position:relative">
+    <div class="container">
+        <div class="row lh40 pt10 pd10">
+            <div class="col-md-4">
+                <a href="/"><h3 style="color:#777;">@client.Name</h3></a>
+                <h2 style="color:#ccc;margin:0 5px;">|</h2>
+                <h4 style="color:#aaa;">手机APP</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="body pt15 pb15">
+    <div class="container">
+        <div class="row pt30 @if(!isMobile){ @("pb30") }">
+            <div class="col-md-6 pb30 text-c">
+                <div><h2 class="cr-white">@client.Remark</h2></div>
+                <div class="pt30"><img src="/api/draw/getqrcode?text=@url" style="height:280px;width:280px" /></div>
+            </div>
+            <div class="col-md-6 pb30 text-c">
+                @if (!isMobile)
+                {
+                    <div class="pt15 pb15 ft16 cr-white text-c">
+                        手机用户请扫描左侧二维码下载客户端
+                    </div>
+                }
+                @if (!isMobile || isAdr)
+                {
+                    <div>
+                        @if (client.AdrVersion.HasValue() && client.AdrPackage.HasValue())
+                        {
+                            <h3 class="pt15 pb15 cr-white">Version @client.AdrVersion</h3>
+                            <div><a href="@WebHelper.WebPath(client.AdrPackage)" class="android"></a></div>
+                            if (isAdr)
+                            {
+                                <div>微信中请点击“在浏览器打开”后下载</div>
+                            }
+                        }
+                        else
+                        {
+                            <h3 class="pt15 pb15 cr-white">暂未上线</h3>
+                            <div><span class="android android_null"></span></div>
+                        }
+                    </div>
+                }
+                @if (!isMobile || !isAdr)
+                {
+                    <div class="@if(!isMobile){ @("pt20") }">
+                        @if (client.IosVersion.HasValue() && @client.IosPackage.HasValue())
+                        {
+                            <h3 class="pt15 pb15 cr-white">Version @client.IosVersion</h3>
+                            <div><a href="@client.IosPackage" class="ios"></a></div>
+                        }
+                        else
+                        {
+                            <h3 class="pt15 pb15 cr-white">暂未上线</h3>
+                            <div><span class="ios ios_null"></span></div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

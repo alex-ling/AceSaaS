@@ -1,0 +1,63 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.AppPage
+@{
+    ViewData["Title"] = "我";
+    Layout = "_shared/webapp";
+
+    var ac = Membership.Current;
+    var version = App.GetQuery("version", "");
+}
+<div class="page">
+    <div class="bd" style="top:0">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">头像</div>
+                <div class="weui-cell__ft">
+                    <img src="@(ac.User.Photo ?? "/images/user.png")" style="width:80px;height:80px" />
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="javascript:setUid()">
+                <div class="weui-cell__bd">登录名</div>
+                <div class="weui-cell__ft" id="uid">@(ac.User.LoginName ?? "未设置")</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:setNik()">
+                <div class="weui-cell__bd">昵称</div>
+                <div class="weui-cell__ft" id="nik">@ac.User.NickName</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">手机号</div>
+                <div class="weui-cell__ft">@ac.User.Mobile</div>
+            </a>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">我的积分</div>
+                <div class="weui-cell__ft">3600</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">积分商城</div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="/webapp/user/index/option?version=@version">
+                <div class="weui-cell__bd">设置</div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    function setUid() {
+        AX.setUid($('#uid').text(), function (val) {
+            $('#uid').text(val);
+        });
+    }
+    function setNik() {
+        AX.setNik($('#nik').text(), function (val) {
+            $('#nik').text(val);
+        });
+    }
+</script>

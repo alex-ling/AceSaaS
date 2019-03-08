@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Acesoft.App.Service
+namespace Acesoft.Service
 {
     public class Program
     {

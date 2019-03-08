@@ -1,0 +1,57 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "安全设置 > 修改密码";
+    Layout = "_shared/front";
+}
+<div class="ct-title">
+    <h5 class="fl">安全设置 > 修改密码</h5>
+    <button class="fl btn btn-default btn-xs ml20 mt5" onclick="AX.gourl('userft/safe')">
+        <span class="fa fa-chevron-left"></span> 返回
+    </button>
+</div>
+<div class="alert alert-info">建议您定期更换密码，设置安全性高的密码可以使帐号更安全。</div>
+@{
+    Ace.View().Id("view").Css("front").Ajax(ds => ds.HttpPut("auth", "putpwd")).Content(
+        @<div class="container-fluid pt10 pd20">
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 当前密码：</div>
+                <div class="col-md-5">
+                    @(Ace.PasswordBox().Name("pwd").Required().ValidType("length[4,20]").Width("100%").Prompt("请输入当前用户密码"))
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        请输入当前用户密码。
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 新的密码：</div>
+                <div class="col-md-5">
+                    @(Ace.PasswordBox().Name("newpwd").Required().ValidType("length[6,20]").Width("100%").Prompt("设置6-20位用户密码"))
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        可以包含字母，数字和特殊符号，不能与原有密码相同！                        
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 再次输入：</div>
+                <div class="col-md-5">
+                    @(Ace.PasswordBox().Id("newpwd2").Required().ValidType("equals['#newpwd']").Width("100%").Prompt("再次输入用户密码"))
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        请再次输入新的用户密码。
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-2">
+                    <button type="button" class="btn btn-primary btn-sm w150" data-cmd="save-back" data-url="userft/safe">保存</button>
+                </div>
+            </div>
+        </div>
+    ).Render();
+}

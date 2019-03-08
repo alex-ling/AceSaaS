@@ -1,0 +1,64 @@
+﻿@model AccessControl
+@{ 
+    var uid = Model.User.LoginName;
+    if (!uid.HasValue())
+    {
+        uid = "未设置";
+    }
+}
+<div class="page">
+    <div class="hd">
+        <div class="title">我的</div>
+        <div class="clear"></div>
+    </div>
+    <div class="bd">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">头像</div>
+                <div class="weui-cell__ft">
+                    <img src="@Model.User.Photo" style="width:80px;height:80px" />
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="javascript:setUid()">
+                <div class="weui-cell__bd">登录名</div>
+                <div class="weui-cell__ft" id="uid">@uid</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:setNik()">
+                <div class="weui-cell__bd">昵称</div>
+                <div class="weui-cell__ft" id="nik">@Model.User.NickName</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">手机号</div>
+                <div class="weui-cell__ft">@Model.User.Mobile</div>
+            </a>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="/home/down?clientid=983633255355908096">
+                <div class="weui-cell__bd">客户端下载</div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">使用帮助</div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">软件版本</div>
+                <div class="weui-cell__ft">V0.5.2.0</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function setUid() {
+        AX.setUid('@Model.User.LoginName', function (val) {
+            $('#uid').text(val);
+        });
+    }
+    function setNik() {
+        AX.setNik('@Model.User.NickName', function (val) {
+            $('#nik').text(val);
+        });
+    }
+</script>

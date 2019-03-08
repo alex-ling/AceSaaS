@@ -1,0 +1,52 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "公众号配置";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit().Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+            {
+                Ace.ComboBox().Name("cfgid").AppendTo(query).Label("公众号：").Width("220px")
+                    .Ajax(a => a.DataSource("wx.appcfg_list").HttpGet().Events(e => e.OnLoadSuccess("onAppLoad")).HttpGet())
+                    .Events(e => e.OnChange("onAppChange"));
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("　关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("图片上传").IconCls("fa fa-plus").Click("onUpload()");
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("onGridAdd()");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false).Edit("edit", 800, 500)
+            .DataSource("sys.cfgitem").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("name").Title("配置名称").Width(15);
+                c.Add().Field("key").Title("配置键").Width(15);
+                c.Add().Field("value").Title("配置值").Width(30);
+                c.Add().Field("orderno").Title("排序号").Width(8).Align(Align.center);
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onAppLoad() {
+        $('#cfgid').combobox('setIndex', 0);
+    }
+    function onAppChange(val) {
+        $('#grid').datagrid('load', { _cfgid: val });
+    }
+    function onUpload() {
+        AX.dialog('上传图片', '/_pages/photo', null, 650, 500)
+    }
+    function onGridAdd() {
+        AX.gridAdd('#grid', 'cfgid=' + $('#cfgid').combobox('getValue'))
+    }
+</script>

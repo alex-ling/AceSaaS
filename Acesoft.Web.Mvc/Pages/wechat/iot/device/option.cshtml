@@ -1,0 +1,241 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "新风主机";
+    Layout = "_shared/wechat";
+
+    // 初始化WechatJsApi
+    Ace.WechatInitJsApi((api) =>
+    {
+        api.Add("hideOptionMenu");
+    }, true);
+
+    var sbno = App.GetQuery<string>("sbno");
+    var data = await IotContext.GetIotData(sbno);
+    var owner = data.Owner_id == Ace.AC.User.Id ? 1 : 0;
+    var netdays = data.NetMin / (24 * 60);
+    var netalert = data.NetAlert ? " checked=\"true\"" : "";
+    var offmin = data.Values["offmin"] ?? (long)0;
+    var hour = (long)offmin / 60;
+    var mins = (long)offmin % 60;
+    var planset = data.PlanData.HasValue();
+    var planenabled = data.PlanEnabled ? " checked=\"true\"" : "";
+}
+<div class="page">
+    <div class="hd">
+        <a class="btn fl fa fa-chevron-left" href="javascript:history.back()"></a>
+        <div class="title">设置</div>
+        <div class="clear"></div>
+    </div>
+    <div class="bd">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">设备ID</div>
+                <div class="weui-cell__ft">@data.Sbno</div>
+            </div>
+            <a class="weui-cell weui-cell_access" href="javascript:setAlias()">
+                <div class="weui-cell__bd">设备别名</div>
+                <div class="weui-cell__ft" id="alias">@data.Alias</div>
+            </a>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">所在城市</div>
+                <div class="weui-cell__ft">@data.Location.City@data.Location.District</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">详细地址</div>
+                <div class="weui-cell__ft">@data.Location.Address</div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">设备拥有者</div>
+                <div class="weui-cell__ft">@data.Owner_phone</div>
+            </div>
+            @if (data.Owner_id == Ace.AC.User.Id)
+            {
+                <a class="weui-cell weui-cell_access" href="~/wechat/iot/device/auth?sbno=@(sbno)">
+                    <div class="weui-cell__bd">权限管理</div>
+                    <div class="weui-cell__ft">授权或转移</div>
+                </a>
+            }
+            <a class="weui-cell weui-cell_access" href="javascript:onUnbind()">
+                <div class="weui-cell__bd">解除绑定</div>
+                <div class="weui-cell__ft">解绑</div>
+            </a>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="javascript:setPower(@hour, @mins)">
+                <div class="weui-cell__bd">定时关机</div>
+                <div class="weui-cell__ft" id="span_power">
+                    <input type="hidden" id="power" />
+                    @if (hour > 0 || mins > 0)
+                    {
+                        <span>@hour 小时 @mins 分钟</span>
+                    }
+                    else
+                    {
+                        <span>未设置</span>
+                    }
+                </div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="~/wechat/iot/device/plan?sbno=@sbno">
+                <div class="weui-cell__bd">定时计划</div>
+                <div class="weui-cell__ft">
+                    @if (planset)
+                    {
+                        <span>已设置</span>
+                    }
+                    else
+                    {
+                        <span>未设置</span>
+                    }
+                </div>
+            </a>
+            <div class="weui-cell weui-cell_switch">
+                <div class="weui-cell__bd">定时计划启用</div>
+                <div class="weui-cell__ft"><input id="chk_plan" class="weui-switch" type="checkbox"@planenabled onclick="planEnabled(this)"></div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell weui-cell_switch">
+                <div class="weui-cell__bd">高级滤网提醒</div>
+                <div class="weui-cell__ft"><input class="weui-switch" type="checkbox"@netalert onclick="netAlert(this)"></div>
+            </div>
+            <a class="weui-cell weui-cell_access" href="javascript:netReset()">
+                <div class="weui-cell__bd">高级滤网复位</div>
+                <div class="weui-cell__ft">已使用@(netdays)天，可复位</div>
+            </a>
+        </div>
+    </div>
+</div>
+@section startup {
+<script>
+    function setPower() {
+        $("#power").picker('open');
+    }
+    function setAlias() {
+        $.prompt({
+            title: '设备别名',
+            text: '设备别名不能超过10个字符',
+            input: $('#alias').html(),
+            empty: false,
+            onOK: function (val) {
+                if (val.length <= 10) {
+                    AX.ajax({
+                        url: AX.api({ api: 'iot/putdevice' }),
+                        data: { sbno: '@sbno', alias: val },
+                        type: 'put',
+                        cb: function () {
+                            AX.wxOk();
+                            $('#alias').html(val);
+                        }
+                    });
+                }
+                else {
+                    AX.wxWarn('设备别名不能多于10个字符！');
+                }
+            }
+        });
+    }
+    function netAlert(ele) {
+        AX.ajax({
+            url: AX.api({ api: 'iot/putdevice' }),
+            data: { sbno: '@sbno', netalert: ele.checked ? 1 : 0 },
+            type: 'put',
+            cb: function () {
+                AX.wxOk();
+            },
+            error: function (res) {
+                AX.ajaxerror(res);
+                ele.checked = !ele.checked;
+            }
+        });
+    }
+    function planEnabled(ele) {
+        AX.ajax({
+            url: AX.api({ api: 'iot/putdevice' }),
+            data: { sbno: '@sbno', planenabled: ele.checked ? 1 : 0 },
+            type: 'put',
+            cb: function () {
+                $('#span_power > span').text('未设置');
+                AX.wxOk();
+            },
+            error: function (res) {
+                AX.ajaxerror(res);
+                ele.checked = !ele.checked;
+            }
+        });
+    }
+    function netReset() {
+        $.confirm({
+            title: '确认进行滤网复位操作？',
+            text: '高级滤网更换周期为180天，在收提醒时应及时更换，滤网更换后请进行复位，复位后将重新从0开始累计计时。',
+            onOK: function () {
+                AX.ajax({
+                    url: AX.api({ api: 'iot/putdevice' }),
+                    data: { sbno: '@sbno', netmin: 0 },
+                    type: 'put',
+                    cb: function () {
+                        AX.wxOk();
+                    }
+                });
+            }
+        });
+    }
+    function setPowerMin(vals) {
+        var mins = parseInt(vals[0]) * 60 + parseInt(vals[1]);
+        AX.ajax({
+            url: AX.api({ api: 'iot/setpoweroffplan' }),
+            data: { sbno: '@sbno', minutes: mins },
+            type: 'get',
+            cb: function () {
+                AX.wxOk();
+                var text = vals[0] == '0' && vals[1] == '0' ? '未设置' : vals[0] + '小时' + vals[1] + '分钟';
+                $('#span_power > span').text(text);
+                $('#chk_plan').get(0).checked = false;
+            }
+        });
+    }
+    function onUnbind() {
+        var tip = @owner ? '，此设备下的所有使用者也将被清除' : '';
+        $.confirm({
+            title: '确认解除绑定？',
+            text: '解除绑定后您将不再拥有此设备的使用权' + tip + '！',
+            onOK: function () {
+                AX.ajax({
+                    url: AX.api({ api: 'iot/deldevice', q: 'sbno=@sbno' }),
+                    type: 'delete',
+                    cb: function () {
+                        AX.wxOk('解除成功！');
+                        AX.go('/wechat/iot/device?t=' + AX.tick());
+                    }
+                });
+            }
+        });
+    }
+    $(function () {
+        wx.ready(function () {
+            wx.hideOptionMenu()
+        });
+        $("#power").picker({
+            title: "请选择关机时长(均设0取消定时)",
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                    displayValues: ['0小时', '1小时', '2小时', '3小时', '4小时', '5小时', '6小时', '7小时', '8小时']
+                },
+                {
+                    textAlign: 'center',
+                    values: [0, 15, 30, 45],
+                    displayValues: ['0分钟', '15分钟', '30分钟', '45分钟']
+                }
+            ],
+            value: [@hour, @mins],
+            onClose: function (rv) {
+                setPowerMin(rv.value);
+            }
+        });
+    })
+</script>
+}

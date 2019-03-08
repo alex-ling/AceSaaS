@@ -10,7 +10,7 @@ namespace Acesoft.Rbac
     {
         public MultiAuthorizeAttribute()
         {
-            base.AuthenticationSchemes = $"{Membership.Auth_Cookie},Bearer";
+            base.AuthenticationSchemes = Membership.Auth_Multis;
         }
     }
 }

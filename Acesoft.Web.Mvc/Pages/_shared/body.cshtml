@@ -1,0 +1,12 @@
+﻿@model Acesoft.Web.UI.RazorPages.WebPageBase
+<div class="ct-body">
+    <div class="ct-title">
+        <h5>@Html.Raw(ViewData["Title"])</h5>
+        @RenderSection("toolbar", false)
+    </div>
+    <div class="ct-layout">
+        @RenderBody()
+    </div>
+</div>
+@Model.Ace.RenderInitScripts(true)
+@RenderSection("startup", false)

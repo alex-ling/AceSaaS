@@ -1,0 +1,40 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("rbac.scale").Form(new {
+        parentid = Ace.AC.User.Scale_Id,
+        ref_id = "",
+        name = "",
+        remark = "",
+        system = 0
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 下级名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"><span class="text-warning"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">关联Id：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("ref_id").Width("100%")</div>
+                <div class="col-xs-4"><span class="text-warning"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">设置：</div>
+                <div class="col-xs-6">
+                    @Ace.CheckBox().Name("system").Text("系统")
+                </div>
+                <div class="col-xs-4"><span class="text-warning">系统属性不能删除！</span></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

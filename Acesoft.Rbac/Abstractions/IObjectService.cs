@@ -10,7 +10,7 @@ namespace Acesoft.Rbac
     public interface IObjectService : IService<Rbac_Object>
     {
         Rbac_Object GetByUrl(string url);
-        IList<Rbac_Object> Gets(IList<long> roleIds, int type, string user);
+        IList<Rbac_Object> Gets(IList<long> roleIds, ObjectType type, string user);
         int Delete(long id);
         int Delete(string ids);
     }

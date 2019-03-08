@@ -32,7 +32,7 @@ namespace Acesoft.Web.Multitenancy
 
         protected override IEnumerable<string> GetTenantIdentifiers(Tenant tenant)
         {
-            return tenant.Hostnames;
+            return tenant.HostNames;
         }
 
         protected override Task<Tenant> ResolveAsync(HttpContext context)
@@ -41,7 +41,7 @@ namespace Acesoft.Web.Multitenancy
 
             // match hostname
             var requestKey = context.Request.Host.Value.ToLower();
-            tenant = config.Tenants.FirstOrDefault(t => t.Hostnames.Any(h => h.Equals(requestKey)));
+            tenant = config.Tenants.FirstOrDefault(t => t.HostNames.Any(h => h.Equals(requestKey)));
 
             if (tenant == null)
             {

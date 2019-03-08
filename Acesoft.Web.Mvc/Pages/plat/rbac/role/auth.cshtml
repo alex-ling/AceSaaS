@@ -1,0 +1,66 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "授权";
+
+    var roleId = App.GetQuery("roleid", "");
+    Ace.Tree().Id("tree").CheckBox().CascadeCheck(false).Root("功能列表").Ajax(ds => ds
+        .DataSource("rbac.objuser_tree")
+        .RouteValue("roleid", roleId)
+        .HttpGet()
+    )
+    .Events(e => e.OnFormatter("formatter").OnCheck("onCheck"))
+    .Render();
+}
+<script>
+    var index = 0, selClr = '#3333ee', clr = '#ccc';
+    function onCheck(n, ck) {
+        $(n.target).find('c').css('color', ck ? selClr : clr);
+        $(n.target).find('input').each(function (i, e) {
+            if (ck) $(e).removeAttr('disabled')
+            else $(e).attr('disabled', 'true');
+        });
+    }
+    function formatter(n) {
+        var cks = '&nbsp;&nbsp;';
+        if (n.children == undefined) {
+            if (n.attributes.sops) {
+                cks += '<c style="color:' + (n.checked ? selClr : clr) + '">';
+                $(n.attributes.sops.replace(/，/g,',').split(',')).each(function (i, text) {
+                    index++;
+                    var ck = '';
+                    if (!n.checked) ck += ' disabled="true"';
+                    if (n.attributes.iopvalue && Math.pow(2, i) & n.attributes.iopvalue) {
+                        ck += ' checked="true"';
+                    }
+                    cks += AX.format('<input type="checkbox" id="ck{0}"{2} /><label for="ck{0}">{1}</label>', index, text, ck);
+                });
+                cks += '</c>';
+            }
+        }
+        return AX.format('{0}{1}', n.text, cks);
+    }
+    function onSubmit(cb) {
+        var ids = "";
+        var cks = $('#tree').tree('getChecked');
+        for (var i = 0; i < cks.length; i++) {
+            if (cks[i].id == '' || !$('#tree').tree('getParent', cks[i].target)) continue;
+            var opsVal = 0;
+            $(cks[i].target).find('input').each(function (i, e) {
+                if (e.checked) opsVal += Math.pow(2, i);
+            });
+            ids += "," + cks[i].id + "_" + opsVal;
+        }
+        if (ids != '') ids = ids.substr(1);
+        AX.ajax({
+            url: AX.api({
+                api: 'auth/postpa',
+                q: 'roleid=@(roleId)'
+            }),
+            type: 'post',
+            data: { objects: ids },
+            cb: cb
+        });
+    }
+</script>

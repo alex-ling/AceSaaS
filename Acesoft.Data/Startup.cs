@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
 using Acesoft.Core;
+using Acesoft.Data.Sql;
 
 namespace Acesoft.Data
 {
@@ -15,6 +16,7 @@ namespace Acesoft.Data
         public override void ConfigureServices(IServiceCollection services)
         {
             // 初始化全局Id实例
+            services.AddSingleton<ISchemaCreator, SchemaCreator>();
             services.AddSingleton<IIdWorker>(new IdWorker(0, 0));
 
             // 初始化数据配置

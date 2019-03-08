@@ -1,0 +1,38 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "概述";
+    Layout = "_shared/bodyct";
+}
+<div class="alert alert-info">请认真阅读以下信息，按照操作说明进行数据维护和管理！</div>
+<div class="container-fluid">
+    <div class="pt20 pb10 bd-b-dashed">操作说明</div>
+    <ul class="pt5" style="list-style:decimal;padding-left:2em">
+        <li class="pt10">
+            <b>产品登记</b>
+            <div class="pt10 pb10 lh25">
+                产品登记：对产品进行分类管理和登记，包含分类、编号、名称、型号等信息；<br/>
+                分类编号：用于标识和识别产品分类，由2位的字符或数字构成；<br />
+                产品编号：用于标识和识别产品，由2位的分类编号和2位的特定型号码构成。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>参数配置</b>
+            <div class="pt10 pb10 lh25">
+                根据物联协议配置产品上行参数指标，配置完成后请 [构建数据表]，需要专业人员进行维护和修改，请勿随意改动。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>指令配置</b>
+            <div class="pt10 pb10 lh25">
+                根据物联协议配置产品上下行指令指标令，需要专业人员进行维护和修改，请勿随意改动。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>产品统计</b>
+            <div class="pt10 pb10 lh25">
+                按产品进行设备数量的统计分析，可导出统计图。
+            </div>
+        </li>
+    </ul>
+</div>

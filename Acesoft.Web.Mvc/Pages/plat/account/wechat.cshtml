@@ -1,0 +1,90 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@{ 
+    ViewData["Title"] = "微信登录";
+
+    var openId = "";
+    var appId = App.GetQuery<string>("appid");
+    var needBindUser = false;
+    var redirectUrl = App.GetQuery("redirect_uri", "/wechat");
+    var external = redirectUrl.StartsWith("http");
+    var regUrl = $"/plat/account/wechatreg?appid={appId}";
+
+    if (Ace.AC.TryWechatAutoLogin(external, out openId))
+    {
+        // 外部系统，附加OpenId参数
+        if (external)
+        {
+            redirectUrl = UrlHelper.Append(redirectUrl, "OpenID", openId);
+        }
+
+        // 跳转到登录前页面
+        Response.Redirect(redirectUrl);
+    }
+    else
+    {
+        if (openId.HasValue())
+        {
+            // 绑定本地用户或注册
+            needBindUser = true;
+            regUrl += $"&openid={openId}&redirect_uri={HttpUtility.UrlEncode(redirectUrl)}";
+
+            // 外部系统，附加OpenId参数
+            if (external)
+            {
+                redirectUrl = UrlHelper.Append(redirectUrl, Membership.Auth_OpenID, openId);
+            }
+        }
+        else
+        {
+            // 登录失败，重新请求原始链接
+            var returnUrl = HttpUtility.UrlEncode(redirectUrl);
+            var url = $"/plat/account/login?appid={appId}&returnUrl={returnUrl}";
+            Response.Redirect(url);
+        }
+    }
+}
+@if (needBindUser)
+{
+<div class="ph15">
+    <div class="pt30 text-c">
+        <img src="~/images/logo.jpg" />
+    </div>
+    <div class="pt20 text-c ft12 cr-a lh20">
+        <div class="pb15 cr-7" style="font-size:18px">微信首次登录请绑定现有用户或注册新用户</div>
+        <div>
+            云平台用户(环都新风APP、云平台网站注册)请直接绑定登录<br/>
+            绑定登录成功后，下次将以微信身份直接登录(无需帐户密码)
+        </div>
+    </div>
+    @{
+        Ace.Form().Id("log").Ajax(a => a.RouteQuery("appid").HttpPost("wechat", "login")).Content(
+        @<div class="pt10 pb30">
+            <div class="pt15">
+                @(Ace.TextBox().Name("username").Required().IconCls("icon-man").IconAlign(Align.left).IconWidth(30)
+                        .Width("100%").Height(40).Prompt("登录名/手机号码/邮箱").TipPosition(Position.bottom))
+            </div>
+            <div class="pt15">
+                @(Ace.PasswordBox().Name("password").Required().IconCls("icon-lock").IconAlign(Align.left).IconWidth(30)
+                        .Width("100%").Height(40).ShowEye(false).Prompt("用户密码").TipPosition(Position.bottom))
+            </div>
+            <div class="pt30">
+                @Ace.HiddenBox().Name("openid").Value(openId)
+                <a class="btn btn-lg btn-primary" style="width:100%" onclick="onBind()">绑定登录</a>
+            </div>
+            <div class="pt15">
+                <a class="btn btn-lg btn-success" style="width:100%" href="@regUrl">注册新用户</a>
+            </div>
+        </div>
+        ).Render();
+    }
+</div>
+<script>
+    function onBind() {
+        AX.formSubmit('#log', function (res) {
+            $.messager.info({ msg: '绑定成功！' });
+            window.location = '@redirectUrl';
+        });
+    }
+</script>
+}

@@ -1,0 +1,87 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "信息编辑";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("同步微信").IconCls("fa fa-wechat").Click("onWxSync('')");
+                Ace.Button().AppendTo(tools).Text("批量审核").IconCls("fa fa-check").Click("onAudit('')");
+                Ace.Button().AppendTo(tools).Text("批量退回").IconCls("fa fa-arrow-left").Click("onBack('')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Edit("../news/edit", 800, 550)
+            .DataSource("cms.audit").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("item_names").Title("所属栏目").Width(8);
+                c.Add().Field("title").Title("标题").Width(15).Format("link:/wechat/cms/news/detail?id={id}");
+                c.Add().Field("dcreate").Title("编辑时间").Format("date:yyyy-MM-dd");
+                c.Add().Field("dpublish").Title("发布时间").Format("date:yyyy-MM-dd");
+                c.Add().Field("source").Title("来源").Width(5);
+                c.Add().Field("author").Title("作者").Width(3);
+                c.Add().Field("comment").Title("评论").Align(Align.center).Format("bool");
+                c.Add().Field("wx").Title("微信").Align(Align.center).Format("bool");
+                c.Add().Field("audit_name").Title("审核状态");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onWxSync(ids) {
+        if (ids == '') ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
+        AX.ajax({
+            type: 'post',
+            url: AX.api({ api: 'exec/execids', ds: 'cms.exe_news_wxsync' }),
+            data: { id: ids },
+            cb: function () {
+                $('#grid').datagrid('reload');
+                $.messager.info({ msg: '同步成功！' });
+            }
+        });
+    }
+    function onAudit(ids) {
+        if (ids == '') ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
+        AX.ajax({
+            type: 'post',
+            url: AX.api({ api: 'exec/execid', ds: 'cms.exe_news_audit' }),
+            data: { id: ids },
+            cb: function () {
+                $('#grid').datagrid('reload');
+                $.messager.info({ msg: '审核成功！' });
+            }
+        });
+    }
+    function event_grid_sh(cid, id) {
+        onAudit(id);
+    }
+    function onBack(ids) {
+        if (ids == '') ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
+        AX.ajax({
+            type: 'post',
+            url: AX.api({ api: 'exec/execid', ds: 'cms.exe_news_back' }),
+            data: { id: ids },
+            cb: function () {
+                $('#grid').datagrid('reload');
+                $.messager.info({ msg: '退回成功！' });
+            }
+        });
+    }
+    function event_grid_th(cid, id) {
+        onBack(id);
+    }
+</script>

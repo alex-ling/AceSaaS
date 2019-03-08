@@ -1,0 +1,58 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "信息编辑";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+                Ace.ComboBox().Name("audit").AppendTo(query).Label("　状态：").Ajax(a => a.Dict("AUDITSTATE").NullSelect().HttpGet());
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("批量提交").IconCls("fa fa-arrow-up").Click("onTj('')");
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("AX.gridAdd('#grid')");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Edit("edit", 800, 550)
+            .DataSource("cms.news").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("item_names").Title("所属栏目").Width(8);
+                c.Add().Field("title").Title("标题").Width(15).Format("link:/wechat/cms/news/detail?id={id}");
+                c.Add().Field("dcreate").Title("编辑时间").Format("date:yyyy-MM-dd");
+                c.Add().Field("dpublish").Title("发布时间").Format("date:yyyy-MM-dd");
+                c.Add().Field("source").Title("来源").Width(5);
+                c.Add().Field("author").Title("作者").Width(3);
+                c.Add().Field("comment").Title("评论").Align(Align.center).Format("bool");
+                c.Add().Field("audit_name").Title("审核状态");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onTj(ids) {
+        if (ids == '') ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
+        AX.ajax({
+            type: 'post',
+            url: AX.api({ api: 'exec/execid', ds: 'cms.exe_news_submit' }),
+            data: { id: ids },
+            cb: function () {
+                $('#grid').datagrid('reload');
+                $.messager.info({ msg: '提交成功！' });
+            }
+        });
+    }
+    function event_grid_tj(cid, id) {
+        onTj(id);
+    }
+</script>

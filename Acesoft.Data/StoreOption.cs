@@ -10,7 +10,7 @@ namespace Acesoft.Data
         public StoreOption()
         {
             IsolationLevel = IsolationLevel.ReadCommitted;
-            TablePrefix = "";
+            AutoCreateSchema = true;
             SessionPoolSize = 16;
             QueryGatingEnabled = true;
         }
@@ -18,7 +18,7 @@ namespace Acesoft.Data
         public string Name { get; set; }
         public IsolationLevel IsolationLevel { get; set; }
         public IConnectionFactory ConnectionFactory { get; set; }
-        public string TablePrefix { get; set; }
+        public bool AutoCreateSchema { get; set; }
         public int SessionPoolSize { get; set; }
         public bool QueryGatingEnabled { get; set; }
         public string[] SqlMaps { get; set; }

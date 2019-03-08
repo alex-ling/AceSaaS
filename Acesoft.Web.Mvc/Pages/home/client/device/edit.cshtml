@@ -1,0 +1,61 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("sys.version").Form(new {
+        client_id = App.GetQuery("clientid", ""),
+        version = "",
+        pubdate = DateTime.Now.ToString("yyyy-MM-dd"),
+        package = "",
+        md5 = "",
+        changelog = "",
+        force = 0,
+        remark = "",
+        type = 5
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 版本号：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("version").Width("100%").Required().ValidType("length[7,7]")</div>
+                <div class="col-xs-4"><span class="text-warning">必须填写x.x.x.x格式</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 发布日期：</div>
+                <div class="col-xs-6">@Ace.DateBox().Name("pubdate").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 发行包：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("package").Width("100%")</div>
+                <div class="col-xs-4"><span class="text-warning">请上传Android发行包apk文件</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> MD5核验：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("md5").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 更新说明：</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("changelog").Width("100%").Height("80px")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 强制更新：</div>
+                <div class="col-xs-6">@Ace.CheckBox().Name("force").Text("是/否")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+@section startup {
+    <script>
+    </script>
+}

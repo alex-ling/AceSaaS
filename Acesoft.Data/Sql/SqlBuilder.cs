@@ -35,10 +35,10 @@ namespace Acesoft.Data.Sql
 
         public Dictionary<string, object> Parameters { get; protected set; } = new Dictionary<string, object>();
 
-        public SqlBuilder(string tablePrefix, ISqlDialect dialect)
+        public SqlBuilder(ISqlDialect dialect, string tablePrefix = "")
         {
-            _tablePrefix = tablePrefix;
             _dialect = dialect;
+            _tablePrefix = tablePrefix;
         }
 
         public string Clause { get { return _clause; } }
@@ -277,7 +277,7 @@ namespace Acesoft.Data.Sql
 
         public ISqlBuilder Clone()
         {
-            var clone = new SqlBuilder(_tablePrefix, _dialect);
+            var clone = new SqlBuilder(_dialect, _tablePrefix);
 
             clone._clause = _clause;
             clone._table = _table;

@@ -1,0 +1,98 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "新风主机";
+    Layout = "_shared/wechat";
+
+    var uid = Ace.AC.User.Id;
+
+    // 初始化WechatJsApi
+    Ace.WechatInitJsApi((api) =>
+    {
+        api.Add("hideOptionMenu");
+        api.Add("scanQRCode");
+    });
+}
+<div class="page">
+    <div class="hd">
+        <div class="title">扫码添加设备</div>
+        <div class="clear"></div>
+    </div>
+    <div class="bd ph15">
+        <div class="pt30 text-c">
+            <div class="cr-7">请点击【扫一扫】扫描设备机身二维码</div>
+        </div>
+        <div class="buttons_panel pt20">
+            <a href="javascript:onScan()" class="weui-btn weui-btn_primary weui-btn_disabled" id="scan">扫一扫</a>
+        </div>
+        <div class="pt50 text-c">
+            <div class="cr-7">无法扫描二维码，请在下方输入设备ID</div>
+        </div>
+        <div class="pt20">
+            <input id="sbno" class="weui-input bd-gray text-c h50" maxlength="12" placeholder="请输入12位设备ID">
+        </div>
+        <div class="buttons_panel pt20">
+            <a href="javascript:onInput()" class="weui-btn weui-btn_primary" id="scan">确认设备ID并提交</a>
+            <a href="javascript:history.back()" class="weui-btn weui-btn_default">返回</a>
+        </div>
+    </div>
+</div>
+@section startup {
+<script>
+    function onInput(){
+        var sbno = $('#sbno').val();
+        if (sbno.length != 12) {
+            AX.wxWarn('请输入有效的12位设备ID！');
+            return;
+        }
+        goNext(sbno);
+    }
+    function onScan() {
+        AX.wxScan(function (res) {
+            var sbno = AX.query('sbno', res.substr(res.indexOf('?')));
+            if (sbno.length != 12) {
+                AX.wxWarn('未发现有效的设备二维码！');
+                return;
+            }
+            AX.wxOk('设备扫码成功：' + sbno);
+            goNext(sbno);
+        });
+    }
+    function goNext(sbno){
+        AX.ajax({
+            url: AX.api({
+                api: 'iot/getdata',
+                q: 'sbno=' + sbno
+            }),
+            type: 'get',
+            cb: function (r) {
+                if (r.value.owner_id == null) {
+                    // 开始配网
+                    AX.go('/wechat/iot/device/wifi?sbno=' + sbno);
+                }
+                else if (r.value.owner_id == '@uid') {
+                    $.confirm({
+                        title: '提示',
+                        text: '您和该设备已绑定，确认重新配网？',
+                        onOK: function () {
+                            // 开始配网
+                            AX.go('/wechat/iot/device/wifi?wifi=1&sbno=' + sbno);
+                        }
+                    });
+                    //AX.wxWarn('该用户和设备已绑定，勿重复绑定！');
+                }
+                else {
+                    // 提示已经配网
+                    AX.wxWarn('该设备已绑定其他用户，请先解绑！');
+                }
+            }
+        });
+    }
+    $(function () {
+        wx.ready(function () {
+            wx.hideOptionMenu();
+            $('#scan').removeClass('weui-btn_disabled');
+        })
+    })
+</script>
+}

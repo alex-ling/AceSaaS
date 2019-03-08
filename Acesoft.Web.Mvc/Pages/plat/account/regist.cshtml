@@ -1,0 +1,141 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@inject IConfigService ConfigService
+@{
+    var cfg = ConfigService.GetConfig(1);
+    ViewData["Title"] = "注册";
+    Ace.RenderAuthOptions = true;
+}
+<div class="header" style="position:relative">
+    <div class="container pt30 pb5">
+        <div class="col-md-6">
+            <a class="logo" href="/">
+                <img class="fl" src="@cfg["sys_logo"]" style="height:60px" />
+                <div class="fl ft30 fwb" style="line-height:60px;color:@cfg["sys_name_color"]">@cfg["sys_name"]</div>
+            </a>
+        </div>
+        <div class="col-md-6 text-r">
+            <div class="ft30 fwb" style="line-height:60px;color:@cfg["sys_tip_color"]">@cfg["sys_tip"]</div>
+        </div>
+    </div>
+</div>
+<div style="height:440px;padding-top:40px;background-image:url(/images/rbg.jpg);background-position:center">
+    <div style="margin:0 auto;width:630px;padding:30px 15px;background:#fff;opacity:0.90">
+        <div class="ph15 pb10">
+            <h3 style="color:#08c">平台注册</h3>
+        </div>        
+        @{
+            Ace.Form().Id("view").Css("front")
+            .Ajax(ds => ds.DataSource("user.regist").HttpPost("auth", "postuser"))
+            .Events(e => e.OnSuccess("onSuccess")).Content(
+                @<div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">手机号码</div>
+                        <div class="col-md-6">
+                            @Ace.TextBox().Name("mobile").Required().ValidType("length[11,11]").Prompt("11位手机号码").Width("100%")
+                        </div>
+                        <div class="col-md-4"><span class="text-warning">每个手机号码注册一次</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">图片验证码</div>
+                        <div class="col-md-6">
+                            @Ace.TextBox().Id("code").Required().ValidType("length[5,5]").Prompt("5位验证码").Width("32%").TipPosition(Position.bottom)
+                            <img id="vimg" src="/api/draw/getvalidimage" onclick="onRefresh(this)" class="hand" />
+                            @Ace.LinkButton().Name("btnc").Text("发送验证码").Width(100).Events(e => e.OnClick("onCode"))
+                        </div>
+                        <div class="col-md-4"><span class="text-warning">请输入图片验证码</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">短信验证码</div>
+                        <div class="col-md-6">
+                            @Ace.TextBox().Name("valid_code").Required().ValidType("length[6,6]").Prompt("6位短信验证码").Width("100%")
+                        </div>
+                        <div class="col-md-4"><span class="text-warning">短信验证码有效期为15分钟</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">登录密码</div>
+                        <div class="col-md-6">
+                            @Ace.PasswordBox().Name("password").Required().Prompt("请输入4-20位密码").ValidType("length[4,20]").Width("100%")
+                        </div>
+                        <div class="col-md-4"><span class="text-warning">密码区分大小写</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">确认密码</div>
+                        <div class="col-md-6">
+                            @Ace.PasswordBox().Id("pwd").Required().ValidType("equals['#password']").Prompt("请再次输入密码").Width("100%")
+                        </div>
+                        <div class="col-md-4"><span class="text-warning">请牢记您的密码</span></div>
+                    </div>
+                    <div class="row" style="padding-top:20px">
+                        <div class="col-md-2">
+                            @Ace.HiddenBox().Name("regtype").Value("0")
+                            @Ace.HiddenBox().Name("client_id").Value("208078593874460672")
+                        </div>
+                        <div class="col-md-6"><a class="btn btn-primary" style="width:100%" onclick="AX.formSubmit('#view')">注 册</a></div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            ).Render();
+        }
+    </div>
+</div>
+<script>
+    function onRefresh(ele) {
+        $(ele).attr('src', AX.opts.root + 'api/draw/getvalidimage?d=' + Math.random());
+    }
+    function onSuccess() {
+        $.messager.alert('提示', '<h4 class="cr">注册成功！</h4><h5>请返回登录页面进行登录！</h5>', 'info', function () {
+            AX.login();
+        });
+    }
+    var count = 60, sb = false;
+    function getCode() {
+        $("#btnc").find('.l-btn-text').text("重新发送(" + count + ")")
+        count--;
+        if (count > 0) {
+            setTimeout(getCode, 1000);
+        }
+        else {
+            $("#btnc").find('.l-btn-text').text("获取验证码");
+            $("#btnc").linkbutton("enable");
+        }
+    }
+    function onCode() {
+        var mobile = $('#mobile').val();
+        if (mobile.length != 11) {
+            $.messager.error({ msg: '请输入有效的手机号！' });
+            $('#mobile').next().find('input').focus();
+            return;
+        }
+        var vcode = $('#code').val();
+        if (vcode.length != 5) {
+            $.messager.error({ msg: '请输入图片验证码！' });
+            $('#code').next().find('input').focus();
+            return;
+        }
+        if ($('#mobile').textbox('isValid')) {
+            $("#btnc").linkbutton("disable");
+            $("#btnc").find('.l-btn-text').text("正在发送…");
+            AX.ajax({
+                url: AX.api({ api: 'msg/getsms', ds: 'user.regist' }),
+                data: { mobile: $('#mobile').val(), code: $('#code').val() },
+                type: 'get',
+                error: function (xhr) {
+                    AX.ajaxerror(xhr);
+                    onRefresh($('#vimg').get(0));
+                    count = 5;
+                    getCode();
+                },
+                cb: function () {
+                    $('#valid_code').next().find('input').focus();
+                    $.messager.info({ msg: '发送成功，请注意查收，15分钟内提交有效！' });
+                    onRefresh($('#vimg').get(0));
+                    count = 60;
+                    getCode();
+                }
+            });
+        } else {
+            $('#mobile').next().find('input').focus();
+        }
+    }
+</script>

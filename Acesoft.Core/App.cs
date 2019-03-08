@@ -2,25 +2,52 @@
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-
+using Acesoft.Config;
 using Acesoft.Core;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Acesoft
 {
     public static class App
     {
+        public const string Script_Init = "Script_Init";
+
         private static IHttpContextAccessor httpContextAccessor;
+        private static AppConfig appConfig;
+        public static AppConfig AppConfig
+        {
+            get
+            {
+                if (appConfig == null)
+                {
+                    appConfig = ConfigContext.GetConfig<AppConfig>("", (cfg, key) =>
+                    {
+                        // refresh object while changed.
+                        appConfig = cfg;
+                    });
+                }
+                return appConfig;
+            }
+        }        
 
         public static HtmlEncoder DefaultEncoder => HtmlEncoder.Create(UnicodeRanges.All);
         public static HttpContext Context => httpContextAccessor?.HttpContext;
         public static IIdWorker IdWorker { get; private set; }
 
+        public static IMemoryCache MemoryCache { get; private set; }
+        public static IDistributedCache Cache { get; private set; }        
+
         public static IServiceProvider UseAppContext(this IServiceProvider service)
         {
             httpContextAccessor = service.GetService<IHttpContextAccessor>();
-            IdWorker = service.GetService<IIdWorker>();
+
+            var httpService = Context?.RequestServices ?? service;
+            IdWorker = httpService.GetService<IIdWorker>();
+            MemoryCache = httpService.GetService<IMemoryCache>();
+            Cache = httpService.GetService<IDistributedCache>();
 
             return service;
         }        
@@ -141,6 +168,21 @@ namespace Acesoft
             }
 
             return str;
+        }
+        #endregion
+
+        #region cookie
+        public static T GetCookie<T>(string name, T defaultValue)
+        {
+            if (Context != null)
+            {
+                string val = Context.Request.Cookies[name];
+                if (val.HasValue())
+                {
+                    return val.ToObject<T>();
+                }
+            }
+            return defaultValue;
         }
         #endregion
     }

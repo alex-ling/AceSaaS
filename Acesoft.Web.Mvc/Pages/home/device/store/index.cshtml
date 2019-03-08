@@ -1,0 +1,63 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "设备库存";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit().Items(lay =>
+    {
+        lay.Add().Region(Region.west).Border(false).Split().MinWidth(200).Width(250).MaxWidth(300).Controls(wst =>
+        {
+            Ace.Layout().AppendTo(wst).Fit().Items(layout =>
+            {
+                layout.Add().Css("oy").Region(Region.center).Controls(ctls =>
+                {
+                    Ace.Tree().AppendTo(ctls).Id("tree").Root("产品分类")
+                        .DataSource("iot.class").Ajax(ds => ds.HttpGet())
+                        .Events(e => e.OnSelect("onSelect"));
+                });
+            });
+        });
+
+        lay.Add().Region(Region.center).Border(false).Controls(cnt =>
+        {
+            Ace.Layout().AppendTo(cnt).Fit().Items(layout =>
+            {
+                layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+                    {
+                        Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+                    })
+                    .Tools(tools =>
+                    {
+                    });
+                });
+                layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+                {
+                    Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination()
+                    .DataSource("iot.store").Ajax(ds => ds.HttpGet()).Columns(c =>
+                    {
+                        c.Add().Field("cpno").Title("产品编号").Width(5);
+                        c.Add().Field("name").Title("产品名称").Width(8);
+                        c.Add().Field("cpxh").Title("设备型号").Width(8);
+                        c.Add().Field("zs").Title("总数").Width(5);
+                        c.Add().Field("kcs").Title("库存数").Width(5);
+                        c.Add().Field("cks").Title("出库数").Width(5);
+                        c.Add().Field("fcs").Title("返厂数").Width(5);
+                    });
+                });
+            });
+        });
+    }).Render();
+}
+<script>
+    function onSelect(node) {
+        var fl = node.id ? node.text.split('.')[0] : '';
+        $('#grid').datagrid('load', { _flno: fl });
+    }
+    function gridAdd() {
+        var node = $('#tree').tree('getLevel', 3);
+        if (node != null) AX.gridAdd('#grid', AX.format('productid={0}&cpno={1}', node.id, node.text.split('.')[0]));
+    }
+</script>

@@ -14,11 +14,13 @@ namespace Acesoft.Web.WeChat
         public override void ConfigureServices(IServiceCollection services)
         {
             // regist
+            services.AddSingleton<IWeChatContainer, WeChatContainer>();
+
+            // regist services.
             services.AddSingleton<IAppService, AppService>();
             services.AddSingleton<IMediaService, MediaService>();
             services.AddSingleton<IMenuService, MenuService>();
             services.AddSingleton<INewsService, NewsService>();
-            services.AddSingleton<IWeChatContainer, WeChatContainer>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)

@@ -1,0 +1,31 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.AppPage
+@{
+    ViewData["Title"] = "智能设备";
+    Layout = "_shared/webapp";
+
+    var ac = Membership.Current;
+    var version = App.GetQuery("version", "");
+}
+<div class="page">
+    <div class="bd">
+        <div class="weui-cells">
+            <div class="weui-cells__title">样机设备</div>
+        </div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="/webapp/device/index/detail?sbno=JYTZ187008&name=振动筛">
+                <div class="weui-cell__bd">振动筛JYTZ187008</div>
+                <div class="weui-cell__ft" id="uid">天津宝坻区智能工厂</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="/webapp/device/index/detail?sbno=JYTT187011&name=跳汰机">
+                <div class="weui-cell__bd">跳汰机JYTT187011</div>
+                <div class="weui-cell__ft" id="uid">天津宝坻区智能工厂</div>
+            </a>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cells__title">我的设备</div>
+        </div>
+    </div>
+</div>
+<script>
+</script>

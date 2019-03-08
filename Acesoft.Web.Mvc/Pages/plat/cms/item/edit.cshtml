@@ -1,0 +1,74 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("cms.item").Form(new
+    {
+        parentid = App.GetQuery("parentid", ""),
+        type = "",
+        code = "",
+        name = "",
+        url = "",
+        itemtemp = "",
+        newstemp = "",
+        orderno = 10,
+        visible = 1,
+        remark = ""
+    }).HttpSave()).Content(
+    @<div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red"></span> 父级栏目：</div>
+            <div class="col-xs-6">@Ace.ComboTree().Name("parentid").Width("100%").Ajax(a => a.DataSource("cms.item_tree").HttpGet())</div>
+            <div class="col-xs-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red">*</span> 栏目路由：</div>
+            <div class="col-xs-6">@Ace.TextBox().Name("code").Width("100%").Required()</div>
+            <div class="col-xs-4"><div class="text-warning">栏目访问路径，同级必须唯一！</div></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red">*</span> 栏目名称：</div>
+            <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+            <div class="col-xs-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red">*</span> 栏目类型：</div>
+            <div class="col-xs-6">@Ace.ComboBox().Name("type").Width("100%").Required().Ajax(a => a.Dict("ITEMTYPE").HttpGet())</div>
+            <div class="col-xs-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red"></span> 栏目Url：</div>
+            <div class="col-xs-6">@Ace.TextBox().Name("url").Width("100%")</div>
+            <div class="col-xs-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red"></span> 栏目模板：</div>
+            <div class="col-xs-6">@Ace.TextBox().Name("itemtemp").Width("100%")</div>
+            <div class="col-xs-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red"></span> 文章模板：</div>
+            <div class="col-xs-6">@Ace.TextBox().Name("newstemp").Width("100%")</div>
+            <div class="col-xs-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r">栏目属性：</div>
+            <div class="col-xs-6">@Ace.CheckBox().Name("visible").Text("可见")</div>
+            <div class="col-xs-4"><div class="text-warning">不可见但可以正常路由访问！</div></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r"><span class="cr-red">*</span> 排序号：</div>
+            <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Increment(10).Width("100%").Required()</div>
+            <div class="col-xs-4"><div class="text-warning">设置时建议按10，20递增！</div></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-r">备注：</div>
+            <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+            <div class="col-xs-4"></div>
+        </div>
+        @Html.AntiForgeryToken()
+    </div>
+    ).Render();
+}

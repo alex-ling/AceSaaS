@@ -1,0 +1,112 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "安全中心 > 邮箱绑定";
+    Layout = "_shared/bodyct";
+
+    var user = Ace.AC.User;
+}
+@section toolbar {
+    <button class="btn btn-default btn-xs ml20" data-cmd="back">
+        <span class="fa fa-chevron-left"></span> 返回
+    </button>
+}
+<div class="alert alert-info">请输入电子邮箱后，点击[获取验证码]后登录邮箱查看验证码，在15分钟内录入并提交！</div>
+@{
+    Ace.View().Id("view").Css("front").Ajax(ds => ds.HttpPost("auth", "postmail")).Content(
+        @<div class="container-fluid pt10 pd20">
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red"></span> 当前邮箱：</div>
+                @if (user.Mail.HasValue())
+                {
+                    <div class="col-md-5">
+                        @Ace.AC.User.Mail.Left(3)****@Ace.AC.User.Mail.Right(7)
+                    </div>
+                    <div class="col-md-5">
+                        <span class="text-warning">
+                            当前绑定的安全邮箱。
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-5">
+                        XXX****XXXX
+                    </div>
+                    <div class="col-md-5">
+                        <span class="text-warning">
+                            当前未绑定的安全邮箱。
+                        </span>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 新的邮箱：</div>
+                <div class="col-md-5">
+                    @Ace.TextBox().Name("mail").Required().ValidType("email").Width("100%").Prompt("请输入电子邮箱")
+                    <div class="mt5">
+                        @Ace.LinkButton().Name("btnc").Text("发送验证码").Width(100).Events(e => e.OnClick("onCode"))
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        绑定新的电子邮箱成功后，将立即生效！
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-r"><span class="cr-red">*</span> 验证码：</div>
+                <div class="col-md-5">
+                    @Ace.TextBox().Name("valid_code").Required().ValidType("length[6,6]").Width("100%").Prompt("6位数字邮件验证码")
+                </div>
+                <div class="col-md-5">
+                    <span class="text-warning">
+                        请在接收后15分钟内录入并提交。
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-2">
+                    <button type="button" class="btn btn-primary btn-sm w150" data-cmd="save-back">保存</button>
+                </div>
+            </div>
+        </div>
+    ).Render();
+}
+<script>
+    var count = 0, sb = false;
+    function getCode() {
+        $("#btnc").find('.l-btn-text').text("重新发送(" + count + ")")
+        count--;
+        if (count > 0) {
+            setTimeout(getCode, 1000);
+        }
+        else {
+            $("#btnc").find('.l-btn-text').text("获取验证码");
+            $("#btnc").removeAttr("disabled");
+        }
+    }
+    function onCode() {
+        if ($('#mail').textbox('isValid')) {
+            $("#btnc").attr("disabled", "disabled");
+            $("#btnc").find('.l-btn-text').text("正在发送…");
+            AX.ajax({
+                url: AX.api({ api: 'msg/getmail', ds: 'iot.mail' }),
+                data: { id: $('#mail').val() },
+                type: 'get',
+                error: function (xhr) {
+                    AX.ajaxerror(xhr);
+                    count = 5;
+                    getCode();
+                },
+                cb: function () {
+                    $('#valid_code').next().find('input').focus();
+                    count = 60;
+                    getCode();
+                }
+            });
+        } else {
+            $('#mail').next().find('input').focus();
+        }
+    }
+</script>

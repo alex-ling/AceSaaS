@@ -1,0 +1,563 @@
+﻿/* global */
+a, a:focus, a:hover, a:active {
+    color: #78828c;
+    outline: 0;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e6400c;
+}
+
+::-moz-selection {
+    color: #fff;
+    background: #e6400c;
+}
+
+::selection {
+    color: #fff;
+    background: #e6400c;
+}
+
+/* header */
+.header {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    z-index: 9;
+    width: 100%;
+    min-height: 60px;
+    line-height: 60px;
+    padding: 0;
+    background: rgba(255,255,255,1);
+    box-shadow: 0 1px 4px rgba(200,200,200,1);
+    z-index: 1;
+}
+
+.header .logo {
+    float: left;
+    color: #059773;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* swiper */
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    position: relative;
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center bottom;
+}
+
+/* footer */
+.footer {
+    background: #fff;
+    padding: 15px 0;
+    font-size: 1.2em;
+    line-height: 2em;
+    text-align: center;
+    color: #667480;
+}
+
+/*============================top-container===================*/
+.top-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+    color: #8983b4;
+    width: 42px;
+    opacity: .9;
+    filter: alpha(opacity=90);
+    -moz-opacity: .9;
+    -khtml-opacity: .9;
+    z-index: 99;
+    border-top: 1px solid #dfdfe1;
+}
+
+.top-container .top-block {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    display: inline-block;
+    background-color: #fff;
+    color: #8983b4;
+    cursor: pointer;
+    border-bottom: 1px solid #dfdfe1;
+    border-left: 1px solid #dfdfe1;
+    border-right: 1px solid #dfdfe1
+}
+
+.top-container a.chat .icon {
+    width: 22px;
+    height: 20px;
+    background: url('images/top.png') 0 -80px no-repeat;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.top-container .qrcode-icon {
+    background: url('images/app.png') no-repeat;
+    background-size: 100% 100%;
+    width: 170px;
+    height: 170px;
+    position: absolute;
+    bottom: -5px;
+    right: 50px;
+    display: none;
+}
+
+.top-container p.phone .icon {
+    width: 22px;
+    height: 20px;
+    background: url('images/top.png') 0 -25px no-repeat;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.top-container a.help .icon {
+    width: 20px;
+    height: 20px;
+    background: url('images/top.png') 0 -125px no-repeat;
+    display: inline-block;
+    margin-top: 10px
+}
+
+.top-container p.top .icon {
+    width: 19px;
+    height: 16px;
+    background: url('images/top.png') 0 -105px no-repeat;
+    margin-top: 12px;
+}
+
+.top-container .text {
+    margin-top: 2px;
+    width: 24px;
+    font-size: 12px;
+    display: none
+}
+
+.top-container a:hover, .top-container p:hover {
+    background-color: #8983b4;
+    color: #fff;
+}
+
+.top-container a:hover .icon, .top-container p:hover .icon {
+    display: none;
+}
+
+.top-container a:hover .text, .top-container p:hover .text {
+    display: inline-block;
+}
+
+/*============================ax-manager======================*/
+.ax-sidebar {
+    background-color: #f5f6fa;
+    z-index: 102;
+    border: 1px solid #e5e5e5;
+}
+
+.ax-sidebar .sidebar-nav {
+    width: 100%;
+}
+
+.ax-sidebar .nav-title {
+    height: 35px;
+    line-height: 35px;
+    color: #999;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding-left: 1.6em;
+}
+
+.ax-sidebar .nav-collapse ul {
+    height: 0 !important;
+    overflow: hidden
+}
+
+.ax-sidebar .nav-collapse .nav-icon {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg)
+}
+
+.ax-sidebar .nav-collapse .nav-title {
+    border-bottom: 0; /*!important*/
+}
+
+.ax-sidebar .nav-collapse:last-child .nav-title {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.ax-sidebar .nav-title-text {
+    display: inline-block;
+    width: 80px;
+}
+
+.ax-sidebar .nav-title-icon,
+.ax-sidebar .nav-item-icon,
+.ax-sidebar .nav-icon {
+    display: inline-block;
+    width: 15px;
+    margin-right: 5px;
+    transition: transform 0.12s;
+    -o-transition: -o-transform 0.12s;
+    -ms-transition: -ms-transform 0.12s;
+    -moz-transition: -moz-transform 0.12s;
+    -webkit-transition: -webkit-transform 0.12s
+}
+
+.ax-sidebar .nav-icon {
+    font-size: 1.2em;
+}
+
+.ax-sidebar .nav-title:hover {
+    background-color: #e6efff /*eee*/;
+    color: #fd8238 /*333*/;
+}
+
+.ax-sidebar .nav-body {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden
+}
+
+.ax-sidebar .nav-item {
+    position: relative;
+    cursor: pointer;
+    padding-left: 3.25em;
+}
+
+.ax-sidebar .sidebar-nav > .nav-item {
+    padding-left: 1.6em;
+}
+
+.ax-sidebar .nav-item a {
+    display: block;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    color: #555;
+    overflow: hidden;
+}
+
+.ax-sidebar .nav-item:hover {
+    background-color: #e6efff;
+}
+
+.ax-sidebar .nav-item.active {
+    background-color: #09c;
+    /*border: 1px solid #dcdcdc;
+    border-right: 1px solid #fff;
+    border-left: 0;*/
+}
+
+.ax-sidebar .nav-item a:hover {
+    color: #fd8238;
+}
+
+.ax-sidebar .nav-item.active a {
+    color: #fff;
+}
+
+.ax-content {
+    position: relative;
+    width: auto;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+}
+
+.ax-content .ct-navbar {
+    font-size: 13px;
+    width: 150px;
+    float: left;
+    background-color: #eaedf1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.ct-navbar .ct-navbar-title {
+    height: 70px;
+    line-height: 70px;
+    text-indent: 1.5em;
+    font-weight: bold;
+    background: #d9dee4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ct-navbar .ct-navbar-list {
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ct-navbar .ct-navbar-list > ul {
+    display: none;
+}
+
+.ct-navbar .ct-navbar-list > ul.active {
+    display: block;
+}
+
+.ct-navbar .nav-item {
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    color: #333;
+    cursor: pointer;
+}
+
+.ct-navbar .nav-item:hover {
+    background: #f4f6f8;
+}
+
+.ct-navbar .nav-item.active {
+    background: #fff;
+}
+
+.ct-navbar .nav-icon {
+    width: 30px;
+    height: 40px;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+
+.ct-navbar .nav-title {
+    width: 100px;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ax-content .ct-split {
+    position: absolute;
+    left: 130px;
+    top: 50%;
+    width: 20px;
+    height: 50px;
+    z-index: 3;
+    display: none;
+}
+
+.ax-content .ct-split-wrap {
+    top: -50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.ax-content .ct-split-bg {
+    width: 0;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    left: auto;
+    border-bottom: 9px solid transparent;
+    border-left: none;
+    border-right: 13px solid #f7f7f7;
+    border-top: 9px solid transparent;
+}
+
+.ax-content .ct-split:hover .ct-split-bg {
+    border-bottom: 8px solid transparent;
+    border-left: none;
+    border-right: 20px solid #f7f7f7;
+    border-top: 8px solid transparent;
+}
+
+.ax-content .ct-split-collapse {
+    right: -7px;
+    left: auto;
+    height: 50px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    color: #555;
+}
+
+.ax-content .ct-split:hover .ct-split-collapse {
+    right: 0;
+}
+
+.ax-content .ct-split-collapse span {
+    font-size: 18px;
+    line-height: 50px;
+    vertical-align: text-top;
+}
+
+.ax-content .ct-split-collapse .fa-chevron-left {
+    display: inline;
+}
+
+.ax-content .ct-split-collapse .fa-chevron-right {
+    display: none;
+}
+
+.ax-content.mini .ct-navbar {
+    width: 0;
+}
+
+.ax-content.mini .ct-split {
+    left: 0;
+}
+
+.ax-content.mini .ct-split-bg {
+    top: 0;
+    left: 0;
+    border-bottom: 9px solid transparent;
+    border-left: 13px solid #d9dee4;
+    border-top: 9px solid transparent;
+    border-right: 0;
+}
+
+.ax-content.mini .ct-split:hover .ct-split-bg {
+    border-bottom: 8px solid transparent;
+    border-left: 20px solid #d9dee4;
+    border-top: 8px solid transparent;
+}
+
+.ax-content.mini .ct-split-collapse {
+    left: -7px;
+}
+
+.ax-content.mini .ct-split:hover .ct-split-collapse {
+    left: 0;
+}
+
+.ax-content.mini .ct-split-collapse .fa-chevron-left {
+    display: none;
+}
+
+.ax-content.mini .ct-split-collapse .fa-chevron-right {
+    display: inline;
+}
+
+.ax-content .ct-wrap {
+    /*position: absolute;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    background: #fff;
+    padding: 0 15px;*/
+}
+
+.ax-content.mini .ct-wrap {
+    left: 0;
+}
+
+.ct-wrap .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #eee;
+    opacity: 0.8;
+    z-index: 999999;
+}
+
+.ct-wrap .loading.show {
+    display: block;
+}
+
+.ct-wrap .loading .load {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -30px;
+    padding-left: 40px;
+    line-height: 31px;
+    font-size: 16px;
+    background: url(../../../images/loading.gif) no-repeat;
+}
+
+.ct-wrap .loading .load::after {
+    content: '正在加载中…';
+}
+
+.ct-wrap .empty {
+    padding-top: 50px;
+    text-align: center;
+    color: #ccc;
+}
+
+.ct-wrap .empty::after {
+    content: '加载页面出错，请重试！';
+}
+
+.ct-wrap .ct-title {
+    padding: 18px 15px;
+    min-height: 70px;
+    border-bottom: 1px solid #ddd;
+}
+
+.ct-wrap .ct-title h5, .ct-item .ct-title h6 {
+    display: inline-block;
+    text-indent: 8px;
+    border-left: 2px solid #88b7e0;
+    margin: 8px 0;
+    font-weight: bold;
+}
+
+.ax-content .ct-body, .ax-content .ct-gray, .ax-content .ct-layout {
+    position: absolute;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.ct-body .ct-title {
+    padding: 18px 15px;
+}
+
+.ax-content .ct-gray {
+    overflow-y: auto;
+    background: #eaedf1;
+    padding: 0 15px;
+}
+
+.ax-content .ct-layout {
+    top: 71px;
+}
+
+.ax-content .ct-gray a {
+    color: #08c;
+}
+
+.ax-content .ct-gray a:hover {
+    text-decoration: underline;
+}

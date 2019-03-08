@@ -1,0 +1,101 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "系统信息";
+    Layout = "_shared/bodyct";
+
+    var netcore = Microsoft.Extensions.DependencyModel.DependencyContext.Default;
+    var runtime = netcore.RuntimeLibraries.First(x => x.Name == "Microsoft.NETCore.App");
+    var memory = MemoryHelper.GetMemoryStatusEx();
+    var testFile = WebHelper.LocalPath("test.txt");
+    var isWrite = false;
+    try
+    {
+        FileHelper.Write(testFile, "ok");
+        isWrite = true;
+    }
+    catch
+    { }
+    finally
+    {
+        if (isWrite)
+        {
+            FileHelper.Delete(testFile);
+        }
+    }
+}
+<div class="container-fluid">
+    <div class="pt20 pb10 bd-b-dashed">系统参数</div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">服务名称：</div>
+        <div class="col-md-10">@Environment.MachineName</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">服务地址：</div>
+        <div class="col-md-10">@Request.Headers["host"]</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">操作系统：</div>
+        <div class="col-md-10">@Environment.OSVersion @System.Globalization.CultureInfo.InstalledUICulture.DisplayName</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">.NetCore：</div>
+        <div class="col-md-10">@netcore.Target.Framework @runtime.Name @runtime.Version</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">应用路径：</div>
+        <div class="col-md-10">@AppDomain.CurrentDomain.BaseDirectory</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">支持写入：</div>
+        <div class="col-md-10">@isWrite</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">CPU 信息：</div>
+        <div class="col-md-10">
+            @RegistryHelper.OpenHLM(@"HARDWARE\DESCRIPTION\System\CentralProcessor\0").GetValue("ProcessorNameString")
+            @Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER") /
+            @Environment.GetEnvironmentVariable("NUMBER_OF_PROCESSORS")个
+        </div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">机器内存：</div>
+        <div class="col-md-10">
+            Physical：@(memory.availPhys / 1024 / 1024)M / @(memory.totalPhys / 1024 / 1024)M  
+            Virtual：@(memory.availVirtual / 1024 / 1024 / 1024)M / @(memory.totalVirtual / 1024 / 1024 / 1024)M
+        </div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">磁盘空间：</div>
+        <div class="col-md-10">@((Convert.ToInt64(DiskHelper.OpenDriveProperty("FreeSpace")) * 1.0 / 1024 / 1024 / 1024).ToString("N2"))G / @((Convert.ToInt64(DiskHelper.OpenDriveProperty("Size")) * 1.0 / 1024 / 1024 / 1024).ToString("N2"))G</div>
+    </div>
+    <div class="pt20 pb10 bd-b-dashed">运行参数</div>
+    <div class="row pt10">
+        <div class="col-md-2 text-r">访问时间：</div>
+        <div class="col-md-10">@DateTime.Now.ToString("yyyy 年 MM 月 dd 日 tt HH 时 mm 分 ss.fff 秒")</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">访问者 IP：</div>
+        <div class="col-md-10">@HttpContext.GetClientIp()</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">User-Agent：</div>
+        <div class="col-md-10">@Request.Headers["user-agent"]</div>
+    </div>
+    @*<div class="row pt5">
+        <div class="col-md-2 text-r">访问 URL：</div>
+        <div class="col-md-10">@WebHelper.GetUrl()</div>
+    </div>*@
+    <div class="row pt5">
+        <div class="col-md-2 text-r">当前路径：</div>
+        <div class="col-md-10">@Path</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">占用内存：</div>
+        <div class="col-md-10">@(((Double)System.Diagnostics.Process.GetCurrentProcess().WorkingSet64 / 1048576).ToString("N2")) M</div>
+    </div>
+    <div class="row pt5">
+        <div class="col-md-2 text-r">占用 CPU：</div>
+        <div class="col-md-10">@(((TimeSpan)System.Diagnostics.Process.GetCurrentProcess().TotalProcessorTime).TotalSeconds.ToString("N0")) %</div>
+    </div>
+</div>

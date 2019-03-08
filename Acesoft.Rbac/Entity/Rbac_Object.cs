@@ -13,7 +13,7 @@ namespace Acesoft.Rbac.Entity
         public long? ParentId { get; set; }
         public string Name { get; set; }
         public string Remark { get; set; }
-        public int Type { get; set; }
+        public ObjectType Type { get; set; }
         public string Url { get; set; }
         public string Icon { get; set; }
         public string OpNames { get; set; }

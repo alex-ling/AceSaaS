@@ -100,7 +100,7 @@ namespace Acesoft.Web.WeChat.Services
         private string GetWxHtml(Wx_App app, Wx_News news)
         {
             var html = new HtmlDocument();
-            var sysCfg = configService.GetItems(app.Id);
+            var sysCfg = configService.GetConfig(app.Id);
 
             var content = news.Content.Replace(vars);
             var header = sysCfg["header_html"];

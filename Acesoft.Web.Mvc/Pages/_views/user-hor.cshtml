@@ -1,0 +1,18 @@
+﻿@model AccessControl
+<div class="row bg-head">
+    <div class="col-md-12 pt5 pb5 fwb">登录用户信息</div>
+</div>
+<div class="row bg-body mb15">
+    <div class="col-md-12 pt10 pb10 lh30">
+        <div>
+            <h3>Hi，</h3>
+            <a href="javascript:AX.go('plat/user|basic')"><h3>@Model.User.NickName</h3></a>
+        </div>
+        <div class="pt5">
+            登录时间：@Model.User.DLogin.Value.ToString("yyyy-MM-dd HH:mm")
+        </div>
+        <div>
+            登录地点：@App.Context.GetClientIp()
+        </div>
+    </div>
+</div>

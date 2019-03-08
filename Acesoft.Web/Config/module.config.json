@@ -1,8 +1,8 @@
 {
-  "name": "Acesoft.HR",
-  "description": "组织和人员基础模块",
-  "mainAssembly": "Acesoft.HR.dll",
+  "name": "HR",
+  "description": "人事管理",
+  "mainAssembly": "Acesoft.Web.HR.dll",
   "category": "application",
-  "version": "v1.0.1",
-  "dependencies": [ "passport", "users" ]
+  "version": "v1.0.0",
+  "dependencies": []
 }

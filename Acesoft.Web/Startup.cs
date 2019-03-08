@@ -5,9 +5,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Acesoft.Data;
 using Acesoft.Web.DataAccess;
-using Acesoft.Web.Database;
 
 namespace Acesoft.Web
 {
@@ -15,10 +13,13 @@ namespace Acesoft.Web
     {
         public override void ConfigureServices(IServiceCollection services)
         {
+            // add app global config. WebHostBuilder extension to add.
+            //services.AddAppConfig();
+
+            // add data access for every Tenant.
             services.AddDataAccess();
 
             services.AddSingleton<IApplicationContext, ApplicationContext>();
-            services.AddSingleton<ISchemaStore, SchemaStore>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)

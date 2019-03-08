@@ -1,0 +1,39 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "智能云平台";
+    Ace.RenderAuthOptions = true;
+    var sign = Ace.AC.Logined ? "AX.enter()" : "AX.login()";
+}
+<div class="header">
+    <div class="container">
+        <div class="col-md-2">
+            <a class="logo" href="/">AceCloud</a>
+        </div>
+        <div class="col-md-7">
+            <ul class="head-nav">
+                <li>
+                    <a href="#">首页</a>
+                </li>
+                <li>
+                    <a href="#">产品</a>
+                </li>
+                <li>
+                    <a href="#">解决方案</a>
+                </li>
+                <li>
+                    <a href="#">开放服务</a>
+                </li>
+                <li>
+                    <a href="#">关于我们</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <div class="head-link">
+                <a class="btn cr-green" href="javascript:;" onclick="@sign">登录平台</a>
+                <a class="btn btn-success" href="javascript:;">申请加入</a>
+            </div>
+        </div>
+    </div>
+</div>

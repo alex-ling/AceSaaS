@@ -1,0 +1,140 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "系统构建";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Region(Region.west).Border(false).Split().Width(250).MinWidth(200).MaxWidth(300).Controls(wst =>
+        {
+            Ace.Layout().AppendTo(wst).Fit().Items(lay =>
+            {
+                lay.Add().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Toolbar().AppendTo(ctls).Controls(c =>
+                    {
+                        Ace.Button().AppendTo(c).Title("添加").IconCls("fa fa-plus").Click("treeAdd()");
+                        Ace.Button().AppendTo(c).Title("编辑").IconCls("fa fa-edit").Click("treeEdit()");
+                        Ace.Button().AppendTo(c).Title("删除").IconCls("fa fa-remove").Click("treeDel()");
+                        Ace.Button().AppendTo(c).Title("构建").IconCls("fa fa-database").Click("onTable('create')");
+                        Ace.Button().AppendTo(c).Title("撤销").IconCls("fa fa-ban").Click("onTable('drop')");
+                    });
+                });
+                lay.Add().Css("oy").Region(Region.center).Controls(ctls =>
+                {
+                    Ace.Tree().AppendTo(ctls).Id("tree").Root("数据库").Edit("table")
+                        .DataSource("sys.table").Ajax(ds => ds.HttpGet())
+                        .Events(e => e.OnSelect("onSelect"));
+                });
+            });
+        });
+
+        layout.Add().Region(Region.center).Border(false).Controls(cnt =>
+        {
+            Ace.Layout().AppendTo(cnt).Fit().Items(lay =>
+            {
+                lay.Add().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+                    {
+                        Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+                    })
+                    .Tools(tools =>
+                    {
+                        Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("gridAdd()");
+                        Ace.Button().AppendTo(tools).Text("构建").IconCls("fa fa-database").Click("onFields('create','')");
+                        Ace.Button().AppendTo(tools).Text("撤销").IconCls("fa fa-ban").Click("onFields('drop','')");
+                        Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+                    });
+                });
+                lay.Add().Border(false).Region(Region.center).Controls(ctls =>
+                {
+                    Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination().PageSize(50).Edit("field")
+                    .DataSource("sys.field").Ajax(ds => ds.HttpGet()).Columns(c =>
+                    {
+                        c.Add().Field("field").Title("字段").Width(10);
+                        c.Add().Field("name").Title("名称").Width(10);
+                        c.Add().Field("type").Title("类型");
+                        c.Add().Field("remark").Title("备注").Width(20);
+                        c.Add().Field("ref").Title("字典/引用").Width(10);
+                        c.Add().Field("length").Title("长度");
+                        //c.Add().Field("defval").Title("唯一键");
+                        c.Add().Field("isnull").Title("可空").Format("bool");
+                        c.Add().Field("created").Title("构建").Format("bool");
+                        c.Add().Field("orderno").Title("排序");
+                        c.Add().Field("action").Title("操作").Format("button");
+                    });
+                });
+            });
+        });
+    }).Render();
+}
+<script>
+    function onSelect(node) {
+        var level = $('#tree').tree('getLevel', node.target);
+        if (level == 3) $('#grid').datagrid('load', { _table: node.id });
+    }
+    function treeAdd() {
+        var level = $('#tree').tree('getLevel');
+        if (level == 1) AX.treeAdd('#tree', 1, 'schema');
+        else if (level == 2) AX.treeAdd('#tree', 2, 'table');
+        else $.messager.error({ msg: '选择根或分类节点进行【添加】！' });
+    }
+    function treeEdit() {
+        var level = $('#tree').tree('getLevel');
+        if (level == 1) $.messager.error({ msg: '根节点不能进行【编辑】！' });
+        else if (level == 2) AX.treeEdit('#tree', 2, 'schema');
+        else AX.treeEdit('#tree', 3, 'table');
+    }
+    function treeDel() {
+        var level = $('#tree').tree('getLevel');
+        if (level == 1) $.messager.error({ msg: '根节点不能进行【删除】！' });
+        else if (level == 2) AX.treeDel('#tree', 0, 'sys.schema');
+        else {
+            var node = $('#tree').tree('getSelected');
+            if (node.iconCls != 'icon-ok') {
+                AX.treeDel('#tree', 0);
+            }
+            else {
+                $.messager.error({ msg: '已构建表不能进行【删除】！' });
+            }
+        }
+    }
+    function gridAdd() {
+        var id = $('#tree').tree('getSelectedId', { level: 3 });
+        if (id != '') AX.gridAdd('#grid', AX.format('tableid={0}', id));
+    }
+    function onTable(action) {
+        var id = $('#tree').tree('getSelectedId', { level: 3 });
+        if (id == null) return;
+        AX.ajax({
+            type: 'get',
+            url: AX.format('{0}api/schema/{1}table/{2}', AX.opts.root, action, id),
+            cb: function () {
+                $('#tree').tree('reload');
+                $.messager.info({ msg: action == 'create' ? '构建成功！' : '撤销成功!' });
+            }
+        });
+    }
+    function onFields(action, ids) {
+        if (ids == '') ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
+        var id = $('#tree').tree('getSelectedId', { level: 3 });
+        if (id == null) return;
+        AX.ajax({
+            type: 'get',
+            url: AX.format('{0}api/schema/{1}fields/{2}?fields={3}', AX.opts.root, action, id, ids),
+            cb: function () {
+                $('#grid').datagrid('reload');
+                $.messager.info({ msg: action == 'create' ? '构建成功！' : '撤销成功!' });
+            }
+        });
+    }
+    function event_grid_gj(cid, id) {
+        onFields('create', id);
+    }
+    function event_grid_cx(cid, id) {
+        onFields('drop', id);
+    }
+</script>

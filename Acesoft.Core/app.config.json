@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "oauth.enabled": false,
+    "oauth.certpath": "config/acecms.pfx",
+    "oauth.certpwd": "123456",
+    "oauth.server": "http://yun.holtop.com.cn/",
+    "oauth.https": false,
+    "oauth.client": "aceclient",
+    "oauth.secret": "Us1e3cv5rsMet4pv",
+    "oauth.apiscope": "api",
+
+    "auth.loginurl": "/plat/account/login",
+    "auth.logouturl": "/plat/account/logout",
+    "auth.denyurl": "/plat/account/deny"
+  }
+}

@@ -1,0 +1,38 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "概述";
+    Layout = "_shared/bodyct";
+}
+<div class="alert alert-info">请认真阅读以下信息，按照操作说明进行数据维护和管理！</div>
+<div class="container-fluid">
+    <div class="pt20 pb10 bd-b-dashed">操作说明</div>
+    <ul class="pt5" style="list-style:decimal;padding-left:2em">
+        <li class="pt10">
+            <b>设备入库</b>
+            <div class="pt10 pb10 lh25">
+                所有设备经由生产下线后，必须先在云平台进行入库登记，方可连接云平台网关；<br/>
+                提供单个入库和批量入库操作，入库时须提供MAC地址，指定设备编号生成方式；<br />
+                设备入库后，可打印二维码或批量导出，二维码非客户端扫描为下载App，客户端扫描为绑定设备。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>设备库存</b>
+            <div class="pt10 pb10 lh25">
+                根据设备状态进行汇总和统计。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>设备在线</b>
+            <div class="pt10 pb10 lh25">
+                跟踪设备基本信息（包括激活时间，安装位置等信息）、在线状态（包含操控状态和传感器数据），在线远程操控设备。
+            </div>
+        </li>
+        <li class="pt10">
+            <b>设备分布</b>
+            <div class="pt10 pb10 lh25">
+                按设备激活地区进行统计分析，可导出统计图。
+            </div>
+        </li>
+    </ul>
+</div>

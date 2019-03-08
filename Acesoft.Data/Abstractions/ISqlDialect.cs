@@ -32,7 +32,7 @@ namespace Acesoft.Data
         void Concat(StringBuilder builder, params Action<StringBuilder>[] generators);
         string DefaultValuesInsert { get; }
         void Page(ISqlBuilder sqlBuilder, string offset, string limit);
-        ISqlBuilder CreateBuilder(string tablePrefix);
+        ISqlBuilder CreateBuilder(string tablePrefix = "");
         string RenderMethod(string name, params string[] args);
     }
 }

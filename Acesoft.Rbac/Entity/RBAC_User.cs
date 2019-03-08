@@ -18,7 +18,7 @@ namespace Acesoft.Rbac.Entity
         internal IList<Rbac_Auth> Rbac_Auths;
 
         public long Scale_Id { get; set; }
-        public long? ClientId { get; set; }
+        public long? Client_Id { get; set; }
 
         public string LoginName { get; set; }
         public string NickName { get; set; }

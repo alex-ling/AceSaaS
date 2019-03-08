@@ -26,7 +26,10 @@ namespace Acesoft.Data.SqlMapper
             MappedScopes = new Dictionary<string, SqlScope>();
 
             // 先执行scope和sqlmap初始化，再初始化缓存
-            Initalize(directories);
+            if (directories != null)
+            {
+                Initalize(directories);
+            }
             CacheManager = new CacheManager(this);
         }
 

@@ -1,18 +1,14 @@
 {
   "defaultTenant": "default",
+  "unresolvedRedirect": "",
+  "RedirectPermanent": false,
   "tenants": [
     {
-      "name": "saas",
-      "hostnames": [
-        "localhost:54321",
-        "localhost/saas",
-        "localhost/admin"
-      ],
-      "plugins": [
-        "admin",
-        "platform"
-      ],
-      "theme": "default"
+      "name": "default",
+      "hostnames": [ "localhost:5000" ],
+      "indexpage": "plat/index",
+      "modules": [ "plat", "cms", "hr", "iot", "shop", "wechat" ],
+      "theme": ""
     }
   ]
 }

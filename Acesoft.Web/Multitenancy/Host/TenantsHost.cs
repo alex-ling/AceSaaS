@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Acesoft.Web.Modules;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -15,15 +15,18 @@ namespace Acesoft.Web.Multitenancy
         private readonly static object syncLock = new object();
         private readonly TenantsConfig tenantsConfig;
         private readonly ITenantContainerFactory tenantContainerFactory;
+        private readonly IModulesHost modulesHost;
 
         private ConcurrentDictionary<string, TenantContext> contexts;
 
         public TenantsHost(IOptions<TenantsConfig> tenantsOption,
             ITenantContainerFactory factory,
+            IModulesHost modulesHost,
             ILogger<TenantsHost> logger)
         {
             tenantsConfig = tenantsOption.Value;
             tenantContainerFactory = factory;
+            this.modulesHost = modulesHost;
             this.logger = logger;
         }
 
@@ -35,8 +38,9 @@ namespace Acesoft.Web.Multitenancy
                 {
                     if (contexts == null)
                     {
-                        logger.LogDebug("Starting initialize TenantsHost from config.");
+                        this.modulesHost.Initialize();
 
+                        logger.LogDebug("Starting initialize TenantsHost from config.");
                         contexts = new ConcurrentDictionary<string, TenantContext>();
                         CreateAndLoadTenants();
                     }

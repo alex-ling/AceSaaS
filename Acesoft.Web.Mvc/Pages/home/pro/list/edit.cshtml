@@ -1,0 +1,52 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    var isEdit = false;
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("iot.product").Form(new {
+        class_id = App.GetQuery("classid", ""),
+        cpno = "",
+        name = "",
+        cpxh = "",
+        cpzp = "",
+        remark = ""
+    }).HttpSave()).Do(x => isEdit = x.Component.DataSource.IsEdit).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 产品编号：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("cpno").Width("100%").Required().ValidType("length[4,4]")</div>
+                <div class="col-xs-4"><span class="text-warning">前2位为产品分类编号</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 产品名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 产品型号：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("cpxh").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+@section startup {
+    <script>
+        $(function () {
+            if (!@isEdit.ToString().ToLower()) {
+                $('#cpno').textbox('setValue', AX.query('flno'));
+            }
+            $('#cpno').textbox('textbox').keyup(function () {
+                $('#cpno').textbox('setValue', this.value.replace(/[^\w]/g, '').toUpperCase());
+            });
+        });
+    </script>
+}

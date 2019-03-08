@@ -1,0 +1,50 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信小程序";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").Button(false).Controls(query =>
+            {
+                query.Add(Html.Raw("<span class=\"text-warning\">在此记录微信小程序发版，发布版本需要提交微信开发平台，客户端无需提示更新版本！</span>"));
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("发布新版本").IconCls("fa fa-plus").Click("gridAdd()");
+            });
+        });
+        layout.Add().Border().Region(Region.west).Width(200).Controls(ctls =>
+        {
+            Ace.Tree().AppendTo(ctls).Id("tree").Root("应用列表")
+                .DataSource("sys.client").Ajax(ds => ds.HttpGet())
+                .Events(e => e.OnSelect("onSelect"));
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false).CheckBox(false)
+            .DataSource("sys.version").Ajax(ds => ds.RouteValues(new { type = 4 }).HttpGet()).Columns(c =>
+            {
+                c.Add().Field("pubdate").Title("发布日期").Format("date:yyyy-MM-dd").Width(5);
+                c.Add().Field("version").Title("版本号").Width(5);
+                c.Add().Field("changelog").Title("更新内容").Width(15);
+                c.Add().Field("url").Title("发行包").Width(10);
+                c.Add().Field("force").Title("强制升级").Format("bool");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onSelect(node) {
+        var level = $('#tree').tree('getLevel', node.target);
+        if (level == 2) $('#grid').datagrid('load', { _clientid: node.id });
+    }
+    function gridAdd() {
+        var node = $('#tree').tree('getLevel', 2);
+        if (node != null) AX.gridAdd('#grid', AX.format('clientid={0}', node.id));
+    }
+</script>

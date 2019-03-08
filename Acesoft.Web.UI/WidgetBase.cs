@@ -1,12 +1,12 @@
-using Acesoft.Web.UI.Html;
-using Acesoft.Web.UI.Script;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
+
+using Acesoft.Web.UI.Html;
+using Acesoft.Web.UI.Script;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace Acesoft.Web.UI
 {
@@ -126,7 +126,7 @@ namespace Acesoft.Web.UI
 
 		public virtual void WriteInitScript(TextWriter writer)
 		{
-			IDictionary<string, object> options = HtmlBuilder.BuildOptions();
+			var options = HtmlBuilder.BuildOptions();
 			writer.Write(Serializer.InitializeFor(Id, Widget, options));
 		}
 	}

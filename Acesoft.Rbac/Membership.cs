@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 
 namespace Acesoft.Rbac
 {
     public class Membership
     {
+        public const string Auth_Multis = "Cookie,Bearer,Wechat";
         public const string Auth_Cookie = "Cookie";
         public const string AUth_WeChat = "Wechat";
         public const string Auth_Bearer = "Bearer";
+        public const string Auth_OpenID = "OpenID";
+        public const long Default_ScaleId = 967167765444034560L;
 
+        #region ticket
         public static AuthenticationTicket AuthenticationTicket(
             string userHashId, bool isPersistent, string authenticationSchema = Auth_Cookie)
         {
@@ -30,7 +35,9 @@ namespace Acesoft.Rbac
                 new AuthenticationProperties { IsPersistent = isPersistent }, 
                 authenticationSchema);
         }
+        #endregion
 
+        #region params
         public static object GetParams()
         {
             var ac = App.Context.RequestServices.GetService<IAccessControl>();
@@ -46,5 +53,6 @@ namespace Acesoft.Rbac
                 roleids = ac.Roles
             };
         }
+        #endregion
     }
 }

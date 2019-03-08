@@ -1,0 +1,994 @@
+2019-03-05 14:23:38.218 +08:00 [INF] Starting web host
+2019-03-05 14:23:38.765 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-05 14:23:39.248 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-05 14:23:39.260 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-03-05 14:23:39.260 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-03-05 14:23:39.263 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-03-05 14:23:39.263 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-03-05 14:23:40.507 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 14:23:40.568 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-05 14:23:40.664 +08:00 [DBG] Load Tenant with name "saas" successful.
+2019-03-05 14:23:40.664 +08:00 [DBG] Load Tenant with name "plat" successful.
+2019-03-05 14:23:40.664 +08:00 [DBG] Done initialize tentants.
+2019-03-05 14:23:40.664 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 14:23:40.672 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-05 14:23:40.674 +08:00 [DBG] Resolved Tenant "plat" with request: localhost:5000.
+2019-03-05 14:23:40.680 +08:00 [DBG] Tenant "plat" resolved. Caching with keys "localhost:5000,localhost:6000".
+2019-03-05 14:23:40.694 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 14:23:40.695 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 14:23:40.765 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 14:23:44.745 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 14:23:44.775 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 14:23:44.775 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 14:23:45.577 +08:00 [INF] Executed page /Index in 827.243ms
+2019-03-05 14:23:45.578 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 14:23:45.598 +08:00 [INF] Request finished in 5095.5892ms 200 text/html; charset=utf-8
+2019-03-05 14:23:52.545 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 14:23:52.545 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 14:23:52.545 +08:00 [DBG] Tenant "plat" retrieved from cache with key "localhost:5000".
+2019-03-05 14:23:52.545 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 14:23:52.545 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 14:23:52.546 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 14:23:52.547 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 14:23:52.548 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 14:23:52.548 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 14:23:52.556 +08:00 [INF] Executed page /Index in 7.9090000000000007ms
+2019-03-05 14:23:52.556 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 14:23:52.558 +08:00 [INF] Request finished in 12.8644ms 200 text/html; charset=utf-8
+2019-03-05 14:23:52.643 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 14:23:52.668 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 14:23:52.669 +08:00 [INF] Request finished in 26.1288ms 200 image/x-icon
+2019-03-05 14:23:53.762 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 14:23:53.763 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 14:23:53.763 +08:00 [DBG] Tenant "plat" retrieved from cache with key "localhost:5000".
+2019-03-05 14:23:53.763 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 14:23:53.763 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 14:23:53.763 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 14:23:53.763 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 14:23:53.763 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 14:23:53.763 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 14:23:53.764 +08:00 [INF] Executed page /Index in 1.2141ms
+2019-03-05 14:23:53.765 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 14:23:53.765 +08:00 [INF] Request finished in 2.4521ms 200 text/html; charset=utf-8
+2019-03-05 14:23:53.892 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 14:23:53.921 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 14:23:53.924 +08:00 [INF] Request finished in 31.5708ms 200 image/x-icon
+2019-03-05 14:23:54.524 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 14:23:54.524 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 14:23:54.524 +08:00 [DBG] Tenant "plat" retrieved from cache with key "localhost:5000".
+2019-03-05 14:23:54.524 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 14:23:54.524 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 14:23:54.524 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 14:23:54.524 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 14:23:54.525 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 14:23:54.525 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 14:23:54.527 +08:00 [INF] Executed page /Index in 1.4709ms
+2019-03-05 14:23:54.527 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 14:23:54.527 +08:00 [INF] Request finished in 2.7381ms 200 text/html; charset=utf-8
+2019-03-05 14:23:54.637 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 14:23:54.638 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 14:23:54.639 +08:00 [INF] Request finished in 1.655ms 200 image/x-icon
+2019-03-05 14:23:55.380 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 14:23:55.380 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 14:23:55.380 +08:00 [DBG] Tenant "plat" retrieved from cache with key "localhost:5000".
+2019-03-05 14:23:55.380 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 14:23:55.380 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 14:23:55.380 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 14:23:55.380 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 14:23:55.380 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 14:23:55.380 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 14:23:55.383 +08:00 [INF] Executed page /Index in 2.1734ms
+2019-03-05 14:23:55.383 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 14:23:55.383 +08:00 [INF] Request finished in 3.1124ms 200 text/html; charset=utf-8
+2019-03-05 14:23:55.500 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 14:23:55.505 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 14:23:55.506 +08:00 [INF] Request finished in 5.9891ms 200 image/x-icon
+2019-03-05 14:25:01.137 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 14:25:01.137 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 14:25:01.137 +08:00 [DBG] Tenant "plat" retrieved from cache with key "localhost:5000".
+2019-03-05 14:25:01.137 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 14:25:01.137 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 14:25:01.137 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 14:25:01.137 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 14:25:01.138 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 14:25:01.138 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 14:25:01.138 +08:00 [INF] Executed page /Index in 0.6685ms
+2019-03-05 14:25:01.138 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 14:25:01.138 +08:00 [INF] Request finished in 1.1571ms 200 text/html; charset=utf-8
+2019-03-05 16:39:24.555 +08:00 [INF] Starting web host
+2019-03-05 16:39:25.251 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-05 16:39:25.896 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-05 16:39:25.912 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-03-05 16:39:25.912 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-03-05 16:39:25.921 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-03-05 16:39:25.921 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-03-05 16:39:27.219 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 16:39:27.266 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-05 16:39:27.391 +08:00 [DBG] Load Tenant with name "saas" successful.
+2019-03-05 16:39:27.391 +08:00 [DBG] Load Tenant with name "plat" successful.
+2019-03-05 16:39:27.391 +08:00 [DBG] Done initialize tentants.
+2019-03-05 16:39:27.391 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 16:39:27.397 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-05 16:39:27.400 +08:00 [DBG] Resolved Tenant "plat" with request: localhost:5000.
+2019-03-05 16:39:27.403 +08:00 [DBG] Tenant "plat" resolved. Caching with keys "localhost:5000,localhost:6000".
+2019-03-05 16:39:27.415 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 16:39:27.417 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 16:39:27.478 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 16:39:31.474 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 16:39:31.506 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 16:39:31.506 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 16:39:32.571 +08:00 [INF] Executed page /Index in 1087.476ms
+2019-03-05 16:39:32.571 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 16:39:32.596 +08:00 [INF] Request finished in 5382.0381ms 200 text/html; charset=utf-8
+2019-03-05 16:40:46.132 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 16:40:46.132 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 16:40:46.132 +08:00 [DBG] Tenant "plat" retrieved from cache with key "localhost:5000".
+2019-03-05 16:40:46.132 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 16:40:46.132 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 16:40:46.132 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 16:40:46.133 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 16:40:46.134 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 16:40:46.134 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 16:40:46.142 +08:00 [INF] Executed page /Index in 7.5041ms
+2019-03-05 16:40:46.143 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 16:40:46.143 +08:00 [INF] Request finished in 11.8431ms 200 text/html; charset=utf-8
+2019-03-05 16:40:46.201 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 16:40:46.220 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 16:40:46.220 +08:00 [INF] Request finished in 18.7883ms 200 image/x-icon
+2019-03-05 16:40:47.040 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 16:40:47.040 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 16:40:47.040 +08:00 [DBG] Tenant "plat" retrieved from cache with key "localhost:5000".
+2019-03-05 16:40:47.040 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 16:40:47.040 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 16:40:47.040 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-05 16:40:47.041 +08:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2019-03-05 16:40:47.041 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 16:40:47.041 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 16:40:47.043 +08:00 [INF] Executed page /Index in 2.0105ms
+2019-03-05 16:40:47.043 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-05 16:40:47.043 +08:00 [INF] Request finished in 3.065ms 200 text/html; charset=utf-8
+2019-03-05 16:40:47.129 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 16:40:47.146 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 16:40:47.149 +08:00 [INF] Request finished in 20.626ms 200 image/x-icon
+2019-03-05 18:28:17.589 +08:00 [INF] Starting web host
+2019-03-05 18:28:17.852 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-05 18:28:19.318 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:28:19.385 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Release\netcoreapp2.2\Modules.
+2019-03-05 18:28:19.385 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-05 18:28:19.468 +08:00 [DBG] Load Tenant with name "default" successful.
+2019-03-05 18:28:19.468 +08:00 [DBG] Done initialize tentants.
+2019-03-05 18:28:19.468 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:28:19.478 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-05 18:28:19.483 +08:00 [DBG] Resolved Tenant "default" with request: localhost:5000.
+2019-03-05 18:28:19.487 +08:00 [DBG] Tenant "default" resolved. Caching with keys "localhost:5000,localhost:5001".
+2019-03-05 18:28:19.498 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:28:19.499 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:28:19.570 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:28:21.264 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:28:21.265 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationFailedException: One or more compilation failures occurred:
+wbl22icp.dy0(224,16): error CS0246: The type or namespace name 'Tenant' could not be found (are you missing a using directive or an assembly reference?)
+D:\acecms\src\Acesoft.Web.Mvc\Pages\index.cshtml(12,23): error CS1061: 'Tenant' does not contain a definition for 'Name' and no extension method 'Name' accepting a first argument of type 'Tenant' could be found (are you missing a using directive or an assembly reference?)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(RazorCodeDocument codeDocument, String generatedCode)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(String relativePath)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.OnCacheMiss(String normalizedPath)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.DefaultPageLoader.Load(PageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionInvokerFactory.CreateInvoker(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Internal.MvcEndpointDataSource.<>c__DisplayClass21_0.<CreateEndpoint>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:28:21.284 +08:00 [INF] Request finished in 1968.8625ms 500 text/html; charset=utf-8
+2019-03-05 18:30:22.852 +08:00 [INF] Starting web host
+2019-03-05 18:30:23.259 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-05 18:30:24.696 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:30:24.756 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-05 18:30:24.765 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-03-05 18:30:24.766 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-03-05 18:30:24.769 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-03-05 18:30:24.770 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-03-05 18:30:24.771 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-05 18:30:24.868 +08:00 [DBG] Load Tenant with name "default" successful.
+2019-03-05 18:30:24.868 +08:00 [DBG] Done initialize tentants.
+2019-03-05 18:30:24.869 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:30:24.879 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-05 18:30:24.882 +08:00 [DBG] Resolved Tenant "default" with request: localhost:5000.
+2019-03-05 18:30:24.885 +08:00 [DBG] Tenant "default" resolved. Caching with keys "localhost:5000,localhost:5001".
+2019-03-05 18:30:24.893 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:30:24.896 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:30:24.959 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:30:28.104 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:30:28.130 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:30:28.131 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:30:28.921 +08:00 [INF] Executed page /index in 812.412ms
+2019-03-05 18:30:28.921 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:30:28.927 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationFailedException: One or more compilation failures occurred:
+ow1aibti.5jz(172,96): error CS0234: The type or namespace name 'NetCore' does not exist in the namespace 'Acesoft' (are you missing an assembly reference?)
+ow1aibti.5jz(988,79): error CS0234: The type or namespace name 'NetCore' does not exist in the namespace 'Acesoft' (are you missing an assembly reference?)
+D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml(3,15): error CS0103: The name 'SysCfg' does not exist in the current context
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(RazorCodeDocument codeDocument, String generatedCode)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(String relativePath)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.OnCacheMiss(String normalizedPath)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.DefaultRazorPageFactoryProvider.CreateFactory(String relativePath)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine.CreateCacheResult(HashSet`1 expirationTokens, String relativePath, Boolean isMainPage)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine.OnCacheMiss(ViewLocationExpanderContext expanderContext, ViewLocationCacheKey cacheKey)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine.LocatePageFromViewLocations(ActionContext actionContext, String pageName, Boolean isMainPage)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine.FindPage(ActionContext context, String pageName)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.GetLayoutPage(ViewContext context, String executingFilePath, String layoutPath)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:30:29.035 +08:00 [INF] Request finished in 4343.5514ms 500 text/html; charset=utf-8
+2019-03-05 18:32:55.399 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:32:55.399 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:32:55.399 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:32:55.399 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:32:55.399 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:32:55.399 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:32:55.409 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:32:55.410 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:32:55.410 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:32:55.818 +08:00 [INF] Executed page /index in 409.1119ms
+2019-03-05 18:32:55.818 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:32:55.819 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'Acesoft.Web.Mvc.Pages.Pages_index', but this ViewDataDictionary instance requires a model item of type 'Acesoft.Web.UI.RazorPages.WebPageBase'.
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary.EnsureCompatible(Object value)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary..ctor(ViewDataDictionary source, Object model, Type declaredModelType)
+   at lambda_method(Closure , ViewDataDictionary )
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorPagePropertyActivator.CreateViewDataDictionary(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorPagePropertyActivator.Activate(Object page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPageActivator.Activate(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:32:55.928 +08:00 [INF] Request finished in 528.9378ms 500 text/html; charset=utf-8
+2019-03-05 18:32:55.993 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:32:56.009 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:32:56.009 +08:00 [INF] Request finished in 15.9539ms 200 image/x-icon
+2019-03-05 18:36:58.390 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:36:58.391 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:36:58.391 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:36:58.391 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:36:58.391 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:36:58.391 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:36:58.716 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:36:58.746 +08:00 [INF] Authorization failed.
+2019-03-05 18:36:58.752 +08:00 [INF] Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+2019-03-05 18:36:58.765 +08:00 [INF] Executing ChallengeResult with authentication schemes ([]).
+2019-03-05 18:36:58.773 +08:00 [INF] Executed page /index in 56.3782ms
+2019-03-05 18:36:58.773 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:36:58.773 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: No authenticationScheme was specified, and there was no DefaultChallengeScheme found.
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ChallengeResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAlwaysRunResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:36:58.805 +08:00 [INF] Request finished in 414.6769ms 500 text/html; charset=utf-8
+2019-03-05 18:36:58.889 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:36:58.909 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:36:58.915 +08:00 [INF] Request finished in 25.7319ms 200 image/x-icon
+2019-03-05 18:37:24.791 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:37:24.792 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:37:24.792 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:37:24.792 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:37:24.792 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:37:24.792 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:37:25.000 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:37:25.001 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:37:25.002 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:37:25.025 +08:00 [INF] Executed page /index in 25.6404ms
+2019-03-05 18:37:25.025 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:37:25.026 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 32
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:37:25.125 +08:00 [INF] Request finished in 333.453ms 500 text/html; charset=utf-8
+2019-03-05 18:37:25.184 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:37:25.190 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:37:25.190 +08:00 [INF] Request finished in 6.1083ms 200 image/x-icon
+2019-03-05 18:37:29.643 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:37:29.643 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:37:29.643 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:37:29.643 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:37:29.643 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:37:29.643 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:37:29.643 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:37:29.643 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:37:29.643 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:37:29.650 +08:00 [INF] Executed page /index in 6.7493000000000007ms
+2019-03-05 18:37:29.650 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:37:29.651 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 32
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:37:29.751 +08:00 [INF] Request finished in 107.9608ms 500 text/html; charset=utf-8
+2019-03-05 18:37:29.832 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:37:29.833 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:37:29.833 +08:00 [INF] Request finished in 1.1309ms 200 image/x-icon
+2019-03-05 18:37:30.418 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:37:30.418 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:37:30.418 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:37:30.418 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:37:30.418 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:37:30.418 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:37:30.419 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:37:30.419 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:37:30.419 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:37:30.427 +08:00 [INF] Executed page /index in 7.8757ms
+2019-03-05 18:37:30.427 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:37:30.428 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ExpressionResolverBuilder.<>c__DisplayClass17_0.<Build>b__1(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 32
+   at lambda_method(Closure , ServiceProviderEngineScope )
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:37:30.535 +08:00 [INF] Request finished in 116.4519ms 500 text/html; charset=utf-8
+2019-03-05 18:37:30.612 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:37:30.613 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:37:30.613 +08:00 [INF] Request finished in 1.1973ms 200 image/x-icon
+2019-03-05 18:37:31.017 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:37:31.017 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:37:31.017 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:37:31.018 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:37:31.018 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:37:31.018 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:37:31.018 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:37:31.018 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:37:31.018 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:37:31.027 +08:00 [INF] Executed page /index in 4.5545ms
+2019-03-05 18:37:31.029 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:37:31.030 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ExpressionResolverBuilder.<>c__DisplayClass17_0.<Build>b__1(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 32
+   at lambda_method(Closure , ServiceProviderEngineScope )
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:37:31.129 +08:00 [INF] Request finished in 111.9789ms 500 text/html; charset=utf-8
+2019-03-05 18:37:31.229 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:37:31.230 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:37:31.231 +08:00 [INF] Request finished in 1.1716ms 200 image/x-icon
+2019-03-05 18:47:22.081 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:47:22.082 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:47:22.082 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:47:22.082 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:47:22.082 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:47:22.082 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:47:22.082 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:47:22.082 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:47:22.082 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:47:22.085 +08:00 [INF] Executed page /index in 3.3880000000000003ms
+2019-03-05 18:47:22.085 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:47:22.086 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ExpressionResolverBuilder.<>c__DisplayClass17_0.<Build>b__1(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 32
+   at lambda_method(Closure , ServiceProviderEngineScope )
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:47:22.175 +08:00 [INF] Request finished in 93.5855ms 500 text/html; charset=utf-8
+2019-03-05 18:47:22.250 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:47:22.251 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:47:22.252 +08:00 [INF] Request finished in 2.2289ms 200 image/x-icon
+2019-03-05 18:47:22.990 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:47:22.990 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:47:22.990 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:47:22.990 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:47:22.990 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:47:22.990 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:47:22.990 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:47:22.990 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:47:22.990 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:47:22.991 +08:00 [INF] Executed page /index in 1.0337ms
+2019-03-05 18:47:22.991 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:47:22.992 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ExpressionResolverBuilder.<>c__DisplayClass17_0.<Build>b__1(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 32
+   at lambda_method(Closure , ServiceProviderEngineScope )
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:47:23.077 +08:00 [INF] Request finished in 86.8117ms 500 text/html; charset=utf-8
+2019-03-05 18:47:23.143 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:47:23.144 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:47:23.144 +08:00 [INF] Request finished in 1.4331ms 200 image/x-icon
+2019-03-05 18:47:23.627 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:47:23.627 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:47:23.627 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:47:23.627 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:47:23.627 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:47:23.627 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:47:23.627 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:47:23.627 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:47:23.627 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:47:23.628 +08:00 [INF] Executed page /index in 0.9966ms
+2019-03-05 18:47:23.628 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:47:23.629 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ExpressionResolverBuilder.<>c__DisplayClass17_0.<Build>b__1(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 32
+   at lambda_method(Closure , ServiceProviderEngineScope )
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:47:23.737 +08:00 [INF] Request finished in 110.2455ms 500 text/html; charset=utf-8
+2019-03-05 18:47:23.806 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:47:23.807 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:47:23.808 +08:00 [INF] Request finished in 1.1929ms 200 image/x-icon
+2019-03-05 18:47:39.273 +08:00 [INF] Starting web host
+2019-03-05 18:47:39.526 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-05 18:47:40.529 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:47:40.586 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-05 18:47:40.597 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-03-05 18:47:40.597 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-03-05 18:47:40.599 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-03-05 18:47:40.599 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-03-05 18:47:40.600 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-05 18:47:40.685 +08:00 [DBG] Load Tenant with name "default" successful.
+2019-03-05 18:47:40.685 +08:00 [DBG] Done initialize tentants.
+2019-03-05 18:47:40.686 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:47:40.694 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-05 18:47:40.696 +08:00 [DBG] Resolved Tenant "default" with request: localhost:5000.
+2019-03-05 18:47:40.699 +08:00 [DBG] Tenant "default" resolved. Caching with keys "localhost:5000,localhost:5001".
+2019-03-05 18:47:40.708 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:47:40.709 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:47:40.773 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:47:43.446 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:47:43.475 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:47:43.476 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:47:44.110 +08:00 [DBG] Store has initlialized with database "default"
+2019-03-05 18:47:44.111 +08:00 [DBG] Open new session with database "default"
+2019-03-05 18:47:44.128 +08:00 [DBG] Get ISqlMapper for name: default
+2019-03-05 18:47:44.129 +08:00 [DBG] Initalize ISqlMapper for name: default
+2019-03-05 18:47:44.140 +08:00 [INF] Executed page /index in 687.2904ms
+2019-03-05 18:47:44.140 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:47:44.144 +08:00 [DBG] Dispose session with database "default"
+2019-03-05 18:47:44.151 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Data.SqlMapper.SqlMapper.Initalize(IList`1 directories) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 35
+   at Acesoft.Data.SqlMapper.SqlMapper..ctor(IList`1 directories) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 29
+   at Acesoft.Data.SqlMapper.MapperContainer.<>c__DisplayClass7_0.<GetSqlMapper>b__0(String key) in D:\acecms\src\Acesoft.Data.SqlMapper\MapperContainer.cs:line 37
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Acesoft.Data.SqlMapper.MapperContainer.GetSqlMapper(IStoreOption option) in D:\acecms\src\Acesoft.Data.SqlMapper\MapperContainer.cs:line 34
+   at Acesoft.Data.ISessionExtensions.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\ISessionExtensions.cs:line 67
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:47:44.313 +08:00 [INF] Request finished in 3796.8656ms 500 text/html; charset=utf-8
+2019-03-05 18:55:31.300 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:55:31.300 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:55:31.300 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 18:55:31.300 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:55:31.300 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:55:31.330 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:55:31.331 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:55:31.332 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:55:31.332 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:55:31.334 +08:00 [DBG] Open new session with database "default"
+2019-03-05 18:55:31.334 +08:00 [DBG] Get ISqlMapper for name: default
+2019-03-05 18:55:31.334 +08:00 [DBG] Initalize ISqlMapper for name: default
+2019-03-05 18:55:50.451 +08:00 [INF] Executed page /index in 19119.6256ms
+2019-03-05 18:55:50.451 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:55:50.452 +08:00 [DBG] Dispose session with database "default"
+2019-03-05 18:55:50.452 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Data.SqlMapper.SqlMapper.Initalize(IList`1 directories) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 35
+   at Acesoft.Data.SqlMapper.SqlMapper..ctor(IList`1 directories) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 29
+   at Acesoft.Data.SqlMapper.MapperContainer.<>c__DisplayClass7_0.<GetSqlMapper>b__0(String key) in D:\acecms\src\Acesoft.Data.SqlMapper\MapperContainer.cs:line 37
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Acesoft.Data.SqlMapper.MapperContainer.GetSqlMapper(IStoreOption option) in D:\acecms\src\Acesoft.Data.SqlMapper\MapperContainer.cs:line 34
+   at Acesoft.Data.ISessionExtensions.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\ISessionExtensions.cs:line 67
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:55:50.527 +08:00 [INF] Request finished in 19227.3333ms 500 text/html; charset=utf-8
+2019-03-05 18:55:50.594 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 18:55:50.641 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 18:55:50.645 +08:00 [INF] Request finished in 50.8279ms 200 image/x-icon
+2019-03-05 18:57:25.451 +08:00 [INF] Starting web host
+2019-03-05 18:57:25.710 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-05 18:57:27.083 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 18:57:27.127 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-05 18:57:27.134 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-03-05 18:57:27.134 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-03-05 18:57:27.138 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-03-05 18:57:27.138 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-03-05 18:57:27.139 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-05 18:57:27.205 +08:00 [DBG] Load Tenant with name "default" successful.
+2019-03-05 18:57:27.205 +08:00 [DBG] Done initialize tentants.
+2019-03-05 18:57:27.205 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 18:57:27.211 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-05 18:57:27.213 +08:00 [DBG] Resolved Tenant "default" with request: localhost:5000.
+2019-03-05 18:57:27.214 +08:00 [DBG] Tenant "default" resolved. Caching with keys "localhost:5000,localhost:5001".
+2019-03-05 18:57:27.220 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 18:57:27.221 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 18:57:27.270 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 18:57:29.384 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 18:57:29.399 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 18:57:29.399 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 18:57:29.898 +08:00 [DBG] Store has initlialized with database "default"
+2019-03-05 18:57:29.898 +08:00 [DBG] Open new session with database "default"
+2019-03-05 18:57:29.906 +08:00 [DBG] Get ISqlMapper for name: default
+2019-03-05 18:57:29.906 +08:00 [DBG] Initalize ISqlMapper for name: default
+2019-03-05 18:57:29.910 +08:00 [DBG] CacheManager load FlushSqlMaps!
+2019-03-05 18:57:29.915 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-03-05 18:57:29.921 +08:00 [INF] Executed page /index in 532.9607ms
+2019-03-05 18:57:29.922 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 18:57:29.924 +08:00 [DBG] Dispose session with database "default"
+2019-03-05 18:57:29.930 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Acesoft.AceException: SqlMapper can't find Scope: sys
+   at Acesoft.Data.SqlMapper.SqlMapper.GetSqlMap(RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 82
+   at Acesoft.Data.SqlMapper.SqlMapper.DoRequest[T](ISession s, RequestContext ctx, Func`2 func) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 96
+   at Acesoft.Data.SqlMapper.SqlMapper.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 306
+   at Acesoft.Data.ISessionExtensions.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\ISessionExtensions.cs:line 68
+   at Acesoft.Platform.Services.ConfigService.GetItems(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-05 18:57:30.050 +08:00 [INF] Request finished in 2970.2804ms 500 text/html; charset=utf-8
+2019-03-05 19:00:12.383 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 19:00:12.383 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 19:00:12.383 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 19:00:12.383 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 19:00:12.383 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 19:00:12.383 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 19:00:12.389 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 19:00:12.390 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 19:00:12.390 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 19:00:12.798 +08:00 [INF] Executed page /index in 408.64270000000005ms
+2019-03-05 19:00:12.798 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 19:00:12.800 +08:00 [INF] Request finished in 417.2151ms 200 text/html; charset=utf-8
+2019-03-05 19:00:12.831 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/font-awesome/css/font-awesome.css  
+2019-03-05 19:00:12.838 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/bootstrap/dist/css/bootstrap.css  
+2019-03-05 19:00:12.838 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/content/site.css  
+2019-03-05 19:00:12.839 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/easyui/themes/default/easyui.css  
+2019-03-05 19:00:12.875 +08:00 [INF] Sending file. Request path: '/content/site.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\content\site.css'
+2019-03-05 19:00:12.876 +08:00 [INF] Sending file. Request path: '/scripts/font-awesome/css/font-awesome.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\font-awesome\css\font-awesome.css'
+2019-03-05 19:00:12.879 +08:00 [INF] Request finished in 40.0899ms 200 text/css
+2019-03-05 19:00:12.879 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/easyui/themes/icon.css  
+2019-03-05 19:00:12.879 +08:00 [INF] Request finished in 48.7244ms 200 text/css
+2019-03-05 19:00:12.879 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/ace/css/aceui.css  
+2019-03-05 19:00:12.882 +08:00 [INF] Sending file. Request path: '/scripts/ace/css/aceui.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\ace\css\aceui.css'
+2019-03-05 19:00:12.882 +08:00 [INF] Sending file. Request path: '/scripts/easyui/themes/icon.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\easyui\themes\icon.css'
+2019-03-05 19:00:12.883 +08:00 [INF] Request finished in 3.6176ms 200 text/css
+2019-03-05 19:00:12.883 +08:00 [INF] Request finished in 3.2195ms 200 text/css
+2019-03-05 19:00:12.886 +08:00 [INF] Sending file. Request path: '/scripts/easyui/themes/default/easyui.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\easyui\themes\default\easyui.css'
+2019-03-05 19:00:12.886 +08:00 [INF] Request finished in 47.5475ms 200 text/css
+2019-03-05 19:00:12.888 +08:00 [INF] Sending file. Request path: '/scripts/bootstrap/dist/css/bootstrap.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\bootstrap\dist\css\bootstrap.css'
+2019-03-05 19:00:12.889 +08:00 [INF] Request finished in 50.2907ms 200 text/css
+2019-03-05 19:00:12.901 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/content/front.css  
+2019-03-05 19:00:12.903 +08:00 [INF] Sending file. Request path: '/content/front.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\content\front.css'
+2019-03-05 19:00:12.903 +08:00 [INF] Request finished in 2.7142ms 200 text/css
+2019-03-05 19:00:12.904 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/bootstrap/dist/js/bootstrap.js  
+2019-03-05 19:00:12.903 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/jquery/dist/jquery.js  
+2019-03-05 19:00:12.908 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/easyui/jquery.easyui.min.js  
+2019-03-05 19:00:12.908 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/plupload/js/plupload.full.min.js  
+2019-03-05 19:00:12.918 +08:00 [INF] Sending file. Request path: '/scripts/bootstrap/dist/js/bootstrap.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\bootstrap\dist\js\bootstrap.js'
+2019-03-05 19:00:12.918 +08:00 [INF] Request finished in 14.1075ms 200 application/javascript
+2019-03-05 19:00:12.918 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/easyui/locale/easyui-lang-zh_cn.js  
+2019-03-05 19:00:12.922 +08:00 [INF] Sending file. Request path: '/scripts/easyui/locale/easyui-lang-zh_cn.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\easyui\locale\easyui-lang-zh_cn.js'
+2019-03-05 19:00:12.925 +08:00 [INF] Request finished in 6.9281ms 200 application/javascript
+2019-03-05 19:00:12.928 +08:00 [INF] Sending file. Request path: '/scripts/plupload/js/plupload.full.min.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\plupload\js\plupload.full.min.js'
+2019-03-05 19:00:12.928 +08:00 [INF] Request finished in 19.4866ms 200 application/javascript
+2019-03-05 19:00:12.930 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/ace/aceui.js  
+2019-03-05 19:00:12.929 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/ace/aceui-easyuiex.js  
+2019-03-05 19:00:12.932 +08:00 [INF] Sending file. Request path: '/scripts/ace/aceui-easyuiex.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\ace\aceui-easyuiex.js'
+2019-03-05 19:00:12.932 +08:00 [INF] Request finished in 2.6513ms 200 application/javascript
+2019-03-05 19:00:12.932 +08:00 [INF] Sending file. Request path: '/scripts/ace/aceui.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\ace\aceui.js'
+2019-03-05 19:00:12.932 +08:00 [INF] Request finished in 2.5187ms 200 application/javascript
+2019-03-05 19:00:12.933 +08:00 [INF] Sending file. Request path: '/scripts/jquery/dist/jquery.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\jquery\dist\jquery.js'
+2019-03-05 19:00:12.933 +08:00 [INF] Request finished in 31.398ms 200 application/javascript
+2019-03-05 19:00:12.934 +08:00 [INF] Sending file. Request path: '/scripts/easyui/jquery.easyui.min.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\easyui\jquery.easyui.min.js'
+2019-03-05 19:00:12.935 +08:00 [INF] Request finished in 26.9353ms 200 application/javascript
+2019-03-05 19:00:12.941 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/ace/aceui-upload.js  
+2019-03-05 19:00:12.944 +08:00 [INF] Sending file. Request path: '/scripts/ace/aceui-upload.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\ace\aceui-upload.js'
+2019-03-05 19:00:12.945 +08:00 [INF] Request finished in 3.5891ms 200 application/javascript
+2019-03-05 19:00:12.965 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts/ace/ace.js  
+2019-03-05 19:00:12.967 +08:00 [INF] Sending file. Request path: '/scripts/ace/ace.js'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\scripts\ace\ace.js'
+2019-03-05 19:00:12.968 +08:00 [INF] Request finished in 2.4623ms 200 application/javascript
+2019-03-05 19:00:13.253 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 19:00:13.254 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 19:00:13.254 +08:00 [INF] Request finished in 1.0165ms 200 image/x-icon
+2019-03-05 19:01:21.345 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-05 19:01:21.346 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-05 19:01:21.346 +08:00 [DBG] Tenant "default" retrieved from cache with key "localhost:5000".
+2019-03-05 19:01:21.346 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-05 19:01:21.346 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-05 19:01:21.346 +08:00 [INF] Executing endpoint 'Page: /index'
+2019-03-05 19:01:21.607 +08:00 [INF] Route matched with {page = "/index"}. Executing page /index
+2019-03-05 19:01:21.607 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-05 19:01:21.607 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-05 19:01:21.612 +08:00 [INF] Executed page /index in 5.4921000000000006ms
+2019-03-05 19:01:21.612 +08:00 [INF] Executed endpoint 'Page: /index'
+2019-03-05 19:01:21.612 +08:00 [INF] Request finished in 266.826ms 200 text/html; charset=utf-8
+2019-03-05 19:01:21.760 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico  
+2019-03-05 19:01:21.761 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-03-05 19:01:21.761 +08:00 [INF] Request finished in 1.473ms 200 image/x-icon

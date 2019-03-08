@@ -1,0 +1,66 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "设备用户";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("绑定用户").IconCls("fa fa-plus").Click("gridAdd()");
+            });
+        });
+        layout.Add().Border(false).Region(Region.west).Width(420).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("pgrid").AppendTo(ctls).Pagination().CheckBox(false)
+            .Events(e => e.OnSelect("onSelect"))
+            .DataSource("iot.devices").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("sbno").Title("设备编号").Width(5);
+                c.Add().Field("name").Title("设备名称").Width(5);
+                c.Add().Field("cpxh").Title("设备型号").Width(4);
+                c.Add().Field("usercnt").Title("关联用户数").Align(Align.center);
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false).CheckBox(false)
+            .DataSource("iot.userdevice").Delete("iot/deldeviceuser")
+            .Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("dcreate").Title("绑定时间").Format("date:yyyy-MM-dd").Width(4);
+                c.Add().Field("sfdq").Title("绑定地区").Width(5);
+                c.Add().Field("mobile").Title("用户手机").Width(5);
+                c.Add().Field("nickname").Title("用户昵称").Width(5);
+                c.Add().Field("write").Title("可操控").Format("bool");
+                c.Add().Field("owner").Title("拥有者").Format("bool");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onSelect(index, row) {
+        $('#grid').datagrid('load', { _sbno: row.sbno });
+    }
+    function gridAdd() {
+        var row = $('#pgrid').datagrid('getSelected');
+        if (row == null) {
+            $.messager.error({ msg: '请选择某一用户后再 [绑定设备] !' });
+        }
+        else {
+            AX.gridAdd('#grid', 'sbno=' + row.sbno);
+        }
+    }
+    function event_grid_iotdel(cid, id) {
+        var row = $('#grid').datagrid('getRow', id);
+        AX.gridDel('#grid', row.user_id + '&sbno=' + row.sbno);
+    }
+</script>

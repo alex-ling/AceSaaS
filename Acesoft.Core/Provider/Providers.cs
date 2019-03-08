@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Acesoft.Core.Provider
+namespace Acesoft.Core
 {
     public class ProviderContainer : IProviders
     {

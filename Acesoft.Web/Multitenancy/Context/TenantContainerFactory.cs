@@ -27,8 +27,6 @@ namespace Acesoft.Web.Multitenancy
             this.serviceProvider = serviceProvider;
             this.modulesHost = modulesHost;
             this.logger = logger;
-
-            this.modulesHost.Initialize();
         }
 
         public IServiceProvider CreateContainer(Tenant tenant)

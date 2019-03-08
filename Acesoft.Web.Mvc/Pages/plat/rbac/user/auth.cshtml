@@ -1,0 +1,30 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "授权";
+
+    var userId = App.GetQuery("userid", "");
+    var scaleId = Ace.AC.User.Scale_Id;
+    Ace.Tree().Id("tree").CheckBox().OnlyLeafCheck(true).Root("角色列表").Ajax(ds => ds
+        .DataSource("rbac.roleuser_tree")
+        .RouteValue("userid", userId)
+        .RouteValue("scaleid", scaleId)
+        .HttpGet()
+    ).Render();
+}
+<script>
+    function onSubmit(cb) {
+        var ids = $('#tree').tree('getCheckedId');
+        if (ids == '') return;
+        AX.ajax({
+            url: AX.api({
+                api: 'auth/postua',
+                q: 'userid=@(userId)'
+            }),
+            type: 'post',
+            data: { roles: ids },
+            cb: cb
+        });
+    }
+</script>

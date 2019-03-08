@@ -1,0 +1,115 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信菜单";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.ComboBox().Id("appid").AppendTo(query).Label("公众号：").Width("220px")
+                    .Ajax(ds => ds.DataSource("wx.appgzh_list").Events(e => e.OnLoadSuccess("onAppLoad")).HttpGet())
+                    .Events(e => e.OnChange("onAppChange"));
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("　关键字：");
+            })
+            .Tools(tools =>
+            {
+                //Ace.Button().AppendTo(tools).Text("菜单查看").IconCls("fa fa-eye").Click("onMenuView()");
+                Ace.Button().AppendTo(tools).Text("菜单上传").IconCls("fa fa-upload").Click("onMenuUpload()");
+                Ace.Button().AppendTo(tools).Text("菜单删除").IconCls("fa fa-remove").Click("onMenuDelete()");
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("onGridAdd()");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.TreeGrid().Id("grid").TreeField("name").AppendTo(ctls).Pagination(false)
+            .DataSource("wx.menu").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("name").Title("菜单名称").Width(6);
+                c.Add().Field("type_name").Title("菜单类型").Width(5);
+                c.Add().Field("value").Title("菜单URL").Width(15);
+                c.Add().Field("remark").Title("备注").Width(10);
+                c.Add().Field("orderno").Title("排序");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function getAppId() {
+        var appid = $('#appid').combobox('getValue');
+        if (appid == '') {
+            $.messager.error({ msg: '请选择左侧某一公众号！' });
+        }
+        return appid;
+    }
+    function onMenuView() {
+        var appid = getAppId();
+        if (appid != '') {
+            AX.ajax({
+                url: AX.api({
+                    api: 'wechat/getmenu',
+                    q: 'appid=' + appid
+                }),
+                type: 'get',
+                cb: function (res) {
+                    $.messager.alert('提示', JSON.stringify(res.value.menu), 'info');
+                }
+            });
+        }
+    }
+    function onMenuUpload() {
+        var appid = getAppId();
+        if (appid != '') {
+            AX.ajax({
+                url: AX.api({
+                    api: 'wechat/createmenu',
+                    q: 'appid=' + appid
+                }),
+                type: 'get',
+                cb: function (res) {
+                    AX.ok(res.value.errcode + ': ' + res.value.errmsg);
+                }
+            });
+        }
+    }
+    function onMenuDelete() {
+        var appid = getAppId();
+        if (appid != '') {
+            AX.ajax({
+                url: AX.api({
+                    api: 'wechat/delmenu',
+                    q: 'appid=' + appid
+                }),
+                type: 'delete',
+                cb: function (res) {
+                    AX.ok(res.value.errcode + ': ' + res.value.errmsg);
+                }
+            });
+        }
+    }
+    function onAppLoad() {
+        $('#appid').combobox('setIndex', 0);
+    }
+    function onAppChange(val) {
+        $('#grid').treegrid('load', { _appid: val });
+    }
+    function onGridAdd() {
+        var appid = getAppId();
+        if (appid != '') {
+            AX.gridAdd('#grid', 'appid=' + appid);
+        }
+    }
+    function event_grid_add(cid, id) {
+        var row = $('#grid').treegrid('getRow', id);
+        AX.gridAdd(cid, 'appid=' + row.app_id + '&parentid=' + id);
+    }
+    function event_grid_ed(cid, id) {
+        var row = $('#grid').treegrid('getRow', id);
+        AX.gridEdit(cid, id + '&appid=' + row.app_id);
+    }
+</script>

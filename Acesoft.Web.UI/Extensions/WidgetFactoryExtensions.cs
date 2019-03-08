@@ -15,21 +15,21 @@ namespace Acesoft.Web.UI
 				sb.Append("<script>");
 			}
 
-            /*IDictionary<string, string> settings = ConfigFactory.GetConfig<AppConfig>().Settings;
-			string value = settings.GetValue("auth.loginurl", "/plat/account/login");
-			string value2 = settings.GetValue("auth.logouturl", "/plat/account/logout");
-			stringBuilder.Append("AX.init({root:'" + WebHelper.WebRoot(false) + "',path:'" + ace.Path + "',app:'" + ace.AppName + "'");
+            var settings = App.AppConfig.Settings;
+			var loginUrl = settings.GetValue("auth.loginurl", "/plat/account/login");
+			var logoutUrl = settings.GetValue("auth.logouturl", "/plat/account/logout");
+            var webRoot = App.GetWebRoot();
+
+			sb.Append($"AX.init({{root:'{webRoot}',path:'{ace.Path}',app:'{ace.AppName}'");
 			if (ace.RenderAuthOptions)
 			{
-				stringBuilder.Append(",loginUrl:'" + value + "',logoutUrl:'" + value2 + "'");
+				sb.Append($",loginUrl:'{loginUrl}',logoutUrl:'{logoutUrl}'");
 			}
-			stringBuilder.Append("});");*/
+			sb.Append("});");
 
-            var initScripts = App.Context.GetInitScripts();
-			if (initScripts.HasValue())
-			{
-				sb.Append(initScripts);
-			}
+            // append script init.
+			sb.Append(App.Context.GetInitScripts());
+
 			if (renderTags)
 			{
 				sb.Append("</script>");

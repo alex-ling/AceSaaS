@@ -1,0 +1,99 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "安全设置";
+    Layout = "_shared/front";
+
+    var ac = Membership.Current;
+}
+<div class="ct-title">
+    <h5 class="fl">安全设置</h5>
+</div>
+<div class="container-fluid ml15 mr15">
+    <div class="row pt20 pb20 bd-b-dashed">
+        <div class="col-md-2">
+            <img src="@WebHelper.WebPhoto(ac.User.Photo)" style="width:120px;height:120px" />
+        </div>
+        <div class="col-md-10 lh30">
+            <p><span>登录帐号： </span><span>@ac.User.LoginName</span></p>
+            <p><span>帐号ＩＤ： </span><span>@ac.User.Id</span></p>
+            <p class="cr-9"><span>实名认证： </span><span>暂不提供实名认证</span></p>
+            <p><span>注册时间： </span><span>@ac.User.DCreate.ToString("yyyy-MM-dd HH:mm:ss")</span></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="row pt30">
+        <div class="col-md-2"><b>登录密码</b></div>
+        <div class="col-md-6">
+            <div class="inner">安全性高的密码可以使帐号更安全。建议您设置一个包含字母，数字和特殊符号且长度超过6位的密码。</div>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <span class="text-success">
+                <span class="fa fa-check-square-o"></span>
+                <span>已设置</span>
+            </span>
+            <span class="text-explode">|</span>
+            <span class="link-operation"><a href="javascript:;" onclick="AX.gourl('userft/safe/pwd')">修改</a></span>
+        </div>
+    </div>
+    <div class="row pt20">
+        <div class="col-md-2"><b>手机绑定</b></div>
+        @if (ac.User.Mobile.HasValue())
+        {
+            <div class="col-md-6">
+                <div class="inner ng-binding">您已绑定了手机<span class="text-success">@(ac.User.Mobile.Left(3))****@(ac.User.Mobile.Right(4))</span>。[您的手机安全验证通过，可以用于登录、找回密码和接收各类业务通知。]</div>
+            </div>
+            <div class="col-md-2 col-md-offset-1">
+                <span class="text-success">
+                    <span class="fa fa-check-square-o"></span>
+                    <span>已设置</span>
+                </span>
+                <span class="text-explode">|</span>
+                <span class="link-operation"><a href="javascript:;" onclick="AX.gourl('userft/safe/mobile')">修改</a></span>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-6">
+                <div class="inner ng-binding">您未绑定手机号码，请立即设置！手机绑定后可用来登录、找回密码和接收各类业务通知。</div>
+            </div>
+            <div class="col-md-2 col-md-offset-1">
+                <span class="text-warning">
+                    <span class="fa fa-exclamation-triangle"></span>
+                    <span>未设置</span>
+                </span>
+                <span class="text-explode">|</span>
+                <span class="link-operation"><a href="javascript:;" onclick="AX.gourl('userft/safe/mobile')">设置</a></span>
+            </div>
+        }
+    </div>
+    <div class="row pt20">
+        <div class="col-md-2"><b>邮箱绑定</b></div>
+        <div class="col-md-6">
+        @if (ac.User.Mail.HasValue()) {
+            <div class="inner ng-binding">您已绑定了邮箱<span class="text-success">@((ac.User.Mail).Left(3))****@((ac.User.Mail).Right(7))</span>。[您的邮箱安全验证通过，可以用于登录、找回密码和接收各类业务通知与活动信息。]</div>
+        }
+        else {
+            <div class="inner ng-binding">您未绑定安全邮箱，请立即设置！邮箱绑定后可用来登录、找回密码和接收各类业务通知与活动信息。</div>
+        }
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+        @if (ac.User.Mail.HasValue()) {
+            <span class="text-success">
+                <span class="fa fa-check-square-o"></span>
+                <span>已设置</span>
+            </span>
+            <span class="text-explode">|</span>
+            <span class="link-operation"><a href="javascript:;" onclick="AX.load('mail')">修改</a></span>
+        }
+        else {
+            <span class="text-warning">
+                <span class="fa fa-exclamation-triangle"></span>
+                <span class="ng-binding">未设置</span>
+            </span>
+            <span class="text-explode">|</span>
+            <span class="link-operation"><a href="javascript:;" onclick="AX.load('mail')">设置</a></span>
+        }
+        </div>
+    </div>
+</div>

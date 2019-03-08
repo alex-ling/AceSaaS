@@ -10,7 +10,7 @@ namespace Acesoft.Data
         string Name { get; set; }
         IsolationLevel IsolationLevel { get; set; }
         IConnectionFactory ConnectionFactory { get; set; }
-        string TablePrefix { get; set; }
+        bool AutoCreateSchema { get; set; }
         int SessionPoolSize { get; set; }
         bool QueryGatingEnabled { get; set; }
         string[] SqlMaps { get; set; }

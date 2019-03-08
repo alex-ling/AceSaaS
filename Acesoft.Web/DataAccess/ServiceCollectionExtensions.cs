@@ -22,9 +22,23 @@ namespace Acesoft.Web.DataAccess
                 var option = new StoreOption();
 
                 // Disabling query gating as it's failing to improve performance right now
-                option.DisableQueryGating().UseDatabase(tenant.Name).UseConfig(dataConfig);
+                option.UseDatabase(tenant.Name).UseConfig(dataConfig);
 
-                return new Store(option);
+                // create schemas.
+                var store = new Store(option);
+                if (option.AutoCreateSchema)
+                {
+                    var storeCreator = sp.GetService<ISchemaCreator>();
+                    if (storeCreator != null)
+                    {
+                        using (var session = store.OpenSession())
+                        {
+                            storeCreator.CreateSchema(session);
+                        }
+                    }
+                }
+
+                return store;
             });
 
             services.AddScoped(sp =>

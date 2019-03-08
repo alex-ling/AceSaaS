@@ -1,0 +1,51 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("rbac.app").Form(new {
+        code = "",
+        name = "",
+        remark = "",
+        type = "",
+        orderno = 100,
+        system = 1
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 应用编码：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("code").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 应用名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">应用类别：</div>
+                <div class="col-xs-6">
+                    @Ace.ComboBox().Name("type").Width("100%").Ajax(d => d.Dict("APPTYPE").HttpGet()).Required()
+                </div>
+                <div class="col-xs-4"><div class="text-warning">为空时为分类节点！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">应用设置：</div>
+                <div class="col-xs-6">@Ace.CheckBox().Name("system").Text("系统")</div>
+                <div class="col-xs-4"><div class="text-warning">系统属性不能删除！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 排序号：</div>
+                <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Increment(10).Width("100%").Required()</div>
+                <div class="col-xs-4"><div class="text-warning">设置时建议按10，20递增！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

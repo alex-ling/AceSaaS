@@ -1,0 +1,82 @@
+{
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console" ],
+    "LevelSwitches": { "$controlSwitch": "Verbose" },
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Warning",
+        "MyApp.Something.Tricky": "Verbose"
+      }
+    },
+    "WriteTo:Sublogger": {
+      "Name": "Logger",
+      "Args": {
+        "configureLogger": {
+          "MinimumLevel": "Verbose",
+          "WriteTo": [
+            {
+              "Name": "Console",
+              "Args": {
+                "outputTemplate": "[{Timestamp:HH:mm:ss} {SourceContext} [{Level}] {Message}{NewLine}{Exception}",
+                "theme": "Serilog.Sinks.SystemConsole.Themes.SystemConsoleTheme::Grayscale, Serilog.Sinks.Console"
+              }
+            }
+          ]
+        },
+        "restrictedToMinimumLevel": "Verbose",
+        "levelSwitch": "$controlSwitch"
+      }
+    },
+    "WriteTo:Async": {
+      "Name": "Async",
+      "Args": {
+        "configure": [
+          {
+            "Name": "File",
+            "Args": {
+              "path": "%TEMP%\\Logs\\serilog-configuration-sample.txt",
+              "outputTemplate": "{Timestamp:o} [{Level:u3}] ({Application}/{MachineName}/{ThreadId}) {Message}{NewLine}{Exception}"
+            }
+          }
+        ]
+      }
+    },
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+    "Properties": {
+      "Application": "Sample"
+    },
+    "Destructure": [
+      {
+        "Name": "With",
+        "Args": { "policy": "Sample.CustomPolicy, Sample" }
+      },
+      {
+        "Name": "ToMaximumDepth",
+        "Args": { "maximumDestructuringDepth": 3 }
+      },
+      {
+        "Name": "ToMaximumStringLength",
+        "Args": { "maximumStringLength": 10 }
+      },
+      {
+        "Name": "ToMaximumCollectionCount",
+        "Args": { "maximumCollectionCount": 5 }
+      }
+    ],
+    "Filter": [
+      {
+        "Name": "ByIncludingOnly",
+        "Args": {
+          "expression": "Application = 'Sample'"
+        }
+      },
+      {
+        "Name": "With",
+        "Args": {
+          "filter": "Sample.CustomFilter, Sample"
+        }
+      }
+    ]
+  }
+}

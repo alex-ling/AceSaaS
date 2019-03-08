@@ -5,6 +5,7 @@ using System.Xml;
 
 using Acesoft.Config;
 using Acesoft.Config.Xml;
+using Acesoft.Data.Sql;
 using Acesoft.Data.SqlMapper.Caching;
 using Acesoft.Util;
 
@@ -56,8 +57,8 @@ namespace Acesoft.Data.SqlMapper
                         }
                         else if (query.Value == "ac")
                         {
-                            //var val = ctx.ExtraParams[query.Key];
-                            //ctx.Params.Add(query.Key, val);
+                            var val = ctx.ExtraParams[query.Key];
+                            ctx.Params.Add(query.Key, val);
                         }
                         else
                         {
@@ -71,24 +72,24 @@ namespace Acesoft.Data.SqlMapper
 
         public string BuildSql(ISession session, RequestContext ctx)
         {
-            var provider = session.Store.Dialect;
+            var dialect = session.Store.Dialect;
             var sql = "";
 
-            /*if (ctx.OpType == OpType.get)
+            if (ctx.CmdType == CmdType.select)
             {
                 sql = Params.GetValue("selectsql", "");
                 if (!sql.HasValue())
                 {
-                    sql = BuildSelectSql(provider, ctx);
+                    sql = BuildSelectSql(dialect, ctx);
                 }
             }
-            else if (ctx.OpType == OpType.ins)
+            else if (ctx.CmdType == CmdType.insert)
             {
                 CheckSql(session, "checkinsert", ctx);
                 sql = Params.GetValue("insertsql", "");
                 if (!sql.HasValue())
                 {
-                    sql = BuildInsertSql(provider, ctx);
+                    sql = BuildInsertSql(dialect, ctx);
                 }
 
                 var insSql = Params.GetValue("afterinsertsql", "");
@@ -97,13 +98,13 @@ namespace Acesoft.Data.SqlMapper
                     sql += insSql;
                 }
             }
-            else if (ctx.OpType == OpType.upd)
+            else if (ctx.CmdType == CmdType.update)
             {
                 CheckSql(session, "checkupdate", ctx);
                 sql = Params.GetValue("updatesql", "");
                 if (!sql.HasValue())
                 {
-                    sql = BuildUpdateSql(provider, ctx);
+                    sql = BuildUpdateSql(dialect, ctx);
                 }
 
                 var updSql = Params.GetValue("afterupdatesql", "");
@@ -112,19 +113,19 @@ namespace Acesoft.Data.SqlMapper
                     sql += updSql;
                 }
             }
-            else if (ctx.OpType == OpType.del)
+            else if (ctx.CmdType == CmdType.delete)
             {
                 CheckSql(session, "checkdelete", ctx);
                 sql = Params.GetValue("deletesql", "");
                 if (!sql.HasValue())
                 {
-                    sql = BuildDeleteSql(provider, ctx);
+                    sql = BuildDeleteSql(dialect, ctx);
                 }
             }
             else
             {
                 sql = Params.GetValue<string>("sql");
-            }*/
+            }
 
             return sql;
         }

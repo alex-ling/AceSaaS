@@ -1,0 +1,54 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+    
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("sys.cfgitem").Form(new {
+        cfg_id = App.GetQuery<long>("cfgid", 0),
+        name = "",
+        key = "",
+        value = "",
+        orderno = 10
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r">排序号：</div>
+                <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Width("100%").Increment(1)</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 配置名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 配置健：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("key").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 配置值：</div>
+                <div class="col-xs-9">@Ace.KindEditor().Name("value").Width("100%").Height("300px")</div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+@section startup {
+<script>
+    function onSelect() {
+        AX.dialog('选择图片', '/_pages/photo', function (res) {
+            $('#value').textbox('setValue', res)
+        }, 650, 500)
+    }
+    function onColor() {
+        var clr = $('#value').val()
+        if (!clr.startsWith('#') && !clr.startsWith('rgb')) clr = ''
+        if (clr.startsWith('#')) clr = clr.substr(1)
+        AX.dialog('选择颜色', '/_pages/color?clr=' + clr, function (res) {
+            $('#value').textbox('setValue', res)
+        }, 310, 330)
+    }
+</script>
+}

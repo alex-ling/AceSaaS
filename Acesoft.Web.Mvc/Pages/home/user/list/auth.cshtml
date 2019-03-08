@@ -1,0 +1,33 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "第三方登录授权";
+    Layout = "_shared/back";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border(false).Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false).Border(false)
+            .DataSource("rbac.auth").Ajax(ds => ds.RouteQuery("userid").HttpGet()).Columns(c =>
+            {
+                c.Add().Field("dcreate").Title("授权时间").Width(10).Format("date:yyyy-MM-dd HH:ss");
+                c.Add().Field("app_id").Title("应用Id").Width(12);
+                c.Add().Field("authtype").Title("授权类别").Width(5);
+                c.Add().Field("authid").Title("授权Id").Width(25);
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}

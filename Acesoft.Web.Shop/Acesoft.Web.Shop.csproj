@@ -24,7 +24,8 @@
     <Folder Include="Models\" />
     <Folder Include="Views\" />
     <Folder Include="ViewModel\" />
-    <Folder Include="Service\" />
+    <Folder Include="Services\" />
+    <Folder Include="Entity\" />
   </ItemGroup>
 
 </Project>

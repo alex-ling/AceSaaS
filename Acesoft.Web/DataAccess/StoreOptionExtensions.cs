@@ -59,9 +59,9 @@ namespace Acesoft.Web.DataAccess
             return option;
         }
 
-        public static IStoreOption SetTablePrefix(this IStoreOption option, string tablePrefix)
+        public static IStoreOption AutoCreateSchema(this IStoreOption option, bool autoCreateSchema = true)
         {
-            option.TablePrefix = tablePrefix;
+            option.AutoCreateSchema = autoCreateSchema;
             return option;
         }
 
@@ -71,11 +71,11 @@ namespace Acesoft.Web.DataAccess
             return option;
         }
 
-        public static IStoreOption DisableQueryGating(this IStoreOption option)
+        /*public static IStoreOption DisableQueryGating(this IStoreOption option)
         {
             option.QueryGatingEnabled = false;
             return option;
-        }
+        }*/
 
         public static IStoreOption SetSqlMaps(this IStoreOption option, string[] sqlmaps)
         {

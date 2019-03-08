@@ -1,0 +1,59 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "恢复出厂";
+    Layout = "_shared/body";
+
+    Ace.Layout().Fit().Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+                Ace.ComboTree().Name("product").AppendTo(query).Label("　产品：").Ajax(ds => ds.DataSource("iot.product_tree").HttpGet()).Width(220).PanelWidth(300);
+                Ace.ComboBox().Name("online").AppendTo(query).Label("　状态：").Width(120).Items(items =>
+                {
+                    items.Add(new ComboItem("", "　"));
+                    items.Add(new ComboItem("1", "在线"));
+                    items.Add(new ComboItem("0", "离线"));
+                });
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("恢复出厂").IconCls("fa fa-ban").Click("onGridIotDel");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination()
+            .DataSource("iot.resetreg").Ajax(ds => ds.Controller("iot").HttpGet())
+            .Delete("iot/reset", "iot.device", "恢复出厂").Columns(c =>
+            {
+                c.Add().Field("sbno").Title("设备编号").Width(6);
+                c.Add().Field("mac").Title("MAC地址").Width(6);
+                c.Add().Field("name").Title("设备名称").Width(6);
+                //c.Add().Field("cpxh").Title("设备型号").Width(6);
+                //c.Add().Field("ztsj").Title("最后状态时间").Format("date:yy-MM-dd HH:mm");
+                c.Add().Field("alias").Title("设备别名").Width(6);
+                c.Add().Field("sfdq").Title("地区").Width(5);
+                c.Add().Field("addr").Title("安装地址").Width(16);
+                c.Add().Field("zcsj").Title("注册时间").Width(7).Format("date:yy-MM-dd HH:mm:ss");
+                c.Add().Field("online").Title("在线").Format("bool");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onGridIotDel() {
+        var o = $('#grid').datagrid('options');
+        var id = $('#grid').datagrid('getCheckedId', 'mac');
+        if (id == '') return;
+        AX.gridDel('#grid', row.mac);
+    }
+    function event_grid_iotdel(cid, id) {
+        var row = $('#grid').datagrid('getRow', id);
+        AX.gridDel('#grid', row.mac);
+    }
+</script>

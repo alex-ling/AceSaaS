@@ -8,6 +8,6 @@ namespace Acesoft.Platform
 {
     public interface IConfigService
     {
-        IDictionary<string, string> GetItems(long configId);
+        Configs GetConfig(long configId);
     }
 }

@@ -1,0 +1,74 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信用户";
+    Layout = "_shared/back";
+
+    var multi = App.GetQuery("multi", "") == "1";
+    var idField = App.GetQuery("idfield", "id");
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Region(Region.north).Border(false).Css("border-b").Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("空选").IconCls("fa fa-check").Plain(false).Click("onNull()");
+            });
+        });
+        layout.Add().Region(Region.center).Border(false).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination().Border(false).CheckOnSelect()
+            .SelectOnCheck().CheckBox(multi).SingleSelect(!multi).IdField(idField)
+            .DataSource("wx.usersel").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("name").Title("昵称").Width(10);
+                c.Add().Field("wxname").Title("微信号").Width(10);
+                c.Add().Field("mobile").Title("手机号").Width(10);
+                c.Add().Field("remark").Title("备注").Width(25);
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onNull() {
+        $('#grid').datagrid('unselectAll');
+    }
+    function event_grid_sel(cid, id) {
+    }
+    function onSubmit(cb) {
+        var id = AX.query('idfield') || "id";
+        var d = $('#grid').datagrid('getRow');
+        if (d == null) {
+            $.messager.info({ msg: '没有选择任何记录，将返回空值！' });
+            cb('', '');
+        }
+        else if (AX.query('multi') != '1') {
+            cb(d[id], d.sbno);
+        }
+        else {
+            var rows = $('#grid').datagrid('getChecked');
+            var vals = '', txts = '';
+            for (var r = 0; r < rows.length; r++) {
+                vals += ',' + rows[r][id];
+                txts += ',' + rows[r].sbno;
+            }
+            if (vals.length > 0) {
+                vals = vals.substr(1);
+                txts = txts.substr(1);
+            }
+            cb(vals, txts);
+        }
+    }
+    function onLoad() {
+        var vals = AX.query('val').split(',');
+        for (var i = 0; i < vals.length; i++) {
+            $('#grid').datagrid('selectRecord', vals[i]);
+        }
+    }
+</script>

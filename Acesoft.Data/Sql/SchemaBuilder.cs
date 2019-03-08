@@ -21,7 +21,7 @@ namespace Acesoft.Data.Sql
             ThrowOnError = throwOnError;
             _builder = CommandInterpreterFactory.For(session.Connection);
             _dialect = session.Store.Dialect;
-            _tablePrefix = session.Store.Option.TablePrefix;
+            _tablePrefix = "";
         }
 
         private void Execute(IEnumerable<string> statements)

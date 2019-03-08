@@ -1,0 +1,61 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.menu").Form(new {
+        app_id = App.GetQuery("appid", ""),
+        parentid = App.GetQuery("parentid", ""),
+        type = 0,
+        name = "",
+        remark = "",
+        value = "",
+        extravalue = "",
+        orderno = 10
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            @*<div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 公众号：</div>
+                <div class="col-xs-6">@Ace.ComboBox().Name("app_id").Width("100%").Required().Ajax(a => a.DataSource("wx.app_list").HttpGet())</div>
+                <div class="col-xs-4"></div>
+            </div>*@
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red"></span> 父级菜单：</div>
+                <div class="col-xs-6">@Ace.ComboBox().Name("parentid").Width("100%").Ajax(a => a.DataSource("wx.menu_list").RouteQuery("appid").HttpGet())</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 菜单名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 菜单类型：</div>
+                <div class="col-xs-6">@Ace.ComboBox().Name("type").Width("100%").Required().Ajax(a => a.Dict("WXBUTTON").HttpGet())</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red"></span> 菜单URL：</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("value").Width("100%").Height("80px")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red"></span> 小程序：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("extravalue").Width("100%")</div>
+                <div class="col-xs-4"><div class="text-warning">格式：appid:pagepath</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 排序号：</div>
+                <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Increment(10).Width("100%").Required()</div>
+                <div class="col-xs-4"><div class="text-warning">设置时建议按10，20递增！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

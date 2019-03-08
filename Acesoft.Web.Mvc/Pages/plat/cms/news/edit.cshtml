@@ -1,0 +1,84 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("cms.news").Form(new {
+        item_ids = new string[0],
+        item_names = "",
+        title = "",
+        text = "",
+        photos = "",
+        source = "",
+        author = Ace.AC.User.NickName,
+        state = "0",
+        audit = "0",
+        dpublish = DateEx.GetCurShort(),
+        comment = ""
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 所属栏目：</div>
+                <div class="col-xs-6">
+                    @(Ace.ComboTree().Name("item_ids").Width("100%").Required().Multiple()
+                        .Ajax(a => a.DataSource("cms.item_tree").HttpGet())
+                        .Events(e => e.OnChange("onItemChange")))
+                    @Ace.HiddenBox().Name("item_names")
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">标题：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("title").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 标题图片：</div>
+                <div class="col-xs-6" style="min-height:60px">
+                    @(Ace.UploadBox().Name("photos").Width("100%").Max(4).Filters(f =>
+                    {
+                        f.max_file_size = "500kb";
+                        f.mime_types.Add(new MineType 
+                        {
+                            title = "图片文件",
+                            extensions = "jpg,jpeg,gif,png,bmp"
+                        });
+                    }).OssBucket("mp-yqyy").Dir("img"))
+                </div>
+                <div class="col-xs-4"><span class="text-warning">单个文件不要超过500K</span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">内容：</div>
+                <div class="col-xs-9">@Ace.KindEditor().Name("text").Width("100%").Height("230px")</div>
+                <div class="col-xs-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">来源：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("source").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">作者：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("author").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">发布日期：</div>
+                <div class="col-xs-6">@Ace.DateBox().Name("dpublish").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">文章属性：</div>
+                <div class="col-xs-6">@Ace.CheckBox().Name("comment").Text("允许评论")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+<script>
+    function onItemChange() {
+        $('#item_names').val($('#item_ids').combotree('getText'))
+    }
+</script>

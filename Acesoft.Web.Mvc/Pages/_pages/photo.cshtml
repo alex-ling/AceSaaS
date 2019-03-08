@@ -1,0 +1,49 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@{
+    Layout = "_shared/back";
+    ViewData["Title"] = "选择图片";   
+}
+<style>
+    .photo.cur img { border:2px solid red }
+    .photo img { width:120px;height:100px }
+</style>
+<div class="container-fluid">
+    <div class="row pb10" id="warp">
+        <div class="col-xs-3 text-c pt10" onclick="onUpload()" style="cursor:pointer">
+            <img src="~/images/add.png" title="上传新的图片" style="width:120px;height:100px" />
+            <br/><span>上传新图片</span>
+        </div>
+    </div>
+</div>
+@section Startup {
+<script>
+    function onSubmit(cb) {
+        cb($('.photo.cur').find('img').attr('src'))
+    }
+    function onSelect(e) {
+        $('.photo').removeClass('cur')
+        $(e).addClass('cur')
+    }
+    $(function () {
+        var path = '/user', warp = $('#warp')
+        var append = function (row) {
+            warp.append(
+                '<div class="col-xs-3 text-c pt10 photo" style="cursor:pointer" onclick="onSelect(this)">\
+                    <img src="/user/' + row.file_name + '" title="' + row.file_time + '" /><br/>\
+                    <span>' + row.file_name + '</span>\
+                </div>'
+            )
+        }
+        AX.ajax({
+            url: '/api/file/getphoto?app=home&folder=' + path,
+            type: 'get',
+            cb: function (res) {
+                for (var i = 0; i < res.value.length; i++) {
+                    append(res.value[i])
+                }
+            }
+        })
+    })
+</script>
+}

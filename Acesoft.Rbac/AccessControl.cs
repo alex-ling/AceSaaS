@@ -11,27 +11,26 @@ using Acesoft.Logger;
 using Acesoft.Rbac.Entity;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
+using IdentityModel.Client;
+using System.Net.Http;
 
 namespace Acesoft.Rbac
 {
     public class AccessControl : IAccessControl
     {
         private readonly ILogger<AccessControl> logger = LoggerContext.GetLogger<AccessControl>();
-
         private readonly ConcurrentDictionary<string, Func<object>> stateResolvers;
         private IEnumerable<IStateProvider> stateProviders;
-
         private IHttpContextAccessor httpContextAccessor;
         private IUserService userService;
         private Rbac_User user;
 
         public HttpContext HttpContext => httpContextAccessor.HttpContext;
-
         public bool Logined => User.LoginName != "guest";
         public bool IsRoot => User.LoginName == "root";
         public bool IsAdmin => User.LoginName == "admin";
         public string InRoles => $"({User.Rbac_UAs.Join(ua => ua.Role_Id)})";
-        public IEnumerable<long> Roles => User.Rbac_UAs.Select(ua => ua.Role_Id);
+        public IList<long> Roles => User.Rbac_UAs.Select(ua => ua.Role_Id).ToList();
         public IDictionary<string, string> Params => User.Rbac_Params.ToDictionary(p => p.Name, p => p.Value);
         public IDictionary<string, string> Auths => User.Rbac_Auths.ToDictionary(a => a.AuthType, a => a.AuthId);
 
@@ -65,7 +64,7 @@ namespace Acesoft.Rbac
             return Login(userService.QueryByAuth(appId, authId), persistent);
         }
 
-        public Task Login(Rbac_User user, bool persistent)
+        private Task Login(Rbac_User user, bool persistent)
         {
             this.user = user;
 
@@ -74,7 +73,46 @@ namespace Acesoft.Rbac
             return HttpContext.SignInAsync(ticket.AuthenticationScheme, ticket.Principal, ticket.Properties);
         }
 
-        public void UpdateUser(long appId, string authId, string authType, bool needSaveUser)
+        public async Task<Token> GetToken(string userName, string password)
+        {
+            logger.LogDebug($"Get token begin with UserName \"{userName}\"");
+
+            var settings = App.AppConfig.Settings;
+            var oauthServer = settings.GetValue<string>("oauth.server");
+            var oauthClient = settings.GetValue<string>("oauth.client");
+            var oauthSecret = settings.GetValue<string>("oauth.secret");
+            var oauthScope = settings.GetValue<string>("oauth.scope");
+
+            // https://identitymodel.readthedocs.io/en/latest/client/discovery.html
+            var client = new HttpClient();
+            var disco = await client.GetDiscoveryDocumentAsync(oauthServer);
+            Check.Assert(disco.IsError, $"OAuth认证服务器不能访问");
+
+            // https://identitymodel.readthedocs.io/en/latest/client/token.html#requesting-a-token-using-the-password-grant-type
+            var token = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+            {
+                // "/connect/token"
+                Address = disco.TokenEndpoint,
+                ClientId = oauthClient,
+                ClientSecret = oauthSecret,
+                Scope = oauthScope,
+                UserName = userName,
+                Password = password
+            });
+            Check.Assert(token.IsError, token.ErrorDescription);
+
+            logger.LogDebug("Get token end with: " + oauthServer + ", SUCCESS");
+            return new Token
+            {
+                Access_token = token.AccessToken,
+                Refresh_token = token.RefreshToken,
+                Token_type = token.TokenType,
+                Expires_in = token.ExpiresIn,
+                Created = DateTime.Now
+            };
+        }
+
+        public void UpdateAuth(long appId, string authId, string authType, bool needSaveUser)
         {
             if (needSaveUser)
             {
@@ -99,6 +137,11 @@ namespace Acesoft.Rbac
         public bool CheckAccess(long refId)
         {
             throw new NotImplementedException();
+        }
+
+        public long GetDefaultScaleId()
+        {
+            return Logined ? User.Scale_Id : Membership.Default_ScaleId;
         }
 
         #region state
