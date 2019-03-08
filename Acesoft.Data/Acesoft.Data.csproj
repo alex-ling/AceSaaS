@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acesoft.Core\Acesoft.Core.csproj" />
-    <ProjectReference Include="..\Acesoft.Data.Model\Acesoft.Data.Model.csproj" />
     <ProjectReference Include="..\Acesoft.Util\Acesoft.Util.csproj" />
   </ItemGroup>
 

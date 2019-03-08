@@ -237,3 +237,97 @@
 2019-03-08 00:15:26.466 +08:00 [INF] Executed page /error in 6417.51ms
 2019-03-08 00:15:26.467 +08:00 [INF] Executed endpoint 'Page: /error'
 2019-03-08 00:15:26.467 +08:00 [INF] Request finished in 7116.273ms 404 text/html; charset=utf-8
+2019-03-08 22:49:45.999 +08:00 [INF] Starting web host
+2019-03-08 22:49:49.196 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-08 22:51:26.103 +08:00 [INF] Starting web host
+2019-03-08 22:51:49.430 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-08 22:52:59.489 +08:00 [FTL] Application startup exception
+System.TypeInitializationException: The type initializer for 'Acesoft.Config.ConfigContext' threw an exception. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Logger.LoggerContext.GetLogger(String name) in D:\acecms\src\Acesoft.Core\Logger\LoggerContext.cs:line 19
+   at Acesoft.Config.ConfigContext..cctor() in D:\acecms\src\Acesoft.Core\Config\ConfigContext.cs:line 24
+   --- End of inner exception stack trace ---
+   at Acesoft.Config.ConfigContext.UseConfigContext(IServiceProvider service) in D:\acecms\src\Acesoft.Core\Config\ConfigContext.cs:line 138
+   at Acesoft.Startup.Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services) in D:\acecms\src\Acesoft.Core\Startup.cs:line 36
+   at Acesoft.Web.Modules.ModuleLoader.<>c__DisplayClass5_0.<Configure>b__1(IStartup startup) in D:\acecms\src\Acesoft.Web\Modules\ModuleLoader.cs:line 33
+   at Acesoft.CollExtensions.Each[T](IEnumerable`1 list, Action`1 action) in D:\acecms\src\Acesoft.Util\Extensions\CollExtensions.cs:line 15
+   at Acesoft.Web.Modules.ModuleLoader.Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services) in D:\acecms\src\Acesoft.Web\Modules\ModuleLoader.cs:line 31
+   at Acesoft.Web.ApplicationBuilderExtensions.<>c__DisplayClass0_0.<UseMultitenancy>b__0(IRouteBuilder routes) in D:\acecms\src\Acesoft.Web\Extensions\ApplicationBuilderExtensions.cs:line 36
+   at Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc(IApplicationBuilder app, Action`1 configureRoutes)
+   at Acesoft.Web.ApplicationBuilderExtensions.UseMultitenancy(IApplicationBuilder app) in D:\acecms\src\Acesoft.Web\Extensions\ApplicationBuilderExtensions.cs:line 33
+   at Acesoft.Web.Mvc.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env) in D:\acecms\src\Acesoft.Web.Mvc\Startup.cs:line 64
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Internal.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.Internal.AutoRequestServicesStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.BuildApplication()
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
+   at Acesoft.Web.Mvc.Program.<>c__DisplayClass0_0.<Main>b__0() in D:\acecms\src\Acesoft.Web.Mvc\Program.cs:line 20
+   at Acesoft.Logger.LoggerContext.RunMainWithSerilog(Action main) in D:\acecms\src\Acesoft.Core\Logger\LoggerContext.cs:line 50
+2019-03-08 22:52:59.555 +08:00 [FTL] Host terminated unexpectedly
+System.TypeInitializationException: The type initializer for 'Acesoft.Config.ConfigContext' threw an exception. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Logger.LoggerContext.GetLogger(String name) in D:\acecms\src\Acesoft.Core\Logger\LoggerContext.cs:line 19
+   at Acesoft.Config.ConfigContext..cctor() in D:\acecms\src\Acesoft.Core\Config\ConfigContext.cs:line 24
+   --- End of inner exception stack trace ---
+   at Acesoft.Config.ConfigContext.UseConfigContext(IServiceProvider service) in D:\acecms\src\Acesoft.Core\Config\ConfigContext.cs:line 138
+   at Acesoft.Startup.Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services) in D:\acecms\src\Acesoft.Core\Startup.cs:line 36
+   at Acesoft.Web.Modules.ModuleLoader.<>c__DisplayClass5_0.<Configure>b__1(IStartup startup) in D:\acecms\src\Acesoft.Web\Modules\ModuleLoader.cs:line 33
+   at Acesoft.CollExtensions.Each[T](IEnumerable`1 list, Action`1 action) in D:\acecms\src\Acesoft.Util\Extensions\CollExtensions.cs:line 15
+   at Acesoft.Web.Modules.ModuleLoader.Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services) in D:\acecms\src\Acesoft.Web\Modules\ModuleLoader.cs:line 31
+   at Acesoft.Web.ApplicationBuilderExtensions.<>c__DisplayClass0_0.<UseMultitenancy>b__0(IRouteBuilder routes) in D:\acecms\src\Acesoft.Web\Extensions\ApplicationBuilderExtensions.cs:line 36
+   at Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc(IApplicationBuilder app, Action`1 configureRoutes)
+   at Acesoft.Web.ApplicationBuilderExtensions.UseMultitenancy(IApplicationBuilder app) in D:\acecms\src\Acesoft.Web\Extensions\ApplicationBuilderExtensions.cs:line 33
+   at Acesoft.Web.Mvc.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env) in D:\acecms\src\Acesoft.Web.Mvc\Startup.cs:line 64
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Internal.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.Internal.AutoRequestServicesStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.BuildApplication()
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
+   at Acesoft.Web.Mvc.Program.<>c__DisplayClass0_0.<Main>b__0() in D:\acecms\src\Acesoft.Web.Mvc\Program.cs:line 20
+   at Acesoft.Logger.LoggerContext.RunMainWithSerilog(Action main) in D:\acecms\src\Acesoft.Core\Logger\LoggerContext.cs:line 50
+2019-03-08 22:55:23.075 +08:00 [INF] Starting web host
+2019-03-08 22:55:29.936 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-08 22:55:32.981 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-08 22:55:33.063 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-08 22:55:33.095 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-03-08 22:55:33.095 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-03-08 22:55:33.121 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-03-08 22:55:33.121 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-03-08 22:55:33.121 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-08 22:55:33.296 +08:00 [DBG] Load Tenant with name "default" successful.
+2019-03-08 22:55:33.296 +08:00 [DBG] Done initialize tentants.
+2019-03-08 22:55:33.297 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-08 22:55:33.303 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-08 22:55:33.305 +08:00 [DBG] Resolved Tenant "default" with request: localhost:5000.
+2019-03-08 22:55:33.309 +08:00 [DBG] Tenant "default" resolved. Caching with keys "localhost:5000".
+2019-03-08 22:55:33.315 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-08 22:55:33.316 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-08 22:55:33.399 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-08 22:55:35.354 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-08 22:55:35.500 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationFailedException: One or more compilation failures occurred:
+D:\acecms\src\Acesoft.Web.Mvc\Pages\_ViewImports.cshtml(25,19): error CS0234: The type or namespace name 'Models' does not exist in the namespace 'Acesoft.Web' (are you missing an assembly reference?)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(RazorCodeDocument codeDocument, String generatedCode)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(String relativePath)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.OnCacheMiss(String normalizedPath)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.DefaultPageLoader.Load(PageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionInvokerFactory.CreateInvoker(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Internal.MvcEndpointDataSource.<>c__DisplayClass21_0.<CreateEndpoint>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-03-08 22:55:35.537 +08:00 [INF] Request finished in 2560.5787ms 500 text/html; charset=utf-8

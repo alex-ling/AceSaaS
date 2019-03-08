@@ -32,11 +32,11 @@ namespace Acesoft
             // set global app
             services.UseAppContext();
 
-            // use config
-            services.UseConfigContext();
-
             // use logger
             services.UseLoggerContext();
+
+            // use config
+            services.UseConfigContext();
         }
     }
 }

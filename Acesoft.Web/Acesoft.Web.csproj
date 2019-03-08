@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acesoft.Core\Acesoft.Core.csproj" />
-    <ProjectReference Include="..\Acesoft.Data.Model\Acesoft.Data.Model.csproj" />
     <ProjectReference Include="..\Acesoft.Data.MySql\Acesoft.Data.MySql.csproj" />
     <ProjectReference Include="..\Acesoft.Data.PostgreSql\Acesoft.Data.PostgreSql.csproj" />
     <ProjectReference Include="..\Acesoft.Data.Sqlite\Acesoft.Data.Sqlite.csproj" />
