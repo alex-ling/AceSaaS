@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Acesoft.Config;
 using Acesoft.Web.Modules;
 using Acesoft.Web.Multitenancy;
+using Acesoft.Web.Mvc;
+using Acesoft.Platform;
 
 namespace Acesoft.Web
 {
@@ -68,7 +70,10 @@ namespace Acesoft.Web
             // AddMvc
             return services.AddMvc(opts =>
             {
-                // mvc设置
+                // 改为ExceptionMiddleware处理
+                opts.Filters.Add<ExceptionFilter>();
+                opts.Filters.Add<ApiResultFilter>();
+                opts.RespectBrowserAcceptHeader = true;
             })
             .AddRazorOptions(opts =>
             {
@@ -78,6 +83,12 @@ namespace Acesoft.Web
             .AddRazorPagesOptions(opts =>
             {
                 // 此处设置RazorPages
+            })
+            .AddJsonOptions(opts =>
+            {
+                opts.SerializerSettings.Converters.Add(new LongConverter());
+                opts.SerializerSettings.Converters.Add(new TreeConverter());
+                opts.SerializerSettings.Converters.Add(new GridConverter());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Latest);
         }

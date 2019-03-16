@@ -20,15 +20,15 @@ namespace Acesoft.Data.SqlMapper.Caching
 
         public string BuildQueryString()
         {
-            if (RequestContext.Params == null)
+            if (RequestContext.DapperParams == null)
             {
                 return "Null";
             }
 
             var sb = new StringBuilder();
-            foreach (var reqParam in RequestContext.Params.ParameterNames)
+            foreach (var param in RequestContext.Params)
             {
-                BuildQueryString(sb, reqParam, RequestContext.Params.Get<object>(reqParam));
+                BuildQueryString(sb, param.Key, param.Value);
             }
             return sb.ToString().Trim('&');
         }

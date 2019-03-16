@@ -10,7 +10,8 @@ namespace Acesoft.Data
     {
         public string Scope { get; set; }
         public string SqlId { get; set; }
-        public DynamicParameters Params { get; private set; }
+        public DynamicParameters DapperParams { get; private set; }
+        public IDictionary<string, object> Params { get; private set; }
         public IDictionary<string, object> ExtraParams { get; set; }
         public CmdType CmdType { get; set; }
         public object NewObj { get; set; }
@@ -41,7 +42,8 @@ namespace Acesoft.Data
         {
             if (param != null)
             {
-                Params.AddDynamicParams(param);
+                DapperParams.AddDynamicParams(param);
+                Params.Merge(param);
             }
             return this;
         }
@@ -60,6 +62,7 @@ namespace Acesoft.Data
 
         public RequestContext SetParam(string name, object value)
         {
+            DapperParams.Add(name, value);
             Params.Add(name, value);
             return this;
         }
@@ -69,7 +72,8 @@ namespace Acesoft.Data
             Scope = scope;
             SqlId = sqlId;
             
-            Params = new DynamicParameters();
+            DapperParams = new DynamicParameters();
+            Params = new Dictionary<string, object>();
             ExtraParams = new Dictionary<string, object>();
             CmdType = CmdType.sql;
         }

@@ -22,7 +22,7 @@
         layout.Add().Border(false).Region(Region.center).Controls(ctls =>
         {
             Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false)
-            .DataSource("sys.cfgroot").Ajax(ds => ds.HttpGet()).Columns(c =>
+            .DataSource("sys.cfgitem").Ajax(ds => ds.RouteQuery("cfgid").HttpGet()).Columns(c =>
             {
                 c.Add().Field("name").Title("配置名称").Width(15);
                 c.Add().Field("key").Title("配置键").Width(15);

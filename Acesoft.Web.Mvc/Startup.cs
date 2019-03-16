@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Acesoft.Web.Multitenancy;
 using Acesoft.Config;
 using Acesoft.Rbac;
+using Acesoft.Web.Middleware;
 
 namespace Acesoft.Web.Mvc
 {
@@ -60,12 +61,17 @@ namespace Acesoft.Web.Mvc
                 app.UseHsts();
             }
 
+            // use webapi result to request.
+            app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseAuthentication();
+
             // Use SaaS middleware.
             app.UseMultitenancy();
 
+            // for per tenant config                
             /*app.UsePerTenant((ctx, builder) =>
-            {
-                // for per tenant config                
+            {                
             });*/
         }
     }

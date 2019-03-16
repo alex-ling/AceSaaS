@@ -13,7 +13,7 @@ namespace Acesoft.Web.UI.RazorPages
         {
             get
             {
-                return HttpContext.RequestServices.GetService<IApplicationContext>();
+                return Ace.AppCtx;
             }
         }
 

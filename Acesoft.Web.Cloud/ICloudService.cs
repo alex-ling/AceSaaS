@@ -10,5 +10,6 @@ namespace Acesoft.Web.Cloud
         ISmsService GetSmsService(string name = "aliyunsms");
         IWeatherService GetWeatherService(string name = "mojiweather");
         ILocationService GetLocationService();
+        IMailService GetMailService(string name = "mail163");
     }
 }

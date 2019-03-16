@@ -4,12 +4,12 @@
     ViewData["Title"] = "安全中心";
     Layout = "_shared/bodyct";
 
-    var ac = Membership.Current;
+    var ac = AppCtx.AC;
 }
 <div class="container-fluid ml15 mr15">
     <div class="row pt20 pb20 bd-b-dashed">
         <div class="col-md-2">
-            <img src="@WebHelper.WebPhoto(ac.User.Photo)" style="width:120px;height:120px" />
+            <img src="@App.GetWebPhoto(ac.User.Photo)" style="width:120px;height:120px" />
         </div>
         <div class="col-md-10 lh30">
             <p><span>登录帐号： </span><span>@ac.User.LoginName</span></p>

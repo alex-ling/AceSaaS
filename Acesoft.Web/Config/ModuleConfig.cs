@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Acesoft.Web
+namespace Acesoft.Web.Modules
 {
     public class ModuleConfig
     {

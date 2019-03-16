@@ -31,5 +31,26 @@ namespace Acesoft
         {
             return json.ToObject<Dictionary<string, object>>();
         }
+
+        public static void WriteDbValue(this JsonWriter writer, object val)
+        {
+            object obj;
+            if (val == Convert.DBNull)
+            {
+                writer.WriteNull();
+            }
+            else if ((obj = val) is long)
+            {
+                writer.WriteValue(((long)obj).ToString());
+            }
+            else if ((obj = val) is bool)
+            {
+                writer.WriteValue(((bool)obj) ? 1 : 0);
+            }
+            else
+            {
+                writer.WriteValue(val);
+            }
+        }
     }
 }

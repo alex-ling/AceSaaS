@@ -380,6 +380,8 @@
                     return ax.format('<img src="/api/draw/getqrcode?text={0}" />', v);
                 case 'tip':
                     return ax.format('<a href="javascript:;" class="easyui-tooltip" data-options="content:$(\'<div></div>\'),onUpdate:{1}">{0}</a>', v, exp);
+                case 'size':
+                    return ax.filesize(v);
                 default:
                     return v;
             }
@@ -426,10 +428,12 @@
         // util
         root: '/',
         ok: function (msg) {
-            $.messager.info({ msg: msg || '操作成功！' });
+            if (typeof msg == 'string') $.messager.info({ msg: msg });
+            else $.messager.info({ msg: '操作成功！' });
         },
         error: function (msg) {
-            $.messager.error({ msg: msg || '操作失败！' });
+            if (typeof msg == 'string') $.messager.error({ msg: msg });
+            else $.messager.error({ msg: '操作失败！' });
         },
         okcall: function (cb) {
             $.messager.alert('提示', '操作成功！', 'info', cb);
@@ -443,14 +447,8 @@
             }
         },
         ajax: function (opts) {
-            opts.success = opts.success || function (rv, status, xhr) {
-                var url = xhr.getResponseHeader('location');
-                if (url != null) {
-                    window.location = url;
-                }
-                else if (opts.cb) {
-                    opts.cb(rv);
-                }
+            opts.success = opts.success || function (rv) {
+                if (opts.cb) opts.cb(rv);
             };
             if (opts.type == 'post' || opts.type == 'put') {
                 opts.data = JSON.stringify(opts.data);
@@ -480,13 +478,23 @@
             var pos = file.lastIndexOf('/');
             return pos > 0 ? file.substring(pos + 1) : file;
         },
+        filesize: function (len) {
+            var rv = "";
+            if (len < 1048576) rv = (len / 1024).toFixed(2) + "KB";
+            else if (len == 1048576) rv = "1MB";
+            else if (len > 1048576 && len < 1073741824) rv = (len / (1024 * 1024)).toFixed(2) + "MB";
+            else if (len > 1048576 && len == 1073741824) rv = "1GB";
+            else if (len > 1073741824 && len < 1099511627776) rv = (len / (1024 * 1024 * 1024)).toFixed(2) + "GB";
+            else rv = ">1TB";
+            return rv;
+        },
         len: function (s) {
             var l = 0;
             for (var i = 0; i < s.length; i++ , l++) {
                 if (s[i].match(/[^x00-xff]/ig) != null) l++;
             };
             return l;
-        },
+        },        
         now: function () {
             return new Date();
         },

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -47,24 +48,27 @@ namespace Acesoft.Data.SqlMapper
                 // 根据Query设置sql参数
                 foreach (var query in Query)
                 {
-                    if (ctx.Params.Get<object>(query.Key) == null)
+                    if (!ctx.Params.ContainsKey(query.Key))
                     {
                         // 若包含了参数，暂不做处理
                         if (query.Value == "qs")
                         {
                             var val = App.GetQuery<string>(query.Key);
+                            ctx.DapperParams.Add(query.Key, val);
                             ctx.Params.Add(query.Key, val);
                         }
                         else if (query.Value == "ac")
                         {
                             var val = ctx.ExtraParams[query.Key];
+                            ctx.DapperParams.Add(query.Key, val);
                             ctx.Params.Add(query.Key, val);
                         }
-                        else
-                        {
-                            var val = query.Value;
-                            ctx.Params.Add(query.Key, val);
-                        }
+                        //else
+                        //{
+                        //    var val = query.Value;
+                        //    ctx.DapperParams.Add(query.Key, val);
+                        //    ctx.Params.Add(query.Key, val);
+                        //}
                     }
                 }
             }
@@ -136,10 +140,10 @@ namespace Acesoft.Data.SqlMapper
             if (sql.HasValue())
             {
                 var error = Params.GetValue($"{key}error", "校验未通过");
-                var intVal = session.ExecuteScalar<int>(sql, ctx.Params);
+                var intVal = session.ExecuteScalar<int>(sql, ctx.DapperParams);
                 if (intVal > 0)
                 {
-                    throw new AceException(error.Replace(ctx.Params));
+                    throw new AceException(error.Replace(ctx.DapperParams));
                 }
             }
         }
@@ -156,7 +160,7 @@ namespace Acesoft.Data.SqlMapper
                     // rd表示只读列
                     continue;
                 }
-                if (key.StartsWith("ar_"))
+                if (key.StartsWith("a_"))
                 {
                     // ar表示数组
                     sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key}, ");
@@ -184,7 +188,7 @@ namespace Acesoft.Data.SqlMapper
                 // 自动插入id列
                 sbIns.Append($"{dialect.QuoteForColumnName("id")}, ");
                 sbVal.Append($"@id, ");
-                ctx.Params.AddDynamicParams(new { id = App.IdWorker.NextId() });
+                ctx.DapperParams.AddDynamicParams(new { id = App.IdWorker.NextId() });
             }
             if (insertTime)
             {
@@ -194,15 +198,15 @@ namespace Acesoft.Data.SqlMapper
                 //ctx.DapperParams.AddDynamicParams(new { dcreate = DateTime.Now });
             }
 
-            foreach (var key in ctx.Params.ParameterNames)
+            foreach (var key in ctx.DapperParams.ParameterNames)
             {
-                var obj = ctx.Params.Get<object>(key);
+                var obj = ctx.DapperParams.Get<object>(key);
                 if (obj is string str && !str.HasValue())
                 {
                     // 提交的值为空时不插入
                     continue;
                 }
-                if (key.StartsWith("rd_"))
+                if (key.StartsWith("r_") || key.StartsWith("__"))
                 {
                     // rd表示只读列
                     continue;
@@ -228,15 +232,15 @@ namespace Acesoft.Data.SqlMapper
                 //ctx.DapperParams.AddDynamicParams(new { dupdate = DateTime.Now });
             }
 
-            foreach (var key in ctx.Params.ParameterNames)
+            foreach (var key in ctx.DapperParams.ParameterNames)
             {
-                if (key == "id" || key.StartsWith("rd_"))
+                if (key == "id" || key.StartsWith("r_") || key.StartsWith("__"))
                 {
                     // rd表示只读列
                     continue;
                 }
 
-                var obj = ctx.Params.Get<object>(key);
+                var obj = ctx.DapperParams.Get<object>(key);
                 if (obj is string str && !str.HasValue())
                 {
                     sb.Append($"{dialect.QuoteForColumnName(key)}=null, ");

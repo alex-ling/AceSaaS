@@ -3,7 +3,6 @@ using System.IO;
 using Acesoft.Web.UI.Ajax;
 using Acesoft.Web.UI.Html;
 using Acesoft.Web.UI.Widgets.Html;
-using Microsoft.AspNetCore.Html;
 using Newtonsoft.Json;
 
 namespace Acesoft.Web.UI.Widgets
@@ -78,7 +77,7 @@ namespace Acesoft.Web.UI.Widgets
 			}
 			if (DataSource.FormData != null)
 			{
-				object arg = JsonConvert.SerializeObject(DataSource.FormData/*, new LongConverter(), new BoolConverter()*/);
+				object arg = JsonConvert.SerializeObject(DataSource.FormData, new LongConverter(), new BoolConverter());
 				writer.Write(base.Serializer.Initialize($"AX.formLoad('#{base.Id}',{arg});"));
 			}
 		}

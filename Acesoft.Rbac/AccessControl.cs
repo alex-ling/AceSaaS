@@ -25,13 +25,24 @@ namespace Acesoft.Rbac
         private IUserService userService;
         private Rbac_User user;
 
-        public HttpContext HttpContext => httpContextAccessor.HttpContext;
+        public HttpContext Context => httpContextAccessor.HttpContext;
         public bool Logined => User.LoginName != "guest";
         public bool IsRoot => User.LoginName == "root";
         public bool IsAdmin => User.LoginName == "admin";
         public string InRoles => $"({User.Rbac_UAs.Join(ua => ua.Role_Id)})";
         public IList<long> Roles => User.Rbac_UAs.Select(ua => ua.Role_Id).ToList();
-        public IDictionary<string, string> Params => User.Rbac_Params.ToDictionary(p => p.Name, p => p.Value);
+        public IDictionary<string, object> Params => User.Rbac_Params.ToDictionary(p => p.Name, p => (object)p.Value)
+            .Merge(new Dictionary<string, object>
+            {
+                { "userid" , user.Id },
+                { "loginname", user.LoginName },
+                { "username", user.UserName },
+                { "refcode", user.RefCode },
+                { "nickname", user.NickName },
+                { "scaleid", user.Scale_Id },
+                { "inroles", InRoles },
+                { "roleids", Roles }
+            });
         public IDictionary<string, string> Auths => User.Rbac_Auths.ToDictionary(a => a.AuthType, a => a.AuthId);
 
         public Rbac_User User
@@ -41,6 +52,12 @@ namespace Acesoft.Rbac
                 if (user == null)
                 {
                     user = Get<Rbac_User>("CurrentUser");
+
+                    // check login
+                    if (user == null)
+                    {
+                        Context.Response.Redirect("/plat/account/logout");
+                    }
                 }
                 return user;
             }
@@ -69,8 +86,8 @@ namespace Acesoft.Rbac
             this.user = user;
 
             logger.LogDebug($"Login with the user \"{user.Id}:{user.LoginName}\"");
-            var ticket = Membership.AuthenticationTicket(user.HashId, persistent);
-            return HttpContext.SignInAsync(ticket.AuthenticationScheme, ticket.Principal, ticket.Properties);
+            var ticket = Membership.AuthenticationTicket(user.HashId, user.LoginName, persistent);
+            return Context.SignInAsync(ticket.AuthenticationScheme, ticket.Principal, ticket.Properties);
         }
 
         public async Task<Token> GetToken(string userName, string password)
@@ -126,10 +143,9 @@ namespace Acesoft.Rbac
             }
         }
 
-        public Task Logout()
+        public void Logout()
         {
-            user = null;
-            return HttpContext.SignOutAsync(Membership.Auth_Cookie);
+            user = userService.QueryByUserName("guest");
         }
 
         public bool IsInRole(long roleId) => Roles.Contains(roleId);
@@ -137,6 +153,19 @@ namespace Acesoft.Rbac
         public bool CheckAccess(long refId)
         {
             throw new NotImplementedException();
+        }
+
+        public string Replace(string str, bool replaceQuery = true)
+        {
+            if (!str.HasValue())
+            {
+                return str;
+            }
+            if (replaceQuery)
+            {
+                str = App.ReplaceQuery(str);
+            }
+            return str.Replace(Params);
         }
 
         public long GetDefaultScaleId()
@@ -171,7 +200,7 @@ namespace Acesoft.Rbac
         {
             if (stateProviders == null)
             {
-                stateProviders = HttpContext.RequestServices.GetServices<IStateProvider>();
+                stateProviders = Context.RequestServices.GetServices<IStateProvider>();
             }
 
             var resolver = stateProviders.FirstOrDefault(m => m.Name == name).Get();
@@ -179,7 +208,7 @@ namespace Acesoft.Rbac
             {
                 return () => default(T);
             }            
-            return () => resolver(HttpContext);
+            return () => resolver(Context);
         }
         #endregion
     }

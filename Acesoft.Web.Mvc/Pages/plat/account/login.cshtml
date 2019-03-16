@@ -70,6 +70,7 @@
                                             </span>
                                         </div>
                                         <div class="pt15">
+                                            @Html.AntiForgeryToken()
                                             <a class="btn btn-primary" style="width:100%" onclick="login()">登录</a>
                                         </div>
                                     }
@@ -83,9 +84,9 @@
     </div>
     <script>
         function login() {
-            AX.formSubmit('#log', function (url) {
+            AX.formSubmit('#log', function (rv) {
                 $.messager.info({ msg: '登录成功' });
-                if (url == '') url = '/plat/account/enter?x=' + AX.tick();
+                var url = AX.query('ReturnUrl') || ('/plat/account/enter?x=' + AX.tick());
                 window.location = url;
             });
         }

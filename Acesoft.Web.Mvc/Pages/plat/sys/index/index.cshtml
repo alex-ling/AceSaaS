@@ -7,7 +7,7 @@
     var netcore = Microsoft.Extensions.DependencyModel.DependencyContext.Default;
     var runtime = netcore.RuntimeLibraries.First(x => x.Name == "Microsoft.NETCore.App");
     var memory = MemoryHelper.GetMemoryStatusEx();
-    var testFile = WebHelper.LocalPath("test.txt");
+    var testFile = App.GetLocalPath("test.txt");
     var isWrite = false;
     try
     {

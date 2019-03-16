@@ -15,6 +15,7 @@ namespace Acesoft.Platform.Entity
         public FieldType Type { get; set; }
         public int? Length { get; set; }
         public bool IsNull { get; set; }
+        public bool Unique { get; set; }
         public string Default { get; set; }
         public string Ref { get; set; }
         public int OrderNo { get; set; }

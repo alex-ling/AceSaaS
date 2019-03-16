@@ -12,6 +12,7 @@ namespace Acesoft.Data
         public int Total { get; set; }
         public int PageCount { get; set; }
         public DataTable Data { get; set; }
+        public object Map { get; set; }
     }
 
     public class GridResponse<T>

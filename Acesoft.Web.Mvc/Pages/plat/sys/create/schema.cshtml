@@ -6,18 +6,12 @@
 
     Ace.View().Id("view").Ajax(ds => ds.DataSource("sys.schema").Form(new
     {
-        app_id = "",
         code = "",
         name = "",
         orderno = 10,
         system = 0
     }).HttpSave()).Content(
         @<div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 所属应用：</div>
-                <div class="col-xs-6">@Ace.ComboBox().Name("app_id").Width("100%").Required().Ajax(a => a.DataSource("rbac.app_list").HttpGet())</div>
-                <div class="col-xs-4"></div>
-            </div>
             <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red">*</span> 分类编码：</div>
                 <div class="col-xs-6">@Ace.TextBox().Name("code").Width("100%").Required()</div>

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Acesoft.Web.Multitenancy;
 using Acesoft.Web.Modules;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
 namespace Acesoft.Web
 {
@@ -22,6 +24,16 @@ namespace Acesoft.Web
             // use common
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(App.GetLocalPath("logs", true)),
+                RequestPath = new PathString("/logs")
+            });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(App.GetLocalPath("uploads", true)),
+                RequestPath = new PathString("/uploads")
+            });
 
             // use multitenant
             app.UseMiddleware<TenantContainerMiddleware>();

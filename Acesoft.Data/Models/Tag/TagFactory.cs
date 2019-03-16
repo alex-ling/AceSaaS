@@ -11,7 +11,7 @@ namespace Acesoft.Data
     {
         public const string REG_Tag = @"(?<=\{)([^\;\|\{\}]{0,}\|){0,2}[^\;\|\{\}]{0,}(?=\})";
 
-        public string ReplaceTag(string str, DataRow dataRow, int rowIndex)
+        public static string ReplaceTag(string str, DataRow dataRow, int rowIndex)
         {
             if (!str.HasValue())
             {
@@ -21,7 +21,7 @@ namespace Acesoft.Data
             return RegexHelper.Replace(str, REG_Tag, m => ToTagString(dataRow, m.Value, rowIndex));
         }
 
-        public string ToTagString(DataRow dataRow, string expression, int rowIndex)
+        public static string ToTagString(DataRow dataRow, string expression, int rowIndex)
         {
             return new DataTag(dataRow, expression, rowIndex).Output();
         }

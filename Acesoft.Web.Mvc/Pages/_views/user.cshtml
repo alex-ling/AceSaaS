@@ -2,7 +2,7 @@
 @{ 
     var ac = Model.AC;
     var sql = "select * from sys_stat_view";
-    var data = DbContext.Current.Query(sql).First();
+    var data = Model.Session.Query(sql).First();
 }
 <div class="row pt10">
     <div class="col-md-4">

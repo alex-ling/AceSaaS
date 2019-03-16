@@ -19,7 +19,7 @@ namespace Acesoft.Web.WeChat
     {
         public static bool TryWechatAutoLogin(this IAccessControl ac, bool external, out string openId)
         {
-            var app = ac.HttpContext.RequestServices.GetService<IWeChatContainer>().GetApp();
+            var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
 
             try
             {
@@ -45,7 +45,7 @@ namespace Acesoft.Web.WeChat
 
         public static async Task WechatLogin(this IAccessControl ac, string userName, string password, string openId)
         {
-            var app = ac.HttpContext.RequestServices.GetService<IWeChatContainer>().GetApp();
+            var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
             await ac.Login(userName, password, true);
 
             var userInfoJson = UserApi.Info(app.AppId, openId);
@@ -62,7 +62,7 @@ namespace Acesoft.Web.WeChat
 
         public static bool WeChatAuthorize(this IAccessControl ac, string openIdParamName)
         {
-            var context = ac.HttpContext;
+            var context = ac.Context;
             if (!context.SideInWeixinBrowser()) return true;
 
             try
@@ -80,7 +80,7 @@ namespace Acesoft.Web.WeChat
 
                 if (ac.Logined) ac.Logout();
 
-                var app = ac.HttpContext.RequestServices.GetService<IWeChatContainer>().GetApp();
+                var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
                 var returnUrl = App.GetQuery("ReturnUrl", "/wechat");
                 var state = App.GetQuery("state", "state");
                 var scope = (OAuthScope)App.GetQuery("scope", 0);
@@ -99,12 +99,12 @@ namespace Acesoft.Web.WeChat
         public static JsApiToken GetJsApiToken(this IAccessControl ac, bool resetUrl)
         {
             var appId = ac.Params.GetValue<long>("appid", App.GetQuery<long>("appid"));
-            var app = ac.HttpContext.RequestServices.GetService<IWeChatContainer>().GetApp();
+            var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
 
             var timestamp = JSSDKHelper.GetTimestamp();
             var noncestr = JSSDKHelper.GetNoncestr();
             var jsApiTicket = JsApiTicketContainer.GetJsApiTicket(app.AppId);
-            var url = ac.HttpContext.Request.GetUrl();
+            var url = ac.Context.Request.GetUrl();
 
             if (resetUrl) url = UrlHelper.Append(url, "t", timestamp);
             var signature = JSSDKHelper.GetSignature(jsApiTicket, noncestr, timestamp, url);

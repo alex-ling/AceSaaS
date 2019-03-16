@@ -91,8 +91,8 @@ namespace Acesoft.Data.SqlMapper
         private T DoRequest<T>(ISession s, RequestContext ctx, Func<string, T> func)
         {
             logger.LogInformation($"SqlMapper do request: {ctx.Scope}.{ctx.SqlId}, type: {typeof(T)}");
-
-            // 处理参数，附加查询参数
+            
+            // 处理参数，附加查询参数，放在前面是因为参数会构造缓存Key
             var map = GetSqlMap(ctx);
             map.AppendSqlParams(ctx);
 
@@ -105,7 +105,7 @@ namespace Acesoft.Data.SqlMapper
 
             // 获取sql语句
             string sql = map.BuildSql(s, ctx);
-            var result = func(sql);
+            var result = func(sql.Replace(ctx.ExtraParams));
             CacheManager[ctx] = result;
             return result;
         }
@@ -181,6 +181,12 @@ namespace Acesoft.Data.SqlMapper
             bool hasFilterParamValue = false;
             foreach (var query in map.Query)
             {
+                if (query.Value == "qs" || query.Value == "ac")
+                {
+                    // 若为固定参数，已经处理，此外不再拼接条件
+                    continue;
+                }
+
                 if (query.Key.StartsWith("_"))
                 {
                     hasFilterParam = true;
@@ -189,7 +195,7 @@ namespace Acesoft.Data.SqlMapper
                 if (queryValue.HasValue())
                 {
                     // 此处同步添加ctx的params
-                    //ctx.Params[query.Key] = queryValue;
+                    ctx.Params[query.Key] = queryValue;
 
                     // 拼接查询条件
                     hasFilterParamValue = hasFilterParam;
@@ -260,6 +266,7 @@ namespace Acesoft.Data.SqlMapper
                 //param.Table = param.Table.Replace(ctx.ExtraParams);
                 param.Where = param.Where.Replace(ctx.ExtraParams);
             }
+            param.Where = param.Where.Replace(ctx.Params);
             #endregion
 
             // 获取数据
@@ -268,79 +275,79 @@ namespace Acesoft.Data.SqlMapper
 
         public int Execute(ISession s, RequestContext ctx)
          {
-            return DoRequest(s, ctx, (sql) => s.Execute(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.Execute(sql, ctx.DapperParams));
         }
 
         public Task<int> ExecuteAsync(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.ExecuteAsync(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.ExecuteAsync(sql, ctx.DapperParams));
         }
 
         public object ExecuteScalar(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.ExecuteScalar(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.ExecuteScalar(sql, ctx.DapperParams));
         }
 
         public Task<object> ExecuteScalarAsync(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.ExecuteScalarAsync(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.ExecuteScalarAsync(sql, ctx.DapperParams));
         }
 
         public T ExecuteScalar<T>(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.ExecuteScalar<T>(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.ExecuteScalar<T>(sql, ctx.DapperParams));
         }
 
         public Task<T> ExecuteScalarAsync<T>(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.ExecuteScalarAsync<T>(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.ExecuteScalarAsync<T>(sql, ctx.DapperParams));
         }
 
         public IEnumerable<dynamic> Query(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.Query(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.Query(sql, ctx.DapperParams));
         }
 
         public IEnumerable<T> Query<T>(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.Query<T>(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.Query<T>(sql, ctx.DapperParams));
         }
 
         public IEnumerable<TReturn> Query<TFisrt, TSecond, TReturn>(ISession s, RequestContext ctx, Func<TFisrt, TSecond, TReturn> map)
         {
-            return DoRequest(s, ctx, (sql) => s.Query(sql, map, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.Query(sql, map, ctx.DapperParams));
         }
 
         public IEnumerable<TReturn> Query<TFirst, TSecond, TThird, TReturn>(ISession s, RequestContext ctx, Func<TFirst, TSecond, TThird, TReturn> map)
         {
-            return DoRequest(s, ctx, (sql) => s.Query(sql, map, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.Query(sql, map, ctx.DapperParams));
         }
 
         public dynamic QueryFirst(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.QueryFirst(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.QueryFirst(sql, ctx.DapperParams));
         }
 
         public T QueryFirst<T>(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.QueryFirst<T>(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.QueryFirst<T>(sql, ctx.DapperParams));
         }
 
         public dynamic QuerySingle(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.QuerySingle(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.QuerySingle(sql, ctx.DapperParams));
         }
 
         public T QuerySingle<T>(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.QuerySingle<T>(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.QuerySingle<T>(sql, ctx.DapperParams));
         }
 
         public T QueryMultiple<T>(ISession s, RequestContext ctx, Func<GridReader, T> func)
         {
             return DoRequest(s, ctx, (sql) => 
             {
-                using (var reader = s.QueryMultiple(sql, ctx.Params))
+                using (var reader = s.QueryMultiple(sql, ctx.DapperParams))
                 {
                     return func(reader);
                 }
@@ -349,12 +356,12 @@ namespace Acesoft.Data.SqlMapper
 
         public DataTable QueryDataTable(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.QueryDataTable(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.QueryDataTable(sql, ctx.DapperParams));
         }
 
         public DataSet QueryDataSet(ISession s, RequestContext ctx)
         {
-            return DoRequest(s, ctx, (sql) => s.QueryDataSet(sql, ctx.Params));
+            return DoRequest(s, ctx, (sql) => s.QueryDataSet(sql, ctx.DapperParams));
         }
 
         public GridResponse<dynamic> QueryPage(ISession s, RequestContext ctx, GridRequest request)
@@ -383,7 +390,7 @@ namespace Acesoft.Data.SqlMapper
             {
                 var res = s.QueryPageTable(param);
                 res.Request = request;
-                //res.Map = map;
+                res.Map = map;
                 return res;
             });
         }

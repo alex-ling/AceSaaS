@@ -3,6 +3,8 @@
 @{ 
     ViewData["Title"] = "注销";
 
-    await Membership.SignOut();
-    App.Context.Response.Redirect("/plat/account/login", true);
+    Ace.AC.Logout();
+
+    await App.Context.SignOutAsync(Membership.Auth_Cookie);
+    App.Context.Response.Redirect("/plat/account/login");
 }

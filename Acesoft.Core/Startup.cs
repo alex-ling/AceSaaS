@@ -9,6 +9,7 @@ using Acesoft.Cache;
 using Acesoft.Util;
 using Acesoft.Config;
 using Acesoft.Logger;
+using Acesoft.Security;
 
 namespace Acesoft
 {
@@ -22,6 +23,8 @@ namespace Acesoft
 
             // add util
             services.AddSingleton<FileWatcher>();
+            services.AddSingleton<IByteCrypto, SwapByteCrypto>();
+            //services.AddScoped<IRSACrypto, RSACrypto>();
 
             // add logging
             services.AddLogging();

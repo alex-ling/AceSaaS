@@ -12,6 +12,6 @@ namespace Acesoft.Rbac
         Rbac_Object GetByUrl(string url);
         IList<Rbac_Object> Gets(IList<long> roleIds, ObjectType type, string user);
         int Delete(long id);
-        int Delete(string ids);
+        void Delete(string ids);
     }
 }

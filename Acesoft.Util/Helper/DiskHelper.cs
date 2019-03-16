@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Management;
 using System.Text;
 
-namespace Acesoft.Core.Util
+namespace Acesoft.Util
 {
     public static class DiskHelper
     {

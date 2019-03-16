@@ -25,7 +25,7 @@ namespace Acesoft.Web.WeChat.Authenticatoon
             string token = Request.Headers["wechat_token"];
             if (token.HasValue() && SessionContainer.GetSession(token) != null)
             {
-                var ticket = Membership.AuthenticationTicket(token, true, Scheme.Name);
+                var ticket = Membership.AuthenticationTicket(token, null, true, Scheme.Name);
                 return await Task.FromResult(AuthenticateResult.Success(ticket));
             }
 

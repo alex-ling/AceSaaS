@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Security.Claims;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Acesoft.Rbac.Entity;
+using Microsoft.Extensions.Logging;
+using Acesoft.Util;
+using Acesoft.Logger;
 
 namespace Acesoft.Rbac.StateProviders
 {
     public class UserStateProvider : IStateProvider
     {
+        private readonly ILogger<UserStateProvider> logger = LoggerContext.GetLogger<UserStateProvider>();
+
         public string Name => "CurrentUser";
 
         public Func<HttpContext, object> Get()
@@ -20,8 +23,17 @@ namespace Acesoft.Rbac.StateProviders
 
                 if (ctx.User.Identity.IsAuthenticated)
                 {
-                    var userId = ctx.User.Identity.Name.ToObject<long>();
-                    return userService.QueryById(userId);
+                    var claim = ctx.User.FindFirst("sub");
+                    if (claim != null)
+                    { 
+                        var userId = NaryHelper.ToNary(claim.Value, 36);
+                        return userService.QueryById(userId);
+                    }
+                    else
+                    {
+                        logger.LogError($"Create user from \"{ctx.User.Identity.AuthenticationType}\" with error");
+                        return null;
+                    }
                 }
 
                 return userService.QueryByUserName("guest");

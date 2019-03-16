@@ -5,8 +5,8 @@
     ViewData["Title"] = "授权";
 
     var roleId = App.GetQuery("roleid", "");
-    Ace.Tree().Id("tree").CheckBox().CascadeCheck(false).Root("功能列表").Ajax(ds => ds
-        .DataSource("rbac.objuser_tree")
+    Ace.Tree().Id("tree").CheckBox().CascadeCheck(false).Ajax(ds => ds
+        .DataSource("rbac.objectuser_tree")
         .RouteValue("roleid", roleId)
         .HttpGet()
     )
@@ -45,7 +45,7 @@
         var ids = "";
         var cks = $('#tree').tree('getChecked');
         for (var i = 0; i < cks.length; i++) {
-            if (cks[i].id == '' || !$('#tree').tree('getParent', cks[i].target)) continue;
+            if (cks[i].id == '') continue;
             var opsVal = 0;
             $(cks[i].target).find('input').each(function (i, e) {
                 if (e.checked) opsVal += Math.pow(2, i);

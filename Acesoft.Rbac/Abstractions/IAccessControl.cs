@@ -10,7 +10,7 @@ namespace Acesoft.Rbac
 {
     public interface IAccessControl
     {
-        HttpContext HttpContext { get; }
+        HttpContext Context { get; }
 
         bool Logined { get; }
         bool IsRoot { get; }
@@ -18,7 +18,7 @@ namespace Acesoft.Rbac
         Rbac_User User { get; }
         IList<long> Roles { get; }
         string InRoles { get; }
-        IDictionary<string, string> Params { get; }
+        IDictionary<string, object> Params { get; }
         IDictionary<string, string> Auths { get; }
 
         Task Login(string userName, string password, bool persistent);
@@ -26,9 +26,10 @@ namespace Acesoft.Rbac
         //Task Login(Rbac_User user, bool persistent);
         Task<Token> GetToken(string userName, string passwrod);
         void UpdateAuth(long appId, string authId, string authType, bool needSaveUser);
-        Task Logout();
+        void Logout();
         bool IsInRole(long roleId);
         bool CheckAccess(long refId);
+        string Replace(string str, bool reapceQuery = true);
 
         long GetDefaultScaleId();
     }

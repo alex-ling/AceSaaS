@@ -136,6 +136,11 @@ namespace Acesoft.Web.UI
 			return new KindEditorBuilder(new KindEditor(this));
 		}
 
+        public virtual LabelBuilder Label()
+        {
+            return new LabelBuilder(new Label(this));
+        }
+
 		public virtual LayoutBuilder Layout()
 		{
 			return new LayoutBuilder(new Layout(this));

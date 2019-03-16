@@ -54,7 +54,7 @@ namespace Acesoft.Web.UI.Ajax
 
             var ctx = new RequestContext(sqlScope, sqlId)
                 .SetCmdType(CmdType.select)
-                .SetExtraParam(Membership.GetParams());
+                .SetExtraParam(JsonObject.Widget.Ace.AC.Params);
 			JsonObject.FormData = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
 			JsonObject.IsEdit = true;
 			return this;

@@ -68,6 +68,7 @@ namespace Acesoft.Platform.Services
                             if (item.Default.HasValue()) c.WithDefault(item.Default);
                             if (item.Length.HasValue) c.WithLength(item.Length);
                             if (item.Type == FieldType.text) c.Unlimited();
+                            if (item.Unique) c.Unique();
                         });
                     }
                 });

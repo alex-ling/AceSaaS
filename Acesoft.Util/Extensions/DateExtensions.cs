@@ -38,6 +38,11 @@ namespace Acesoft
             return dt.ToString("yyyyMMdd");
         }
 
+        public static string ToDHMSF(this DateTime dt)
+        {
+            return dt.ToString("ddHHmmssff");
+        }
+
         public static int GetChinaWeek(this DateTime dt)
         {
             var w = (int)dt.DayOfWeek;

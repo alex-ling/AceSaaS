@@ -56,11 +56,11 @@
                         c.Add().Field("field").Title("字段").Width(10);
                         c.Add().Field("name").Title("名称").Width(10);
                         c.Add().Field("type").Title("类型");
-                        c.Add().Field("remark").Title("备注").Width(20);
+                        c.Add().Field("remark").Title("备注").Width(16);
                         c.Add().Field("ref").Title("字典/引用").Width(10);
                         c.Add().Field("length").Title("长度");
-                        //c.Add().Field("defval").Title("唯一键");
                         c.Add().Field("isnull").Title("可空").Format("bool");
+                        c.Add().Field("unique").Title("唯一").Format("bool");
                         c.Add().Field("created").Title("构建").Format("bool");
                         c.Add().Field("orderno").Title("排序");
                         c.Add().Field("action").Title("操作").Format("button");

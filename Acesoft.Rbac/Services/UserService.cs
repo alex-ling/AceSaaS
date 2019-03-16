@@ -181,6 +181,9 @@ namespace Acesoft.Rbac.Services
             // Check having role
             Check.Assert(user.LoginName != "root" && user.Rbac_UAs.Count == 0, "用户无任何角色权限");
 
+            // update login date and ip
+            UpdateLogin(user);
+
             return user;
         }
 
@@ -202,14 +205,8 @@ namespace Acesoft.Rbac.Services
         public void UpdateLogin(Rbac_User user)
         {
             user.DLogin = DateTime.Now;
-            Session.Execute(
-                new RequestContext("rbac", "update_user_by_login")
-                .SetParam(new
-                {
-                    now = user.DLogin,
-                    id = user.Id
-                })
-            );
+            user.LoginIP = App.Context.GetClientIp();
+            Update(user);
         }
         #endregion
 
