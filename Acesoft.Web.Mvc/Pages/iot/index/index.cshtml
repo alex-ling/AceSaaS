@@ -2,7 +2,7 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
     ViewData["Title"] = "智能云平台";
-    Layout = "_shared/test";
+    Layout = "iot/_shared/test";
     Ace.RenderAuthOptions = true;
 }
 <div class="ct-gray">
@@ -10,7 +10,7 @@
         <span class="text-warning h3">欢迎您访问智能云平台测试中心！</span>
     </div>
     <div class="container-fluid">
-        @Html.Partial("_views/user-hor", Ace.AC)
+        @await Html.PartialAsync("_views/user-hor", Ace.AC)
         <div class="row bg-head">
             <div class="col-md-12 pt5 pb5 fwb">测试中心简介</div>
         </div>

@@ -1,11 +1,12 @@
 ﻿@model Acesoft.Web.UI.RazorPages.WebPageBase
+@inject IObjectService ObjectService
+@inject IConfigService ConfigService
 @{ 
     Model.Ace.RenderAuthOptions = true;
-    var rep = new RBAC_ObjectRep();
-    var modules = rep.Gets(Model.Ace.AC.Roles, ObjType.module, Model.Ace.AC.User.LoginName);
+    var modules = ObjectService.Gets(Model.Ace.AC.Roles, ObjectType.Module, Model.Ace.AC.User.LoginName);
     var rootUserModule = 233342651854749696;
     var url = Model.Ace.Path.ToLower();
-    var cfg = SysCfg.CreateInstance(1);
+    var cfg = ConfigService.GetConfig(1);
 }
 <!DOCTYPE html>
 <html>
@@ -113,8 +114,8 @@
         </div>
     </div>
     <div class="footer" style="margin-top:3px">
-        <div>Copyright © 2017-2018 北京环都拓普空调有限公司</div>
-        <div>技术支持：北京高卓软件技术有限公司</div>
+        <div>Copyright © @cfg["sys_copyright"]</div>
+        <div>技术支持：@cfg["sys_support"]</div>
     </div>
     <environment include="Development">
         <script src="~/scripts/jquery/dist/jquery.js"></script>

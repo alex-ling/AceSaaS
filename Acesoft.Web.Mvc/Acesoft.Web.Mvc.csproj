@@ -67,6 +67,11 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\webapp\" />
+    <Folder Include="Pages\wechat\" />
+  </ItemGroup>
+
   <!--Target Name="PublishModules" BeforeTargets="Build">
     <ItemGroup>
       <ModuleProject Include="..\Acesoft.Web.HR\Acesoft.Web.HR.csproj" />

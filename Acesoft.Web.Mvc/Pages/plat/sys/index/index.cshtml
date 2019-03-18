@@ -2,7 +2,7 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
     ViewData["Title"] = "系统信息";
-    Layout = "_shared/bodyct";
+    Layout = "_shared/body";
 
     var netcore = Microsoft.Extensions.DependencyModel.DependencyContext.Default;
     var runtime = netcore.RuntimeLibraries.First(x => x.Name == "Microsoft.NETCore.App");

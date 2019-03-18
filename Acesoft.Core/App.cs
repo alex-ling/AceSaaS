@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Acesoft.Config;
-using Acesoft.Core;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Acesoft.Config;
+using Acesoft.Core;
 
 namespace Acesoft
 {
@@ -42,6 +44,10 @@ namespace Acesoft
 
         public static IServiceProvider UseAppContext(this IServiceProvider service)
         {
+            // For utf-8
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            // Global HttpContextWarpper
             httpContextAccessor = service.GetService<IHttpContextAccessor>();
 
             var httpService = Context?.RequestServices ?? service;

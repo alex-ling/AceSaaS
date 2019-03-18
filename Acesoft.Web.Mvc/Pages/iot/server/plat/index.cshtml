@@ -2,7 +2,7 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
     ViewData["Title"] = "云平台";
-    Layout = "_shared/bodyct";
+    Layout = "_shared/body";
 
     var client = Iot.Client.IotClient.Instance.Client;
     var opt_enabled = IotContext.GetStatus<bool>("enable_optlog");
