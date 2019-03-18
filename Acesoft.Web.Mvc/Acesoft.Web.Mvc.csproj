@@ -9,6 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\webapp\**" />
+    <Compile Remove="Pages\wechat\**" />
+    <Content Remove="Pages\webapp\**" />
+    <Content Remove="Pages\wechat\**" />
+    <EmbeddedResource Remove="Pages\webapp\**" />
+    <EmbeddedResource Remove="Pages\wechat\**" />
+    <None Remove="Pages\webapp\**" />
+    <None Remove="Pages\wechat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Config\app.config.json" />
     <Content Remove="Config\data.config.json" />
     <Content Remove="Config\tenants.config.json" />
@@ -65,11 +76,6 @@
     <None Update="Modules\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\webapp\" />
-    <Folder Include="Pages\wechat\" />
   </ItemGroup>
 
   <!--Target Name="PublishModules" BeforeTargets="Build">
