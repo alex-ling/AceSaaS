@@ -1,0 +1,14 @@
+{
+  "serviceName": "AcesoftIotService",
+  "serviceDisplayName": "Acesoft Iot Service",
+  "serviceDescription": "Acesoft Iot Service is a cloud TCP/IP access gateway for responding to smart devices",
+
+  "supersocketServers": [
+    {
+      "name": "IotServer",
+      "ip": "Any",
+      "port": 7345,
+      "maxConnectionNumber": 10000
+    }
+  ]
+}

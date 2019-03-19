@@ -53,7 +53,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.WeChat", "Aceso
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Platform", "Acesoft.Platform\Acesoft.Platform.csproj", "{99532755-12F0-405C-88FB-1F187BF08B35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.Web.Cloud", "Acesoft.Web.Cloud\Acesoft.Web.Cloud.csproj", "{61D619FD-2FE9-411F-A020-17219E11F2FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.Cloud", "Acesoft.Web.Cloud\Acesoft.Web.Cloud.csproj", "{61D619FD-2FE9-411F-A020-17219E11F2FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.IotService", "Acesoft.IotService\Acesoft.IotService.csproj", "{CC7227DA-C934-490E-A049-1CB47535B89B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.IotNet", "Acesoft.IotNet\Acesoft.IotNet.csproj", "{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +149,14 @@ Global
 		{61D619FD-2FE9-411F-A020-17219E11F2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61D619FD-2FE9-411F-A020-17219E11F2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61D619FD-2FE9-411F-A020-17219E11F2FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC7227DA-C934-490E-A049-1CB47535B89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7227DA-C934-490E-A049-1CB47535B89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC7227DA-C934-490E-A049-1CB47535B89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7227DA-C934-490E-A049-1CB47535B89B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +183,8 @@ Global
 		{534EF239-A1BC-4943-997F-61CB82DDC6E3} = {BE7D65F7-BABE-4CE6-98AA-3F20D6C4592D}
 		{99532755-12F0-405C-88FB-1F187BF08B35} = {DEB81B93-6D3D-4446-A4CA-AD993C8E1F4B}
 		{61D619FD-2FE9-411F-A020-17219E11F2FC} = {BE7D65F7-BABE-4CE6-98AA-3F20D6C4592D}
+		{CC7227DA-C934-490E-A049-1CB47535B89B} = {B1646805-615E-45AD-AC3E-B4E44398C0FA}
+		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF} = {B1646805-615E-45AD-AC3E-B4E44398C0FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15C56BF2-C468-45C5-B13D-00FA80AD2CD4}

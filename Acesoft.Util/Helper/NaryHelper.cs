@@ -75,7 +75,7 @@ namespace Acesoft.Util
         /// <summary>
         /// 数据转16进制指定长度字符串，左侧补字符'0'
         /// </summary>
-        public static string ToHex(int value, int length)
+        public static string ToHex(this int value, int length)
         {
             var str = FromNary(value, 16);
             if (str.Length > length)

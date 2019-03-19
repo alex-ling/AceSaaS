@@ -71,7 +71,7 @@ namespace Acesoft.Web.Cloud.Controllers
                 }
             }
 
-            var rndStr = RandomHelper.GetRandomNumberString(6);
+            var rndStr = RandomHelper.GetRandomNumber(6);
             var key = "sms_" + mobile;
             var keySending = "sms_sending_" + mobile;
             if (App.Cache.GetString(keySending) != null)
@@ -131,7 +131,7 @@ namespace Acesoft.Web.Cloud.Controllers
                 }
             }
 
-            var rndStr = RandomHelper.GetRandomNumberString(6);
+            var rndStr = RandomHelper.GetRandomNumber(6);
             var key = "mail_" + mailto;
             var keySending = "mail-send-" + mailto;
             if (App.Cache.GetString(keySending) != null)

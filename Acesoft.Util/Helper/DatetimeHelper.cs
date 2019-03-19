@@ -25,6 +25,12 @@ namespace Acesoft.Util
             return ToUnix(DateTime.Now);
         }
 
+        public static string GetNowHex()
+        {
+            var now = DateTime.Now;
+            return $"{now.Year.ToHex(4)}{now.Month.ToHex(2)}{now.Day.ToHex(2)}{now.Hour.ToHex(2)}{now.Minute.ToHex(2)}";
+        }
+
         public static long GetNowMilliseconds()
         {
             return (long)(DateTime.UtcNow - ZERO.ToUniversalTime()).TotalMilliseconds;

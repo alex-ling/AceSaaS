@@ -23,6 +23,11 @@ namespace Acesoft
             return EncodingHelper.BytesToHex(data);
         }
 
+        public static string ToHex(this IEnumerable<byte> data)
+        {
+            return EncodingHelper.BytesToHex(data);
+        }
+
         public static string ToStr(this byte[] data, string encoding = "")
         {
             if (!encoding.HasValue())
