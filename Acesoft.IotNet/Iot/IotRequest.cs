@@ -63,7 +63,7 @@ namespace Acesoft.IotNet.Iot
 			list.AddRange(Header);
 			list.AddRange(EncodingHelper.HexToBytes(Length.ToHex(4)));
 			list.AddRange(Body.CloneRange(0, Length - 2));
-			return CrcHelper.GetCrc16(list.ToArray()).ToHex(4) == Crc16;
+			return CrcHelper.GetCrc16_ModBus(list.ToArray()) == Crc16;
 		}
 
 		public bool CheckValid()

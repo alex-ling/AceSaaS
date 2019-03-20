@@ -1,9 +1,12 @@
-using SuperSocket.SocketBase;
-using SuperSocket.SocketEngine;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceProcess;
+
+using Serilog;
+using SuperSocket.SocketBase;
+using SuperSocket.SocketEngine;
 
 namespace Acesoft.IotService
 {
@@ -11,42 +14,64 @@ namespace Acesoft.IotService
 	{
 		private static Dictionary<string, Command> CmdHandlers = new Dictionary<string, Command>();
 		private static bool setConsoleColor;
+        private static ILogger logger;
 
 		private static void Main(string[] args)
 		{
-			if (!Environment.UserInteractive)
-			{
-				RunAsService();
-				return;
-			}
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.AppSettings()
+                .WriteTo.Console()
+                .WriteTo.Async(a => a.File("logs/log.txt", rollingInterval: RollingInterval.Day, shared: true))
+                .CreateLogger();
+            logger = Log.ForContext(typeof(Program));
 
-			var input = string.Empty;
-			if (args == null || args.Length < 1)
-			{
-				Console.WriteLine("Welcome to Acesoft.IotService!");
-				Console.WriteLine("Please press a key to continue...");
-				Console.WriteLine("[r]: Run this application as a console application");
-				Console.WriteLine("[i]: Install this application as a Windows Service");
-				Console.WriteLine("[u]: Uninstall this Windows Service application");
-				do
-				{
-					input = Console.ReadKey().KeyChar.ToString();
-					Console.WriteLine();
-				}
-				while (!Run(input, null));
+            try
+            {
+                logger.Information("Starting AcesoftIotService...");
 
-				Console.WriteLine("Press the 'Enter' key to quit this application.");
-				Console.ReadLine();
-			}
-			else
-			{
-				input = args[0];
-				if (!string.IsNullOrEmpty(input))
-				{
-					input = input.TrimStart('-');
-				}
-				Run(input, args);
-			}
+                if (!Environment.UserInteractive)
+			    {
+				    RunAsService();
+				    return;
+			    }
+
+			    var input = string.Empty;
+			    if (args == null || args.Length < 1)
+			    {
+				    Console.WriteLine("Welcome to Acesoft.IotService!");
+				    Console.WriteLine("Please press a key to continue...");
+				    Console.WriteLine("[r]: Run this application as a console application");
+				    Console.WriteLine("[i]: Install this application as a Windows Service");
+				    Console.WriteLine("[u]: Uninstall this Windows Service application");
+				    do
+				    {
+					    input = Console.ReadKey().KeyChar.ToString();
+					    Console.WriteLine();
+				    }
+				    while (!Run(input, null));
+
+				    Console.WriteLine("Press the 'Enter' key to quit this application.");
+				    Console.ReadLine();
+			    }
+			    else
+			    {
+				    input = args[0];
+				    if (!string.IsNullOrEmpty(input))
+				    {
+					    input = input.TrimStart('-');
+				    }
+				    Run(input, args);
+			    }
+            }
+            catch (Exception ex)
+            {
+                logger.Fatal(ex, "AcesoftIotService terminated unexpectedly");
+            }
+            finally
+            {
+                logger.Information("Stopped AcesoftIotService!");
+                Log.CloseAndFlush();
+            }
         }
 
         private static void RunAsService()
@@ -81,25 +106,22 @@ namespace Acesoft.IotService
 
 		private static void RunAsConsole()
 		{
-			Console.WriteLine("Welcome to Acesoft Iot SocketService!");
 			CheckCanSetConsoleColor();
 
-			Console.WriteLine("Initializing...");
+            logger.Information("Initializing servers...");
 
 			var bootstrap = BootstrapFactory.CreateBootstrap();
 			if (!bootstrap.Initialize())
 			{
 				SetConsoleColor(ConsoleColor.Red);
-				Console.WriteLine("Failed to initialize Acesoft.IotService!");
-				Console.WriteLine("Please check error log for more information!");
+				Console.WriteLine("Failed to initialize AcesoftIotService!");
 				Console.ReadKey();
 				return;
 			}
 
-			Console.WriteLine("Starting...");
-			StartResult startResult = bootstrap.Start();
+			var startResult = bootstrap.Start();
 			Console.WriteLine("-------------------------------------------------------------------");
-			foreach (IWorkItem appServer in bootstrap.AppServers)
+			foreach (var appServer in bootstrap.AppServers)
 			{
 				if (appServer.State == ServerState.Running)
 				{
@@ -122,7 +144,7 @@ namespace Acesoft.IotService
 				    Console.ReadKey();
 				    return;
 			    case StartResult.Success:
-				    Console.WriteLine("The Acesoft.IotService has been started!");
+				    Console.WriteLine("The AcesoftIotService has been started!");
 				    break;
 			    case StartResult.Failed:
 				    SetConsoleColor(ConsoleColor.Red);
@@ -135,13 +157,13 @@ namespace Acesoft.IotService
 				    break;
 			}
 			Console.ResetColor();
-			Console.WriteLine("Enter key 'quit' to stop the Acesoft.IotService.");
+			Console.WriteLine("Enter key 'quit' to stop the AcesoftIotService.");
 
 			RegisterCommands();
 			ReadConsoleCommand(bootstrap);
 			bootstrap.Stop();
 
-			Console.WriteLine("The Acesoft Iot SocketService has been stopped!");
+			Console.WriteLine("The AcesoftIotService has been stopped!");
 		}
 
 		private static void AddCommand(string name, string description, Func<IBootstrap, string[], bool> handler)

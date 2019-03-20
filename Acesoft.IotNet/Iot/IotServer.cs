@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
+using Serilog;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Protocol;
 using Acesoft.Util;
@@ -11,22 +12,21 @@ namespace Acesoft.IotNet.Iot
 	public class IotServer : AppServer<IotSession, IotRequest>, IDispatcher
 	{
 		private readonly ConcurrentDictionary<string, IotSession> sessions = new ConcurrentDictionary<string, IotSession>();
+        private readonly ILogger logger;
 		private int interval = 30;
 		private IDispatcher api;
 
-		public IotServer() : base(new DefaultReceiveFilterFactory<IotReceiveFilter, IotRequest>())
+        public IotServer() : base(new DefaultReceiveFilterFactory<IotReceiveFilter, IotRequest>())
 		{
 			NewSessionConnected += IotServer_NewSessionConnected;
 			NewRequestReceived += IotServer_NewRequestReceived;
 			SessionClosed += IotServer_SessionClosed;
-		}
+            logger = Log.ForContext<IotServer>();
+        }
 
 		private void IotServer_NewRequestReceived(IotSession session, IotRequest req)
 		{
-			Console.WriteLine($"Rece: {session.RemoteEndPoint} {req.Length} {req.BodyHex}");
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine($"Rece: {session.RemoteEndPoint} {req.SessionId}-{req.Device.Mac}: {req.Command}");
-			Console.ResetColor();
+			logger.Debug($"IoT-Rece: {session.RemoteEndPoint} {req.Device.Mac}-{req.SessionId} {req.Command}");
 
 			IotRequest request = null;
 			var hasError = false;
@@ -134,14 +134,11 @@ namespace Acesoft.IotNet.Iot
 			return req.ErrorSession();
 		}
 
-		private void Send(IotSession session, IotRequest request)
+		private void Send(IotSession session, IotRequest req)
 		{
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine($"Send: {session.RemoteEndPoint} {request.SessionId}-{request.Device.Mac}: {request.Command}");
-			Console.ResetColor();
+            logger.Debug($"IoT-Send: {session.RemoteEndPoint} {req.Device.Mac}-{req.SessionId} {req.Command}");
 
-			var bytes = request.BuildBytes();
-			Console.WriteLine($"Send: {session.RemoteEndPoint} {request.Length} {request.BodyHex}");
+            var bytes = req.BuildBytes();
 			session.Send(bytes, 0, bytes.Length);
 		}
 
@@ -187,27 +184,29 @@ namespace Acesoft.IotNet.Iot
 
 		private void IotServer_NewSessionConnected(IotSession session)
 		{
-			Console.WriteLine($"{session.RemoteEndPoint} has connected!");
+			logger.Debug($"IoT-Session-BGN: {session.RemoteEndPoint}");
 		}
 
 		private void IotServer_SessionClosed(IotSession session, CloseReason value)
 		{
-			Console.WriteLine($"{session.RemoteEndPoint} has disconnected!");
 			if (session.Device != null)
 			{
 				DoLogout(session.Device);
-			}
-		}
+            }
 
-		protected override void OnStarted()
+            logger.Debug($"IoT-Session-END: {session.RemoteEndPoint}");
+        }
+
+        protected override void OnStarted()
 		{
 			api = Bootstrap.GetServerByName("ApiServer") as IDispatcher;
-			Console.WriteLine($"Socket [{base.Config.Ip}:{base.Config.Port}] has started!");
+
+			logger.Debug($"IoT-Socket-START: {Config.Ip}:{Config.Port}");
 		}
 
 		protected override void OnStopped()
 		{
-			Console.WriteLine($"Socket [{base.Config.Ip}:{base.Config.Port}] has stoped!");
+			logger.Debug($"IoT-Socket-STOP: {Config.Ip}:{Config.Port}");
 		}
 	}
 }

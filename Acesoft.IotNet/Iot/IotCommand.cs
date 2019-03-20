@@ -46,7 +46,7 @@ namespace Acesoft.IotNet.Iot
 
 		public override string ToString()
 		{
-			return $"{Name}{DataHex}";
+			return $"{Name}-{Data.Length.ToString("{00}")}-{DataHex}";
 		}
 	}
 }

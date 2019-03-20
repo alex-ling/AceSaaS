@@ -66,27 +66,28 @@ namespace Acesoft.Util
             0x43, 0x83, 0x41, 0x81, 0x80, 0x40
         };
 
-        public static int GetCrc16(byte[] data)
+        public static int GetCrc16(byte[] data, int crcHigh = 255, int crcLow = 255)
         {
             int index = 0x00;
-            int CrcHigh = 0x00;
-            int CrcLow = 0x00;
             int i = 0, length = data.Length;
 
             while (length-- > 0)
             {
-                index = CrcLow ^ data[i++];
-                CrcLow = CrcHigh ^ CRC_HIGH[index];
-                CrcHigh = CRC_LOW[index];
+                index = crcLow ^ data[i++];
+                crcLow = crcHigh ^ CRC_HIGH[index];
+                crcHigh = CRC_LOW[index];
             }
-            return ((CrcHigh << 8) + CrcLow);
+            return ((crcHigh << 8) + crcLow);
         }
 
-        public static string GetCrc16(string hex)
+        public static string GetCrc16_IBM(byte[] data)
         {
-            var bytes = EncodingHelper.HexToBytes(hex);
-            var crc = GetCrc16(bytes);
-            return NaryHelper.ToHex(crc, 4);
+            return GetCrc16(data, 0, 0).ToHex(4);
+        }
+
+        public static string GetCrc16_ModBus(byte[] data)
+        {
+            return GetCrc16(data).ToHex(4);
         }
     }
 }

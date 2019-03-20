@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Threading;
 
+using Serilog;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Protocol;
 using Acesoft.Util;
@@ -11,22 +12,22 @@ namespace Acesoft.IotNet.Api
 {
 	public class ApiServer : AppServer<ApiSession, ApiRequest>, IDispatcher
 	{
+		private readonly object syncObj = new object();
+        private readonly ILogger logger;
 		private IDispatcher iot;
 		private ApiSession session;
-		private readonly object syncObj = new object();
 
 		public ApiServer() : base(new DefaultReceiveFilterFactory<ApiReceiverFilter, ApiRequest>())
 		{
 			NewSessionConnected += ApiServer_NewSessionConnected;
 			SessionClosed += ApiServer_SessionClosed;
 			NewRequestReceived += ApiServer_NewRequestReceived;
+            logger = Log.ForContext<ApiServer>();
 		}
 
 		private void ApiServer_NewRequestReceived(ApiSession session, ApiRequest req)
 		{
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine($"APIRece: {req.Action}-{req.Key}-{req.Cmd}: {req.Body}");
-			Console.ResetColor();
+			logger.Debug($"API-Rece: {req.Action}-{req.Key}-{req.Cmd} {req.Body}");
 
 			string key = req.Key;
 			string action = req.Action;
@@ -49,9 +50,7 @@ namespace Acesoft.IotNet.Api
 
 		private void Send(ApiSession session, string mac, string action, string cmd, string body)
 		{
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine($"APISend: {action}-{mac}-{cmd}: {body}");
-			Console.ResetColor();
+			logger.Debug($"API-Send: {action}-{mac}-{cmd} {body}");
 
 			var bytes = EncodingHelper.ToBytes($"#{mac}#{action}#{cmd}#{body}#");
 			session.Send(bytes, 0, bytes.Length);
@@ -63,48 +62,36 @@ namespace Acesoft.IotNet.Api
 			{
 				lock (syncObj)
 				{
-					Console.ForegroundColor = ConsoleColor.Red;
-					Console.WriteLine("The ApiClient hasn't connected!");
 					if (session == null || !session.Connected)
 					{
-						Console.WriteLine("Now connecting to the ApiClient 1st...");
-						if (!ConnectToApiClient())
-						{
-							Thread.Sleep(100);
-							Console.WriteLine("Now connecting to the ApiClient 2st...");
-							ConnectToApiClient();
-						}
-					}
+                        ConnectToApiClient();
 
-                    // waiting 100ms
-                    Thread.Sleep(100);
+                        // waiting 100ms
+                        Thread.Sleep(100);
+                    }
 
                     if (session == null || !session.Connected)
 					{
-						Console.WriteLine("Connecting to the ApiClient failure!");
-						Console.WriteLine($"Sending to ApiClient failed: {mac}-{action}");
-						Console.ResetColor();
-						base.Logger.Error($"Sending to ApiClient failed: {mac}-{action}-{cmd}-{data}");
 						return false;
 					}
-
-					Console.WriteLine("Connecting to the ApiClient success!");
-					Console.ResetColor();
 				}
 			}
 
-			Send(session, mac, action, cmd, data);
+            Logger.Debug($"API-Send: {action}-{mac}-{cmd} {data}");
+            Send(session, mac, action, cmd, data);
 			return true;
 		}
 
 		private bool ConnectToApiClient()
 		{
 			try
-			{
-                string value = ConfigHelper.GetAppSetting<string>("ApiClientUrl");
+            {
+                string url = ConfigHelper.GetAppSetting<string>("ApiClientUrl");
+                logger.Debug($"API-Conn: Connecting {{{url}}}");
+
 				using (var httpClient = new HttpClient())
 				{
-					return httpClient.GetAsync(value).Result.IsSuccessStatusCode;
+					return httpClient.GetAsync(url).Result.IsSuccessStatusCode;
 				}
 			}
 			catch
@@ -120,24 +107,25 @@ namespace Acesoft.IotNet.Api
 
 		private void ApiServer_SessionClosed(ApiSession session, CloseReason value)
 		{
-			Console.WriteLine($"API {session.RemoteEndPoint} has disconnected!");
+			logger.Debug($"API-Session-END: {session.RemoteEndPoint}");
 		}
 
 		private void ApiServer_NewSessionConnected(ApiSession session)
 		{
 			this.session = session;
-			Console.WriteLine($"API {session.RemoteEndPoint} has connected!");
+			logger.Debug($"API-Session-BEN: {session.RemoteEndPoint}");
 		}
 
 		protected override void OnStarted()
 		{
-			iot = (Bootstrap.GetServerByName("IotServer") as IDispatcher);
-			Console.WriteLine($"API Socket [{Config.Ip}:{Config.Port}] has started!");
+			iot = Bootstrap.GetServerByName("IotServer") as IDispatcher;
+
+			logger.Debug($"API-Socket-START: {Config.Ip}:{Config.Port}");
 		}
 
 		protected override void OnStopped()
 		{
-			Console.WriteLine($"API Socket [{Config.Ip}:{Config.Port}] has stopped!");
+			logger.Debug($"API-Socket-STOP: {Config.Ip}:{Config.Port}");
 		}
 	}
 }
