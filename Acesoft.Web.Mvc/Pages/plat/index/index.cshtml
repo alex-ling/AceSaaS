@@ -1,19 +1,168 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @inject IConfigService ConfigService
+@inject IObjectService ObjectService
 @{
-    var cfg = ConfigService.GetConfig(1);
-    var name = cfg["sys_name"];
-
-    ViewData["Title"] = name;
-    Layout = "_shared/plat";
+    Layout = "_shared/site";
     Ace.RenderAuthOptions = true;
+
+    var cfg = ConfigService.GetConfig(1);
+    ViewData["Title"] = cfg["sys_name"];
+
+    var modules = ObjectService.Gets(Model.Ace.AC.Roles, ObjectType.Module, Model.Ace.AC.User.LoginName);
+    var menus = new List<Rbac_Object>();
+    var index = 0;
+    var layout = App.GetCookie("aceplat.layout", "full");
+    var loginName = Model.Ace.AC.User.LoginName;
+    if (loginName.HasValue())
+    {
+        loginName = $"({loginName})";
+    }
 }
-<div class="ct-gray">
-    <div class="pt30 pb20 text-c">
-        <span class="text-warning h3">欢迎您访问@(name)！</span>
-    </div>
-    <div class="container-fluid">
-        @await Html.PartialAsync("_views/user", Ace)
+<div class="ax-header">
+    <div class="ax-topbar">
+        <div class="topbar-head fl">
+            <a class="topbar-logo fl" style="@cfg["sys_plat_style"]" href="@App.GetWebRoot()">
+                <img src="@cfg["sys_plat_logo"]" height="50" />
+                <span class="fwb">@cfg["sys_short"]</span>
+            </a>
+        </div>
+        <div class="topbar-nav fl dropdown ml15">
+            <a href="/plat/index" class="topbar-btn topbar-nav-btn dropdown-toggle">
+                <span>首页</span>
+            </a>
+        </div>
+        <div class="topbar-info fr mr15">
+            <div class="fl dropdown">
+                <a href="#" class="topbar-btn" data-toggle="dropdown">
+                    <span>@Model.AppCtx.AC.User.NickName @loginName</span>
+                    <span class="fa fa-caret-down"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="topbar-info-btn"><a href="javascript:AX.go('plat/user|safe/pwd')"><span>修改密码</span></a></li>
+                    <li class="topbar-info-btn"><a href="javascript:AX.logout()"><span>注销</span></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+<div class="ax-body ax-sidebar-@(layout)">
+    <div class="ax-sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-inner">
+                <div class="sidebar-fold fa fa-reorder" title="点击展开/收起左侧导航栏"></div>
+                @foreach (var obj in modules.Where(o => !o.ParentId.HasValue).OrderBy(o => o.OrderNo))
+                {
+                    var childCss = obj.Url.HasValue() ? "" : "child";
+                    var fold = index > 0 ? "sidebar-nav-fold" : "";
+                    <div class="sidebar-nav @fold">
+                        <div class="sidebar-title aceui-tooltip" data-url="@obj.Url" tooltip="@Html.Raw(obj.Name)">
+                            <div class="sidebar-title-inner">
+                                <span class="sidebar-title-icon fa fa-caret-down"></span>
+                                <span class="sidebar-title-text">@Html.Raw(obj.Name)</span>
+                            </div>
+                        </div>
+                        <ul class="sidebar-trans">
+                            @foreach (var item in modules.Where(o => o.ParentId == obj.Id).OrderBy(o => o.OrderNo))
+                            {
+                                if (childCss.HasValue()) { menus.Add(item); }
+                                <li class="nav-item">
+                                    <a class="@childCss" data-url="@item.Url">
+                                        <div class="nav-icon aceui-tooltip" tooltip="@Html.Raw(item.Name)">
+                                            <span class="@(item.Icon ?? "fa fa-file")"></span>
+                                        </div>
+                                        <span class="nav-title">@Html.Raw(item.Name)</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="ax-content mini">
+        @if (menus.Count > 0)
+        {
+            <div class="ct-navbar">
+                <div class="ct-navbar-title"></div>
+                <div class="ct-navbar-list">
+                    @foreach (var mod in menus)
+                    {
+                        <ul>
+                            @foreach (var item in modules.Where(o => o.ParentId == mod.Id).OrderBy(o => o.OrderNo))
+                            {
+                                <li class="nav-item" data-url="/@item.Url">
+                                    <div class="nav-icon"></div>
+                                    <div class="nav-title">@Html.Raw(item.Name)</div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+            <div class="ct-split">
+                <div class="ct-split-wrap">
+                    <div class="ct-split-bg"></div>
+                    <div class="ct-split-collapse">
+                        <span class="fa fa-chevron-left"></span>
+                        <span class="fa fa-chevron-right"></span>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="ct-wrap">
+            <iframe style="width:100%;height:100%" src="/plat/index/welcome?bg=eaedf1" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+@section startup  {
+<script>
+    $(function () {
+        $('.sidebar-fold').click(function () {
+            var val = 'full';
+            $('.ax-body').toggleClass('ax-sidebar-full').toggleClass('ax-sidebar-mini');
+            if ($('.ax-body').hasClass('ax-sidebar-mini')) {
+                val = 'mini';
+                $('.aceui-tooltip').acetip();
+            } else {
+                val = 'full';
+                $('.aceui-tooltip').tooltip('destroy');
+            }
+            $('.easyui-layout').layout('resize', { width: '100%' });
+            $.cookie('aceplat.layout', val, { expires: 15 });
+        });
+        $('.sidebar-title').click(function () {
+            //$('.sidebar-nav').addClass('sidebar-nav-fold');
+            $(this).closest('.sidebar-nav').toggleClass('sidebar-nav-fold');
+        });
+        $('.nav-item a').click(function () {
+            if ($(this).hasClass('child')) {
+                $('.ax-content').removeClass('mini').find('.ct-split').show('normal');
+                $('.nav-item').removeClass('active');
+                $(this).closest('.nav-item').addClass('active');
+                $('.ct-navbar-title').text($(this).find('span.nav-title').text());
+                $('.ct-navbar-list ul').removeClass('active')
+                    .eq($(this).index('.nav-item a')).addClass('active')
+                    .find('.nav-item').first().trigger('click');
+            }
+            else {
+                $('.nav-item').removeClass('active');
+                $(this).closest('.nav-item').addClass('active');
+                AX.load('/' + $(this).attr('data-url'));
+            }
+        });
+        $('.ct-split-collapse').click(function () {
+            $(this).closest('.ax-content').toggleClass('mini');
+            $('.easyui-layout').layout('resize', { width: '100%' });
+        });
+        $('.ct-navbar .nav-item').click(function () {
+            $('.ct-navbar .nav-item').removeClass('active');
+            $(this).addClass('active');
+            AX.opts._curMods = [];
+            AX.load($(this).attr('data-url'));
+        });
+        if ('@layout' == 'mini') $('.aceui-tooltip').acetip();
+    });
+</script>
+}

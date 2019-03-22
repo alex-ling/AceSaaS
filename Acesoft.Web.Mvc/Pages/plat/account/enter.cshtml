@@ -4,13 +4,5 @@
     ViewData["Title"] = "进入";
 
     var roles = Ace.AC.Roles;
-    if (roles.Contains(989455033017827328))
-    {
-        // 测试用户角色
-        App.Context.Response.Redirect("/iot/test");
-    }
-    else
-    {
-        App.Context.Response.Redirect("/plat/index");
-    }
+    App.Context.Response.Redirect("/proj/index");
 }

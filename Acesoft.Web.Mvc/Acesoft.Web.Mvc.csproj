@@ -9,23 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\webapp\**" />
-    <Compile Remove="Pages\wechat\**" />
-    <Content Remove="Pages\webapp\**" />
-    <Content Remove="Pages\wechat\**" />
-    <EmbeddedResource Remove="Pages\webapp\**" />
-    <EmbeddedResource Remove="Pages\wechat\**" />
-    <None Remove="Pages\webapp\**" />
-    <None Remove="Pages\wechat\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Config\app.config.json" />
-    <Content Remove="Config\data.config.json" />
-    <Content Remove="Config\tenants.config.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.3.0" />
@@ -52,24 +35,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Config\serilog.config.json">
+    <None Update="SqlMaps\cms.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="SqlMaps\cms.config">
+    </None>
+    <None Update="SqlMaps\iot.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="SqlMaps\iot.config">
+    </None>
+    <None Update="SqlMaps\rbac.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="SqlMaps\rbac.config">
+    </None>
+    <None Update="SqlMaps\sys.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="SqlMaps\sys.config">
+    </None>
+    <None Update="SqlMaps\wx.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="SqlMaps\wx.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

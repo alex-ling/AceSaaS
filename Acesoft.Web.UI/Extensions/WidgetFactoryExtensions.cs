@@ -1,12 +1,22 @@
 using System.Collections.Generic;
 using System.Text;
-
+using Acesoft.Util.Helper;
 using Microsoft.AspNetCore.Html;
 
 namespace Acesoft.Web.UI
 {
 	public static class WidgetFactoryExtensions
 	{
+        public static string GetAppUrl(this WidgetFactory ace, string url, params string[] appendQueries)
+        {
+            url = $"/{ace.AppName}/{url}";
+            foreach (var query in appendQueries)
+            {
+                url = UrlHelper.Append(url, query, App.GetQuery(query, ""));
+            }
+            return url;
+        }
+
 		public static IHtmlContent RenderInitScripts(this WidgetFactory ace, bool renderTags = true)
 		{
 			var sb = new StringBuilder();

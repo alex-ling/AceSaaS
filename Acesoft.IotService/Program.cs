@@ -38,7 +38,7 @@ namespace Acesoft.IotService
 			    var input = string.Empty;
 			    if (args == null || args.Length < 1)
 			    {
-				    Console.WriteLine("Welcome to Acesoft.IotService!");
+				    Console.WriteLine("Welcome to AcesoftIotService!");
 				    Console.WriteLine("Please press a key to continue...");
 				    Console.WriteLine("[r]: Run this application as a console application");
 				    Console.WriteLine("[i]: Install this application as a Windows Service");

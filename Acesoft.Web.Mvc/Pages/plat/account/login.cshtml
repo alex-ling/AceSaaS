@@ -36,7 +36,7 @@
             <div class="container">
                 <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
                     <div style="margin:50px 0;padding:30px;background:#fff;opacity:0.90">
-                        <h3 style="color:#08c">平台登录</h3>
+                        <h3 style="color:#08c">系统登录</h3>
                         @{
                             Ace.Form().Id("log").Ajax(a => a.RouteQuery("ReturnUrl").HttpPost("auth", "login")).Content(
                                 @<div class="pt15 pb15">

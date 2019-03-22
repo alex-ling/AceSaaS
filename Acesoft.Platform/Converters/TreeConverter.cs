@@ -38,9 +38,22 @@ namespace Acesoft.Platform
                 }
                 writer.WritePropertyName("children");
             }
-            IEnumerable<DataRow> rows2 = null;
-            rows2 = ((res.Request.Id.HasValue || !res.Data.Columns.Contains("parentid")) ? res.Data.Rows.Cast<DataRow>() : ((!res.Request.RootId.HasValue()) ? res.Data.Select("parentid is null", "orderno") : res.Data.Select("parentid='" + res.Request.RootId + "'", "orderno")));
-            WriteJson(writer, rows2);
+
+            IEnumerable<DataRow> rows = null;
+            if (res.Request.Id.HasValue || !res.Data.Columns.Contains("parentid"))
+            {
+                rows = res.Data.Rows.Cast<DataRow>();
+            }
+            else if (res.Request.RootId.HasValue())
+            {
+                rows = res.Data.Select($"parentid='{res.Request.RootId}'", "orderno");
+            }
+            else
+            {
+                rows = res.Data.Select("parentid is null", "orderno");
+            }
+            WriteJson(writer, rows, res.Request);
+
             if (res.Request.RootName.HasValue())
             {
                 writer.WriteEndObject();
@@ -48,22 +61,35 @@ namespace Acesoft.Platform
             }
         }
 
-        private void WriteJson(JsonWriter writer, IEnumerable<DataRow> rows)
+        private void WriteJson(JsonWriter writer, IEnumerable<DataRow> rows, TreeRequest request)
         {
             writer.WriteStartArray();
+
+            if (request != null && request.NullSelect)
+            {
+                writer.WriteStartObject();
+                writer.WritePropertyName("id");
+                writer.WriteValue("");
+                writer.WritePropertyName("text");
+                writer.WriteValue("　");
+                writer.WriteEndObject();
+            }
+
             foreach (DataRow row in rows)
             {
-                string id = row[0].ToString();
-                string text = row[1].ToString();
+                var id = row[0].ToString();
+                var text = row[1].ToString();
                 if (row.Table.Columns.Contains("title"))
                 {
-                    text = string.Format("<span title=\"{0}\">{1}</span>", row["title"], text);
+                    text = $"<span title=\"{row["title"]}\">{text}</span>";
                 }
+
                 writer.WriteStartObject();
                 writer.WritePropertyName("id");
                 writer.WriteValue(id);
                 writer.WritePropertyName("text");
                 writer.WriteValue(text);
+
                 if (row.Table.Columns.Contains("checked"))
                 {
                     writer.WritePropertyName("checked");
@@ -89,13 +115,14 @@ namespace Acesoft.Platform
                     }
                     writer.WriteEndObject();
                 }
+
                 DataRow[] childRows = null;
-                int num = row.Table.Columns.Contains("childs") ? Convert.ToInt32(row["childs"]) : 0;
+                var childs = row.Table.Columns.Contains("childs") ? Convert.ToInt32(row["childs"]) : 0;
                 if (row.Table.Columns.Contains("parentid"))
                 {
                     childRows = row.Table.Select("parentid='" + id + "'", "orderno");
                 }
-                if (num > 0 && (childRows == null || (childRows != null && childRows.Length == 0)))
+                if (childs > 0 && (childRows == null || (childRows != null && childRows.Length == 0)))
                 {
                     writer.WritePropertyName("state");
                     writer.WriteValue("closed");
@@ -103,8 +130,9 @@ namespace Acesoft.Platform
                 else if (childRows != null && childRows.Length != 0)
                 {
                     writer.WritePropertyName("children");
-                    WriteJson(writer, childRows);
+                    WriteJson(writer, childRows, null);
                 }
+
                 writer.WriteEndObject();
             }
             writer.WriteEndArray();
