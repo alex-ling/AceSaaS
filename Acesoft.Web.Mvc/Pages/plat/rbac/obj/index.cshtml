@@ -2,7 +2,7 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
     ViewData["Title"] = "模块管理";
-    Layout = "_shared/body";
+    Layout = "_shared/back";
 
     Ace.Layout().Fit(true).Items(layout =>
     {
@@ -25,6 +25,7 @@
             {
                 c.Add().Field("name").Title("模块名称").Width(13);
                 c.Add().Field("url").Title("模块URL").Width(12);
+                c.Add().Field("icon").Title("图标").Width(10);
                 c.Add().Field("opnames").Title("操作命令").Width(15);
                 c.Add().Field("remark").Title("备注").Width(15);
                 c.Add().Field("orderno").Title("排序");

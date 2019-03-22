@@ -1,0 +1,42 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("rbac.role").Form(new {
+        scale_id = Ace.AC.User.Scale_Id,
+        name = "",
+        remark = "",
+        orderno = 10,
+        visible = 1,
+        system = 0
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 角色名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">角色说明：</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">角色设置：</div>
+                <div class="col-xs-6">
+                    @Ace.CheckBox().Name("visible").Text("可见　")
+                    @Ace.CheckBox().Name("system").Text("系统")
+                </div>
+                <div class="col-xs-4"><div class="text-warning">系统属性不能删除！</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 排序号：</div>
+                <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Increment(10).Width("100%").Required()</div>
+                <div class="col-xs-4"><div class="text-warning">设置时建议按10，20递增！</div></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
