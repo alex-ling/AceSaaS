@@ -4,14 +4,17 @@
     Layout = "_shared/edit";
     ViewData["Title"] = "编辑";
 
+    var dict = App.GetQuery("dict", "");
+    var ctx = new RequestContext("sys", "get_dictitem_orderno").SetParam(new { dict });
+    var orderno = (int)Ace.Session.ExecuteScalar(ctx);
+
     Ace.View().Id("view").Ajax(ds => ds.DataSource("sys.dictitem").Form(new
     {
-        dict = App.GetQuery("dict", ""),
+        dict = dict,
         parentid = App.GetQuery("parentid", ""),
         value = "",
         name = "",
-        remark = "",
-        orderno = 10,
+        orderno = orderno,
         system = 0
     }).HttpSave()).Content(
         @<div class="container-fluid">
@@ -23,11 +26,6 @@
             <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red">*</span> 项名称：</div>
                 <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
-                <div class="col-xs-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-2 text-r">备注：</div>
-                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
                 <div class="col-xs-4"></div>
             </div>
             <div class="row">

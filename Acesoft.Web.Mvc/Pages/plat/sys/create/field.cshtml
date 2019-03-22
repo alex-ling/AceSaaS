@@ -46,8 +46,8 @@
             <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red">*</span> 字典：</div>
                 <div class="col-xs-6">
-                   @(Ace.ComboBox().Id("dict").Events(e => e.OnChange("onRefChange")).PanelHeight(160)
-                        .Disabled().Ajax(ds => ds.DataSource("sys.dict_list").HttpGet()).Width("100%"))
+                   @(Ace.ComboTree().Id("dict").Events(e => e.OnChange("onRefChange")).PanelHeight(160)
+                        .Disabled().Ajax(ds => ds.DataSource("sys.dict_tree").HttpGet()).Width("100%"))
                 </div>
                 <div class="col-xs-4"><div class="text-warning">选择字典类！</div></div>
             </div>
@@ -103,20 +103,20 @@
         else $('#length').numberbox('enable');
 
         if (index == 8) {
-            $('#dict').combobox({ required: true }).combobox('enable');
+            $('#dict').combotree({ required: true }).combotree('enable');
             $('#ref').textbox('disableValidation').textbox('disable');
         } else if (index > 9) {
-            $('#dict').combobox({ required: false }).combobox('disable');
+            $('#dict').combotree({ required: false }).combotree('disable');
             $('#ref').textbox('enable').textbox('enableValidation');
         } else {
-            $('#dict').combobox({ required: false }).combobox('disable');
+            $('#dict').combotree({ required: false }).combotree('disable');
             $('#ref').textbox('disableValidation').textbox('disable');
         }
     }
     $(function () {
         setTimeout(function () {
             onTypeChange();
-            $('#dict').combobox('setValue', $('#ref').textbox('getValue'));
+            $('#dict').combotree('setValue', $('#ref').textbox('getValue'));
             loading = false;
         }, 100);
     });

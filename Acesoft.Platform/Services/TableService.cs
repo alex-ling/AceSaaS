@@ -207,7 +207,6 @@ namespace Acesoft.Platform.Services
                 case FieldType.varchar:
                 case FieldType.dict:
                 case FieldType.rcode:
-                case FieldType.rkey:
                     return DbType.AnsiString;
 
                 case FieldType.boolean:
@@ -224,6 +223,7 @@ namespace Acesoft.Platform.Services
 
                 case FieldType.key:
                 case FieldType.fkey:
+                case FieldType.rkey:
                     return DbType.Int64;
 
                 default:
