@@ -5,17 +5,9 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class ComboTreeGrid : TreeGrid
 	{
-		public string TextField
-		{
-			get;
-			set;
-		}
+		public string TextField { get; set; }
 
-		public bool? LimitToGrid
-		{
-			get;
-			set;
-		}
+		public bool? LimitToGrid { get; set; }
 
 		public ComboTreeGrid(WidgetFactory ace)
 			: base(ace)

@@ -11,7 +11,7 @@ using Acesoft.Config;
 using Acesoft.Logger;
 using Acesoft.Security;
 
-namespace Acesoft
+namespace Acesoft.Core
 {
     public class Startup : StartupBase
     {

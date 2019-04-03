@@ -27,6 +27,11 @@
                 <div class="col-xs-4"></div>
             </div>
             <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 模块类别：</div>
+                <div class="col-xs-6">@Ace.ComboBox().Name("type").Width("100%").Required().Ajax(ds => ds.Dict("OBJTYPE").HttpGet())</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red"></span> 模块Url：</div>
                 <div class="col-xs-6">@Ace.TextBox().Name("url").Width("100%")</div>
                 <div class="col-xs-4"></div>

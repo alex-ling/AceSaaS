@@ -94,10 +94,6 @@ a:hover {
     text-decoration: none;
 }
 
-.fl, .fr {
-    display: inline;
-}
-
 .fl, .fr s {
     float: left;
 }
@@ -205,6 +201,14 @@ h6, .h6 {
 
 .pr {
     position: relative;
+}
+
+.fit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 .pa {

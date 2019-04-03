@@ -96,7 +96,7 @@ namespace Acesoft
         {
             if (virtualPath.HasValue())
             {
-                var path = Path.Combine(AppContext.BaseDirectory, virtualPath);
+                var path = Path.Combine(AppContext.BaseDirectory, virtualPath.TrimStart('/'));
                 if (mustCreatePath && !Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);

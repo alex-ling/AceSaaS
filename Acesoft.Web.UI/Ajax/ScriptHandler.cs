@@ -2,11 +2,7 @@ namespace Acesoft.Web.UI.Ajax
 {
 	public class ScriptHandler
 	{
-		public string Handler
-		{
-			get;
-			set;
-		}
+		public string Handler { get; set; }
 
 		public bool HasValue()
 		{

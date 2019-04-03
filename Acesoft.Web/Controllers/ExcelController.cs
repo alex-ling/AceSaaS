@@ -1,13 +1,12 @@
 using System;
 
 using Microsoft.AspNetCore.Mvc;
-using Acesoft.Web;
+using Acesoft.Data;
 using Acesoft.Rbac;
 using Acesoft.Web.Mvc;
-using Acesoft.Data;
 using Acesoft.Platform.Office;
 
-namespace Acesoft.NetCore.Api
+namespace Acesoft.Web.Controllers
 {
 	[ApiExplorerSettings(GroupName = "PLAT")]
 	[Route("api/[controller]/[action]")]

@@ -29,7 +29,9 @@ namespace Acesoft
 
         public static IDictionary<string, object> ToDictionary(this JObject json)
         {
-            return json.ToObject<Dictionary<string, object>>();
+            var dict = json.ToObject<Dictionary<string, object>>();
+            dict.Remove("__RequestVerificationToken");
+            return dict;
         }
 
         public static void WriteDbValue(this JsonWriter writer, object val)

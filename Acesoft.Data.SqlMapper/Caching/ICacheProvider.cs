@@ -8,11 +8,7 @@ namespace Acesoft.Data.SqlMapper.Caching
     public interface ICacheProvider
     {
         void Initialize(IDictionary<string, string> props);
-        object this[CacheKey key]
-        {
-            get;
-            set;
-        }
+        object this[CacheKey key] { get; set; }
         bool Remove(CacheKey key);
         void Flush();
     }

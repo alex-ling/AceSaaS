@@ -23,116 +23,43 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnContextMenu = new ScriptEvent("onContextMenu", "title,index");
 
-		public int? Width
-		{
-			get;
-			set;
-		}
+		public int? Width { get; set; }
 
-		public int? Height
-		{
-			get;
-			set;
-		}
+		public int? Height { get; set; }
 
-		public bool? Plain
-		{
-			get;
-			set;
-		}
+		public bool? Plain { get; set; }
 
-		public bool? Fit
-		{
-			get;
-			set;
-		}
+		public bool? Fit { get; set; }
 
-		public bool? Border
-		{
-			get;
-			set;
-		}
+		public bool? Border { get; set; }
 
-		public int? ScrollIncrement
-		{
-			get;
-			set;
-		}
+		public int? ScrollIncrement { get; set; }
 
-		public int? ScrollDuration
-		{
-			get;
-			set;
-		}
+		public int? ScrollDuration { get; set; }
 
-		public List<LinkButton> Tools
-		{
-			get;
-			set;
-		}
+		public List<LinkButton> Tools { get; set; }
 
-		public Position? ToolPosition
-		{
-			get;
-			set;
-		}
+		public Position? ToolPosition { get; set; }
 
-		public Position? TabPosition
-		{
-			get;
-			set;
-		}
+		public Position? TabPosition { get; set; }
 
-		public int? HeaderWidth
-		{
-			get;
-			set;
-		}
+		public int? HeaderWidth { get; set; }
 
-		public int? TabWidth
-		{
-			get;
-			set;
-		}
+		public int? TabWidth { get; set; }
 
-		public int? TabHeight
-		{
-			get;
-			set;
-		}
+		public int? TabHeight { get; set; }
 
-		public int? Selected
-		{
-			get;
-			set;
-		}
+		public int? Selected { get; set; }
 
-		public bool? ShowHeader
-		{
-			get;
-			set;
-		}
+		public bool? ShowHeader { get; set; }
 
-		public bool? Justified
-		{
-			get;
-			set;
-		}
+		public bool? Justified { get; set; }
 
-		public bool? Narrow
-		{
-			get;
-			set;
-		}
+		public bool? Narrow { get; set; }
 
-		public bool? Pill
-		{
-			get;
-			set;
-		}
+		public bool? Pill { get; set; }
 
-		public Tabs(WidgetFactory ace)
-			: base(ace)
+		public Tabs(WidgetFactory ace) : base(ace)
 		{
 			base.Widget = "tabs";
 			Tools = new List<LinkButton>();

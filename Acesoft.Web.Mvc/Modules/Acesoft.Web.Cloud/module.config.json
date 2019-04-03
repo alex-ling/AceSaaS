@@ -1,0 +1,9 @@
+{
+  "name": "Cloud",
+  "description": "云服务支持",
+  "startupType": "Acesoft.Web.Cloud.Startup, Acesoft.Web.Cloud",
+  "mainAssembly": "Acesoft.Web.Cloud.dll",
+  "category": "application",
+  "version": "v1.0.0",
+  "dependencies": []
+}

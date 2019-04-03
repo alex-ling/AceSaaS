@@ -4,17 +4,9 @@ namespace Acesoft.Web.UI.Charts
 {
 	public class Series : OptionBase<Series>
 	{
-		public ChartType Type
-		{
-			get;
-			set;
-		}
+		public ChartType Type { get; set; }
 
-		public IList<SeriesData> Data
-		{
-			get;
-			set;
-		} = new List<SeriesData>();
+		public IList<SeriesData> Data { get; set; }= new List<SeriesData>();
 
 
 		public Series Name(string name)

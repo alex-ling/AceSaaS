@@ -3,10 +3,9 @@ using System;
 
 namespace Acesoft.Web.UI.Widgets.Fluent
 {
-	public class LayoutBuilder : ListBuilder<Layout, LayoutItem, LayoutBuilder>
+	public class LayoutBuilder : ListBuilder<Layout, LayoutBuilder, LayoutItem, LayoutItemBuilder>
 	{
-		public LayoutBuilder(Layout component)
-			: base(component)
+		public LayoutBuilder(Layout component) : base(component)
 		{
 		}
 

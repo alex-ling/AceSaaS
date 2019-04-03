@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-using Acesoft.Web;
-using Acesoft.Web.Mvc;
-using Acesoft.Util;
 using Acesoft.Rbac;
+using Acesoft.Web.Mvc;
 
-namespace Acesoft.NetCore.Api
+namespace Acesoft.Web.Controllers
 {
 	[ApiExplorerSettings(GroupName = "RBAC")]
 	[Route("api/[controller]/[action]")]

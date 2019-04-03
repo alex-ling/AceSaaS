@@ -10,83 +10,31 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnValidate = new ScriptEvent("onValidate", "valid");
 
-		public bool? Required
-		{
-			get;
-			set;
-		}
+		public bool? Required { get; set; }
 
-		public string ValidType
-		{
-			get;
-			set;
-		}
+		public string ValidType { get; set; }
 
-		public int? Delay
-		{
-			get;
-			set;
-		}
+		public int? Delay { get; set; }
 
-		public string MissingMessage
-		{
-			get;
-			set;
-		}
+		public string MissingMessage { get; set; }
 
-		public string InvalidMessage
-		{
-			get;
-			set;
-		}
+		public string InvalidMessage { get; set; }
 
-		public Position? TipPosition
-		{
-			get;
-			set;
-		}
+		public Position? TipPosition { get; set; }
 
-		public int? DeltaX
-		{
-			get;
-			set;
-		}
+		public int? DeltaX { get; set; }
 
-		public bool? Novalidate
-		{
-			get;
-			set;
-		}
+		public bool? Novalidate { get; set; }
 
-		public bool? Editable
-		{
-			get;
-			set;
-		}
+		public bool? Editable { get; set; }
 
-		public bool? Disabled
-		{
-			get;
-			set;
-		}
+		public bool? Disabled { get; set; }
 
-		public bool? Readonly
-		{
-			get;
-			set;
-		}
+		public bool? Readonly { get; set; }
 
-		public bool? ValidateOnCreate
-		{
-			get;
-			set;
-		}
+		public bool? ValidateOnCreate { get; set; }
 
-		public bool? ValidateOnBlur
-		{
-			get;
-			set;
-		}
+		public bool? ValidateOnBlur { get; set; }
 
 		public ValidateBox(WidgetFactory ace)
 			: base(ace)

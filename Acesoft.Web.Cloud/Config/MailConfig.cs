@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Acesoft.Web.Cloud
+namespace Acesoft.Web.Cloud.Config
 {
     public class MailConfig
     {

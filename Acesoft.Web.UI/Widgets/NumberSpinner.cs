@@ -5,35 +5,15 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class NumberSpinner : Spinner
 	{
-		public int? Precision
-		{
-			get;
-			set;
-		}
+		public int? Precision { get; set; }
 
-		public string DecimalSeparator
-		{
-			get;
-			set;
-		}
+		public string DecimalSeparator { get; set; }
 
-		public string GroupSeparator
-		{
-			get;
-			set;
-		}
+		public string GroupSeparator { get; set; }
 
-		public string Prefix
-		{
-			get;
-			set;
-		}
+		public string Prefix { get; set; }
 
-		public string Suffix
-		{
-			get;
-			set;
-		}
+		public string Suffix { get; set; }
 
 		public NumberSpinner(WidgetFactory ace)
 			: base(ace)

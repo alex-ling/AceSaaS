@@ -20,6 +20,16 @@ namespace Acesoft.Util
             return new SwapByteCrypto().Decrypt(bytes);
         }
 
+        public static byte[] EncryptX(byte[] bytes)
+        {
+            return new SwapByteCryptoX().Encrypt(bytes);
+        }
+
+        public static byte[] DecryptX(byte[] bytes)
+        {
+            return new SwapByteCryptoX().Decrypt(bytes);
+        }
+
         //sha1
         public static string ComputeSHA1Signature(string key, string data)
         {

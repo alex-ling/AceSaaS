@@ -14,41 +14,12 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnContextMenu = new ScriptEvent("OnContextMenu", "");
 
-		public string TreeField
-		{
-			get;
-			set;
-		}
-
-		public bool? Animate
-		{
-			get;
-			set;
-		}
-
-		public bool? Checkbox
-		{
-			get;
-			set;
-		}
-
-		public bool? CascadeCheck
-		{
-			get;
-			set;
-		}
-
-		public bool? OnlyLeafCheck
-		{
-			get;
-			set;
-		}
-
-		public bool? Lines
-		{
-			get;
-			set;
-		}
+		public string TreeField { get; set; }
+		public bool? Animate { get; set; }
+		public bool? Checkbox { get; set; }
+		public bool? CascadeCheck { get; set; }
+		public bool? OnlyLeafCheck { get; set; }
+		public bool? Lines { get; set; }
 
 		public TreeGrid(WidgetFactory ace)
 			: base(ace)

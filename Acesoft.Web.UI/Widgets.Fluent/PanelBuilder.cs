@@ -17,6 +17,7 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 			return this;
 		}
 	}
+
 	public abstract class PanelBuilder<Widget, Builder> : ContentBuilder<Widget, Builder> where Widget : Panel where Builder : WidgetBuilder<Widget, Builder>
 	{
 		public PanelBuilder(Widget component)

@@ -1,6 +1,6 @@
 {
   "default": {
-    "connectionString": "server=59.110.17.56;database=acecms;uid=sa;pwd=lb+cb=17&22;multipleactiveresultsets=true",
+    "connectionString": "server=39.98.70.141;database=aceiot;uid=sa;pwd=xb&db=22&17;multipleactiveresultsets=true",
     "databaseType": "SqlServer",
     "sqlMaps": [ "SqlMaps" ]
   }

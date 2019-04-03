@@ -20,14 +20,14 @@ namespace Acesoft.Web.UI.Widgets
 			{
 				var gridRequest = new GridRequest
 				{
-					Page = new int?(App.GetQuery("page", Paging.PageNumber)),
-					Rows = new int?(App.GetQuery("rows", Paging.PageSize))
+					Page = App.GetQuery("page", Paging.PageNumber),
+					Rows = App.GetQuery("rows", Paging.PageSize)
 				};
 				var ctx = new RequestContext(ds)
                     .SetCmdType(CmdType.query)
                     .SetParam(gridRequest);
 				var gridResponse = Ace.Session.QueryPageTable(ctx, gridRequest);
-				base.Data = gridResponse.Data;
+				base.Model = gridResponse.Data;
 				Paging.Load(gridResponse);
 				OnLoaded(this);
 			}

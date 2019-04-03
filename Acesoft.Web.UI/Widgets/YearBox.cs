@@ -5,17 +5,9 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class YearBox : ComboBox, IDataBind
 	{
-		public int Start
-		{
-			get;
-			set;
-		}
+		public int Start { get; set; }
 
-		public int End
-		{
-			get;
-			set;
-		}
+		public int End { get; set; }
 
 		public YearBox(WidgetFactory ace)
 			: base(ace)

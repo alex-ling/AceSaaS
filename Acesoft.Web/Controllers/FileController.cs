@@ -7,13 +7,12 @@ using System.Text.RegularExpressions;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Acesoft.Web;
+using Newtonsoft.Json.Linq;
 using Acesoft.Rbac;
 using Acesoft.Web.Mvc;
 using Acesoft.Util;
-using Newtonsoft.Json.Linq;
 
-namespace Acesoft.NetCore.Api
+namespace Acesoft.Web.Controllers
 {
 	[ApiExplorerSettings(GroupName = "PLAT")]
 	[Route("api/[controller]/[action]")]
@@ -118,13 +117,9 @@ namespace Acesoft.NetCore.Api
 		[HttpPost, MultiAuthorize, Action("上传文件")]
 		public IActionResult Upload(IFormCollection form)
 		{
-			var folder = "/wwwroot/" + App.GetQuery("folder", "uploads") + "/";
+			var folder = App.GetQuery("folder", "uploads");
 			folder = AppCtx.AC.Replace(folder);
-			var path = App.GetLocalPath(folder);
-			if (!Directory.Exists(path))
-			{
-				Directory.CreateDirectory(path);
-			}
+			var path = App.GetLocalPath(folder, true);
 
 			IFormFile formFile = form.Files["file"];
 			if (formFile == null)
@@ -134,11 +129,7 @@ namespace Acesoft.NetCore.Api
 			var fileName = DateTime.Now.ToDHMSF() + "_" + formFile.FileName;
             FileHelper.Write(path + fileName, formFile.OpenReadStream());
 
-			return Ok(new
-			{
-				success = true,
-				url = folder.Substring("/wwwroot".Length) + fileName
-			});
+			return Ok(folder + fileName);
 		}
 
 		[HttpGet, Action("加载文件")]

@@ -4,11 +4,7 @@ namespace Acesoft.Web.UI.Charts
 {
 	public class OptionBase<T> where T : OptionBase<T>
 	{
-		public IDictionary<string, object> Options
-		{
-			get;
-			set;
-		} = new Dictionary<string, object>();
+		public IDictionary<string, object> Options { get; set; }= new Dictionary<string, object>();
 
 
 		public T Option(string name, object value)

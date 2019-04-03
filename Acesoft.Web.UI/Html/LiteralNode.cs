@@ -7,11 +7,7 @@ namespace Acesoft.Web.UI.Html
 {
 	public class LiteralNode : IHtmlNode
 	{
-		public string Content
-		{
-			get;
-			set;
-		}
+		public string Content { get; set; }
 
 		public IList<IHtmlNode> Children
 		{

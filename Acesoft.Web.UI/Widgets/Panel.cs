@@ -41,209 +41,73 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnMinimize = new ScriptEvent("onMinimize", "");
 
-		public string Title
-		{
-			get;
-			set;
-		}
+		public string Title { get; set; }
 
-		public string IconCls
-		{
-			get;
-			set;
-		}
+		public string IconCls { get; set; }
 
-		public int? Width
-		{
-			get;
-			set;
-		}
+		public int? Width { get; set; }
 
-		public int? Height
-		{
-			get;
-			set;
-		}
+		public int? Height { get; set; }
 
-		public int? Left
-		{
-			get;
-			set;
-		}
+		public int? Left { get; set; }
 
-		public int? Top
-		{
-			get;
-			set;
-		}
+		public int? Top { get; set; }
 
-		public string Cls
-		{
-			get;
-			set;
-		}
+		public string Cls { get; set; }
 
-		public string HeaderCls
-		{
-			get;
-			set;
-		}
+		public string HeaderCls { get; set; }
 
-		public string BodyCls
-		{
-			get;
-			set;
-		}
+		public string BodyCls { get; set; }
 
-		public dynamic Style
-		{
-			get;
-			set;
-		}
+		public dynamic Style { get; set; }
 
-		public bool? Fit
-		{
-			get;
-			set;
-		}
+		public bool? Fit { get; set; }
 
-		public bool? Border
-		{
-			get;
-			set;
-		}
+		public bool? Border { get; set; }
 
-		public bool? DoSize
-		{
-			get;
-			set;
-		}
+		public bool? DoSize { get; set; }
 
-		public bool? NoHeader
-		{
-			get;
-			set;
-		}
+		public bool? NoHeader { get; set; }
 
-		public string Content
-		{
-			get;
-			set;
-		}
+		public string Content { get; set; }
 
-		public Align? HAlign
-		{
-			get;
-			set;
-		}
+		public Align? HAlign { get; set; }
 
-		public Direction? TitleDirection
-		{
-			get;
-			set;
-		}
+		public Direction? TitleDirection { get; set; }
 
-		public bool? Collapsible
-		{
-			get;
-			set;
-		}
+		public bool? Collapsible { get; set; }
 
-		public bool? Minimizable
-		{
-			get;
-			set;
-		}
+		public bool? Minimizable { get; set; }
 
-		public bool? Maximizable
-		{
-			get;
-			set;
-		}
+		public bool? Maximizable { get; set; }
 
-		public bool? Closable
-		{
-			get;
-			set;
-		}
+		public bool? Closable { get; set; }
 
-		public List<LinkButton> Tools
-		{
-			get;
-			set;
-		}
+		public List<LinkButton> Tools { get; set; }
 
-		public string Header
-		{
-			get;
-			set;
-		}
+		public string Header { get; set; }
 
-		public string Footer
-		{
-			get;
-			set;
-		}
+		public string Footer { get; set; }
 
-		public Animation? OpenAnimation
-		{
-			get;
-			set;
-		}
+		public Animation? OpenAnimation { get; set; }
 
-		public int? OpenDuration
-		{
-			get;
-			set;
-		}
+		public int? OpenDuration { get; set; }
 
-		public Animation? CloseAnimation
-		{
-			get;
-			set;
-		}
+		public Animation? CloseAnimation { get; set; }
 
-		public int? CloseDuration
-		{
-			get;
-			set;
-		}
+		public int? CloseDuration { get; set; }
 
-		public bool? Collapsed
-		{
-			get;
-			set;
-		}
+		public bool? Collapsed { get; set; }
 
-		public bool? Minimized
-		{
-			get;
-			set;
-		}
+		public bool? Minimized { get; set; }
 
-		public bool? Maximized
-		{
-			get;
-			set;
-		}
+		public bool? Maximized { get; set; }
 
-		public bool? Closed
-		{
-			get;
-			set;
-		}
+		public bool? Closed { get; set; }
 
-		public string Href
-		{
-			get;
-			set;
-		}
+		public string Href { get; set; }
 
-		public bool? Cache
-		{
-			get;
-			set;
-		}
+		public bool? Cache { get; set; }
 
 		public Panel(WidgetFactory ace)
 			: base(ace)

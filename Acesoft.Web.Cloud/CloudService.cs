@@ -6,6 +6,7 @@ using Acesoft.Web.Cloud.Aliyun;
 using Acesoft.Web.Cloud.Mail;
 using Acesoft.Web.Cloud.Moji;
 using Acesoft.Web.Cloud.Tencent;
+using Acesoft.Web.Cloud.Config;
 
 namespace Acesoft.Web.Cloud
 {

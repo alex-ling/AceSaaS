@@ -1,0 +1,9 @@
+{
+  "name": "IoT",
+  "description": "物联网服务",
+  "startupType": "Acesoft.Web.IoT.Startup, Acesoft.Web.IoT",
+  "mainAssembly": "Acesoft.Web.IoT.dll",
+  "category": "application",
+  "version": "v1.0.0",
+  "dependencies": [ "Cloud" ]
+}

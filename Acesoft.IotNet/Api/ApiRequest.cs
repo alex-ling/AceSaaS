@@ -4,29 +4,13 @@ namespace Acesoft.IotNet.Api
 {
 	public class ApiRequest : IRequestInfo
 	{
-		public string Key
-		{
-			get;
-			set;
-		}
+		public string Key { get; set; }
 
-		public string Action
-		{
-			get;
-			set;
-		}
+		public string Action { get; set; }
 
-		public string Cmd
-		{
-			get;
-			set;
-		}
+		public string Cmd { get; set; }
 
-		public string Body
-		{
-			get;
-			set;
-		}
+		public string Body { get; set; }
 
 		public ApiRequest(string source)
 		{

@@ -5,17 +5,9 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class SplitButton : LinkButton
 	{
-		public string Menu
-		{
-			get;
-			set;
-		}
+		public string Menu { get; set; }
 
-		public int? Duration
-		{
-			get;
-			set;
-		}
+		public int? Duration { get; set; }
 
 		public SplitButton(WidgetFactory ace)
 			: base(ace)

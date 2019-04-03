@@ -6,8 +6,10 @@ namespace Acesoft.Cache
 {
     public class CacheConfig
     {
-        public bool EnabledDistributedRedisCache { get; set; }
-        public string RedisCacheServer { get; set; }
-        public string RedisCacheInstance { get; set; }
+        public bool EnabledDistributedCache { get; set; }
+        public string ConnectionString { get; set; }
+
+        public bool EnabledCluster { get; set; }
+        public string[] ConnectionStrings { get; set; }
     }
 }

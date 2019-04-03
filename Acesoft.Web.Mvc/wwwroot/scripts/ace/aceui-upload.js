@@ -70,8 +70,8 @@
                 }
                 else if (up._opts.dir) {
                     AX.ajax({
-                        url: AX.api({ api: 'file/delfile' }),
-                        data: { file: '/wwwroot' + file.url },
+                        url: AX.api({ api: 'file/deletefile' }),
+                        data: { file: '/' + file.url },
                         type: 'delete',
                         cb: function () {
                             up._box.val(up._box.val().replace("," + file.url, ""));
@@ -208,8 +208,7 @@
                     //回调成功 info.response;
                     if (up._opts.dir) {
                         if (!up._opts.bucket) {
-                            var res = JSON.parse(info.response).value;
-                            file.url = res.url;
+                            file.url = JSON.parse(info.response).value;
                         }
                         $('#file-' + file.id).find('a.lk').attr('href', file.url)
                             .end().find('img').attr('src', file.url);

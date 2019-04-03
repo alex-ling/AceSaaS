@@ -20,7 +20,7 @@ namespace Acesoft.Web.Controllers
     public class CrudController : ApiControllerBase
     {
         [HttpPost, MultiAuthorize, DataSource, Action("新增数据")]
-        public async Task<IActionResult> Post([FromBody] JObject data)
+        public async Task<IActionResult> Post([FromBody]JObject data)
         {
             CheckDataSourceParameter();
 
@@ -44,7 +44,7 @@ namespace Acesoft.Web.Controllers
         }
 
         [HttpPut, MultiAuthorize, DataSource, Action("编辑数据")]
-        public async Task<IActionResult> Put([FromBody] JObject data)
+        public async Task<IActionResult> Put([FromBody]JObject data)
         {
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.update)
@@ -104,7 +104,7 @@ namespace Acesoft.Web.Controllers
         }
 
         [HttpGet, MultiAuthorize, DataSource, Action("查询Grid")]
-        public IActionResult Grid([FromQuery] GridRequest request)
+        public IActionResult Grid([FromQuery]GridRequest request)
         {
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.query)
@@ -131,7 +131,7 @@ namespace Acesoft.Web.Controllers
         }
 
         [HttpGet, MultiAuthorize, DataSource, Action("查询Tree")]
-        public IActionResult Tree([FromQuery] TreeRequest request)
+        public IActionResult Tree([FromQuery]TreeRequest request)
         {
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.query)

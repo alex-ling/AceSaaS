@@ -28,6 +28,17 @@ namespace Acesoft.Web.UI.Widgets.Html
 				}
 				base.Component.Columns[0].Insert(0, dataGridColumn);
 			}
+            if (!base.Component.Sortable)
+            {
+                this.Component.FrozenColumns.Each(row =>
+                {
+                    row.Each(col => col.Sortable = false);
+                });
+                this.Component.Columns.Each(row =>
+                {
+                    row.Each(col => col.Sortable = false);
+                });
+            }
 			if (base.Component.EditUrl.HasValue())
 			{
 				base.Options["editUrl"] = base.Component.EditUrl;
@@ -60,15 +71,15 @@ namespace Acesoft.Web.UI.Widgets.Html
 			{
 				base.Options["export"] = base.Component.Export;
 			}
-			if (Enumerable.Any<IList<DataGridColumn>>((IEnumerable<IList<DataGridColumn>>)base.Component.Columns))
+			if (base.Component.Columns.Any())
 			{
 				base.Options["columns"] = base.Component.Columns;
 			}
-			if (Enumerable.Any<DataGridColumn>((IEnumerable<DataGridColumn>)base.Component.FrozenColumns))
+			if (base.Component.FrozenColumns.Any())
 			{
 				base.Options["frozenColumns"] = base.Component.FrozenColumns;
 			}
-			if (Enumerable.Any<LinkButton>((IEnumerable<LinkButton>)base.Component.Toolbar))
+			if (base.Component.Toolbar.Any())
 			{
 				base.Options["toolbar"] = base.Component.Toolbar;
 			}
@@ -148,7 +159,7 @@ namespace Acesoft.Web.UI.Widgets.Html
 			{
 				base.Options["pageSize"] = base.Component.PageSize;
 			}
-			if (Enumerable.Any<int>((IEnumerable<int>)base.Component.PageList))
+			if (base.Component.PageList.Any())
 			{
 				base.Options["pageList"] = base.Component.PageList;
 			}

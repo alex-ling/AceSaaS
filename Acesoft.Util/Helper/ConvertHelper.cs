@@ -16,7 +16,7 @@ namespace Acesoft.Util
                 return new Dictionary<string, object>(dictionary, StringComparer.OrdinalIgnoreCase);
             }
 
-            dictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            dictionary = new Dictionary<string, object>();
             if (value != null)
             {
                 foreach (var property in Dynamic.GetProperties(value.GetType()))

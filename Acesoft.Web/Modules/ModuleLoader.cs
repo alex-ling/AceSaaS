@@ -39,7 +39,7 @@ namespace Acesoft.Web.Modules
             if (!loaded)
             {
                 // load modules in references
-                Startups.Add(new Acesoft.Startup());
+                Startups.Add(new Acesoft.Core.Startup());
                 Startups.Add(new Acesoft.Data.Startup());
                 Startups.Add(new Acesoft.Platform.Startup());
                 Startups.Add(new Acesoft.Rbac.Startup());

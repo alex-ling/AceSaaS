@@ -39,7 +39,7 @@ namespace Acesoft.IotNet.Iot
 
 		private void LoadData()
 		{
-			Body = CryptoHelper.Decrypt(EncryptedBody);
+			Body = CryptoHelper.DecryptX(EncryptedBody);
 			BodyHex = Body.ToHex();
 			Length = Body.Length;
 
@@ -108,7 +108,7 @@ namespace Acesoft.IotNet.Iot
 
 			Body = list.CloneRange(5, Length).ToArray();
 			BodyHex = Body.ToHex();
-			EncryptedBody = CryptoHelper.Encrypt(Body);
+			EncryptedBody = CryptoHelper.EncryptX(Body);
 
 			list.RemoveRange(5, Length);
 			list.AddRange(EncryptedBody);

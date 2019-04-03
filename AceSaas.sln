@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.Cms", "Acesoft.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Rbac", "Acesoft.Rbac\Acesoft.Rbac.csproj", "{C626AC93-BC67-408E-B5C3-A457715E9431}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.Iot", "Acesoft.Web.Iot\Acesoft.Web.Iot.csproj", "{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.IoT", "Acesoft.Web.Iot\Acesoft.Web.IoT.csproj", "{2A518A72-4785-4FF2-8B22-E7FA3A02B0EE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acesoft.Web.UI", "Acesoft.Web.UI\Acesoft.Web.UI.csproj", "{7E289659-2C52-4F1B-AB21-B6434F4B0798}"
 EndProject
@@ -58,6 +58,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.IotService", "Acesoft.IotService\Acesoft.IotService.csproj", "{CC7227DA-C934-490E-A049-1CB47535B89B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.IotNet", "Acesoft.IotNet\Acesoft.IotNet.csproj", "{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{8245D319-1ACA-42A7-84CE-3AB3EC2874EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

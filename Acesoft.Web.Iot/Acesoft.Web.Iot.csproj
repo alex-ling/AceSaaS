@@ -5,9 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Core\Acesoft.Core.csproj" />
+    <ProjectReference Include="..\Acesoft.Web.Cloud\Acesoft.Web.Cloud.csproj" />
+    <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="module.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NPOI" Version="2.4.1" />
+    <PackageReference Include="SuperSocket.ClientEngine" Version="0.10.0" />
+    <PackageReference Include="SuperSocket.ProtoBase" Version="1.7.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\Lib\WebSocket4Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

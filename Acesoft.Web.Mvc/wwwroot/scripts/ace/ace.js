@@ -94,7 +94,7 @@
         // 加载页面
         load: function (url) {
             if (url.substr(0, 1) != '/') url = ax.path(url);
-            $('.ct-wrap').find('iframe').attr('src', ax.aurl(url, 'nav', '1'));
+            $('.ct-wrap').find('iframe').attr('src', url);
         },
         go: function (url) {
             var ix = url.indexOf('|');
@@ -120,6 +120,23 @@
                     onSubmit(function () {
                         AX.ok();
                         AX.gourl($(this).attr('data-url'));
+                    });
+                }
+            });
+        },
+        initBk: function () {
+            $('.ct-title').append('<button class="fr btn btn-default btn-xs ml10 mt8" data-cmd="max"><span class="fa fa-window-maximize"></span> 全屏打开</button>');
+            $('.ct-title').append('<button class="fr btn btn-default btn-xs ml20 mt8" data-cmd="reload"><span class="fa fa-refresh"></span> 刷新</button>');
+            $('.ct-wrap .btn[data-cmd]').click(function () {
+                var cmd = $(this).attr('data-cmd');
+                if (cmd == 'reload') AX.reload();
+                else if (cmd == 'max') window.open(window.location.href.replace('&nav=1', ''));
+                else if (cmd == 'back') AX.back();
+                else if (cmd == 'save') onSubmit(AX.ok);
+                else if (cmd == 'save-back') {
+                    onSubmit(function () {
+                        AX.ok();
+                        if (cmd.indexOf('back') >= 0) AX.back();
                     });
                 }
             });
@@ -307,7 +324,7 @@
                 case 'bool':
                     return v == "1" ? '<span class="icon icon-ok"></span>' : '';
                 case 'action':
-                    return ax.format('<a class="grid" onclick="{0}(\'' + v + '\',\'' + rd.id + '\')" title="{1}">', exp.split('=')) + v + '</a>';
+                    return ax.format('<a href="javascript:void()" class="grid" onclick="{0}(\'' + v + '\',\'' + rd.id + '\')" title="{1}">', exp.split('=')) + v + '</a>';
                 case 'link':
                     if (v.substr(0, 1) == ',') v = v.substr(1);
                     if (v != '') return '<a target="_blank" href="' + ax.objstr(exp, rd) + '">' + v + '</a>';
@@ -550,6 +567,38 @@
                     default: return $0.substr(1, $0.length - 2);
                 }
             });
+        },
+        iframe: {
+            resolution: 200,
+            iframes: [],
+            interval: null,
+            Iframe: function () {
+                this.element = arguments[0];
+                this.cb = arguments[1];
+                this.hasTracked = false;
+            },
+            track: function (element, cb) {
+                this.iframes.push(new this.Iframe(element, cb));
+                if (!this.interval) {
+                    var _this = this;
+                    this.interval = setInterval(function () { _this.checkClick(); }, this.resolution);
+                }
+            },
+            checkClick: function () {
+                if (document.activeElement) {
+                    var activeElement = document.activeElement;
+                    for (var i in this.iframes) {
+                        if (activeElement === this.iframes[i].element) {
+                            if (this.iframes[i].hasTracked == false) {
+                                this.iframes[i].cb.apply(window, []);
+                                this.iframes[i].hasTracked = true;
+                            }
+                        } else {
+                            this.iframes[i].hasTracked = false;
+                        }
+                    }
+                }
+            }
         }
     };
 
@@ -565,19 +614,4 @@ $(function () {
     }
     // auto focus.
     AX.tfocus();
-
-    // 加载
-    $('.ct-title').append('<button class="fr btn btn-default btn-xs ml20 mt8" data-cmd="reload"><span class="fa fa-refresh"></span> 刷新</button>');
-    $('.ct-wrap .btn[data-cmd]').click(function () {
-        var cmd = $(this).attr('data-cmd');
-        if (cmd == 'reload') AX.reload();
-        else if (cmd == 'back') AX.back();
-        else if (cmd == 'save') onSubmit(AX.ok);
-        else if (cmd == 'save-back') {
-            onSubmit(function () {
-                AX.ok();
-                if (cmd.indexOf('back') >= 0) AX.back();
-            });
-        }
-    });
 });

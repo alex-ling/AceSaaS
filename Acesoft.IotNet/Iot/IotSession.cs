@@ -5,17 +5,9 @@ namespace Acesoft.IotNet.Iot
 {
 	public class IotSession : AppSession<IotSession, IotRequest>
 	{
-		public string SessionId
-		{
-			get;
-			set;
-		}
+		public string SessionId { get; set; }
 
-		public IotDevice Device
-		{
-			get;
-			set;
-		}
+		public IotDevice Device { get; set; }
 
 		protected override void OnInit()
 		{

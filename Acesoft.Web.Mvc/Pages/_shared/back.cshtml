@@ -1,9 +1,9 @@
 ﻿@model Acesoft.Web.UI.RazorPages.WebPageBase
 @{ 
-    var showNav = App.GetQuery("nav", "") == "1";
+    var showNav = ViewBag.ShowNav ?? true;
     var showDisplay = showNav ? "" : "display:none";
     var showHeight = showNav ? "top:56px" : "";
-    var showBack = $"background:#{(showNav ? "f5f5f5" : App.GetQuery("bg", "fff"))}";
+    var showBack = $"background:#{App.GetQuery("bg", "f5f5f5")}";
 }
 <!DOCTYPE html>
 <html>
@@ -52,5 +52,6 @@
 <script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
 <script src="~/scripts/signalr/dist/browser/signalr.min.js"></script>
 <script src="~/scripts/ace/js/ace.min.js" asp-append-version="true"></script></environment>
-@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)</body>
+@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)<script>$(function () { AX.initBk() })</script>
+</body>
 </html>

@@ -14,7 +14,7 @@ namespace Acesoft.Web.UI.Builder
 
 		public virtual Builder DataItem(dynamic dataItem)
 		{
-			base.Component.Data = (object)dataItem;
+			base.Component.Model = (object)dataItem;
 			return this as Builder;
 		}
 

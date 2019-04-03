@@ -244,6 +244,12 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 			return this as Builder;
 		}
 
+        public virtual Builder Sortable(bool sortable = true)
+        {
+            base.Component.Sortable = sortable;
+            return this as Builder;
+        }
+
 		public Builder Ajax(Action<DataSourceBuilder> ajaxAction)
 		{
 			ajaxAction(new DataSourceBuilder(base.Component.DataSource).Controller("crud").Action("grid"));
@@ -259,9 +265,9 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 			return this as Builder;
 		}
 
-		public Builder FrozenColumns(Action<ItemsBuilder<DataGridColumn, DataGridColumnBuilder>> addAction)
+		public Builder FrozenColumns(Action<RowItemsBuilder<DataGridColumn, DataGridColumnBuilder>> addAction)
 		{
-			addAction(new ItemsBuilder<DataGridColumn, DataGridColumnBuilder>(base.Component.FrozenColumns, () => new DataGridColumn(base.Component.Ace)
+			addAction(new RowItemsBuilder<DataGridColumn, DataGridColumnBuilder>(base.Component.FrozenColumns, () => new DataGridColumn(base.Component.Ace)
 			{
 				Grid = base.Component
 			}, (DataGridColumn col) => new DataGridColumnBuilder(col)));

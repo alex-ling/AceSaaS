@@ -5,35 +5,15 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class CheckBox : WidgetBase
 	{
-		public string Text
-		{
-			get;
-			set;
-		}
+		public string Text { get; set; }
 
-		public string Value
-		{
-			get;
-			set;
-		}
+		public string Value { get; set; }
 
-		public string Group
-		{
-			get;
-			set;
-		}
+		public string Group { get; set; }
 
-		public bool Checked
-		{
-			get;
-			set;
-		}
+		public bool Checked { get; set; }
 
-		public InputType Type
-		{
-			get;
-			set;
-		}
+		public InputType Type { get; set; }
 
 		public CheckBox(WidgetFactory ace)
 			: base(ace)

@@ -9,35 +9,15 @@ namespace Acesoft.Web.UI.Widgets
 	{
 		public static readonly ScriptEvent OnSelect = new ScriptEvent("onSelect", "date");
 
-		public string CurrentText
-		{
-			get;
-			set;
-		}
+		public string CurrentText { get; set; }
 
-		public string CloseText
-		{
-			get;
-			set;
-		}
+		public string CloseText { get; set; }
 
-		public string OkText
-		{
-			get;
-			set;
-		}
+		public string OkText { get; set; }
 
-		public IList<LinkButton> Buttons
-		{
-			get;
-			set;
-		}
+		public IList<LinkButton> Buttons { get; set; }
 
-		public string SharedCalendar
-		{
-			get;
-			set;
-		}
+		public string SharedCalendar { get; set; }
 
 		public DateBox(WidgetFactory ace)
 			: base(ace)

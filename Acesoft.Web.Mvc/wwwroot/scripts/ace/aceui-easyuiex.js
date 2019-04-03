@@ -118,6 +118,17 @@ $.extend($.fn.tree.defaults, {
     }
 });
 $.extend($.fn.tree.methods, {
+    /* select first leaf node 
+     */
+    selectLeaf: function (jq) {
+        var node = jq.tree('getRoot');
+        var childs = jq.tree('getChildren', node.target);
+        while (childs.length) {
+            node = childs[0];
+            childs = jq.tree('getChildren', node.target);
+        }
+        jq.tree('select', node.target);
+    },
     /* getLevel: return level or the level's node when error msg when null.
      * target as: 
      * 1. underfined: selectedLevel(n), null(0)

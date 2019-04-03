@@ -39,6 +39,11 @@ namespace Acesoft.Web.UI
 			return new AccordionBuilder(new Accordion(this));
 		}
 
+        public virtual BrowseBuilder Browse()
+        {
+            return new BrowseBuilder(new Browse(this));
+        }
+
 		public virtual LinkButtonBuilder Button()
 		{
 			return new LinkButtonBuilder(new LinkButton(this)).Plain(true).Css("aceui");

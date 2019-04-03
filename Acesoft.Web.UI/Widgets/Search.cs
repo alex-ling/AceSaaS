@@ -7,17 +7,9 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class Search : Form
 	{
-		public bool? Button
-		{
-			get;
-			set;
-		}
+		public bool? Button { get; set; }
 
-		public IList<IHtmlContent> Tools
-		{
-			get;
-			set;
-		}
+		public IList<IHtmlContent> Tools { get; set; }
 
 		public Search(WidgetFactory ace)
 			: base(ace)

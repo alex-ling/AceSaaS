@@ -3,7 +3,7 @@
     // 定义aceui及selector[.aceui-widget]转化方法
     $.aceui = {
         auto: true,
-        plugins: ['uploadbox', 'kindeditor', 'echart'],
+        plugins: ['uploadbox', 'kindeditor', 'echart', 'iframe'],
         parse: function (context) {
             for (var i = 0; i < $.aceui.plugins.length; i++) {
                 var name = $.aceui.plugins[i], ctor = name;
@@ -361,5 +361,40 @@
         items: ['fullscreen', 'source', '|', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', 'emoticons', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'image', 'link', 'table', 'wordpaste'],
         cssData: '.ke-content p {text-indent:2em;line-height:150%;padding:0.2em 0;}',
         filterMode: false
+    };
+})(jQuery);
+
+// $.fn.iframe.
+(function ($) {
+    $.fn.iframe = function (options, param) {
+        if (typeof options == 'string') {
+            return $.fn.iframe.methods[options](this, param);
+        }
+
+        options = options || {};
+        return this.each(function () {
+            var state = $.data(this, 'iframe');
+            if (state) {
+                $.extend(state.options, options);
+            } else {
+                state = $.data(this, 'iframe', {
+                    options: $.extend({}, $.fn.iframe.defaults, $.parser.parseOptions(this), options)
+                });
+            }
+        });
+    };
+
+    $.fn.iframe.methods = {
+        options: function (jq) {
+            return $.data(jq[0], 'iframe').options;
+        },
+        click: function (jq, cb) {
+            return jq.each(function () {
+                AX.iframe.track(this, cb);
+            });
+        }
+    };
+
+    $.fn.iframe.defaults = {
     };
 })(jQuery);

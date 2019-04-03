@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 namespace Acesoft.Web.UI.Widgets.Fluent
 {
-	public class TabsBuilder : ListBuilder<Tabs, TabItem, TabsBuilder>
+	public class TabsBuilder : ListBuilder<Tabs, TabsBuilder, TabItem, TabItemBuilder>
 	{
-		public TabsBuilder(Tabs component)
-			: base(component)
+		public TabsBuilder(Tabs component) : base(component)
 		{
 		}
 
@@ -115,10 +114,15 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 
 		public TabsBuilder Items(Action<ItemsBuilder<TabItem, TabItemBuilder>> addAction)
 		{
-			return Items(addAction, () => new TabItem(base.Component.Ace), (TabItem item) => new TabItemBuilder(item));
+			return Items(addAction, () => new TabItem(Component.Ace), item => new TabItemBuilder(item));
 		}
 
-		public TabsBuilder Events(Action<TabsEventBuilder> clientEventsAction)
+        public TabsBuilder ItemBind<Model>(Action<TabItemBuilder, Model> bindItem)
+        {
+            return ItemBind(bindItem, () => new TabItem(Component.Ace), item => new TabItemBuilder(item));
+        }
+
+        public TabsBuilder Events(Action<TabsEventBuilder> clientEventsAction)
 		{
 			clientEventsAction(new TabsEventBuilder(base.Component.Events));
 			return this;

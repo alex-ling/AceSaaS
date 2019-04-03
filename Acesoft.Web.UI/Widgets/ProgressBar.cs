@@ -8,29 +8,13 @@ namespace Acesoft.Web.UI.Widgets
 	{
 		public static readonly ScriptEvent OnChange = new ScriptEvent("oOnChange", "nv,ov");
 
-		public int? Width
-		{
-			get;
-			set;
-		}
+		public int? Width { get; set; }
 
-		public int? Height
-		{
-			get;
-			set;
-		}
+		public int? Height { get; set; }
 
-		public int? Value
-		{
-			get;
-			set;
-		}
+		public int? Value { get; set; }
 
-		public string Text
-		{
-			get;
-			set;
-		}
+		public string Text { get; set; }
 
 		public ProgressBar(WidgetFactory ace)
 			: base(ace)

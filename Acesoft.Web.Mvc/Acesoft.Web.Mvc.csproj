@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="cache.config.json" />
+    <Content Remove="cloud.config.json" />
+    <Content Remove="Config\iot.config.json" />
+    <Content Remove="module.config.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.3.0" />
@@ -17,21 +25,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Web.Iot\Acesoft.Web.IoT.csproj" />
     <ProjectReference Include="..\Acesoft.Web.UI\Acesoft.Web.UI.csproj" />
     <ProjectReference Include="..\Acesoft.Web.WeChat\Acesoft.Web.WeChat.csproj" />
     <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Config\cloud.config.json" />
+    <None Include="Config\cache.config.json" />
     <None Include="Config\app.config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Config\data.config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Config\iot.config.json" />
     <None Include="Config\tenants.config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Acesoft.Web.Cloud\module.config.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Modules\Acesoft.Web.Cloud\module.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Modules\Acesoft.Web.IoT\module.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Acesoft.Web.UI.Widgets
 {
-	public class Tree : TreeWidgetBase<TreeNode>, IDataSourceWidget, IWidget, IHtml, IHtmlContent
+	public class Tree : TreeWidgetBase<TreeNode>, IDataSourceWidget
 	{
 		public static readonly ScriptEvent OnCheckbox = new ScriptEvent("checkbox", "node");
 
@@ -60,83 +60,31 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnCancelEdit = new ScriptEvent("onCancelEdit", "node");
 
-		public bool? Animate
-		{
-			get;
-			set;
-		}
+		public bool? Animate { get; set; }
 
-		public bool? Checkbox
-		{
-			get;
-			set;
-		}
+		public bool? Checkbox { get; set; }
 
-		public bool? CascadeCheck
-		{
-			get;
-			set;
-		}
+		public bool? CascadeCheck { get; set; }
 
-		public bool? OnlyLeafCheck
-		{
-			get;
-			set;
-		}
+		public bool? OnlyLeafCheck { get; set; }
 
-		public bool? Lines
-		{
-			get;
-			set;
-		}
+		public bool? Lines { get; set; }
 
-		public bool? Dnd
-		{
-			get;
-			set;
-		}
+		public bool? Dnd { get; set; }
 
-		public StringBuilder Data
-		{
-			get;
-			set;
-		}
+		public StringBuilder Data { get; set; }
 
-		public string EditUrl
-		{
-			get;
-			set;
-		}
+		public string EditUrl { get; set; }
 
-		public int? EditWidth
-		{
-			get;
-			set;
-		}
+		public int? EditWidth { get; set; }
 
-		public int? EditHeight
-		{
-			get;
-			set;
-		}
+		public int? EditHeight { get; set; }
 
-		public string DelApi
-		{
-			get;
-			set;
-		}
+		public string DelApi { get; set; }
 
-		public string DelDs
-		{
-			get;
-			set;
-		}
+		public string DelDs { get; set; }
 
-		public DataSource DataSource
-		{
-			get;
-			set;
-		}
+		public DataSource DataSource { get; set; }
 
 		public Tree(WidgetFactory ace)
 			: base(ace)

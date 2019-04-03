@@ -5,35 +5,15 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class PasswordBox : TextBox
 	{
-		public string PasswordChar
-		{
-			get;
-			set;
-		}
+		public string PasswordChar { get; set; }
 
-		public int? CheckInterval
-		{
-			get;
-			set;
-		}
+		public int? CheckInterval { get; set; }
 
-		public int? LastDelay
-		{
-			get;
-			set;
-		}
+		public int? LastDelay { get; set; }
 
-		public bool? Revealed
-		{
-			get;
-			set;
-		}
+		public bool? Revealed { get; set; }
 
-		public bool? ShowEye
-		{
-			get;
-			set;
-		}
+		public bool? ShowEye { get; set; }
 
 		public PasswordBox(WidgetFactory ace)
 			: base(ace)

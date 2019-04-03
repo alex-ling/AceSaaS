@@ -151,27 +151,35 @@ namespace Acesoft.Data.SqlMapper
         private string BuildSelectSql(ISqlDialect dialect, RequestContext ctx)
         {
             var props = ConvertHelper.ObjectToDictionary(ctx.NewObj);
-            var sb = new StringBuilder($"select {dialect.QuoteForColumnName("id")}, ");
-
-            foreach (var key in props.Keys)
+            var sb = new StringBuilder($"select ");
+            if (props.Count > 0)
             {
-                if (key.StartsWith("__"))
+                sb.Append($"{dialect.QuoteForColumnName("id")}, ");
+                foreach (var key in props.Keys)
                 {
-                    // rd表示只读列
-                    continue;
+                    if (key.StartsWith("__"))
+                    {
+                        // rd表示只读列
+                        continue;
+                    }
+                    if (key.StartsWith("a_"))
+                    {
+                        // ar表示数组
+                        sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key}, ");
+                    }
+                    else
+                    {
+                        sb.Append($"{dialect.QuoteForColumnName(key)}, ");
+                    }
                 }
-                if (key.StartsWith("a_"))
-                {
-                    // ar表示数组
-                    sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key}, ");
-                }
-                else
-                {
-                    sb.Append($"{dialect.QuoteForColumnName(key)}, ");
-                }
+                sb.Remove(2);
             }
-            sb.Remove(2).Append($" from {dialect.QuoteForTableName(GetTableName())} where {dialect.QuoteForColumnName("id")}=@id");
+            else
+            {
+                sb.Append("*");
+            }
 
+            sb.Append($" from {dialect.QuoteForTableName(GetTableName(true))} where {dialect.QuoteForColumnName("id")}=@id");
             return sb.ToString();
         }
 
@@ -261,9 +269,10 @@ namespace Acesoft.Data.SqlMapper
             return $"delete from {dialect.QuoteForTableName(GetTableName())} where {dialect.QuoteForColumnName("id")} in @ids";
         }
 
-        private string GetTableName()
+        private string GetTableName(bool read = false)
         {
-            var table = Params.GetValue("writetable", Params.GetValue("table", ""));
+            var table = Params.GetValue("table", "");
+            if (!read) table = Params.GetValue("writetable", table);
             if (!table.HasValue())
             {
                 throw new AceException($"SqlMap must have \"table\" or \"writetable\" params");

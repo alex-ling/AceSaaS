@@ -17,41 +17,21 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnChange = new ScriptEvent("onChange", "target");
 
-		public bool? Novalidate
-		{
-			get;
-			set;
-		}
+		public bool? Novalidate { get; set; }
 
-		public bool? Iframe
-		{
-			get;
-			set;
-		}
+		public bool? Iframe { get; set; }
 
-		public bool? Ajax
-		{
-			get;
-			set;
-		}
+		public bool? Ajax { get; set; }
 
-		public bool? Dirty
-		{
-			get;
-			set;
-		}
+		public bool? Dirty { get; set; }
 
-		public DataSource DataSource
-		{
-			get;
-			set;
-		}
+		public DataSource DataSource { get; set; }
 
 		public void DataBind()
 		{
 			if (DataSource.FormData != null)
 			{
-				base.Data = (object)DataSource.FormData;
+				base.Model = (object)DataSource.FormData;
 			}
 		}
 

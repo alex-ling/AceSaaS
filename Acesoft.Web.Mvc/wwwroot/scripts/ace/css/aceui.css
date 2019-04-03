@@ -85,6 +85,29 @@
     font-size: 14px;
 }
 
+/* ace-browse */
+.aceui-browse .container-fluid {
+    margin: 10px 15px;
+}
+
+.aceui-browse .container-fluid .row {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #777;
+    background: #ebe8e8;
+    border-bottom: 1px dashed #ccc;
+}
+
+.aceui-browse .container-fluid .row > div {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.aceui-browse .container-fluid .row > div:nth-child(2n) {
+    color: #333;
+    background: #fff;
+}
+
 /* aceui-button */
 .btn-split {
     vertical-align: middle;
