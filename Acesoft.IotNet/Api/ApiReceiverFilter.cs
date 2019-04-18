@@ -5,7 +5,7 @@ namespace Acesoft.IotNet.Api
 {
 	public class ApiReceiverFilter : CountSpliterReceiveFilter<ApiRequest>
 	{
-		public ApiReceiverFilter() : base(35, 5)
+		public ApiReceiverFilter() : base((byte)'#', 5)
 		{
 		}
 

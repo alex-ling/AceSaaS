@@ -12,22 +12,12 @@ namespace Acesoft.Util
         //bytes
         public static byte[] Encrypt(byte[] bytes)
         {
-            return new SwapByteCrypto().Encrypt(bytes);
+            return new SwapByteCrypto(0xff).Encrypt(bytes);
         }
 
         public static byte[] Decrypt(byte[] bytes)
         {
-            return new SwapByteCrypto().Decrypt(bytes);
-        }
-
-        public static byte[] EncryptX(byte[] bytes)
-        {
-            return new SwapByteCryptoX().Encrypt(bytes);
-        }
-
-        public static byte[] DecryptX(byte[] bytes)
-        {
-            return new SwapByteCryptoX().Decrypt(bytes);
+            return new SwapByteCrypto(0xff).Decrypt(bytes);
         }
 
         //sha1

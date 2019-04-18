@@ -9,8 +9,11 @@ using Acesoft.Web.IoT.Models;
 
 namespace Acesoft.Web.IoT.Services
 {
-    public class CacheService : ServiceBase, ICacheService
+    public class CacheService : StoreServiceBase, ICacheService
     {
+        public CacheService(IStore store) : base(store)
+        { }
+
         public T Get<T>(string key, T defaultValue)
         {
             return App.Cache.GetOrAdd($"iot_set_{key}", k => defaultValue);
@@ -19,6 +22,22 @@ namespace Acesoft.Web.IoT.Services
         public void Set<T>(string key, T value)
         {
             App.Cache.Set($"iot_set_{key}", value);
+        }
+
+        public string GetMac(string sbno)
+        {
+            return App.Cache.GetOrAdd($"iot_mac_{sbno}",
+                key =>
+                {
+                    return Session.ExecuteScalar<string>(
+                        new RequestContext("iot", "iot_get_mac")
+                        .SetParam(new
+                        {
+                            sbno
+                        })
+                    );
+                }
+            );
         }
 
         public IotData GetData(string mac)
@@ -59,6 +78,7 @@ namespace Acesoft.Web.IoT.Services
 
                     return new IotDevice
                     {
+                        Id = d.id,
                         Alias = d.alias,
                         Cpno = d.cpno,
                         Cpxh = d.cpxh,
@@ -110,7 +130,7 @@ namespace Acesoft.Web.IoT.Services
 
         public IDictionary<string, IotCmd> GetCmds(string cpno)
         {
-            return App.Cache.GetOrAdd($"iot_cmds_{cpno}",
+            var cmds = App.Cache.GetOrAdd($"iot_cmds_{cpno}",
                 key =>
                 {
                     return Session.Query<IotCmd>(
@@ -123,6 +143,20 @@ namespace Acesoft.Web.IoT.Services
                     ).ToDictionary(p => p.Cmd);
                 }
             );
+
+            // add common cmd for every device
+            cmds.Add("00F2", new IotCmd
+            {
+                Cmd = "00F2",
+                Name = "设置上传周期"
+            });
+            cmds.Add("00F3", new IotCmd
+            {
+                Cmd = "00F2",
+                Name = "开启实时上传"
+            });
+
+            return cmds;
         }
 
         public void RemoveData(string mac)

@@ -6,19 +6,19 @@ namespace Acesoft.IotNet.Api
 	{
 		public string Key { get; set; }
 
-		public string Action { get; set; }
+		public string Tenant { get; set; }
 
 		public string Cmd { get; set; }
 
 		public string Body { get; set; }
 
-		public ApiRequest(string source)
+		public ApiRequest(string data)
 		{
-			string[] array = source.Split('#');
-			Key = array[1];
-			Action = array[2];
-			Cmd = array[3];
-			Body = array[4];
+			var items = data.Split('#');
+            Tenant = items[1];
+            Key = items[2];
+			Cmd = items[3];
+			Body = items[4];
 		}
 	}
 }

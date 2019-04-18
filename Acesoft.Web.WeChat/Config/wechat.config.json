@@ -1,0 +1,40 @@
+{
+  "SenparcSetting": {
+    "IsDebug": true,
+    "DefaultCacheNamespace": "",
+    "SenparcUnionAgentKey": "",
+    "Cache_Redis_Configuration": "",
+    "Cache_Memcached_Configuration": ""
+  },
+  "SenparcWeixinSetting": {
+    "IsDebug": true,
+    "Token": "weixin",
+    "EncodingAESKey": "",
+    "WeixinAppId": "WeixinAppId",
+    "WeixinAppSecret": "WeixinAppSecret",
+    "WxOpenAppId": "WxOpenAppId",
+    "WxOpenAppSecret": "WxOpenAppSecret",
+    "WeixinCorpId": "WeixinCorpId",
+    "WeixinCorpSecret": "WeixinCorpSecret",
+    //微信支付V2（旧版）
+    "WeixinPay_PartnerId": "WeixinPay_PartnerId",
+    "WeixinPay_Key": "WeixinPay_Key",
+    "WeixinPay_AppId": "WeixinPay_AppId",
+    "WeixinPay_AppKey": "WeixinPay_AppKey",
+    "WeixinPay_TenpayNotify": "WeixinPay_TenpayNotify",
+    //微信支付V3（新版）
+    "TenPayV3_MchId": "TenPayV3_MchId",
+    "TenPayV3_Key": "TenPayV3_Key",
+    "TenPayV3_AppId": "TenPayV3_AppId",
+    "TenPayV3_AppSecret": "TenPayV3_AppId",
+    "TenPayV3_TenpayNotify": "TenPayV3_TenpayNotify",
+    //开放平台
+    "Component_Appid": "Component_Appid",
+    "Component_Secret": "Component_Secret",
+    "Component_Token": "Component_Token",
+    "Component_EncodingAESKey": "Component_EncodingAESKey",
+    //分布式缓存
+    "Cache_Redis_Configuration": "localhost:6379",
+    "Cache_Memcached_Configuration": "Memcached配置"
+  }
+}

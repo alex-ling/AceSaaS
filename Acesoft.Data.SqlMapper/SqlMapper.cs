@@ -191,7 +191,7 @@ namespace Acesoft.Data.SqlMapper
                 {
                     hasFilterParam = true;
                 }
-                queryValue = App.GetParam(query.Key, "").Trim();
+                queryValue = App.GetQuery(query.Key, "").Trim();
                 if (queryValue.HasValue())
                 {
                     // 此处同步添加ctx的params

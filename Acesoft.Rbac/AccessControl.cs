@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using System.Net.Http;
+using Acesoft.Util;
 
 namespace Acesoft.Rbac
 {
@@ -31,19 +32,46 @@ namespace Acesoft.Rbac
         public bool IsAdmin => User.LoginName == "admin";
         public string InRoles => $"({User.Rbac_UAs.Join(ua => ua.Role_Id)})";
         public IList<long> Roles => User.Rbac_UAs.Select(ua => ua.Role_Id).ToList();
-        public IDictionary<string, object> Params => User.Rbac_Params.ToDictionary(p => p.Name, p => (object)p.Value)
-            .Merge(new Dictionary<string, object>
+
+        private IDictionary<string, object> @params;
+        public IDictionary<string, object> Params
+        {
+            get
             {
-                { "userid" , user.Id },
-                { "loginname", user.LoginName },
-                { "username", user.UserName },
-                { "refcode", user.RefCode },
-                { "nickname", user.NickName },
-                { "scaleid", user.Scale_Id },
-                { "inroles", InRoles },
-                { "roleids", Roles }
-            });
-        public IDictionary<string, string> Auths => User.Rbac_Auths.ToDictionary(a => a.AuthType, a => a.AuthId);
+                if (@params == null)
+                {
+                    @params = User.Rbac_Params.ToDictionary(p => p.Name, p => (object)p.Value);
+
+                    @params.Add("userid", user.Id);
+                    @params.Add("loginname", user.LoginName);
+                    @params.Add("username", user.UserName);
+                    @params.Add( "refcode", user.RefCode);
+                    @params.Add( "nickname", user.NickName);
+                    @params.Add( "scaleid", user.Scale_Id);
+                    @params.Add( "inroles", InRoles);
+                    @params.Add( "roleids", Roles);
+
+                    if (Auths.ContainsKey("wechat"))
+                    {
+                        @params.Add("appid", auths["wechat"].App_Id);
+                    }
+                }
+                return @params;
+            }
+        }
+
+        private IDictionary<string, Rbac_Auth> auths;
+        public IDictionary<string, Rbac_Auth> Auths
+        {
+            get
+            {
+                if (auths == null)
+                {
+                    auths = User.Rbac_Auths.ToDictionary(a => a.AuthType);
+                }
+                return auths;
+            }
+        }
 
         public Rbac_User User
         {
@@ -71,22 +99,64 @@ namespace Acesoft.Rbac
             this.stateResolvers = new ConcurrentDictionary<string, Func<object>>();
         }
 
+        public Rbac_User CheckUser(string userName, string password)
+        {
+            int tryTimes = 0, lockMinutes = 60;
+            var user = userService.QueryByUserName(userName);
+
+            Check.Assert(user == null, "登录名不存在");
+            Check.Require(user.Enabled, "用户已被停用，禁止登录");
+            Check.Assert(tryTimes > 0 && user.TryTimes == tryTimes, $"密码错误超限，禁止登录{lockMinutes}分钟");
+
+            // Set try times to ZERO when after lock minutes
+            if (tryTimes > 0 && user.DLogin.HasValue && user.DLogin.Value.AddMinutes(lockMinutes) < DateTime.Now)
+            {
+                user.TryTimes = 0;
+            }
+
+            // Check password
+            if (user.Password != CryptoHelper.ComputeMD5(user.HashId, password))
+            {
+                if (tryTimes > 0)
+                {
+                    int hasTimes = tryTimes - ++user.TryTimes;
+                    Check.Assert(hasTimes <= 0,
+                        $"密码错误，帐号将锁定{lockMinutes}分钟",
+                        $"密码错误，还有{hasTimes}次尝试机会");
+                }
+                else
+                {
+                    throw new AceException("密码错误");
+                }
+            }
+            else
+            {
+                user.TryTimes = 0;
+            }
+
+            // Check having role
+            Check.Assert(user.LoginName != "root" && user.Rbac_UAs.Count == 0, "用户无任何角色权限");
+
+            // update login date and ip
+            userService.UpdateLogin(user);
+            return user;
+        }
+
         public Task Login(string userName, string password, bool persistent)
         {
-            return Login(userService.Login(userName, password), persistent);
+            var user = CheckUser(userName, password);
+            return Login(user, persistent);
         }
 
-        public Task Login(long appId, string authId, bool persistent)
-        {
-            return Login(userService.QueryByAuth(appId, authId), persistent);
-        }
-
-        private Task Login(Rbac_User user, bool persistent)
+        public Task Login(Rbac_User user, bool persistent)
         {
             this.user = user;
 
-            logger.LogDebug($"Login with the user \"{user.Id}:{user.LoginName}\"");
-            var ticket = Membership.AuthenticationTicket(user.HashId, user.LoginName, persistent);
+            var userName = user.LoginName ?? user.Mobile;
+            var authId = user.Rbac_Auths.FirstOrDefault()?.AuthId ?? "none";
+            var ticket = Membership.AuthenticationTicket(user.HashId, userName, authId, persistent);
+
+            logger.LogDebug($"Login with the user \"{user.Id}:{userName}\"");
             return Context.SignInAsync(ticket.AuthenticationScheme, ticket.Principal, ticket.Properties);
         }
 
@@ -129,23 +199,9 @@ namespace Acesoft.Rbac
             };
         }
 
-        public void UpdateAuth(long appId, string authId, string authType, bool needSaveUser)
-        {
-            if (needSaveUser)
-            {
-                userService.Update(user);
-            }
-
-            var auth = userService.UpdateAuth(user.Id, appId, authId, authType);
-            if (!Auths.ContainsKey(authType))
-            {
-                user.Rbac_Auths.Add(auth);
-            }
-        }
-
         public void Logout()
         {
-            user = userService.QueryByUserName("guest");
+            user = userService.QueryByUserName("guest", "none");
         }
 
         public bool IsInRole(long roleId) => Roles.Contains(roleId);

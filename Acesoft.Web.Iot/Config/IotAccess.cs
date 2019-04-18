@@ -6,11 +6,11 @@ namespace Acesoft.Web.IoT.Config
 {
     public class IotAccess
     {
-        public bool Enabled { get; set; }
         public string ServerIp { get; set; }
         public int ServerPort { get; set; }
+        public string ApiServerIp { get; set; }
+        public int ApiServerPort { get; set; }
         public int CmdTimeout { get; set; }
-        public bool AutoConnect { get; set; }
         public bool ReconnectFail { get; set; }
         public bool ReconnectClose { get; set; }
         public int ConnectInterval { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Threading.Tasks;
+using System.Linq;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using Acesoft.Web.IoT.Client;
 using Acesoft.Web.Mvc;
 using Acesoft.Web.Cloud;
 using Acesoft.Rbac.Entity;
+using Acesoft.Web.IoT.Entity;
 
 namespace Acesoft.Web.IoT.Controllers
 {
@@ -134,6 +136,36 @@ namespace Acesoft.Web.IoT.Controllers
         }
         #endregion
 
+        #region cache
+        [HttpGet, MultiAuthorize, DataSource, Action("刷新缓存")]
+        public IActionResult RefreshParam(string cpno)
+        {
+            cacheService.RemoveParams(cpno);
+            return Ok(null);
+        }
+
+        [HttpGet, MultiAuthorize, DataSource, Action("刷新缓存")]
+        public IActionResult RefreshCmd(string cpno)
+        {
+            cacheService.RemoveCmds(cpno);
+            return Ok(null);
+        }
+
+        [HttpGet, MultiAuthorize, DataSource, Action("刷新缓存")]
+        public IActionResult RefreshDevice(string macs)
+        {
+            macs.Split().Each(mac => cacheService.RemoveDevice(mac));
+            return Ok(null);
+        }
+
+        [HttpGet, MultiAuthorize, DataSource, Action("刷新缓存")]
+        public IActionResult RefreshData(string macs)
+        {
+            macs.Split().Each(mac => cacheService.RemoveData(mac));
+            return Ok(null);
+        }
+        #endregion
+
         #region upload
         [HttpPost, MultiAuthorize, Action("MAC上传")]
         public IActionResult Upload(IFormCollection form)
@@ -203,28 +235,62 @@ namespace Acesoft.Web.IoT.Controllers
         [HttpGet, MultiAuthorize, Action("下发操作")]
 		public async Task<IActionResult> ExecCmd(IotRequest request)
 		{
-            var result = await client.Send(request);
-
-            switch (result.Substring(0, 2))
+            var opt = new IoT_OptLog
             {
-                case "00":
-                    if (result.Length > 2)
-                    {
-                        return Ok(result.Substring(2));
-                    }
-                    return Ok(null);
+                DCreate = request.DCreate,
+                Mac = request.Mac,
+                Cmd = request.Cmd,
+                Body = request.Body,
+                User_Id = AppCtx.AC.User.Id
+            };
+            opt.InitializeId();
 
-                case "01":
-                    throw new AceException("校验错误");
+            try
+            {
+                // check opt
+                var device = cacheService.GetDevice(request.Mac);
+                opt.Sbno = device.Sbno;
 
-                case "02":
-                    throw new AceException("会话错误");
+                Check.Require(device.Cmds.ContainsKey(request.Cmd), $"该设备({device.Cpno})不支持操作：{request.Cmd}");
+                var cmd = device.Cmds[request.Cmd];
+                opt.Name = cmd.Name;
 
-                case "03":
-                    throw new AceException("非法设备");
+                var ctx = await client.Send(request);
+                var result = ctx.Response.Body;
 
-                default:
-                    throw new AceException(result.Substring(2));
+                switch (result.Substring(0, 2))
+                {
+                    case "00":
+                        opt.Result = ctx.Response.Body;
+                        opt.Success = true;
+                        if (result.Length > 2)
+                        {
+                            return Ok(result.Substring(2));
+                        }
+                        return Ok(null);
+
+                    case "01":
+                        throw new AceException("校验错误");
+
+                    case "02":
+                        throw new AceException("会话错误");
+
+                    case "03":
+                        throw new AceException("非法设备");
+
+                    default:
+                        throw new AceException(result.Substring(2));
+                }
+            }
+            catch (Exception ex)
+            {
+                opt.Result = ex.GetMessage();
+                throw;
+            }
+            finally
+            {
+                opt.DUpdate = DateTime.Now;
+                iotService.LogOpt(opt);
             }
         }
         #endregion
@@ -236,6 +302,12 @@ namespace Acesoft.Web.IoT.Controllers
             var data = iotService.GetData(mac, true);
 			return Ok(data);
 		}
+
+        [HttpGet, MultiAuthorize, Action("获取状态")]
+        public IActionResult GetDataById(string sbno)
+        {
+            return GetData(cacheService.GetMac(sbno));
+        }
         #endregion
 
         #region auth
@@ -332,6 +404,9 @@ namespace Acesoft.Web.IoT.Controllers
                 userid = userId ?? AppCtx.AC.User.Id
             });
 
+            // refresh cache for device.
+            cacheService.RemoveDevice(mac);
+
             return Ok(null);
         }
         #endregion
@@ -392,6 +467,20 @@ namespace Acesoft.Web.IoT.Controllers
         public IActionResult SetStatus(string key, string value)
         {
             cacheService.Set(key, value.ToObject<bool>());
+            return Ok(null);
+        }
+        #endregion
+
+        #region iotclient
+        public IActionResult StartClient()
+        {
+            client.Open();
+            return Ok(null);
+        }
+
+        public IActionResult StopClient()
+        {
+            client.Close();
             return Ok(null);
         }
         #endregion

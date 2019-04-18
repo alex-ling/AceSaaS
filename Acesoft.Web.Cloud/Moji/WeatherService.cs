@@ -8,7 +8,7 @@ namespace Acesoft.Web.Cloud.Moji
 {
 	public class WeatherService : IWeatherService
 	{
-		private const string Api = "{Api}";
+		private const string Api = "http://basiccity.market.alicloudapi.com";
 		private const string FreeApi = "http://apifreelat.market.alicloudapi.com";
 		private Dictionary<string, string> headers = new Dictionary<string, string>();
 

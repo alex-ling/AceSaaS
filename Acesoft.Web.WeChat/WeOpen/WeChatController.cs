@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Senparc.Weixin.Exceptions;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MvcExtension;
@@ -17,8 +18,9 @@ namespace Acesoft.Web.WeChat
 {
     [ApiExplorerSettings(GroupName = "plat")]
 	[Route("api/[controller]/[action]")]
-	public class WeChatController : ApiControllerBase
+	public class WeChatController : AuthController
 	{
+        private ILogger<WeChatController> logger;
         private IAppService appService;
         private IMenuService menuService;
         private IMediaService mediaService;
@@ -26,12 +28,21 @@ namespace Acesoft.Web.WeChat
         private Wx_App app;
 
 		public WeChatController(
+            ILogger<WeChatController> logger,
             IWeChatContainer container,
             IAppService appService,
             IMenuService menuService,
             IMediaService mediaService,
-            INewsService newsService)
+            INewsService newsService,
+            IUserService userService,
+            IScaleService scaleService,
+            IUAService uAService,
+            IRoleService roleService,
+            IPAService pAService,
+            IObjectService objectService) 
+            : base(logger, userService, scaleService, uAService, roleService, pAService, objectService)
 		{
+            this.logger = logger;
             this.app = container.GetApp();
 			this.appService = appService;
             this.menuService = menuService;
@@ -39,23 +50,39 @@ namespace Acesoft.Web.WeChat
             this.newsService = newsService;
 		}
 
-		[HttpGet]
+        #region external
+        [HttpGet]
 		public IActionResult GetToken()
 		{
 			var secret = App.GetQuery("secret", "");
             return Ok(appService.GetToken(app, secret));
-		}
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> Login([FromBody] JObject data)
-		{
-			var userName = data.GetValue<string>("username");
-			var password = data.GetValue<string>("password");
-			var openId = data.GetValue<string>("openid");
+        [HttpPost]
+        public async Task<IActionResult> WeLogin([FromBody] JObject data)
+        {
+            if (data.GetValue<string>("regtype").HasValue())
+            {
+                base.PostUser(data);
+            }
+
+            var userName = data.GetValue<string>("username");
+            if (!userName.HasValue())
+            {
+                userName = data.GetValue<string>("mobile");
+                if (!userName.HasValue())
+                {
+                    userName = data.GetValue<string>("mail");
+                }
+            }
+
+            var password = data.GetValue<string>("password");
+            var openId = data.GetValue<string>("openid");
             await AppCtx.AC.WechatLogin(userName, password, openId);
 
-			return Ok(null);
-		}
+            return Ok(null);
+        }
+        #endregion
 
         #region api
         [HttpGet, Route("/api/wechat")]
@@ -76,52 +103,23 @@ namespace Acesoft.Web.WeChat
 				return Content("WeChatOpen服务验证失败，参数错误！");
 			}
 
-			int maxRecordCount = 10;
-			string s = new StreamReader(Request.Body).ReadToEnd();
+			var maxRecordCount = 10;
+			var str = new StreamReader(Request.Body).ReadToEnd();
+			var h = new WeChatHandler(new MemoryStream(Encoding.UTF8.GetBytes(str)), model, maxRecordCount);
 
-			var weOpenHandler = new WeChatHandler(new MemoryStream(Encoding.UTF8.GetBytes(s)), model, maxRecordCount);
 			try
 			{
-				using (var stream = new FileStream(App.GetLocalPath("logs\\wechat\\req_" + DateTime.Now.ToStr("MMddHHmmss") + "_" + App.IdWorker.NextStringId() + "_" + weOpenHandler.RequestMessage.FromUserName + ".log"), FileMode.CreateNew, FileAccess.ReadWrite))
-				{
-					weOpenHandler.RequestDocument.Save((Stream)stream);
-				}
-				weOpenHandler.OmitRepeatedMessage = true;
-				weOpenHandler.Execute();
+                logger.LogDebug($"Receiving from {h.RequestMessage.FromUserName} with XML:\n{h.RequestDocument.Root}");
 
-				var path = App.GetLocalPath("logs\\wechat\\res_" + DateTime.Now.ToStr("MMddHHmmss") + "_" + App.IdWorker.NextStringId() + "_" + weOpenHandler.RequestMessage.FromUserName + ".log");
-				if (weOpenHandler.ResponseDocument != null)
-				{
-					using (var stream2 = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite))
-					{
-						weOpenHandler.ResponseDocument.Save((Stream)stream2);
-					}
-				}
-				return new FixWeixinBugWeixinResult(weOpenHandler);
+                h.OmitRepeatedMessage = true;
+				h.Execute();
+
+                logger.LogDebug($"Sending to {h.RequestMessage.FromUserName} with XML:\n{h.ResponseDocument.Root}");
+				return new FixWeixinBugWeixinResult(h);
 			}
 			catch (Exception ex)
 			{
-				using (FileStream stream3 = new FileStream(App.GetLocalPath("logs\\wechat\\err_" + DateTime.Now.ToStr("MMddHHmmss") + "_" + App.IdWorker.NextStringId() + "_" + weOpenHandler.RequestMessage.FromUserName + ".log"), FileMode.CreateNew, FileAccess.ReadWrite))
-				{
-					using (StreamWriter streamWriter = new StreamWriter(stream3))
-					{
-						streamWriter.WriteLine("ExecptionMessage:" + ex.Message);
-						streamWriter.WriteLine(ex.Source);
-						streamWriter.WriteLine(ex.StackTrace);
-						if (weOpenHandler.ResponseDocument != null)
-						{
-							streamWriter.WriteLine(weOpenHandler.ResponseDocument.ToString());
-						}
-						if (ex.InnerException != null)
-						{
-							streamWriter.WriteLine("========= InnerException =========");
-							streamWriter.WriteLine(ex.InnerException.Message);
-							streamWriter.WriteLine(ex.InnerException.Source);
-							streamWriter.WriteLine(ex.InnerException.StackTrace);
-						}
-						streamWriter.Flush();
-					}
-				}
+                logger.LogWarning(ex.GetException(), $"Sending to {h.RequestMessage.FromUserName} with error");
 				return Content("");
 			}
 		}

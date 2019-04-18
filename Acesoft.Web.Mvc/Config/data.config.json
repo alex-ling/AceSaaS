@@ -1,6 +1,11 @@
 {
-  "default": {
+  "ace": {
     "connectionString": "server=39.98.70.141;database=aceiot;uid=sa;pwd=xb&db=22&17;multipleactiveresultsets=true",
+    "databaseType": "SqlServer",
+    "sqlMaps": [ "SqlMaps" ]
+  },
+  "xile": {
+    "connectionString": "server=39.98.70.141;database=iotxile;uid=sa;pwd=xb&db=22&17;multipleactiveresultsets=true",
     "databaseType": "SqlServer",
     "sqlMaps": [ "SqlMaps" ]
   }

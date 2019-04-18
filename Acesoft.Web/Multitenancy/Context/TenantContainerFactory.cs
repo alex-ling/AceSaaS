@@ -35,7 +35,9 @@ namespace Acesoft.Web.Multitenancy
             var startups = new List<IStartup>();
 
             // Add Acesoft.Web IStartup to first
-            startups.Add(new Startup());
+            var mvcStartup = new Startup();
+            startups.Add(mvcStartup);
+            tenantServices.AddSingleton(mvcStartup);
 
             // Execute external module's IStartup
             foreach (var moduleName in tenant.Modules)
@@ -44,6 +46,7 @@ namespace Acesoft.Web.Multitenancy
                 {
                     // add IStartup
                     startups.Add(module.Startup);
+                    tenantServices.AddSingleton(module.Startup);
                 }
             }
 

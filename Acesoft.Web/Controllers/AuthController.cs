@@ -156,7 +156,7 @@ namespace Acesoft.Web.Controllers
             Check.Require(user != null, "手机号未注册或未绑定用户");
 
             var pwd = data["pwd"].Value<string>();
-            user.Password = CryptoHelper.ComputeMD5(pwd, user.HashId);
+            user.Password = CryptoHelper.ComputeMD5(user.HashId, pwd);
             user.RstPwd = false;
             user.DRstPwd = DateTime.Now;
             userService.Update(user);
@@ -175,10 +175,10 @@ namespace Acesoft.Web.Controllers
             Check.Assert(pwd == newPwd, "新密码不能与当前密码相同");
 
             var user = AppCtx.AC.User;
-            var password = CryptoHelper.ComputeMD5(pwd, user.HashId);
+            var password = CryptoHelper.ComputeMD5(user.HashId, pwd);
             Check.Assert(user.Password == password, "原密码输入不正确");
 
-            user.Password = CryptoHelper.ComputeMD5(newPwd, user.HashId);
+            user.Password = CryptoHelper.ComputeMD5(user.HashId, newPwd);
             user.RstPwd = false;
             user.DRstPwd = DateTime.Now;
             userService.Update(user);
@@ -191,9 +191,8 @@ namespace Acesoft.Web.Controllers
         public IActionResult ResetPwd(long userId)
         {
             var user = userService.Get(userId);
-            var pwd = user.LoginName.HasValue() ? user.LoginName : "123456";
 
-            user.Password = CryptoHelper.ComputeMD5(pwd, user.HashId);
+            user.Password = CryptoHelper.ComputeMD5(user.HashId, user.LoginName ?? "123456");
             user.RstPwd = true;
             user.DRstPwd = DateTime.Now;
             userService.Update(user);
@@ -225,7 +224,7 @@ namespace Acesoft.Web.Controllers
             user.LoginName = loginName;
             user.UserName = data.GetValue<string>("username");
             user.NickName = data.GetValue("nickname", mobile);
-            user.Password = CryptoHelper.ComputeMD5(data["password"].Value<string>(), user.HashId);
+            user.Password = CryptoHelper.ComputeMD5(user.HashId, data["password"].Value<string>());
             user.Photo = data.GetValue<string>("photo");
             user.Mobile = mobile;
             user.Mail = data.GetValue<string>("mail");
@@ -278,6 +277,11 @@ namespace Acesoft.Web.Controllers
                 }
 
                 AppCtx.Session.Commit();
+
+                if (SqlMap.SqlId != "rbac.user")
+                {
+                    SqlMapper.CacheManager.Flush(SqlMap.SqlId);
+                }
                 SqlMapper.CacheManager.Flush("rbac.user");
             }
             catch (Exception ex)
@@ -343,7 +347,7 @@ namespace Acesoft.Web.Controllers
             var password = data.GetValue<string>("password");
             if (password.HasValue() && !password.EndsWith("==") && password.Length <= 20)
             {
-                user.Password = CryptoHelper.ComputeMD5(password, user.HashId);
+                user.Password = CryptoHelper.ComputeMD5(user.HashId, password);
             }
             if (data["username"] != null)
             {
@@ -387,6 +391,10 @@ namespace Acesoft.Web.Controllers
             }
             userService.Update(user);
 
+            if (SqlMap.SqlId != "rbac.user")
+            {
+                SqlMapper.CacheManager.Flush(SqlMap.SqlId);
+            }
             SqlMapper.CacheManager.Flush("rbac.user");
             return Ok(null);
         }
@@ -395,6 +403,12 @@ namespace Acesoft.Web.Controllers
         public IActionResult DelUser(string id)
         {
             userService.Delete(id);
+
+            if (SqlMap.SqlId != "rbac.user")
+            {
+                SqlMapper.CacheManager.Flush(SqlMap.SqlId);
+            }
+            SqlMapper.CacheManager.Flush("rbac.user");
             return Ok(null);
         }
         #endregion

@@ -268,20 +268,13 @@
             ax.gridSrh(gid, fid);
         },
         gridEx: function (gid) {
-            var jq = $(gid), q, ds;
-            if (jq.hasClass("easyui-datagrid")) {
-                q = jq.datagrid('options').queryParams;
-                ds = jq.datagrid('options').ds;
-            } else {
-                q = jq.treegrid('options').queryParams;
-                ds = jq.treegrid('options').ds;
-            }
-            var url = ax.api({ api: 'excel/down', ds: ds, q: 'page=1&rows=0&path=' + ax.opts.path }), inputs = '';
-            $.each($.param(q).split('&'), function () {
-                var p = this.split('=');
-                inputs += '<input type="hidden" name="' + p[0] + '" value="' + p[1] + '" />';
-            });
-            var form = ax.format('<form action="{0}" method="post">{1}</form>', url, inputs);
+            var jq = $(gid);
+            var opts = jq.hasClass("easyui-datagrid") ? jq.datagrid('options') : jq.datagrid('options');
+            var q = opts.url.split('?').length > 1 ? opts.url.split('?')[1] : '';
+            var qp = $.param(opts.queryParams);
+            if (qp) q += '&' + $.param(opts.queryParams);
+            var url = ax.api({ api: 'excel/down', q: q + '&path=' + ax.opts.path });
+            var form = ax.format('<form action="{0}" method="post"></form>', AX.aurl(url, 'rows', '0'));
             $(form).appendTo('body').submit().remove();
         },
         gridTb: function (gid) {
@@ -525,6 +518,13 @@
                 rv += chars.charAt(Math.floor(Math.random() * maxPos));
             }
             return rv;
+        },
+        tohex: function (n, len) {
+            var num = typeof n == 'number' ? n : parseInt(n);
+            return ax.pad(num.toString(16).toUpperCase(), '0', len, 1);
+        },
+        fromhex: function (s) {
+            return parseInt(s, 16);
         },
         isdate: function (s) {
             var d = ax.dateobj(s);

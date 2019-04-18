@@ -160,6 +160,13 @@
             }
             return rv;
         },
+        tohex: function (n, len) {
+            var num = typeof n == 'number' ? n : parseInt(n);
+            return ax.pad(num.toString(16).toUpperCase(), '0', len, 1);
+        },
+        fromhex: function (s) {
+            return parseInt(s, 16);
+        },
         isdate: function (s) {
             var d = ax.dateobj(s);
             return !isNaN(d) || !isNaN(d2);

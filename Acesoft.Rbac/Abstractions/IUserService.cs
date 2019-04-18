@@ -12,11 +12,11 @@ namespace Acesoft.Rbac
         /// <summary>
         /// Query user with the Id(long:18)
         /// </summary>
-        Rbac_User QueryById(long id);
+        Rbac_User QueryById(long id, string authId);
         /// <summary>
         /// Query user with the UserName(perhaps as LoginName, Mobile, Mail)
         /// </summary>
-        Rbac_User QueryByUserName(string userName);
+        Rbac_User QueryByUserName(string userName, string authId = "none");
         /// <summary>
         /// Query user with the 3th AuthId, such as Wechat's OpenId
         /// </summary>
@@ -34,11 +34,6 @@ namespace Acesoft.Rbac
         /// Get user with the Mail
         /// </summary>
         Rbac_User GetByMail(string mail);
-
-        /// <summary>
-        /// Get use with check login error times
-        /// </summary>
-        Rbac_User Login(string userName, string password, int tryTimes = 0, int lockMinutes = 60);
         /// <summary>
         /// Update user login information, such as IP, Time
         /// </summary>
@@ -46,7 +41,7 @@ namespace Acesoft.Rbac
         /// <summary>
         /// Update user auth information, such as Login with WeChat
         /// </summary>
-        Rbac_Auth UpdateAuth(long userId, long appId, string authId, string authType);
+        void UpdateAuth(Rbac_User user, long appId, string authId, string authType);
 
         /// <summary>
         /// Delete user

@@ -13,6 +13,7 @@ using Acesoft.Web.Multitenancy;
 using Acesoft.Config;
 using Acesoft.Rbac;
 using Acesoft.Web.Middleware;
+using Acesoft.Web.IoT.Hubs;
 
 namespace Acesoft.Web.Mvc
 {
@@ -29,6 +30,9 @@ namespace Acesoft.Web.Mvc
         {
             // app global config.
             services.Configure<AppConfig>(Configuration);
+            services.AddSingleton(Configuration);
+
+            // global config.
             var appConfig = Configuration.Get<AppConfig>();
             var settings = appConfig.Settings;
 

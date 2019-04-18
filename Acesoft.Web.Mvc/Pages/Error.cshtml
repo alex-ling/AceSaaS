@@ -2,7 +2,7 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
 @using Microsoft.AspNetCore.Diagnostics
 @{
-    Layout = "_shared/site";
+    Layout = "_shared/page";
     ViewData["Title"] = "Error." + Ace.Context.Response.StatusCode;
 
     var requestId = Activity.Current?.Id ?? Ace.Context.TraceIdentifier;

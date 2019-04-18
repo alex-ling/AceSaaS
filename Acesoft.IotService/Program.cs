@@ -18,10 +18,12 @@ namespace Acesoft.IotService
 
 		private static void Main(string[] args)
 		{
+            var folder = AppDomain.CurrentDomain.BaseDirectory;
+
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
                 .WriteTo.Console()
-                .WriteTo.Async(a => a.File("logs/log.txt", rollingInterval: RollingInterval.Day, shared: true))
+                .WriteTo.Async(a => a.File($"{folder}/logs/log.txt", rollingInterval: RollingInterval.Day, shared: true))
                 .CreateLogger();
             logger = Log.ForContext(typeof(Program));
 

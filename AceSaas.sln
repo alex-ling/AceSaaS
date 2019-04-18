@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.IotNet", "Acesoft.I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{8245D319-1ACA-42A7-84CE-3AB3EC2874EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acesoft.IotClient", "Acesoft.IotClient\Acesoft.IotClient.csproj", "{42B2D568-C110-4C6A-BB6C-1C50682C2DD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,10 @@ Global
 		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B2D568-C110-4C6A-BB6C-1C50682C2DD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B2D568-C110-4C6A-BB6C-1C50682C2DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B2D568-C110-4C6A-BB6C-1C50682C2DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B2D568-C110-4C6A-BB6C-1C50682C2DD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +193,7 @@ Global
 		{61D619FD-2FE9-411F-A020-17219E11F2FC} = {BE7D65F7-BABE-4CE6-98AA-3F20D6C4592D}
 		{CC7227DA-C934-490E-A049-1CB47535B89B} = {B1646805-615E-45AD-AC3E-B4E44398C0FA}
 		{7EA5C672-8F55-4E00-BD5B-3ECBD40AC2CF} = {B1646805-615E-45AD-AC3E-B4E44398C0FA}
+		{42B2D568-C110-4C6A-BB6C-1C50682C2DD0} = {8245D319-1ACA-42A7-84CE-3AB3EC2874EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15C56BF2-C468-45C5-B13D-00FA80AD2CD4}

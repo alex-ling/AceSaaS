@@ -13,7 +13,7 @@ namespace Acesoft.Web.Controllers
 	public class ExcelController : ApiControllerBase
 	{
 		[HttpPost, MultiAuthorize, Action("导出Excel")]
-		public IActionResult Down([FromQuery] GridRequest request)
+		public IActionResult Down([FromQuery]GridRequest request)
 		{
 			CheckDataSourceParameter();
 
@@ -26,9 +26,10 @@ namespace Acesoft.Web.Controllers
             var path = "/pages" + App.GetQuery("path", "");
 			var temp = SqlMap.Params.GetValue("ex_tempfile", "temp.xlsx");
 			var fileName = SqlMap.Params.GetValue("ex_filename", "down");
-            var xls = new XlsExport(res, App.GetLocalPath(path + temp));
+            var autoHeight = SqlMap.Params.GetValue("ex_autoheight", false);
+            var xls = new XlsExport(res, App.GetLocalPath(path + temp), autoHeight);
 
-			fileName = fileName + "_" + DateTime.Now.ToYMD() + ".xlsx";
+			fileName = App.ReplaceQuery(fileName) + "_" + DateTime.Now.ToYMD() + ".xlsx";
 			return File(xls.Export(), "application/vnd.ms-excel", fileName);
 		}
 	}

@@ -1,3 +1,4 @@
+using Serilog;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketEngine;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace Acesoft.IotService
 		{
 			InitializeComponent();
 
-			bootstrap = BootstrapFactory.CreateBootstrap();
+            bootstrap = BootstrapFactory.CreateBootstrap();
 		}
 
 		protected override void OnStart(string[] args)
@@ -28,7 +29,7 @@ namespace Acesoft.IotService
 		protected override void OnStop()
 		{
 			bootstrap.Stop();
-			base.OnStop();
+            base.OnStop();
 		}
 
 		protected override void OnShutdown()

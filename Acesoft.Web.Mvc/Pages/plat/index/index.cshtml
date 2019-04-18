@@ -3,7 +3,6 @@
 @inject IConfigService ConfigService
 @inject IObjectService ObjectService
 @{
-    Layout = "_shared/site";
     Ace.RenderAuthOptions = true;
 
     var cfg = ConfigService.GetConfig(1);
@@ -21,12 +20,14 @@
 }
 <div class="ax-header">
     <div class="ax-topbar">
-        <div class="topbar-head fl">
-            <a class="topbar-logo fl" style="@cfg["sys_plat_style"]" href="@App.GetWebRoot()">
-                <img src="@cfg["sys_plat_logo"]" height="50" />
-                <span class="fwb">@cfg["sys_short"]</span>
-            </a>
-        </div>
+        <a class="topbar-head" style="@cfg["sys_plat_style"]" href="@App.GetWebRoot()">
+            <div class="topbar-logo">
+                <img src="@cfg["sys_plat_logo"]" />
+            </div>
+            <div class="topbar-name">
+                @cfg["sys_short"]
+            </div>
+        </a>
         <div class="topbar-nav fl dropdown ml15">
             <a href="/plat/index" class="topbar-btn topbar-nav-btn dropdown-toggle">
                 <span>首页</span>
@@ -51,73 +52,76 @@
         <div class="sidebar-content">
             <div class="sidebar-inner">
                 <div class="sidebar-fold fa fa-reorder" title="点击展开/收起左侧导航栏"></div>
-                @foreach (var obj in modules.Where(o => !o.ParentId.HasValue).OrderBy(o => o.OrderNo))
-                {
-                    var childCss = obj.Url.HasValue() ? "" : "child";
-                    var fold = index > 0 ? "sidebar-nav-fold" : "";
-                    <div class="sidebar-nav @fold">
-                        <div class="sidebar-title aceui-tooltip" data-url="@obj.Url" tooltip="@Html.Raw(obj.Name)">
-                            <div class="sidebar-title-inner">
-                                <span class="sidebar-title-icon fa fa-caret-down"></span>
-                                <span class="sidebar-title-text">@Html.Raw(obj.Name)</span>
-                            </div>
+            @foreach (var obj in modules.Where(o => !o.ParentId.HasValue).OrderBy(o => o.OrderNo))
+            {
+                var childCss = obj.Url.HasValue() ? "" : "child";
+                var fold = index > 0 ? "sidebar-nav-fold" : "";
+                <div class="sidebar-nav @fold">
+                    <div class="sidebar-title aceui-tooltip" data-url="@obj.Url" tooltip="@Html.Raw(obj.Name)">
+                        <div class="sidebar-title-inner">
+                            <span class="sidebar-title-icon fa fa-caret-down"></span>
+                            <span class="sidebar-title-text">@Html.Raw(obj.Name)</span>
                         </div>
-                        <ul class="sidebar-trans">
-                            @foreach (var item in modules.Where(o => o.ParentId == obj.Id).OrderBy(o => o.OrderNo))
-                            {
-                                if (childCss.HasValue()) { menus.Add(item); }
-                                <li class="nav-item">
-                                    <a class="@childCss" data-url="@item.Url">
-                                        <div class="nav-icon aceui-tooltip" tooltip="@Html.Raw(item.Name)">
-                                            <span class="@(item.Icon ?? "fa fa-file")"></span>
-                                        </div>
-                                        <span class="nav-title">@Html.Raw(item.Name)</span>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
                     </div>
-                }
+                    <ul class="sidebar-trans">
+                        @foreach (var item in modules.Where(o => o.ParentId == obj.Id).OrderBy(o => o.OrderNo))
+                        {
+                            if (childCss.HasValue()) { menus.Add(item); }
+                            <li class="nav-item">
+                                <a class="@childCss" data-url="@item.Url">
+                                    <div class="nav-icon aceui-tooltip" tooltip="@Html.Raw(item.Name)">
+                                        <span class="@(item.Icon ?? "fa fa-file")"></span>
+                                    </div>
+                                    <span class="nav-title">@Html.Raw(item.Name)</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
             </div>
         </div>
     </div>
     <div class="ax-content mini">
-        @if (menus.Count > 0)
-        {
-            <div class="ct-navbar">
-                <div class="ct-navbar-title"></div>
-                <div class="ct-navbar-list">
-                    @foreach (var mod in menus)
-                    {
-                        <ul>
-                            @foreach (var item in modules.Where(o => o.ParentId == mod.Id).OrderBy(o => o.OrderNo))
-                            {
-                                <li class="nav-item" data-url="/@item.Url">
-                                    <div class="nav-icon"></div>
-                                    <div class="nav-title">@Html.Raw(item.Name)</div>
-                                </li>
-                            }
-                        </ul>
-                    }
+    @if (menus.Count > 0)
+    {
+        <div class="ct-navbar">
+            <div class="ct-navbar-title"></div>
+            <div class="ct-navbar-list">
+            @foreach (var mod in menus)
+            {
+                <ul>
+                @foreach (var item in modules.Where(o => o.ParentId == mod.Id).OrderBy(o => o.OrderNo))
+                {
+                    <li class="nav-item" data-url="/@item.Url">
+                        <div class="nav-icon"></div>
+                        <div class="nav-title">@Html.Raw(item.Name)</div>
+                    </li>
+                }
+                </ul>
+            }
+            </div>
+        </div>
+        <div class="ct-split">
+            <div class="ct-split-wrap">
+                <div class="ct-split-bg"></div>
+                <div class="ct-split-collapse">
+                    <span class="fa fa-chevron-left"></span>
+                    <span class="fa fa-chevron-right"></span>
                 </div>
             </div>
-            <div class="ct-split">
-                <div class="ct-split-wrap">
-                    <div class="ct-split-bg"></div>
-                    <div class="ct-split-collapse">
-                        <span class="fa fa-chevron-left"></span>
-                        <span class="fa fa-chevron-right"></span>
-                    </div>
-                </div>
-            </div>
-        }
+        </div>
+    }
         <div class="ct-wrap">
-            <iframe style="width:100%;height:100%" src="/plat/index/welcome?bg=eaedf1" frameborder="0"></iframe>
+            <iframe id="frm" style="width:100%;height:100%" src="/plat/index/welcome?bg=eaedf1" frameborder="0"></iframe>
         </div>
     </div>
 </div>
 @section startup  {
 <script>
+    $('#frm').iframe('click', function () {
+        $('.ax-header').click();
+    });
     $(function () {
         $('.sidebar-fold').click(function () {
             var val = 'full';

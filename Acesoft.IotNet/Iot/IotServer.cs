@@ -6,6 +6,8 @@ using Serilog;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Protocol;
 using Acesoft.Util;
+using Acesoft.Security;
+using System.Net.Http;
 
 namespace Acesoft.IotNet.Iot
 {
@@ -13,10 +15,10 @@ namespace Acesoft.IotNet.Iot
 	{
 		private readonly ConcurrentDictionary<string, IotSession> sessions = new ConcurrentDictionary<string, IotSession>();
         private readonly ILogger logger;
-		private int interval = 30;
+        private int interval;
 		private IDispatcher api;
 
-        public IotServer() : base(new DefaultReceiveFilterFactory<IotReceiveFilter, IotRequest>())
+        public IotServer() : base(new IotReceiveFilterFactory())
 		{
 			NewSessionConnected += IotServer_NewSessionConnected;
 			NewRequestReceived += IotServer_NewRequestReceived;
@@ -24,12 +26,26 @@ namespace Acesoft.IotNet.Iot
             logger = Log.ForContext<IotServer>();
         }
 
+        private string GetWeaHex(string mac)
+        {
+            var iotData = App.Cache.Get<IotData>($"iot_data_{mac}");
+            if (iotData != null && iotData.Weather != null)
+            {
+                var pm25 = int.Parse(iotData.Weather.aqi.pm25);
+                var temp = double.Parse(iotData.Weather.condition.temp);
+                var humi = int.Parse(iotData.Weather.condition.humidity);
+                return $"{NaryHelper.ToYmHex(pm25, 2)}{NaryHelper.ToYmHex(temp, 4)}{NaryHelper.ToYmHex(humi, 2)}";
+            }
+            return $"EEEEEEEE";
+        }
+
 		private void IotServer_NewRequestReceived(IotSession session, IotRequest req)
 		{
 			logger.Debug($"IoT-Rece: {session.RemoteEndPoint} {req.Device.Mac}-{req.SessionId} {req.Command}");
 
 			IotRequest request = null;
-			var hasError = false;
+			//var hasErrorRequest = false;
+            //var hasErrorResponse = false;
 			if (!req.CheckCrc16())
 			{
 				if (!req.Command.IsResponse)
@@ -38,7 +54,7 @@ namespace Acesoft.IotNet.Iot
 				}
 				else
 				{
-					hasError = true;
+					//hasErrorRequest = true;
 				}
 			}
 			else
@@ -73,7 +89,7 @@ namespace Acesoft.IotNet.Iot
                             break;
                         }
                         Task.Run(() => DoUpload(req));
-                        request = req.Ok();
+                        request = req.Ok(GetWeaHex(req.Device.Mac));
                         break;
                     }
 				    case "0003":
@@ -93,11 +109,11 @@ namespace Acesoft.IotNet.Iot
                         {
                             if (!req.CheckSession(sessions, session))
                             {
-                                hasError = true;
+                                //hasErrorResponse = true;
                             }
                             else
                             {
-                                api.Dispatch(req.Device.Mac, "BACK", req.Command.Name, $"1{req.Command.DataHex}");
+                                api.Dispatch(Name, req.Device.Mac, $"BACK-{req.Command.Name}", $"{req.Command.DataHex}");
                             }
                         }
                         else if (!req.CheckSession(sessions, session))
@@ -114,11 +130,9 @@ namespace Acesoft.IotNet.Iot
 				}
 			}
 
-			if (!hasError && request != null)
+			if (request != null)
 			{
 				Send(session, request);
-
-                // success
 			}
 		}
 
@@ -132,9 +146,27 @@ namespace Acesoft.IotNet.Iot
 				});
 			}
 			return req.ErrorSession();
-		}
+        }
 
-		private void Send(IotSession session, IotRequest req)
+        public bool ConnectToApiClient()
+        {
+            try
+            {
+                var url = this.Config.Options["clientStartUrl"];
+                logger.Debug($"IoT-Conn: Connecting {{{url}}}");
+
+                using (var httpClient = new HttpClient())
+                {
+                    return httpClient.GetAsync(url).Result.IsSuccessStatusCode;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void Send(IotSession session, IotRequest req)
 		{
             logger.Debug($"IoT-Send: {session.RemoteEndPoint} {req.Device.Mac}-{req.SessionId} {req.Command}");
 
@@ -142,44 +174,43 @@ namespace Acesoft.IotNet.Iot
 			session.Send(bytes, 0, bytes.Length);
 		}
 
-		public bool Dispatch(string mac, string action, string cmd, string data)
+		public bool Dispatch(string server, string mac, string cmd, string data)
 		{
-			IotSession value = null;
-			if (sessions.TryGetValue(mac, out value) && value.Connected)
+			if (sessions.TryGetValue(mac, out IotSession session) && session.Connected)
 			{
-				var request = IotRequest.CreateRequest(mac, cmd, data);
-				request.SessionId = value.SessionId;
-				Send(value, request);
+				var request = IotRequest.CreateRequest((IotReceiveFilter)session.Items["filter"], mac, cmd, data);
+				request.SessionId = session.SessionId;
+				Send(session, request);
 				return true;
 			}
 
-			api.Dispatch(mac, "BACK", cmd, "0设备已离线！");
+			api.Dispatch(server, mac, $"BACK-{cmd}", "FF设备已离线！");
 			return false;
 		}
 
 		private void DoLogin(IotRequest req)
 		{
-			api.Dispatch(req.Device.Mac, "LOGIN", req.Command.Name, req.Command.DataHex);
+			api.Dispatch(Name, req.Device.Mac, $"LOGIN-{req.Command.Name}", req.Command.DataHex);
 		}
 
 		private void DoOnline(IotRequest req)
 		{
-			api.Dispatch(req.Device.Mac, "ONLINE", req.Command.Name, "");
+			api.Dispatch(Name, req.Device.Mac, $"ONLINE-{req.Command.Name}", "");
 		}
 
 		private void DoLogout(IotDevice device)
 		{
-			api.Dispatch(device.Mac, "LOGOUT", "", "");
+			api.Dispatch(Name, device.Mac, "LOGOUT", "");
 		}
 
 		private void DoUpload(IotRequest req)
 		{
-			api.Dispatch(req.Device.Mac, "UPLOAD", req.Command.Name, req.Command.DataHex);
+			api.Dispatch(Name, req.Device.Mac, $"UPLOAD-{req.Command.Name}", req.Command.DataHex);
 		}
 
 		private void DoUpData(IotRequest req)
 		{
-			api.Dispatch(req.Device.Mac, "UPDATA", req.Command.Name, req.Command.DataHex);
+			api.Dispatch(Name, req.Device.Mac, $"UPDATA-{req.Command.Name}", req.Command.DataHex);
 		}
 
 		private void IotServer_NewSessionConnected(IotSession session)
@@ -200,6 +231,8 @@ namespace Acesoft.IotNet.Iot
         protected override void OnStarted()
 		{
 			api = Bootstrap.GetServerByName("ApiServer") as IDispatcher;
+            interval = Config.Options.GetValue<int>("uploadInterval", 30);
+            ConnectToApiClient();
 
 			logger.Debug($"IoT-Socket-START: {Config.Ip}:{Config.Port}");
 		}

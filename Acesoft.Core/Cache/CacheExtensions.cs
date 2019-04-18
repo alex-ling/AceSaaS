@@ -20,6 +20,17 @@ namespace Acesoft.Cache
             return result;
         }
 
+        public static string GetOrAdd(this IDistributedCache cache, string key, Func<string, string> addFunc)
+        {
+            var result = cache.GetString(key);
+            if (result == null)
+            {
+                result = addFunc(key);
+                cache.SetString(key, result);
+            }
+            return result;
+        }
+
         public static T Get<T>(this IDistributedCache cache, string key)
         {
             var json = cache.GetString(key);

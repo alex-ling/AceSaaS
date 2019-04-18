@@ -27,23 +27,32 @@ namespace Acesoft.Config
         #region json
         public static T GetJsonConfig<T>(Action<ConfigOption> options) where T : class, new()
         {
-            var opts = new ConfigOption();
-            options(opts);
+            var configuration = GetJsonConfig(options);
+            var config = new T();
+            configuration.Bind(config);
+            return config;
+        }
 
-            var basePath = opts.ConfigPath;
+        public static IConfiguration GetJsonConfig(Action<ConfigOption> options)
+        {
+            return GetJsonConfig(options, out ConfigOption option);
+        }
+
+        public static IConfiguration GetJsonConfig(Action<ConfigOption> options, out ConfigOption option)
+        {
+            option = new ConfigOption();
+            options(option);
+
+            var basePath = option.ConfigPath;
             if (!Path.IsPathRooted(basePath))
             {
                 basePath = Path.Combine(Directory.GetCurrentDirectory(), basePath);
             }
 
-            var configuration = new ConfigurationBuilder()
+            return new ConfigurationBuilder()
                 .SetBasePath(basePath)
-                .AddJsonFile(opts.ConfigFile, optional: opts.Optional, reloadOnChange: true)
+                .AddJsonFile(option.ConfigFile, optional: option.Optional, reloadOnChange: true)
                 .Build();
-
-            var config = new T();
-            configuration.Bind(config);
-            return config;
         }
 
         public static T GetConfig<T>(string nameOrTenant = "", Action<T, string> changed = null) where T : class, new()

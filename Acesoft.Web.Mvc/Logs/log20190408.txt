@@ -1,0 +1,1277 @@
+2019-04-08 02:59:00.318 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 02:59:01.266 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 08:19:24.376 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 08:19:26.031 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 08:23:44.197 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/test/online/t_hod1?sbno=AABBCCDDEEFF  
+2019-04-08 08:23:44.284 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:23:44.325 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-08 08:23:44.346 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-08 08:23:44.372 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-08 08:23:44.373 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-08 08:23:44.375 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-08 08:23:44.397 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-08 08:23:44.400 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-08 08:23:44.400 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-08 08:23:44.541 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-08 08:23:44.541 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-08 08:23:44.542 +08:00 [DBG] Done initialize tentants.
+2019-04-08 08:23:44.542 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:23:44.548 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 08:23:44.552 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-08 08:23:44.554 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-08 08:23:44.559 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:23:44.561 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:23:50.989 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:23:50.989 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:23:50.989 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 08:23:50.989 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-08 08:23:50.989 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-08 08:23:50.990 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:23:50.990 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:23:50.991 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-08 08:23:54.081 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-08 08:23:54.114 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 08:23:54.115 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 08:23:54.978 +08:00 [INF] Executed page /Error in 891.8474ms
+2019-04-08 08:23:54.979 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-08 08:23:55.003 +08:00 [INF] Request finished in 10810.6543ms 404 text/html; charset=utf-8
+2019-04-08 08:23:55.682 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-08 08:23:55.684 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:23:55.721 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-08 08:23:55.739 +08:00 [INF] Request finished in 57.2123ms 200 image/x-icon
+2019-04-08 08:24:54.240 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/hub/iotdata  
+2019-04-08 08:24:54.246 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:24:54.246 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:24:54.246 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 08:24:54.246 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-08 08:24:54.246 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-08 08:24:54.246 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:24:54.246 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:24:54.261 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:24:54.261 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:24:54.261 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 08:24:54.261 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-08 08:24:54.261 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-08 08:24:54.261 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:24:54.261 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:24:54.261 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-08 08:24:54.267 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-08 08:24:54.268 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 08:24:54.268 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 08:24:54.275 +08:00 [INF] Executed page /Error in 8.1122ms
+2019-04-08 08:24:54.275 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-08 08:24:54.275 +08:00 [INF] Request finished in 35.148ms 404 text/html; charset=utf-8
+2019-04-08 08:26:23.743 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 08:26:25.222 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 08:26:31.596 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/hub/iotdata  
+2019-04-08 08:26:31.658 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:26:31.691 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-08 08:26:31.696 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-08 08:26:31.720 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-08 08:26:31.721 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-08 08:26:31.722 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-08 08:26:31.744 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-08 08:26:31.744 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-08 08:26:31.744 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-08 08:26:42.178 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-08 08:26:42.178 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-08 08:26:42.178 +08:00 [DBG] Done initialize tentants.
+2019-04-08 08:26:42.179 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:26:42.185 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 08:26:42.188 +08:00 [DBG] Resolved Tenant "xile" with request: localhost:82.
+2019-04-08 08:26:42.191 +08:00 [DBG] Tenant "xile" resolved. Caching with keys "localhost:82".
+2019-04-08 08:26:42.198 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:26:42.199 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:27:02.723 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:27:02.723 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:27:02.723 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 08:27:02.723 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:27:02.723 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:27:02.726 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-08 08:27:05.713 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-08 08:27:05.741 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 08:27:05.742 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 08:27:06.619 +08:00 [INF] Executed page /Error in 901.62520000000006ms
+2019-04-08 08:27:06.620 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-08 08:27:06.636 +08:00 [INF] Request finished in 35041.5581ms 404 text/html; charset=utf-8
+2019-04-08 08:27:06.905 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-08 08:27:06.908 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:27:06.934 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-08 08:27:06.934 +08:00 [INF] Request finished in 29.09ms 200 image/x-icon
+2019-04-08 08:37:47.035 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 08:37:48.374 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 08:37:53.654 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/hub/iotdata  
+2019-04-08 08:37:53.699 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:37:53.730 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-08 08:37:53.734 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-08 08:37:53.750 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-08 08:37:53.750 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-08 08:37:53.754 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-08 08:37:53.771 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-08 08:37:53.772 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-08 08:37:53.773 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-08 08:38:04.654 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-08 08:38:04.654 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-08 08:38:04.656 +08:00 [DBG] Done initialize tentants.
+2019-04-08 08:38:04.656 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:38:04.661 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 08:38:04.663 +08:00 [DBG] Resolved Tenant "xile" with request: localhost:82.
+2019-04-08 08:38:04.664 +08:00 [DBG] Tenant "xile" resolved. Caching with keys "localhost:82".
+2019-04-08 08:38:04.669 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:38:04.670 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:40:51.486 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 08:40:52.820 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 08:40:58.218 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/hub/iotdata  
+2019-04-08 08:40:58.283 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:40:58.324 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-08 08:40:58.331 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-08 08:40:58.351 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-08 08:40:58.352 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-08 08:40:58.353 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-08 08:40:58.376 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-08 08:40:58.376 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-08 08:40:58.376 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-08 08:41:03.055 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-08 08:41:03.055 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-08 08:41:03.056 +08:00 [DBG] Done initialize tentants.
+2019-04-08 08:41:03.056 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:41:03.062 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 08:41:03.065 +08:00 [DBG] Resolved Tenant "xile" with request: localhost:82.
+2019-04-08 08:41:03.067 +08:00 [DBG] Tenant "xile" resolved. Caching with keys "localhost:82".
+2019-04-08 08:41:03.071 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:41:03.072 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:41:24.879 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:41:24.879 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:41:24.879 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 08:41:24.879 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:41:24.879 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:41:24.881 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-08 08:41:27.584 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-08 08:41:27.609 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 08:41:27.609 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 08:41:28.440 +08:00 [INF] Executed page /Error in 851.9787ms
+2019-04-08 08:41:28.441 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-08 08:41:28.457 +08:00 [INF] Request finished in 30244.4149ms 404 text/html; charset=utf-8
+2019-04-08 08:41:28.813 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-08 08:41:28.817 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:41:28.847 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-08 08:41:28.860 +08:00 [INF] Request finished in 46.4352ms 200 image/x-icon
+2019-04-08 08:42:17.791 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/hub/iotdata  
+2019-04-08 08:42:17.806 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:42:17.806 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:42:17.806 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 08:42:17.806 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:42:17.806 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:42:17.809 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:42:17.809 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 08:42:17.809 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 08:42:17.809 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 08:42:17.809 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 08:42:17.809 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-08 08:42:17.811 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-08 08:42:17.811 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 08:42:17.811 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 08:42:17.815 +08:00 [INF] Executed page /Error in 4.3966ms
+2019-04-08 08:42:17.816 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-08 08:42:17.816 +08:00 [INF] Request finished in 24.5142ms 404 text/html; charset=utf-8
+2019-04-08 08:42:17.941 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-08 08:42:17.942 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 08:42:17.943 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-08 08:42:17.943 +08:00 [INF] Request finished in 2.1228ms 200 image/x-icon
+2019-04-08 18:20:09.896 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 18:20:10.623 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 18:20:32.698 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/  
+2019-04-08 18:20:32.862 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:20:32.878 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-08 18:20:32.883 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-08 18:20:32.887 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-08 18:20:32.888 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-08 18:20:32.890 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-08 18:20:32.893 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-08 18:20:32.893 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-08 18:20:32.893 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-08 18:20:33.002 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-08 18:20:33.002 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-08 18:20:33.002 +08:00 [DBG] Done initialize tentants.
+2019-04-08 18:20:33.002 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:20:33.008 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 18:20:33.010 +08:00 [DBG] Resolved Tenant "xile" with request: localhost:82.
+2019-04-08 18:20:33.011 +08:00 [DBG] Tenant "xile" resolved. Caching with keys "localhost:82".
+2019-04-08 18:20:33.016 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:20:33.016 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:20:33.132 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-04-08 18:20:35.823 +08:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing page /Index
+2019-04-08 18:20:35.844 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:20:35.844 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:20:36.740 +08:00 [INF] Executed page /Index in 910.74420000000009ms
+2019-04-08 18:20:36.740 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-04-08 18:20:36.750 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-08 18:20:36.752 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:20:36.752 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:20:36.752 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:20:36.752 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:20:36.752 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:20:36.757 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-08 18:20:36.760 +08:00 [INF] Request finished in 4066.2213ms 302 text/html; charset=utf-8
+2019-04-08 18:20:37.134 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-08 18:20:37.148 +08:00 [INF] Authorization failed.
+2019-04-08 18:20:37.153 +08:00 [INF] Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+2019-04-08 18:20:37.163 +08:00 [INF] Executing ChallengeResult with authentication schemes ([]).
+2019-04-08 18:20:37.169 +08:00 [INF] AuthenticationScheme: Cookie was challenged.
+2019-04-08 18:20:37.169 +08:00 [INF] Executed page /plat/index/index in 35.4912ms
+2019-04-08 18:20:37.169 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-08 18:20:37.173 +08:00 [INF] Request finished in 422.7695ms 302 
+2019-04-08 18:20:37.179 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/account/login?ReturnUrl=%2Fplat%2Findex  
+2019-04-08 18:20:37.179 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:20:37.179 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:20:37.179 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:20:37.179 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:20:37.179 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:20:37.187 +08:00 [INF] Executing endpoint 'Page: /plat/account/login'
+2019-04-08 18:20:37.479 +08:00 [INF] Route matched with {page = "/plat/account/login", action = "", controller = ""}. Executing page /plat/account/login
+2019-04-08 18:20:37.482 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:20:37.482 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:20:37.511 +08:00 [INF] Executed page /plat/account/login in 31.701600000000003ms
+2019-04-08 18:20:37.511 +08:00 [INF] Executed endpoint 'Page: /plat/account/login'
+2019-04-08 18:20:37.517 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 46
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetConfig(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages.plat.account.Pages_plat_account_login.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\plat\account\login.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 28
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 83
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-04-08 18:20:37.678 +08:00 [INF] Request finished in 498.5948ms 500 text/html; charset=utf-8
+2019-04-08 18:21:05.839 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/account/login?ReturnUrl=%2Fplat%2Findex  
+2019-04-08 18:21:05.844 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:21:05.845 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:21:05.845 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:21:05.845 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:21:05.845 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:21:05.848 +08:00 [INF] Executing endpoint 'Page: /plat/account/login'
+2019-04-08 18:21:05.851 +08:00 [INF] Route matched with {page = "/plat/account/login", action = "", controller = ""}. Executing page /plat/account/login
+2019-04-08 18:21:05.854 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:21:05.854 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:21:06.127 +08:00 [INF] Executed page /plat/account/login in 275.6554ms
+2019-04-08 18:21:06.127 +08:00 [INF] Executed endpoint 'Page: /plat/account/login'
+2019-04-08 18:21:06.299 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 46
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetConfig(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages.plat.account.Pages_plat_account_login.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\plat\account\login.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 28
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 83
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-04-08 18:21:06.389 +08:00 [INF] Request finished in 549.7723ms 500 text/html; charset=utf-8
+2019-04-08 18:21:06.481 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-08 18:21:06.486 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:21:06.559 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-08 18:21:06.577 +08:00 [INF] Request finished in 95.9996ms 200 image/x-icon
+2019-04-08 18:23:06.523 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/account/login?ReturnUrl=%2Fplat%2Findex  
+2019-04-08 18:23:06.524 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:23:06.524 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:23:06.524 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:23:06.524 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:23:06.524 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:23:06.525 +08:00 [INF] Executing endpoint 'Page: /plat/account/login'
+2019-04-08 18:23:06.525 +08:00 [INF] Route matched with {page = "/plat/account/login", action = "", controller = ""}. Executing page /plat/account/login
+2019-04-08 18:23:06.525 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:23:06.525 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:23:06.678 +08:00 [INF] Executed page /plat/account/login in 153.2953ms
+2019-04-08 18:23:06.679 +08:00 [INF] Executed endpoint 'Page: /plat/account/login'
+2019-04-08 18:23:06.845 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Acesoft.Web.DataAccess.StoreOptionExtensions.UseConfig(IStoreOption option, DataConfig config) in D:\acecms\src\Acesoft.Web\DataAccess\StoreOptionExtensions.cs:line 27
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ExpressionResolverBuilder.<>c__DisplayClass17_0.<Build>b__1(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 46
+   at lambda_method(Closure , ServiceProviderEngineScope )
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetConfig(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages.plat.account.Pages_plat_account_login.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\plat\account\login.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 28
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 83
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-04-08 18:23:06.884 +08:00 [INF] Request finished in 360.8443ms 500 text/html; charset=utf-8
+2019-04-08 18:23:07.030 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-08 18:23:07.031 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:23:07.036 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-08 18:23:07.047 +08:00 [INF] Request finished in 17.3451ms 200 image/x-icon
+2019-04-08 18:23:22.612 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 18:23:23.353 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 18:23:42.863 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/  
+2019-04-08 18:23:42.910 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:23:42.928 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-08 18:23:42.932 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-08 18:23:42.934 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-08 18:23:42.935 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-08 18:23:42.936 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-08 18:23:42.938 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-08 18:23:42.938 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-08 18:23:42.938 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-08 18:23:43.030 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-08 18:23:43.030 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-08 18:23:43.030 +08:00 [DBG] Done initialize tentants.
+2019-04-08 18:23:43.031 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:23:43.034 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 18:23:43.036 +08:00 [DBG] Resolved Tenant "xile" with request: localhost:82.
+2019-04-08 18:23:43.037 +08:00 [DBG] Tenant "xile" resolved. Caching with keys "localhost:82".
+2019-04-08 18:23:43.042 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:23:43.043 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:23:43.153 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-04-08 18:23:45.404 +08:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing page /Index
+2019-04-08 18:23:45.421 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:23:45.422 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:23:46.128 +08:00 [INF] Executed page /Index in 719.92320000000007ms
+2019-04-08 18:23:46.129 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-04-08 18:23:46.138 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-08 18:23:46.139 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:23:46.139 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:23:46.139 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:23:46.139 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:23:46.139 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:23:46.144 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-08 18:23:46.148 +08:00 [INF] Request finished in 3286.7048ms 302 text/html; charset=utf-8
+2019-04-08 18:23:46.519 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-08 18:23:46.543 +08:00 [INF] Authorization failed.
+2019-04-08 18:23:46.552 +08:00 [INF] Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+2019-04-08 18:23:46.561 +08:00 [INF] Executing ChallengeResult with authentication schemes ([]).
+2019-04-08 18:23:46.572 +08:00 [INF] AuthenticationScheme: Cookie was challenged.
+2019-04-08 18:23:46.573 +08:00 [INF] Executed page /plat/index/index in 53.2087ms
+2019-04-08 18:23:46.573 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-08 18:23:46.577 +08:00 [INF] Request finished in 439.1037ms 302 
+2019-04-08 18:23:46.584 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/account/login?ReturnUrl=%2Fplat%2Findex  
+2019-04-08 18:23:46.584 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:23:46.584 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:23:46.584 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:23:46.584 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:23:46.584 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:23:46.591 +08:00 [INF] Executing endpoint 'Page: /plat/account/login'
+2019-04-08 18:23:46.932 +08:00 [INF] Route matched with {page = "/plat/account/login", action = "", controller = ""}. Executing page /plat/account/login
+2019-04-08 18:23:46.933 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:23:46.933 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:23:46.996 +08:00 [DBG] Store has initlialized with database "xile"
+2019-04-08 18:23:46.997 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:23:47.168 +08:00 [DBG] Query 3 users from "xile" store
+2019-04-08 18:23:47.170 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:23:47.170 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:23:47.185 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:23:47.185 +08:00 [DBG] Initalize ISqlMapper for name: xile
+2019-04-08 18:23:47.188 +08:00 [DBG] SqlMapper initalize the folder: D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\SqlMaps
+2019-04-08 18:23:47.228 +08:00 [DBG] CacheManager load FlushSqlMaps!
+2019-04-08 18:23:47.230 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-08 18:23:47.499 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:23:47.501 +08:00 [INF] SqlMapper do request: rbac.query_user_by_username, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:23:47.508 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_username:userName=guest, Success: False !
+2019-04-08 18:23:47.546 +08:00 [DBG] CacheManager SetCache SqlId: rbac.query_user_by_username:userName=guest
+2019-04-08 18:23:47.685 +08:00 [INF] Executed page /plat/account/login in 753.3592ms
+2019-04-08 18:23:47.685 +08:00 [INF] Executed endpoint 'Page: /plat/account/login'
+2019-04-08 18:23:47.685 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:23:47.686 +08:00 [INF] Request finished in 1101.7926ms 200 text/html; charset=utf-8
+2019-04-08 18:23:47.779 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/content/back.css  
+2019-04-08 18:23:47.780 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:23:47.803 +08:00 [INF] The file /content/back.css was not modified
+2019-04-08 18:23:47.806 +08:00 [INF] Request finished in 26.9277ms 304 text/css
+2019-04-08 18:24:08.971 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:82/api/auth/login?ReturnUrl=%2Fplat%2Findex&app=plat application/json 246
+2019-04-08 18:24:08.972 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-08 18:24:08.972 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:08.972 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:08.972 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:08.972 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:08.973 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)'
+2019-04-08 18:24:08.997 +08:00 [INF] Route matched with {action = "Login", controller = "Auth", page = ""}. Executing action Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)
+2019-04-08 18:24:09.001 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:09.001 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:09.085 +08:00 [DBG] Execute WebApi action "用户登录" with "Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)"
+2019-04-08 18:24:09.226 +08:00 [INF] Executing action method Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web) with arguments (["{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\",\r\n  \"persistent\": \"true\",\r\n  \"__RequestVerificationToken\": \"CfDJ8JmUAGG27HxKvFkOYmwdhe443hblrvHbEIOR4THf_NTJKsH8I-ny7iNKc5gZxsfIZ3sbv5EWOUx8AIf3zWvrIeRnX4kk2j7EFtoIjJnpP1EpTqOL__Sg9ljL1bN0tsBU88n0iSNtC6SLwSWvcYHvnCA\"\r\n}"]) - Validation state: "Valid"
+2019-04-08 18:24:09.233 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:09.233 +08:00 [INF] SqlMapper do request: rbac.query_user_by_username, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:24:09.234 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_username:userName=admin, Success: False !
+2019-04-08 18:24:09.320 +08:00 [DBG] CacheManager SetCache SqlId: rbac.query_user_by_username:userName=admin
+2019-04-08 18:24:09.456 +08:00 [DBG] Login with the user "289469215771983872:admin"
+2019-04-08 18:24:09.466 +08:00 [INF] AuthenticationScheme: Cookie signed in.
+2019-04-08 18:24:09.470 +08:00 [INF] Executed action method Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 239.74030000000002ms.
+2019-04-08 18:24:09.479 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-08 18:24:09.544 +08:00 [INF] Executed action Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web) in 546.5285ms
+2019-04-08 18:24:09.544 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)'
+2019-04-08 18:24:09.552 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:24:09.552 +08:00 [INF] Request finished in 580.8724ms 200 application/json; charset=utf-8
+2019-04-08 18:24:09.603 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-08 18:24:09.608 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:09.608 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:09.608 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:09.608 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:09.608 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-08 18:24:09.609 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-08 18:24:09.610 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:09.613 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:24:09.613 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:24:09.633 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:09.633 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:09.634 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-08 18:24:09.778 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:09.778 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:24:09.778 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: False !
+2019-04-08 18:24:09.838 +08:00 [DBG] CacheManager SetCache SqlId: rbac.query_user_by_id:id=289469215771983872
+2019-04-08 18:24:09.846 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:09.846 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-08 18:24:09.941 +08:00 [INF] Executed page /plat/index/index in 331.77770000000004ms
+2019-04-08 18:24:09.941 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-08 18:24:09.941 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:24:09.941 +08:00 [INF] Request finished in 338.1752ms 200 text/html; charset=utf-8
+2019-04-08 18:24:09.996 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-08 18:24:09.996 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/user/logow.png  
+2019-04-08 18:24:09.997 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:09.997 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:09.997 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:09.997 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:09.997 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-08 18:24:10.050 +08:00 [INF] Sending file. Request path: '/user/logow.png'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\user\logow.png'
+2019-04-08 18:24:10.064 +08:00 [INF] Request finished in 67.5056ms 200 image/png
+2019-04-08 18:24:10.457 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-08 18:24:10.458 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:10.459 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:24:10.459 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:24:10.487 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:10.488 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:10.488 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-08 18:24:11.003 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:11.003 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:24:11.003 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:24:11.513 +08:00 [INF] Executed page /plat/index/welcome in 1055.3186ms
+2019-04-08 18:24:11.513 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-08 18:24:11.513 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:24:11.513 +08:00 [INF] Request finished in 1516.9961ms 200 text/html; charset=utf-8
+2019-04-08 18:24:20.322 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/sys/index  
+2019-04-08 18:24:20.323 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:20.323 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:20.323 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:20.323 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:20.324 +08:00 [INF] Executing endpoint 'Page: /plat/sys/index/index'
+2019-04-08 18:24:20.765 +08:00 [INF] Route matched with {page = "/plat/sys/index/index", action = "", controller = ""}. Executing page /plat/sys/index/index
+2019-04-08 18:24:20.765 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:20.766 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:24:20.766 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:24:20.999 +08:00 [INF] Executed page /plat/sys/index/index in 234.7322ms
+2019-04-08 18:24:20.999 +08:00 [INF] Executed endpoint 'Page: /plat/sys/index/index'
+2019-04-08 18:24:21.000 +08:00 [INF] Request finished in 677.3207ms 200 text/html; charset=utf-8
+2019-04-08 18:24:21.978 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/sys/create  
+2019-04-08 18:24:21.979 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:21.979 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:21.979 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:21.979 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:21.980 +08:00 [INF] Executing endpoint 'Page: /plat/sys/create/index'
+2019-04-08 18:24:22.269 +08:00 [INF] Route matched with {page = "/plat/sys/create/index", action = "", controller = ""}. Executing page /plat/sys/create/index
+2019-04-08 18:24:22.269 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:22.271 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:24:22.271 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:24:22.351 +08:00 [INF] Executed page /plat/sys/create/index in 81.8661ms
+2019-04-08 18:24:22.351 +08:00 [INF] Executed endpoint 'Page: /plat/sys/create/index'
+2019-04-08 18:24:22.351 +08:00 [INF] Request finished in 373.1144ms 200 text/html; charset=utf-8
+2019-04-08 18:24:22.483 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/tree?rootname=%E6%95%B0%E6%8D%AE%E5%BA%93&ds=sys.table_tree&app=plat  
+2019-04-08 18:24:22.484 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:22.484 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:22.484 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:22.484 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:22.491 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:24:22.500 +08:00 [INF] Route matched with {action = "Tree", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)
+2019-04-08 18:24:22.500 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:22.501 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:22.501 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:22.514 +08:00 [DBG] Execute WebApi action "查询Tree" with "Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)"
+2019-04-08 18:24:22.550 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) with arguments (["Acesoft.Data.TreeRequest"]) - Validation state: "Valid"
+2019-04-08 18:24:22.555 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:22.555 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:24:22.555 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:24:22.558 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:22.559 +08:00 [INF] SqlMapper do request: sys.table_tree, type: System.Data.DataTable
+2019-04-08 18:24:22.559 +08:00 [DBG] CacheManager GetCache SqlId: sys.table_tree:Id=&RootId=&RootName=数据库&RootIcon=&NullSelect=False, Success: False !
+2019-04-08 18:24:22.710 +08:00 [DBG] CacheManager SetCache SqlId: sys.table_tree:Id=&RootId=&RootName=数据库&RootIcon=&NullSelect=False
+2019-04-08 18:24:22.710 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 160.2349ms.
+2019-04-08 18:24:22.716 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.TreeResponse'.
+2019-04-08 18:24:22.744 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) in 244.0354ms
+2019-04-08 18:24:22.744 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:24:22.744 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:24:22.744 +08:00 [INF] Request finished in 260.6478ms 200 application/json; charset=utf-8
+2019-04-08 18:24:22.832 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&page=1&rows=50  
+2019-04-08 18:24:22.832 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:22.832 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:22.832 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:22.832 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:22.836 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:24:22.850 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:24:22.850 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:22.850 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:22.850 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:22.859 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:24:22.916 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:24:22.924 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:22.924 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:24:22.925 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:24:22.925 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:22.936 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:24:22.936 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=, Success: False !
+2019-04-08 18:24:23.021 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=
+2019-04-08 18:24:23.021 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 104.7723ms.
+2019-04-08 18:24:23.021 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:24:23.028 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 178.4796ms
+2019-04-08 18:24:23.028 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:24:23.028 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:24:23.028 +08:00 [INF] Request finished in 196.6187ms 200 application/json; charset=utf-8
+2019-04-08 18:24:24.433 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_class&page=1&rows=50  
+2019-04-08 18:24:24.433 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:24.433 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:24.433 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:24.433 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:24.433 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:24:24.434 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:24:24.434 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:24.434 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:24.434 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:24.434 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:24:24.472 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:24:24.473 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:24.473 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:24:24.473 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:24:24.473 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:24.473 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:24:24.473 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_class, Success: False !
+2019-04-08 18:24:24.532 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_class
+2019-04-08 18:24:24.532 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 60.459500000000006ms.
+2019-04-08 18:24:24.532 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:24:24.540 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 106.7699ms
+2019-04-08 18:24:24.540 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:24:24.541 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:24:24.541 +08:00 [INF] Request finished in 107.6725ms 200 application/json; charset=utf-8
+2019-04-08 18:24:28.305 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:24:28.305 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:28.305 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:28.305 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:28.305 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:28.305 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:24:28.305 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:24:28.305 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:28.306 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:28.306 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:28.306 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:24:28.342 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:24:28.343 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:28.343 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:24:28.343 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:24:28.343 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:28.343 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:24:28.344 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: False !
+2019-04-08 18:24:28.389 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd
+2019-04-08 18:24:28.389 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 46.653200000000005ms.
+2019-04-08 18:24:28.389 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:24:28.389 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 84.0903ms
+2019-04-08 18:24:28.390 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:24:28.390 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:24:28.390 +08:00 [INF] Request finished in 84.8879ms 200 application/json; charset=utf-8
+2019-04-08 18:24:30.622 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/schema/dropfields/iot_cmd?fields=971365635554541568  
+2019-04-08 18:24:30.622 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:24:30.622 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:24:30.622 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:24:30.623 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:24:30.624 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)'
+2019-04-08 18:24:30.627 +08:00 [INF] Route matched with {action = "DropFields", controller = "Schema", page = ""}. Executing action Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)
+2019-04-08 18:24:30.627 +08:00 [INF] Authorization was successful.
+2019-04-08 18:24:30.627 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:24:30.627 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:24:30.628 +08:00 [DBG] Execute WebApi action "撤销字段" with "Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)"
+2019-04-08 18:24:30.680 +08:00 [INF] Executing action method Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web) with arguments (["iot_cmd","971365635554541568"]) - Validation state: "Valid"
+2019-04-08 18:24:30.809 +08:00 [DBG] Begin ReadCommitted transcation with database "xile"
+2019-04-08 18:25:57.976 +08:00 [DBG] Commit transcation with database "xile"
+2019-04-08 18:25:57.991 +08:00 [DBG] End transcation with database "xile"
+2019-04-08 18:25:57.991 +08:00 [DBG] CacheManager FlushCache.OnExecute CacheId: c_field, ExeSqlId: sys.field
+2019-04-08 18:25:57.993 +08:00 [INF] Executed action method Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 87312.2277ms.
+2019-04-08 18:25:57.993 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-08 18:25:57.994 +08:00 [INF] Executed action Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web) in 87366.7892ms
+2019-04-08 18:25:57.994 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)'
+2019-04-08 18:25:57.994 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:25:57.994 +08:00 [INF] Request finished in 87372.1342ms 200 application/json; charset=utf-8
+2019-04-08 18:25:58.007 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:25:58.008 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:25:58.008 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:25:58.008 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:25:58.008 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:25:58.008 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:25:58.008 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:25:58.009 +08:00 [INF] Authorization was successful.
+2019-04-08 18:25:58.009 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:25:58.009 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:25:58.009 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:25:58.051 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:25:58.053 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:25:58.053 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:25:58.054 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:25:58.054 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:25:58.054 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:25:58.054 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: False !
+2019-04-08 18:25:58.123 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd
+2019-04-08 18:25:58.123 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 71.7544ms.
+2019-04-08 18:25:58.123 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:25:58.124 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 115.2308ms
+2019-04-08 18:25:58.124 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:25:58.124 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:25:58.124 +08:00 [INF] Request finished in 116.6805ms 200 application/json; charset=utf-8
+2019-04-08 18:26:16.198 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:26:16.198 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:16.198 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:16.198 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:16.198 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:16.198 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:16.198 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:26:16.199 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:16.199 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:16.199 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:16.199 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:26:16.238 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:16.239 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:16.239 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:16.240 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:16.240 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:16.240 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:26:16.240 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: True !
+2019-04-08 18:26:16.240 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 1.5706ms.
+2019-04-08 18:26:16.240 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:26:16.240 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 41.7074ms
+2019-04-08 18:26:16.240 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:16.240 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:16.240 +08:00 [INF] Request finished in 42.4404ms 200 application/json; charset=utf-8
+2019-04-08 18:26:35.880 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:26:35.881 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:35.881 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:35.881 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:35.881 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:35.881 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:35.881 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:26:35.881 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:35.881 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:35.881 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:35.881 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:26:35.923 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:35.924 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:35.924 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:35.924 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:35.924 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:35.924 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:26:35.924 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: True !
+2019-04-08 18:26:35.924 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 1.0935000000000001ms.
+2019-04-08 18:26:35.924 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:26:35.924 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 43.4579ms
+2019-04-08 18:26:35.925 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:35.925 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:35.925 +08:00 [INF] Request finished in 44.4736ms 200 application/json; charset=utf-8
+2019-04-08 18:26:37.541 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_device&page=1&rows=50  
+2019-04-08 18:26:37.542 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:37.542 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:37.542 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:37.542 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:37.542 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:37.542 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:26:37.542 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:37.542 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:37.542 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:37.542 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:26:37.575 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:37.577 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:37.577 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:37.577 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:37.577 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:37.577 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:26:37.577 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_device, Success: False !
+2019-04-08 18:26:37.623 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_device
+2019-04-08 18:26:37.623 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 47.9027ms.
+2019-04-08 18:26:37.623 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:26:37.624 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 82.270400000000009ms
+2019-04-08 18:26:37.624 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:37.624 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:37.624 +08:00 [INF] Request finished in 83.0444ms 200 application/json; charset=utf-8
+2019-04-08 18:26:39.209 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:26:39.210 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:39.210 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:39.210 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:39.210 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:39.210 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:39.210 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:26:39.211 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:39.211 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:39.211 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:39.211 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:26:39.256 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:39.257 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:39.257 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:39.257 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:39.257 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:39.257 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:26:39.257 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: True !
+2019-04-08 18:26:39.257 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 1.1922000000000001ms.
+2019-04-08 18:26:39.257 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:26:39.258 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 47.6565ms
+2019-04-08 18:26:39.258 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:39.258 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:39.258 +08:00 [INF] Request finished in 48.6953ms 200 application/json; charset=utf-8
+2019-04-08 18:26:45.590 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/sys/create/field?id=971365635554541568  
+2019-04-08 18:26:45.591 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:45.591 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:45.591 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:45.591 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:45.591 +08:00 [INF] Executing endpoint 'Page: /plat/sys/create/field'
+2019-04-08 18:26:46.049 +08:00 [INF] Route matched with {page = "/plat/sys/create/field", action = "", controller = ""}. Executing page /plat/sys/create/field
+2019-04-08 18:26:46.049 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:46.050 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:26:46.050 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:26:46.059 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:46.059 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:46.061 +08:00 [INF] SqlMapper do request: sys.field, type: System.Object
+2019-04-08 18:26:46.125 +08:00 [DBG] CacheManager FlushCache.OnExecute CacheId: c_field, ExeSqlId: sys.field
+2019-04-08 18:26:46.599 +08:00 [INF] Executed page /plat/sys/create/field in 550.2714ms
+2019-04-08 18:26:46.599 +08:00 [INF] Executed endpoint 'Page: /plat/sys/create/field'
+2019-04-08 18:26:46.599 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:46.599 +08:00 [INF] Request finished in 1009.106ms 200 text/html; charset=utf-8
+2019-04-08 18:26:46.917 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/list?ds=sys.dictitem_list&dict=FIELDTYPE&app=plat  
+2019-04-08 18:26:46.918 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:46.918 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:46.918 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:46.918 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:46.918 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.List (Acesoft.Web)'
+2019-04-08 18:26:46.920 +08:00 [INF] Route matched with {action = "List", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.List (Acesoft.Web)
+2019-04-08 18:26:46.922 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:46.922 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:46.922 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:46.922 +08:00 [DBG] Execute WebApi action "查询List" with "Acesoft.Web.Controllers.CrudController.List (Acesoft.Web)"
+2019-04-08 18:26:46.981 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/tree?ds=sys.dict_tree&app=plat  
+2019-04-08 18:26:46.982 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:46.982 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:46.982 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:46.982 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:46.982 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:26:46.982 +08:00 [INF] Route matched with {action = "Tree", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)
+2019-04-08 18:26:46.982 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:46.983 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:46.983 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:46.983 +08:00 [DBG] Execute WebApi action "查询Tree" with "Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)"
+2019-04-08 18:26:47.024 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) with arguments (["Acesoft.Data.TreeRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:47.026 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.027 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:47.027 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:47.027 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.027 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.List (Acesoft.Web) - Validation state: "Valid"
+2019-04-08 18:26:47.027 +08:00 [INF] SqlMapper do request: sys.dict_tree, type: System.Data.DataTable
+2019-04-08 18:26:47.027 +08:00 [DBG] CacheManager GetCache SqlId: sys.dict_tree:Id=&RootId=&RootName=&RootIcon=&NullSelect=False, Success: False !
+2019-04-08 18:26:47.078 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.078 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:47.078 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:47.078 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.078 +08:00 [INF] SqlMapper do request: sys.dictitem_list, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.DictItem]
+2019-04-08 18:26:47.079 +08:00 [DBG] CacheManager GetCache SqlId: sys.dictitem_list:dict=FIELDTYPE, Success: False !
+2019-04-08 18:26:47.091 +08:00 [DBG] CacheManager SetCache SqlId: sys.dict_tree:Id=&RootId=&RootName=&RootIcon=&NullSelect=False
+2019-04-08 18:26:47.091 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 66.9237ms.
+2019-04-08 18:26:47.091 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.TreeResponse'.
+2019-04-08 18:26:47.092 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) in 110.09ms
+2019-04-08 18:26:47.092 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:26:47.092 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:47.092 +08:00 [INF] Request finished in 111.0349ms 200 application/json; charset=utf-8
+2019-04-08 18:26:47.098 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/tree?ds=sys.dict_tree&app=plat  
+2019-04-08 18:26:47.099 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:47.099 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:47.099 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:47.099 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:47.099 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:26:47.099 +08:00 [INF] Route matched with {action = "Tree", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)
+2019-04-08 18:26:47.100 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:47.100 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:47.100 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.100 +08:00 [DBG] Execute WebApi action "查询Tree" with "Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)"
+2019-04-08 18:26:47.157 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) with arguments (["Acesoft.Data.TreeRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:47.159 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.159 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:47.159 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:47.159 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.159 +08:00 [INF] SqlMapper do request: sys.dict_tree, type: System.Data.DataTable
+2019-04-08 18:26:47.159 +08:00 [DBG] CacheManager GetCache SqlId: sys.dict_tree:Id=&RootId=&RootName=&RootIcon=&NullSelect=False, Success: True !
+2019-04-08 18:26:47.159 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 2.023ms.
+2019-04-08 18:26:47.159 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.TreeResponse'.
+2019-04-08 18:26:47.160 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) in 60.7404ms
+2019-04-08 18:26:47.160 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:26:47.160 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:47.160 +08:00 [INF] Request finished in 62.6272ms 200 application/json; charset=utf-8
+2019-04-08 18:26:47.238 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/tree?ds=sys.dict_tree&app=plat  
+2019-04-08 18:26:47.240 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:47.241 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:47.241 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:47.241 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:47.241 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:26:47.241 +08:00 [INF] Route matched with {action = "Tree", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)
+2019-04-08 18:26:47.250 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:47.251 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:47.251 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.251 +08:00 [DBG] Execute WebApi action "查询Tree" with "Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)"
+2019-04-08 18:26:47.288 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) with arguments (["Acesoft.Data.TreeRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:47.290 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.290 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:47.290 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:47.290 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:47.290 +08:00 [INF] SqlMapper do request: sys.dict_tree, type: System.Data.DataTable
+2019-04-08 18:26:47.290 +08:00 [DBG] CacheManager GetCache SqlId: sys.dict_tree:Id=&RootId=&RootName=&RootIcon=&NullSelect=False, Success: True !
+2019-04-08 18:26:47.290 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 1.8271000000000002ms.
+2019-04-08 18:26:47.290 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.TreeResponse'.
+2019-04-08 18:26:47.291 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) in 50.3404ms
+2019-04-08 18:26:47.292 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:26:47.292 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:47.292 +08:00 [INF] Request finished in 53.2301ms 200 application/json; charset=utf-8
+2019-04-08 18:26:47.292 +08:00 [DBG] CacheManager SetCache SqlId: sys.dictitem_list:dict=FIELDTYPE
+2019-04-08 18:26:47.292 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.List (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 265.1985ms.
+2019-04-08 18:26:47.292 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[Acesoft.Platform.Models.DictItem, Acesoft.Platform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2019-04-08 18:26:47.310 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.List (Acesoft.Web) in 389.85330000000005ms
+2019-04-08 18:26:47.310 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.List (Acesoft.Web)'
+2019-04-08 18:26:47.310 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:47.311 +08:00 [INF] Request finished in 393.6348ms 200 application/json; charset=utf-8
+2019-04-08 18:26:48.714 +08:00 [INF] Request starting HTTP/1.1 PUT http://localhost:82/api/crud/put?ds=sys.field&app=plat application/json 187
+2019-04-08 18:26:48.714 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:48.714 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:48.714 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:48.714 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:48.714 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Put (Acesoft.Web)'
+2019-04-08 18:26:48.725 +08:00 [INF] Route matched with {action = "Put", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Put (Acesoft.Web)
+2019-04-08 18:26:48.725 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:48.725 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:48.725 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:48.727 +08:00 [DBG] Execute WebApi action "编辑数据" with "Acesoft.Web.Controllers.CrudController.Put (Acesoft.Web)"
+2019-04-08 18:26:48.764 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Put (Acesoft.Web) with arguments (["{\r\n  \"id\": \"971365635554541568\",\r\n  \"table\": \"iot_cmd\",\r\n  \"field\": \"remark\",\r\n  \"name\": \"备注\",\r\n  \"type\": \"2\",\r\n  \"length\": \"16\",\r\n  \"isnull\": \"1\",\r\n  \"unique\": 0,\r\n  \"created\": 1,\r\n  \"ref\": \"\",\r\n  \"orderno\": \"180\",\r\n  \"system\": 0,\r\n  \"remark\": \"\"\r\n}"]) - Validation state: "Valid"
+2019-04-08 18:26:48.790 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:48.791 +08:00 [INF] SqlMapper do request: sys.field, type: System.Threading.Tasks.Task`1[System.Int32]
+2019-04-08 18:26:48.866 +08:00 [DBG] CacheManager FlushCache.OnExecute CacheId: c_field, ExeSqlId: sys.field
+2019-04-08 18:26:48.904 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Put (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 139.51170000000002ms.
+2019-04-08 18:26:48.918 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-08 18:26:48.922 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Put (Acesoft.Web) in 197.2159ms
+2019-04-08 18:26:48.923 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Put (Acesoft.Web)'
+2019-04-08 18:26:48.926 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:48.926 +08:00 [INF] Request finished in 212.6566ms 200 application/json; charset=utf-8
+2019-04-08 18:26:48.945 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:26:48.947 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:48.947 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:48.947 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:48.947 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:48.947 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:48.948 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:26:48.948 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:48.948 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:48.948 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:48.948 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:26:48.990 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:26:48.991 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:48.991 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:26:48.991 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:26:48.991 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:48.991 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:26:48.991 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: False !
+2019-04-08 18:26:49.054 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd
+2019-04-08 18:26:49.055 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 64.3343ms.
+2019-04-08 18:26:49.055 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:26:49.055 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 107.6132ms
+2019-04-08 18:26:49.055 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:26:49.055 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:26:49.055 +08:00 [INF] Request finished in 110.5554ms 200 application/json; charset=utf-8
+2019-04-08 18:26:53.675 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/schema/dropfields/iot_cmd?fields=971365635554541568  
+2019-04-08 18:26:53.675 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:26:53.675 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:26:53.675 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:26:53.675 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:26:53.680 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)'
+2019-04-08 18:26:53.680 +08:00 [INF] Route matched with {action = "DropFields", controller = "Schema", page = ""}. Executing action Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)
+2019-04-08 18:26:53.684 +08:00 [INF] Authorization was successful.
+2019-04-08 18:26:53.684 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:26:53.684 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:26:53.684 +08:00 [DBG] Execute WebApi action "撤销字段" with "Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)"
+2019-04-08 18:26:53.716 +08:00 [INF] Executing action method Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web) with arguments (["iot_cmd","971365635554541568"]) - Validation state: "Valid"
+2019-04-08 18:26:53.834 +08:00 [DBG] Begin ReadCommitted transcation with database "xile"
+2019-04-08 18:27:44.098 +08:00 [DBG] Commit transcation with database "xile"
+2019-04-08 18:27:44.109 +08:00 [DBG] End transcation with database "xile"
+2019-04-08 18:27:44.109 +08:00 [DBG] CacheManager FlushCache.OnExecute CacheId: c_field, ExeSqlId: sys.field
+2019-04-08 18:27:44.109 +08:00 [INF] Executed action method Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 50393.3638ms.
+2019-04-08 18:27:44.110 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-08 18:27:44.110 +08:00 [INF] Executed action Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web) in 50429.618800000004ms
+2019-04-08 18:27:44.110 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)'
+2019-04-08 18:27:44.110 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:27:44.110 +08:00 [INF] Request finished in 50435.3167ms 200 application/json; charset=utf-8
+2019-04-08 18:27:44.135 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:27:44.136 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:27:44.136 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:27:44.136 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:27:44.136 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:27:44.136 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:27:44.136 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:27:44.137 +08:00 [INF] Authorization was successful.
+2019-04-08 18:27:44.137 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:27:44.137 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:27:44.137 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:27:44.156 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:27:44.158 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:27:44.158 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:27:44.158 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:27:44.158 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:27:44.159 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:27:44.159 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: False !
+2019-04-08 18:27:44.172 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd
+2019-04-08 18:27:44.173 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 16.907500000000002ms.
+2019-04-08 18:27:44.173 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:27:44.173 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 36.8408ms
+2019-04-08 18:27:44.173 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:27:44.173 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:27:44.173 +08:00 [INF] Request finished in 38.0077ms 200 application/json; charset=utf-8
+2019-04-08 18:35:39.068 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-08 18:35:40.145 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-08 18:35:53.046 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/  
+2019-04-08 18:35:53.113 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-08 18:35:53.118 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-08 18:35:53.120 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-08 18:35:53.120 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-08 18:35:53.122 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-08 18:35:53.125 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-08 18:35:53.125 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-08 18:35:53.126 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-08 18:35:53.216 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-08 18:35:53.216 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-08 18:35:53.216 +08:00 [DBG] Done initialize tentants.
+2019-04-08 18:35:53.216 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:35:53.221 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-08 18:35:53.222 +08:00 [DBG] Resolved Tenant "xile" with request: localhost:82.
+2019-04-08 18:35:53.224 +08:00 [DBG] Tenant "xile" resolved. Caching with keys "localhost:82".
+2019-04-08 18:35:53.230 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:35:53.231 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:35:53.344 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-04-08 18:35:55.632 +08:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing page /Index
+2019-04-08 18:35:55.651 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:35:55.651 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:35:56.253 +08:00 [INF] Executed page /Index in 616.6788ms
+2019-04-08 18:35:56.253 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-04-08 18:35:56.257 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-08 18:35:56.259 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:35:56.259 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:35:56.259 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:35:56.259 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:35:56.270 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-08 18:35:56.271 +08:00 [INF] Request finished in 3230.4546ms 302 text/html; charset=utf-8
+2019-04-08 18:35:57.391 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-08 18:35:57.411 +08:00 [INF] Authorization was successful.
+2019-04-08 18:35:57.413 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:35:57.413 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:35:57.465 +08:00 [DBG] Store has initlialized with database "xile"
+2019-04-08 18:35:57.466 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:35:57.588 +08:00 [DBG] Query 3 users from "xile" store
+2019-04-08 18:35:57.590 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:35:57.590 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:35:57.601 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:35:57.602 +08:00 [DBG] Initalize ISqlMapper for name: xile
+2019-04-08 18:35:57.605 +08:00 [DBG] SqlMapper initalize the folder: D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\SqlMaps
+2019-04-08 18:35:57.632 +08:00 [DBG] CacheManager load FlushSqlMaps!
+2019-04-08 18:35:57.635 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-08 18:35:57.781 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:35:57.782 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:35:57.796 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: False !
+2019-04-08 18:35:57.833 +08:00 [DBG] CacheManager SetCache SqlId: rbac.query_user_by_id:id=289469215771983872
+2019-04-08 18:35:57.841 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:35:57.841 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-08 18:35:57.886 +08:00 [INF] Executed page /plat/index/index in 495.13960000000003ms
+2019-04-08 18:35:57.886 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-08 18:35:57.887 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:35:57.887 +08:00 [INF] Request finished in 1629.7001ms 200 text/html; charset=utf-8
+2019-04-08 18:35:57.994 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-08 18:35:57.995 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:35:57.996 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:35:57.996 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:35:57.996 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:35:58.002 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-08 18:35:58.446 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-08 18:35:58.446 +08:00 [INF] Authorization was successful.
+2019-04-08 18:35:58.448 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:35:58.448 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:35:58.512 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:35:58.513 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:35:58.513 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-08 18:35:58.814 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:35:58.814 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:35:58.814 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:35:59.257 +08:00 [INF] Executed page /plat/index/welcome in 810.63290000000006ms
+2019-04-08 18:35:59.257 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-08 18:35:59.257 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:35:59.257 +08:00 [INF] Request finished in 1262.5226ms 200 text/html; charset=utf-8
+2019-04-08 18:36:20.357 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/sys/index  
+2019-04-08 18:36:20.358 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:36:20.358 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:36:20.358 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:36:20.358 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:36:20.358 +08:00 [INF] Executing endpoint 'Page: /plat/sys/index/index'
+2019-04-08 18:36:20.778 +08:00 [INF] Route matched with {page = "/plat/sys/index/index", action = "", controller = ""}. Executing page /plat/sys/index/index
+2019-04-08 18:36:20.778 +08:00 [INF] Authorization was successful.
+2019-04-08 18:36:20.779 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:36:20.779 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:36:20.977 +08:00 [INF] Executed page /plat/sys/index/index in 199.6005ms
+2019-04-08 18:36:20.977 +08:00 [INF] Executed endpoint 'Page: /plat/sys/index/index'
+2019-04-08 18:36:20.977 +08:00 [INF] Request finished in 620.2272ms 200 text/html; charset=utf-8
+2019-04-08 18:36:22.092 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/sys/create  
+2019-04-08 18:36:22.093 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:36:22.093 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:36:22.093 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:36:22.093 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:36:22.095 +08:00 [INF] Executing endpoint 'Page: /plat/sys/create/index'
+2019-04-08 18:36:22.376 +08:00 [INF] Route matched with {page = "/plat/sys/create/index", action = "", controller = ""}. Executing page /plat/sys/create/index
+2019-04-08 18:36:22.376 +08:00 [INF] Authorization was successful.
+2019-04-08 18:36:22.377 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-08 18:36:22.377 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-08 18:36:22.627 +08:00 [INF] Executed page /plat/sys/create/index in 250.4777ms
+2019-04-08 18:36:22.627 +08:00 [INF] Executed endpoint 'Page: /plat/sys/create/index'
+2019-04-08 18:36:22.627 +08:00 [INF] Request finished in 534.7955ms 200 text/html; charset=utf-8
+2019-04-08 18:36:22.761 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/tree?rootname=%E6%95%B0%E6%8D%AE%E5%BA%93&ds=sys.table_tree&app=plat  
+2019-04-08 18:36:22.762 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:36:22.762 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:36:22.762 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:36:22.762 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:36:22.762 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:36:22.798 +08:00 [INF] Route matched with {action = "Tree", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)
+2019-04-08 18:36:22.799 +08:00 [INF] Authorization was successful.
+2019-04-08 18:36:22.803 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:36:22.804 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:22.844 +08:00 [DBG] Execute WebApi action "查询Tree" with "Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)"
+2019-04-08 18:36:23.046 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) with arguments (["Acesoft.Data.TreeRequest"]) - Validation state: "Valid"
+2019-04-08 18:36:23.049 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:23.049 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:36:23.049 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:36:23.053 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:23.054 +08:00 [INF] SqlMapper do request: sys.table_tree, type: System.Data.DataTable
+2019-04-08 18:36:23.054 +08:00 [DBG] CacheManager GetCache SqlId: sys.table_tree:Id=&RootId=&RootName=数据库&RootIcon=&NullSelect=False, Success: False !
+2019-04-08 18:36:23.154 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&page=1&rows=50  
+2019-04-08 18:36:23.155 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:36:23.155 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:36:23.155 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:36:23.155 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:36:23.164 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:36:23.174 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:36:23.175 +08:00 [INF] Authorization was successful.
+2019-04-08 18:36:23.175 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:36:23.175 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:23.211 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:36:23.277 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:36:23.280 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:23.280 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:36:23.280 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:36:23.281 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:23.283 +08:00 [DBG] CacheManager SetCache SqlId: sys.table_tree:Id=&RootId=&RootName=数据库&RootIcon=&NullSelect=False
+2019-04-08 18:36:23.290 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 239.33980000000003ms.
+2019-04-08 18:36:23.291 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:36:23.291 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=, Success: False !
+2019-04-08 18:36:23.295 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.TreeResponse'.
+2019-04-08 18:36:23.428 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web) in 629.9326ms
+2019-04-08 18:36:23.428 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Tree (Acesoft.Web)'
+2019-04-08 18:36:23.428 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:36:23.428 +08:00 [INF] Request finished in 666.4627ms 200 application/json; charset=utf-8
+2019-04-08 18:36:23.575 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=
+2019-04-08 18:36:23.575 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 297.1401ms.
+2019-04-08 18:36:23.575 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:36:23.579 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 404.76160000000004ms
+2019-04-08 18:36:23.579 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:36:23.579 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:36:23.579 +08:00 [INF] Request finished in 424.8617ms 200 application/json; charset=utf-8
+2019-04-08 18:36:25.630 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:36:25.630 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:36:25.630 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:36:25.630 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:36:25.630 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:36:25.630 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:36:25.631 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:36:25.631 +08:00 [INF] Authorization was successful.
+2019-04-08 18:36:25.631 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:36:25.631 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:25.631 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:36:25.677 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:36:25.678 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:25.678 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:36:25.678 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:36:25.678 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:25.679 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:36:25.679 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: False !
+2019-04-08 18:36:25.730 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd
+2019-04-08 18:36:25.730 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 52.831500000000005ms.
+2019-04-08 18:36:25.730 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:36:25.738 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 107.76060000000001ms
+2019-04-08 18:36:25.738 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:36:25.738 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:36:25.739 +08:00 [INF] Request finished in 108.7227ms 200 application/json; charset=utf-8
+2019-04-08 18:36:27.506 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/schema/dropfields/iot_cmd?fields=971365635554541568  
+2019-04-08 18:36:27.506 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:36:27.506 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:36:27.506 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:36:27.506 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:36:27.507 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)'
+2019-04-08 18:36:27.509 +08:00 [INF] Route matched with {action = "DropFields", controller = "Schema", page = ""}. Executing action Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)
+2019-04-08 18:36:27.509 +08:00 [INF] Authorization was successful.
+2019-04-08 18:36:27.510 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:36:27.510 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:36:27.511 +08:00 [DBG] Execute WebApi action "撤销字段" with "Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)"
+2019-04-08 18:36:27.548 +08:00 [INF] Executing action method Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web) with arguments (["iot_cmd","971365635554541568"]) - Validation state: "Valid"
+2019-04-08 18:36:27.793 +08:00 [DBG] Begin ReadCommitted transcation with database "xile"
+2019-04-08 18:41:22.325 +08:00 [DBG] Commit transcation with database "xile"
+2019-04-08 18:41:22.338 +08:00 [DBG] End transcation with database "xile"
+2019-04-08 18:41:22.339 +08:00 [DBG] CacheManager FlushCache.OnExecute CacheId: c_field, ExeSqlId: sys.field
+2019-04-08 18:41:22.340 +08:00 [INF] Executed action method Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 294791.217ms.
+2019-04-08 18:41:22.345 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-08 18:41:22.374 +08:00 [INF] Executed action Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web) in 294865.2431ms
+2019-04-08 18:41:22.374 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.SchemaController.DropFields (Acesoft.Web)'
+2019-04-08 18:41:22.375 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:41:22.375 +08:00 [INF] Request finished in 294868.6008ms 200 application/json; charset=utf-8
+2019-04-08 18:41:22.410 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/crud/grid?ds=sys.field_grid&app=plat&_table=iot_cmd&page=1&rows=50  
+2019-04-08 18:41:22.412 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-08 18:41:22.412 +08:00 [DBG] Tenant "xile" retrieved from cache with key "localhost:82".
+2019-04-08 18:41:22.412 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-08 18:41:22.412 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-08 18:41:22.413 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:41:22.413 +08:00 [INF] Route matched with {action = "Grid", controller = "Crud", page = ""}. Executing action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)
+2019-04-08 18:41:22.414 +08:00 [INF] Authorization was successful.
+2019-04-08 18:41:22.414 +08:00 [DBG] Open new session with database "xile"
+2019-04-08 18:41:22.414 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:41:22.414 +08:00 [DBG] Execute WebApi action "查询Grid" with "Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)"
+2019-04-08 18:41:22.415 +08:00 [INF] Executing action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) with arguments (["Acesoft.Data.GridRequest"]) - Validation state: "Valid"
+2019-04-08 18:41:22.417 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:41:22.417 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-08 18:41:22.417 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-08 18:41:22.417 +08:00 [DBG] Get ISqlMapper for name: xile
+2019-04-08 18:41:22.417 +08:00 [INF] SqlMapper do request: sys.field_grid, type: Acesoft.Data.GridResponse
+2019-04-08 18:41:22.417 +08:00 [DBG] CacheManager GetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd, Success: False !
+2019-04-08 18:41:22.431 +08:00 [DBG] CacheManager SetCache SqlId: sys.field_grid:Page=1&Rows=50&Id=&Sort=&Order=&_table=iot_cmd
+2019-04-08 18:41:22.431 +08:00 [INF] Executed action method Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 16.2152ms.
+2019-04-08 18:41:22.431 +08:00 [INF] Executing JsonResult, writing value of type 'Acesoft.Data.GridResponse'.
+2019-04-08 18:41:22.432 +08:00 [INF] Executed action Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web) in 19.3507ms
+2019-04-08 18:41:22.432 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.CrudController.Grid (Acesoft.Web)'
+2019-04-08 18:41:22.432 +08:00 [DBG] Dispose session with database "xile"
+2019-04-08 18:41:22.433 +08:00 [INF] Request finished in 22.4498ms 200 application/json; charset=utf-8

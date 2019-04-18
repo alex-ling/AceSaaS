@@ -19,13 +19,12 @@ namespace Acesoft.Rbac
         IList<long> Roles { get; }
         string InRoles { get; }
         IDictionary<string, object> Params { get; }
-        IDictionary<string, string> Auths { get; }
+        IDictionary<string, Rbac_Auth> Auths { get; }
 
-        Task Login(string userName, string password, bool persistent);
-        Task Login(long appId, string authId, bool persistent);
-        //Task Login(Rbac_User user, bool persistent);
+        Rbac_User CheckUser(string userName, string password);
         Task<Token> GetToken(string userName, string passwrod);
-        void UpdateAuth(long appId, string authId, string authType, bool needSaveUser);
+        Task Login(string userName, string password, bool persistent);
+        Task Login(Rbac_User user, bool persistent);
         void Logout();
         bool IsInRole(long roleId);
         bool CheckAccess(long refId);

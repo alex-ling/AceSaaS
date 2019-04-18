@@ -10,7 +10,7 @@ namespace Acesoft.IotNet.Iot
 {
 	public class IotRequest : IRequestInfo
 	{
-		public const string StartTag = "8E75A9";
+        private readonly IotReceiveFilter filter;
 
 		public string Key { get; set; }
 		public byte[] Header { get; set; }
@@ -24,22 +24,24 @@ namespace Acesoft.IotNet.Iot
         public IotCommand Command { get; set; }
         public string Crc16 { get; set; }
 
-        private IotRequest()
+        private IotRequest(IotReceiveFilter filter)
 		{
-			Header = EncodingHelper.HexToBytes(StartTag);
+            this.filter = filter;
+
+            HeaderHex = filter.Header;
+			Header = EncodingHelper.HexToBytes(HeaderHex);
 		}
 
-		public IotRequest(string header, byte[] body) : this()
+		public IotRequest(IotReceiveFilter filter, byte[] body) : this(filter)
 		{
-			HeaderHex = header;
-			EncryptedBody = body;
+			EncryptedBody = body; 
 
 			LoadData();
 		}
 
 		private void LoadData()
 		{
-			Body = CryptoHelper.DecryptX(EncryptedBody);
+			Body = filter.Crypto.Decrypt(EncryptedBody);
 			BodyHex = Body.ToHex();
 			Length = Body.Length;
 
@@ -106,24 +108,19 @@ namespace Acesoft.IotNet.Iot
 			Crc16 = CrcHelper.GetCrc16(list.ToArray()).ToHex(4);
 			list.AddRange(EncodingHelper.HexToBytes(Crc16));
 
-			Body = list.CloneRange(5, Length).ToArray();
+			Body = list.CloneRange(Header.Length + 2, Length).ToArray();
 			BodyHex = Body.ToHex();
-			EncryptedBody = CryptoHelper.EncryptX(Body);
+			EncryptedBody = filter.Crypto.Encrypt(Body);
 
-			list.RemoveRange(5, Length);
+			list.RemoveRange(Header.Length + 2, Length);
 			list.AddRange(EncryptedBody);
 
 			return list.ToArray();
 		}
 
-		public IDictionary<string, object> Decode()
+		public static IotRequest CreateRequest(IotReceiveFilter filter, string mac, string command, string dataHex = "")
 		{
-			return null;
-		}
-
-		public static IotRequest CreateRequest(string mac, string command, string dataHex = "")
-		{
-			var request = new IotRequest();
+			var request = new IotRequest(filter);
 			request.Device = IotDevice.Load(mac);
 			request.SessionId = request.Device.Mac.Right(4);
 			request.Command = new IotCommand(command, dataHex);
@@ -134,16 +131,27 @@ namespace Acesoft.IotNet.Iot
 
 		public IotRequest CreateRequest(string command, string dataHex = "")
 		{
-			var request = new IotRequest();
+			var request = new IotRequest(filter);
 			request.SessionId = SessionId;
 			request.Device = Device;
 			request.Command = new IotCommand(command, dataHex);
 			request.Key = request.Command.Key;
 			request.Length = request.Command.Data.Length + 24;
 			return request;
-		}
+        }
 
-		public IotRequest Ok(string dataHex = "")
+        public IotRequest CreateResponse(string dataHex)
+        {
+            var request = new IotRequest(filter);
+            request.SessionId = SessionId;
+            request.Device = Device;
+            request.Command = Command.MakeBack(dataHex);
+            request.Key = request.Command.Key;
+            request.Length = request.Command.Data.Length + 12;
+            return request;
+        }
+
+        public IotRequest Ok(string dataHex = "")
 		{
 			return CreateResponse($"00{dataHex}");
 		}
@@ -166,17 +174,6 @@ namespace Acesoft.IotNet.Iot
 		public IotRequest Error()
 		{
 			return CreateResponse("FF");
-		}
-
-		public IotRequest CreateResponse(string dataHex)
-		{
-			var request = new IotRequest();
-			request.SessionId = SessionId;
-			request.Device = Device;
-			request.Command = Command.MakeBack(dataHex);
-			request.Key = request.Command.Key;
-			request.Length = request.Command.Data.Length + 12;
-			return request;
 		}
 	}
 }

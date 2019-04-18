@@ -39,7 +39,11 @@ namespace Acesoft.Util
 
         public static string ToJson(object obj, JsonSerializerSettings settings = null)
         {
-            return JsonConvert.SerializeObject(obj, Formatting.None, settings);
+            if (settings != null)
+            {
+                return JsonConvert.SerializeObject(obj, settings);
+            }
+            return JsonConvert.SerializeObject(obj, new LongConverter());
         }
 
         public static JObject FromJson(string json, JsonSerializerSettings settings = null)

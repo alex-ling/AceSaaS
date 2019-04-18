@@ -5,7 +5,12 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SuperSocket.ClientEngine;
+
+using Microsoft.AspNetCore.SignalR;
 using Acesoft.Web.IoT.Config;
+using Acesoft.Config;
+using Acesoft.Web.Multitenancy;
+using Acesoft.Web.IoT.Hubs;
 
 namespace Acesoft.Web.IoT.WsClient
 {
@@ -18,13 +23,23 @@ namespace Acesoft.Web.IoT.WsClient
         public event ServiceErrorHandler Error;
 
         private readonly ILogger<IotWsClient> logger;
+        private readonly Tenant tenant;
         private readonly IotAccess access;
+        private readonly IHubContext<IotServiceHub> iotServiceHub;
         private WebSocket client;
 
-        public IotWsClient(ILogger<IotWsClient> logger, IOptions<IotConfig> iotOptions)
+        public ServiceStatus CurrentStatus { get; private set; }
+
+        public IotWsClient(ILogger<IotWsClient> logger,
+            IHubContext<IotServiceHub> iotServiceHub)
         {
             this.logger = logger;
-            this.access = iotOptions.Value.Servers["iot"];
+            this.iotServiceHub = iotServiceHub;
+
+            this.tenant = App.Context.GetTenantContext().Tenant;
+            this.access = ConfigContext.GetConfig<IotConfig>(tenant.Name).Servers["iot"];
+
+            this.Connect();
         }
 
         public void Connect()
@@ -102,22 +117,28 @@ namespace Acesoft.Web.IoT.WsClient
 
             foreach (dynamic i in json.InstancesStatus)
             {
-                status.InstancesStatus.Add(new InstanceStatus
+                if (i.Name == tenant.Name || i.Name == "ApiServer")
                 {
-                    Name = i.Name,
-                    CollectedTime = i.CollectedTime,
-                    MaxConnectionNumber = i.Values.MaxConnectionNumber,
-                    Listeners = i.Values.Listeners,
-                    IsRunning = i.Values.IsRunning,
-                    StartedTime = i.Values.StartedTime,
-                    TotalConnections = i.Values.TotalConnections,
-                    RequestHandlingSpeed = i.Values.RequestHandlingSpeed,
-                    TotalHandledRequests = i.Values.TotalHandledRequests,
-                    AvialableSendingQueueItems = i.Values.AvialableSendingQueueItems,
-                    TotalSendingQueueItems = i.Values.TotalSendingQueueItems
-                });
+                    status.InstancesStatus.Add(new InstanceStatus
+                    {
+                        Name = i.Name,
+                        CollectedTime = i.CollectedTime,
+                        MaxConnectionNumber = i.Values.MaxConnectionNumber,
+                        Listeners = i.Values.Listeners,
+                        IsRunning = i.Values.IsRunning,
+                        StartedTime = i.Values.StartedTime,
+                        TotalConnections = i.Values.TotalConnections,
+                        RequestHandlingSpeed = i.Values.RequestHandlingSpeed,
+                        TotalHandledRequests = i.Values.TotalHandledRequests,
+                        AvialableSendingQueueItems = i.Values.AvialableSendingQueueItems,
+                        TotalSendingQueueItems = i.Values.TotalSendingQueueItems
+                    });
+                }
             }
 
+            // set current.
+            this.CurrentStatus = status;
+            this.iotServiceHub.Clients.All.SendAsync("Send", status);
             this.Status?.Invoke(status);
         }
     }

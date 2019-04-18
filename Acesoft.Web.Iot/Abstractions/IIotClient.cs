@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using SuperSocket.ClientEngine;
 using Acesoft.Web.IoT.Client;
+using Acesoft.Web.Multitenancy;
 
 namespace Acesoft.Web.IoT
 {
@@ -15,6 +16,6 @@ namespace Acesoft.Web.IoT
         Task Open();
         void Close();
 
-        Task<string> Send(IotRequest request);
+        Task<IotContext> Send(IotRequest request);
     }
 }

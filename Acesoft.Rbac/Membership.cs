@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Linq;
 
+using Acesoft.Rbac.Entity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
@@ -19,14 +21,14 @@ namespace Acesoft.Rbac
         public const long Default_ScaleId = 967167765444034560L;
 
         #region ticket
-        public static AuthenticationTicket AuthenticationTicket(
-            string userHashId, string userName, bool isPersistent, string authenticationSchema = Auth_Cookie)
+        public static AuthenticationTicket AuthenticationTicket(string id, string userName, string authId, bool isPersistent, string authenticationSchema = Auth_Cookie)
         {
             var identity = new ClaimsIdentity(authenticationSchema);
 
             // add user
-            identity.AddClaim(new Claim("sub", userHashId));
+            identity.AddClaim(new Claim("sub", id));
             identity.AddClaim(new Claim(ClaimTypes.Name, userName));
+            identity.AddClaim(new Claim("authid", authId));
 
             return new AuthenticationTicket(
                 new ClaimsPrincipal(identity),

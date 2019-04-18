@@ -120,6 +120,7 @@ namespace Acesoft.Data.Sql
             {
                 var builder = new StringBuilder();
                 Run(builder, dropColumn);
+                yield return builder.ToString();
             }
 
             // add columns

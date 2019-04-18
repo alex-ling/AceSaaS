@@ -97,13 +97,9 @@ namespace Acesoft.Web.UI.Controllers
 		[HttpGet, Action("图片验证码")]
 		public IActionResult GetValidImage(string type, int length = 5)
 		{
-			var key = "valid_img_" + type;
+			var key = "img_" + App.GetQuery("type", "root");
 			var text = CreateValidCode(length);
 			var memoryStream = CreateImage(text);
-			if (!type.HasValue())
-			{
-				type = "root";
-			}
 
 			App.Cache.SetString(key, text, opts =>
             {

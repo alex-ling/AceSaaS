@@ -12,10 +12,12 @@ namespace Acesoft.Web.WeChat
 	{
         private readonly ILogger logger = LoggerContext.GetLogger<WeChatContainer>();
 		private readonly ConcurrentDictionary<long, Wx_App> apps = new ConcurrentDictionary<long, Wx_App>();
+        private readonly IApplicationContext appCtx;
         private readonly IAppService appService;
 
-        public WeChatContainer(IAppService appService)
+        public WeChatContainer(IApplicationContext appCtx, IAppService appService)
         {
+            this.appCtx = appCtx;
             this.appService = appService;
         }
 
@@ -29,11 +31,7 @@ namespace Acesoft.Web.WeChat
 					throw new AceException("传入的参数[appid]不存在！");
 				}
 
-				if (!BaseContainer<AccessTokenBag>.CheckRegistered(wxApp.AppId))
-				{
-					AccessTokenContainer.Register(wxApp.AppId, wxApp.AppSecret);
-				}
-
+				AccessTokenContainer.Register(wxApp.AppId, wxApp.AppSecret);
 				logger.LogDebug($"Initalize WeChatApp for id: {appId}");
 				return wxApp;
 			});
@@ -41,9 +39,11 @@ namespace Acesoft.Web.WeChat
 
 		public Wx_App GetApp()
 		{
-			var query = App.GetQuery<long>("appid");
-			logger.LogDebug($"Get WeChatApp for id: [{query}]");
-			return GetApp(query);
+            var appId = appCtx.AC.Params.GetValue<long>("appid", 0);
+            if (appId <= 0) appId = App.GetQuery<long>("appid");
+
+            logger.LogDebug($"Get WeChatApp for id: [{appId}]");
+			return GetApp(appId);
 		}
 	}
 }

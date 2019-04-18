@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="NPOI" Version="2.4.1" />
     <PackageReference Include="SuperSocket.ClientEngine" Version="0.10.0" />
     <PackageReference Include="SuperSocket.ProtoBase" Version="1.7.0.17" />

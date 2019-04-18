@@ -11,6 +11,7 @@ namespace Acesoft.Rbac.Entity
     public class Rbac_Auth : EntityBase
     {
         public long User_Id { get; set; }
+        public long App_Id { get; set; }
         public string AuthType { get; set; }
         public string AuthId { get; set; }
         public DateTime DCreate { get; set; }

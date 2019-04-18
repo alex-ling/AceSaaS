@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceProcess;
+using Acesoft.Util;
 
 //using Acesoft.Service.Services;
 using SpreadsheetGear;
@@ -8,9 +9,21 @@ using SpreadsheetGear;
 namespace Acesoft.Service
 {
     public class Program
-    {     
+    {
         static void Main(string[] args)
         {
+            var value = -444.77;
+            var ymHex = value.ToYmHex(6);
+            Console.WriteLine(ymHex);
+
+            value = NaryHelper.YmHexToDouble(ymHex);
+            Console.WriteLine(value);
+
+            Console.ReadLine();
+        }
+
+        static void SpreadsheetGear()
+        { 
             var workbook = Factory.GetWorkbook();
             var sheet = workbook.Worksheets.Add();
             for (var i = 0; i < 2001; i++)

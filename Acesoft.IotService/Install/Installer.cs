@@ -25,10 +25,10 @@ namespace Acesoft.IotService
 			processInstaller.Account = ServiceAccount.LocalSystem;
 			serviceInstaller.StartType = ServiceStartMode.Automatic;
 
-			serviceInstaller.ServiceName = ConfigHelper.GetAppSetting<string>("ServiceName");
-            serviceInstaller.DisplayName = ConfigHelper.GetAppSetting<string>("ServiceDisplayName", serviceInstaller.ServiceName);
-            serviceInstaller.Description = ConfigHelper.GetAppSetting<string>("ServiceDescription", serviceInstaller.ServiceName);
-            serviceInstaller.ServicesDependedOn = ConfigHelper.GetAppSetting<string>("ServicesDependedOn", "tcpip").Split(',');
+			serviceInstaller.ServiceName = ConfigHelper.GetAppSetting<string>("servicename");
+            serviceInstaller.DisplayName = ConfigHelper.GetAppSetting<string>("servicedisplayname", serviceInstaller.ServiceName);
+            serviceInstaller.Description = ConfigHelper.GetAppSetting<string>("servicedescription", serviceInstaller.ServiceName);
+            serviceInstaller.ServicesDependedOn = ConfigHelper.GetAppSetting<string>("servicesdependedon", "tcpip").Split(',');
 
             Installers.Add(serviceInstaller);
             Installers.Add(processInstaller);

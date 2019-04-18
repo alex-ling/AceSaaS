@@ -89,7 +89,7 @@ namespace Acesoft.Web.Controllers
 		{
             Check.Require(folder.HasValue(), "未指定图片路径！");
 
-            folder = "/wwwroot/" + AppCtx.AC.Replace(folder);
+            folder = AppCtx.AC.Replace(folder);
 			var path = App.GetLocalPath(folder);
 			if (Directory.Exists(path))
 			{

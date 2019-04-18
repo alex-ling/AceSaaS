@@ -18,7 +18,7 @@ namespace Acesoft.Web.Cloud
             services.AddJsonConfig<CloudConfig>(opts =>
             {
                 opts.ConfigFile = "cloud.config.json";
-                opts.IsTenantConfig = false;
+                opts.IsTenantConfig = true;
             });
 
             // add cloud service.

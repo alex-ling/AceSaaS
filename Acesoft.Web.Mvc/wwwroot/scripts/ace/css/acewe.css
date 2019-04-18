@@ -620,7 +620,7 @@ body {
     z-index: 1
 }
 .page .hd {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -647,6 +647,12 @@ body {
     line-height: 50px;
     font-size: 1.4em;
     font-weight: 400
+}
+.bd {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0
 }
 .weui-tabbar__item {
     font-size: 1.5em

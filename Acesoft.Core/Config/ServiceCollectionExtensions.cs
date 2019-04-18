@@ -12,14 +12,7 @@ namespace Acesoft.Config
     {
         public static IServiceCollection AddJsonConfig<T>(this IServiceCollection services, Action<ConfigOption> options) where T : class
         {
-            var option = new ConfigOption();
-            options(option);
-
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), option.ConfigPath))
-                .AddJsonFile(option.ConfigFile, optional: false, reloadOnChange: true)
-                .Build();
-
+            var configuration = ConfigContext.GetJsonConfig(options, out ConfigOption option);
             if (option.IsTenantConfig)
             {
                 foreach (var section in configuration.GetChildren())

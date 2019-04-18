@@ -175,7 +175,7 @@ namespace Acesoft.Web.Cloud.Controllers
 
         private string GetValidCode(string type, bool clear = true)
         {
-            var key = "valid_img_" + type;
+            var key = "img_" + type;
             var result = App.Cache.GetString(key);
             if (clear)
             {

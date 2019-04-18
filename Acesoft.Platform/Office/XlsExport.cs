@@ -13,13 +13,15 @@ namespace Acesoft.Platform.Office
 	{
 		private readonly string tempFile;
 		private readonly GridResponse res;
+        private bool autoHeight = false;
 
         public XSSFWorkbook Workbook { get; private set; }
 
-		public XlsExport(GridResponse res, string tempFile)
+		public XlsExport(GridResponse res, string tempFile, bool autoHeight)
 		{
             this.res = res;
 			this.tempFile = tempFile;
+            this.autoHeight = autoHeight;
 		}
 
 		public byte[] Export()
@@ -79,7 +81,10 @@ namespace Acesoft.Platform.Office
 									for (int l = range.FirstRow; l <= range.LastRow; l++)
 									{
 										sheet.CopyRow(l + rowCount, l);
-										sheet.GetRow(l).Height = sheet.GetRow(l + rowCount).Height;
+                                        if (!autoHeight)
+                                        {
+                                            sheet.GetRow(l).Height = sheet.GetRow(l + rowCount).Height;
+                                        }
 									}
 								}
 								ExpandRange(range, rows[k], k + 1);
@@ -111,6 +116,10 @@ namespace Acesoft.Platform.Office
 			{
 				r.SetCellValue(TagFactory.ReplaceTag(r.StringCellValue, row, index));
 			}
+            else if (r.StringCellValue != null)
+            {
+                r.SetCellValue(App.ReplaceQuery(r.StringCellValue));
+            }
 		}
 
 		private NamedRange GetExpandRegion(ISheet s, int r, int c)

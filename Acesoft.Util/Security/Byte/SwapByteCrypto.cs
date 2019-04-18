@@ -6,6 +6,13 @@ namespace Acesoft.Security
 {
     public class SwapByteCrypto : IByteCrypto
     {
+        private byte cryptoKey;
+
+        public SwapByteCrypto(int cryptoKey)
+        {
+            this.cryptoKey = (byte)cryptoKey;
+        }
+
         public byte[] Decrypt(byte[] bytes)
         {
             var len = bytes.Length;
@@ -31,15 +38,15 @@ namespace Acesoft.Security
         private byte Encrypt(byte b, int key)
         {
             var m = key & 7;
-            b ^= 0xff;
+            b ^= cryptoKey;
             return (byte)(key ^ ((b << m) | (b >> (8 - m))));
         }
 
-        public static byte Decrypt(byte b, int key)
+        public byte Decrypt(byte b, int key)
         {
             var m = key & 7;
-            var x = (b ^ key ^ 0xff);
-            return (byte)((x >> m) | (x << (8 - m)));
+            b ^= (byte)key;
+            return (byte)(cryptoKey ^ ((b >> m) | (b << (8 - m))));
         }
     }
 }

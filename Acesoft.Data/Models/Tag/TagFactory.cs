@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 using Acesoft.Util;
 
@@ -18,7 +17,12 @@ namespace Acesoft.Data
                 return str;
             }
 
-            return RegexHelper.Replace(str, REG_Tag, m => ToTagString(dataRow, m.Value, rowIndex));
+            RegexHelper.Matchs(str, REG_Tag, m =>
+            {
+                str = str.Replace($"{{{m.Value}}}", ToTagString(dataRow, m.Value, rowIndex));
+            });
+
+            return str;
         }
 
         public static string ToTagString(DataRow dataRow, string expression, int rowIndex)

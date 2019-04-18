@@ -10,6 +10,7 @@ using Acesoft.Web.IoT.WsClient;
 using Acesoft.Web.IoT.Services;
 using Acesoft.Web.IoT.Config;
 using Acesoft.Config;
+using Acesoft.Web.IoT.Hubs;
 
 namespace Acesoft.Web.IoT
 {
@@ -21,7 +22,7 @@ namespace Acesoft.Web.IoT
             services.AddJsonConfig<IotConfig>(opts =>
             {
                 opts.ConfigFile = "iot.config.json";
-                opts.IsTenantConfig = false;
+                opts.IsTenantConfig = true;
             });
 
             // add iot client service.
@@ -33,10 +34,18 @@ namespace Acesoft.Web.IoT
             // add services.
             services.AddSingleton<ICacheService, CacheService>();
             services.AddSingleton<IIotService, IotService>();
+
+            // add signalR
+            services.AddSignalR();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
+            app.UseSignalR(route =>
+            {
+                route.MapHub<IotDataHub>("/hubs/iotdata");
+                route.MapHub<IotServiceHub>("/hubs/iotservice");
+            });
         }
     }
 }

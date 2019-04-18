@@ -12,18 +12,23 @@ using Acesoft.Data;
 using Acesoft.Web.Controllers;
 using Acesoft.Web.WeChat.Entity;
 using Acesoft.Web.WeChat.WeApp;
+using Microsoft.Extensions.Logging;
 
 namespace Acesoft.Web.WeChat
 {
 	[ApiExplorerSettings(GroupName = "plat")]
 	[Route("api/[controller]/[action]")]
 	public class WeAppController : ApiControllerBase
-	{
+    {
+        private ILogger<WeAppController> logger;
         private IAppService appService;
         private Wx_App app;
 
-        public WeAppController(IWeChatContainer container, IAppService appService)
+        public WeAppController(ILogger<WeAppController> logger, 
+            IWeChatContainer container, 
+            IAppService appService)
 		{
+            this.logger = logger;
             this.app = container.GetApp();
             this.appService = appService;
         }
@@ -47,52 +52,24 @@ namespace Acesoft.Web.WeChat
 				return Content("WeChatApp服务验证失败，参数错误！");
 			}
 
-			int maxRecordCount = 10;
+			var maxRecordCount = 10;
 			var s = new StreamReader(Request.Body).ReadToEnd();
-			var handler = new WeAppHandler(new MemoryStream(Encoding.UTF8.GetBytes(s)), model, maxRecordCount);
+			var h = new WeAppHandler(new MemoryStream(Encoding.UTF8.GetBytes(s)), model, maxRecordCount);
+
 			try
 			{
-				using (var stream = new FileStream(App.GetLocalPath("logs\\wechat\\req_" + DateTime.Now.ToStr("MMddHHmmss") + "_" + App.IdWorker.NextStringId() + "_" + handler.RequestMessage.FromUserName + ".log"), FileMode.CreateNew, FileAccess.ReadWrite))
-				{
-					handler.RequestDocument.Save(stream);
-				}
-				handler.OmitRepeatedMessage = true;
-				handler.Execute();
+                logger.LogDebug($"Receiving from {h.RequestMessage.FromUserName} with XML:\n{h.RequestDocument.Root}");
 
-				var path = App.GetLocalPath("logs\\wechat\\res_" + DateTime.Now.ToStr("MMddHHmmss") + "_" + App.IdWorker.NextStringId() + "_" + handler.RequestMessage.FromUserName + ".log");
-				if (handler.ResponseDocument != null)
-				{
-					using (var stream2 = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite))
-					{
-						handler.ResponseDocument.Save((Stream)stream2);
-					}
-				}
-				return new FixWeixinBugWeixinResult(handler);
+                h.OmitRepeatedMessage = true;
+				h.Execute();
+
+                logger.LogDebug($"Sending to {h.RequestMessage.FromUserName} with XML:\n{h.ResponseDocument.Root}");
+                return new FixWeixinBugWeixinResult(h);
 			}
 			catch (Exception ex)
 			{
-				using (var stream3 = new FileStream(App.GetLocalPath("logs\\wechat\\err_" + DateTime.Now.ToStr("MMddHHmmss") + "_" + App.IdWorker.NextStringId() + "_" + handler.RequestMessage.FromUserName + ".log"), FileMode.CreateNew, FileAccess.ReadWrite))
-				{
-					using (StreamWriter streamWriter = new StreamWriter(stream3))
-					{
-						streamWriter.WriteLine("ExecptionMessage:" + ex.Message);
-						streamWriter.WriteLine(ex.Source);
-						streamWriter.WriteLine(ex.StackTrace);
-						if (handler.ResponseDocument != null)
-						{
-							streamWriter.WriteLine(handler.ResponseDocument.ToString());
-						}
-						if (ex.InnerException != null)
-						{
-							streamWriter.WriteLine("========= InnerException =========");
-							streamWriter.WriteLine(ex.InnerException.Message);
-							streamWriter.WriteLine(ex.InnerException.Source);
-							streamWriter.WriteLine(ex.InnerException.StackTrace);
-						}
-						streamWriter.Flush();
-					}
-				}
-				return Content("");
+                logger.LogWarning(ex.GetException(), $"Sending to {h.RequestMessage.FromUserName} with error");
+                return Content("");
 			}
 		}
         #endregion

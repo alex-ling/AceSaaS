@@ -36,8 +36,14 @@ namespace Acesoft.Web.WeChat
             {
                 if (external) return true;
 
-                ac.Login(app.Id, openId, true).Wait();
-                return true;
+                var service = ac.Context.RequestServices.GetService<IUserService>();
+                var user = service.QueryByAuth(app.Id, openId);
+                if (user != null)
+                {
+                    ac.Login(user, true).Wait();
+                    return true;
+                }
+                return false;
             }
 
             return false;
@@ -45,19 +51,20 @@ namespace Acesoft.Web.WeChat
 
         public static async Task WechatLogin(this IAccessControl ac, string userName, string password, string openId)
         {
+            var user = ac.CheckUser(userName, password);
             var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
-            await ac.Login(userName, password, true);
+            var userService = ac.Context.RequestServices.GetService<IUserService>();
 
             var userInfoJson = UserApi.Info(app.AppId, openId);
-            var needSaveUser = false;
             if (userInfoJson != null)
             {
-                ac.User.NickName = userInfoJson.nickname;
-                ac.User.Photo = userInfoJson.headimgurl;
-                needSaveUser = true;
+                user.NickName = userInfoJson.nickname;
+                user.Photo = userInfoJson.headimgurl;
+                userService.Update(user);
             }
 
-            ac.UpdateAuth(app.Id, openId, "wechat", needSaveUser);
+            userService.UpdateAuth(user, app.Id, openId, "wechat");
+            await ac.Login(user, true);
         }
 
         public static bool WeChatAuthorize(this IAccessControl ac, string openIdParamName)
@@ -72,7 +79,7 @@ namespace Acesoft.Web.WeChat
                     var returnUrl2 = App.GetQuery("ReturnUrl", "/wechat");
                     if (returnUrl2.StartsWith("http"))
                     {
-                        returnUrl2 = UrlHelper.Append(returnUrl2, openIdParamName, ac.Auths["wechat"]);
+                        returnUrl2 = UrlHelper.Append(returnUrl2, openIdParamName, ac.Auths["wechat"].AuthId);
                     }
                     context.Response.Redirect(returnUrl2);
                     return true;
@@ -98,7 +105,6 @@ namespace Acesoft.Web.WeChat
 
         public static JsApiToken GetJsApiToken(this IAccessControl ac, bool resetUrl)
         {
-            var appId = ac.Params.GetValue<long>("appid", App.GetQuery<long>("appid"));
             var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
 
             var timestamp = JSSDKHelper.GetTimestamp();

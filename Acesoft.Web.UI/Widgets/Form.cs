@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
+using Acesoft.Util;
 using Acesoft.Web.UI.Ajax;
 using Acesoft.Web.UI.Html;
 using Acesoft.Web.UI.Widgets.Html;
@@ -57,8 +59,25 @@ namespace Acesoft.Web.UI.Widgets
 			}
 			if (DataSource.FormData != null)
 			{
-				object arg = JsonConvert.SerializeObject(DataSource.FormData, new LongConverter(), new BoolConverter());
-				writer.Write(base.Serializer.Initialize($"AX.formLoad('#{base.Id}',{arg});"));
+                //#ADD.BGN# 2019-04-17 处理从数据库生成的值转化为JSON
+                var dict = ConvertHelper.ObjectToDictionary((object)DataSource.FormData)
+                    .ToDictionary(p => p.Key, p =>
+                    {
+                        if (p.Key.StartsWith("a__"))
+                        {
+                            // a__表示数据为数组
+                            if (p.Value != null && p.Value.ToString().HasValue())
+                            {
+                                return p.Value.ToString().Split(',');
+                            }
+                            return new string[0];
+                        }
+                        return p.Value;
+                    });
+                //#ADD.END#
+
+				var data = JsonConvert.SerializeObject(dict, new LongConverter(), new BoolConverter());
+				writer.Write(base.Serializer.Initialize($"AX.formLoad('#{base.Id}',{data});"));
 			}
 		}
 	}

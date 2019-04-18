@@ -11,6 +11,7 @@ using Acesoft.Web.Multitenancy;
 using Acesoft.Web.Modules;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace Acesoft.Web
 {
@@ -24,6 +25,24 @@ namespace Acesoft.Web
             // use common
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = new FileExtensionContentTypeProvider(new Dictionary<string, string>
+                {
+                    {
+                        ".apk",
+                        "application/vnd.android.package-archive"
+                    },
+                    {
+                        ".nupkg",
+                        "application/zip"
+                    },
+                    {
+                        ".exe",
+                        "application/octet-stream"
+                    }
+                })
+            });
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(App.GetLocalPath("logs", true)),

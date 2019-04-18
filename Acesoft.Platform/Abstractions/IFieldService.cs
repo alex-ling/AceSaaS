@@ -10,6 +10,6 @@ namespace Acesoft.Platform
 	{
 		IList<Sys_Field> Gets(string tableName);
 
-		IList<Sys_Field> Gets(string tableName, long[] fieldIds);
+		IList<Sys_Field> Gets(string tableName, long[] fieldIds, int created = 0);
 	}
 }

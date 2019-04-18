@@ -11,6 +11,8 @@ namespace Acesoft.Web.IoT
         event ServiceStatusHandler Status;
         event ServiceErrorHandler Error;
 
+        ServiceStatus CurrentStatus { get; }
+
         void Connect();
         void Start(string serverName);
         void Stop(string serverName);

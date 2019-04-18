@@ -6,15 +6,15 @@ using SuperSocket.ProtoBase;
 
 namespace Acesoft.Web.IoT.Client
 {
-    public class IotReceiveFilter : CountSpliterReceiveFilter<IotResponse>
+    public class IotReceiveFilter : CountSpliterReceiveFilter<IotRequest>
     {
-        public IotReceiveFilter() : base(new byte[] { (byte)'#' }, 4)
+        public IotReceiveFilter() : base(new byte[] { (byte)'#' }, 5)
         {
         }
 
-        public override IotResponse ResolvePackage(IBufferStream bufferStream)
+        public override IotRequest ResolvePackage(IBufferStream bufferStream)
         {
-            return new IotResponse(bufferStream.ReadString((int)bufferStream.Length, Encoding.UTF8));
+            return new IotRequest(bufferStream.ReadString((int)bufferStream.Length, Encoding.UTF8));
         }
     }
 }

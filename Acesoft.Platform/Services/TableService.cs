@@ -102,7 +102,7 @@ namespace Acesoft.Platform.Services
 			Session.BeginTransaction();
 			try
 			{
-                new SchemaBuilder(Session).DropTable(tableName);
+                new SchemaBuilder(Session).DropTable(table.Table);
 
 				UpdateCreated(table.Table, 0);
 
@@ -124,7 +124,7 @@ namespace Acesoft.Platform.Services
 			Session.BeginTransaction();
 			try
 			{
-                var sb = new SchemaBuilder(Session).AlterTable(tableName, t =>
+                var sb = new SchemaBuilder(Session).AlterTable(table.Table, t =>
                 {
                     foreach (var item in fields)
                     {
@@ -149,7 +149,7 @@ namespace Acesoft.Platform.Services
                         "id");
                 }
 
-                UpdateCreated(tableName, fieldIds, 1);
+                UpdateCreated(table.Table, fieldIds, 1);
 
 				Session.Commit();
 			}
@@ -164,7 +164,7 @@ namespace Acesoft.Platform.Services
 		{
 			var table = Get(tableName);
             Check.Require(table.Created, $"表 [{table.Table}.{table.Name}] 未构建，无需撤销");
-            var fields = fieldService.Gets(tableName, fieldIds);
+            var fields = fieldService.Gets(tableName, fieldIds, 1);
 
 			Session.BeginTransaction();
 			try
@@ -180,10 +180,10 @@ namespace Acesoft.Platform.Services
 
                 foreach (var item in fields)
                 {
-                    sb.AlterTable(table.Name, t => t.DropColumn(item.Field));
+                    sb.AlterTable(table.Table, t => t.DropColumn(item.Field));
                 }
 
-                UpdateCreated(tableName, fieldIds, 0);
+                UpdateCreated(table.Table, fieldIds, 0);
 
 				Session.Commit();
 			}

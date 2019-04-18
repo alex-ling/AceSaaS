@@ -9,6 +9,7 @@ namespace Acesoft.Web.Multitenancy
         void Initialize();
 
         TenantContext GetOrCreateContext(Tenant tenant);
+        TenantContext GetContext(string tenant);
 
         void ReloadContext(Tenant tenant);
     }

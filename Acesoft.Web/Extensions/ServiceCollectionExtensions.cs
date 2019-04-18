@@ -79,6 +79,7 @@ namespace Acesoft.Web
             {
                 // 此处可添加外部views目录
                 //opts.FileProviders.Add(new PhysicalFileProvider(""));
+                opts.AllowRecompilingViewsOnFileChange = true;
             })
             .AddRazorPagesOptions(opts =>
             {
