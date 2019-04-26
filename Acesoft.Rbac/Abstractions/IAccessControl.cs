@@ -21,8 +21,7 @@ namespace Acesoft.Rbac
         IDictionary<string, object> Params { get; }
         IDictionary<string, Rbac_Auth> Auths { get; }
 
-        Rbac_User CheckUser(string userName, string password);
-        Task<Token> GetToken(string userName, string passwrod);
+        Task<Token> GetToken(string userName, string password);
         Task Login(string userName, string password, bool persistent);
         Task Login(Rbac_User user, bool persistent);
         void Logout();

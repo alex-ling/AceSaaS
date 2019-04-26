@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Hosting;
-using Acesoft.Web.WeChat.Services;
-using Senparc.CO2NET.RegisterServices;
-using Senparc.Weixin.RegisterServices;
-using Acesoft.Config;
 using Microsoft.Extensions.Options;
 using Senparc.CO2NET;
-using Senparc.CO2NET.Cache;
+using Senparc.CO2NET.RegisterServices;
 using Senparc.Weixin;
 using Senparc.Weixin.Entities;
+using Senparc.Weixin.RegisterServices;
+using Acesoft.Web.WeChat.Services;
+using Acesoft.Config;
+using Acesoft.Rbac;
+using Acesoft.Web.WeChat.Authenticatoon;
 
 namespace Acesoft.Web.WeChat
 {

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Acesoft.Config;
 using Acesoft.Core;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Acesoft
 {
@@ -33,7 +34,7 @@ namespace Acesoft
                 }
                 return appConfig;
             }
-        }        
+        }
 
         public static HtmlEncoder DefaultEncoder => HtmlEncoder.Create(UnicodeRanges.All);
         public static HttpContext Context => httpContextAccessor?.HttpContext;
@@ -56,7 +57,12 @@ namespace Acesoft
             Cache = httpService.GetService<IDistributedCache>();
 
             return service;
-        }        
+        }
+
+        public static void SetAppConfig(AppConfig appConfig = null)
+        {
+            App.appConfig = appConfig;
+        }
 
         #region path
         public static string GetWebRoot(bool fullPath = false)

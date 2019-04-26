@@ -51,9 +51,9 @@ namespace Acesoft.Web.WeChat
 
         public static async Task WechatLogin(this IAccessControl ac, string userName, string password, string openId)
         {
-            var user = ac.CheckUser(userName, password);
             var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
             var userService = ac.Context.RequestServices.GetService<IUserService>();
+            var user = userService.CheckUser(userName, password);
 
             var userInfoJson = UserApi.Info(app.AppId, openId);
             if (userInfoJson != null)
@@ -74,24 +74,25 @@ namespace Acesoft.Web.WeChat
 
             try
             {
+                var returnUrl = App.GetQuery("returnurl", "/wechat");
                 if (ac.Logined && ac.Auths.ContainsKey("wechat"))
                 {
-                    var returnUrl2 = App.GetQuery("ReturnUrl", "/wechat");
-                    if (returnUrl2.StartsWith("http"))
+                    if (returnUrl.StartsWith("http"))
                     {
-                        returnUrl2 = UrlHelper.Append(returnUrl2, openIdParamName, ac.Auths["wechat"].AuthId);
+                        returnUrl = UrlHelper.Append(returnUrl, openIdParamName, ac.Auths["wechat"].AuthId);
                     }
-                    context.Response.Redirect(returnUrl2);
+                    context.Response.Redirect(returnUrl);
                     return true;
                 }
-
-                if (ac.Logined) ac.Logout();
+                else if (ac.Logined)
+                {
+                    // logout first
+                    ac.Logout();
+                }
 
                 var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
-                var returnUrl = App.GetQuery("ReturnUrl", "/wechat");
                 var state = App.GetQuery("state", "state");
                 var scope = (OAuthScope)App.GetQuery("scope", 0);
-
                 var redirectUrl = $"{App.GetWebRoot(true)}plat/account/wechat?appid={app.Id}&redirect_uri={returnUrl}";
                 var authorizeUrl = OAuthApi.GetAuthorizeUrl(app.AppId, redirectUrl, state, scope);
                 context.Response.Redirect(authorizeUrl);

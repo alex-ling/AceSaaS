@@ -92,7 +92,7 @@ namespace Acesoft.IotNet.Iot
                         request = req.Ok(GetWeaHex(req.Device.Mac));
                         break;
                     }
-				    case "0003":
+				    case "0002":
                     {
                         if (!req.CheckSession(sessions, session))
                         {

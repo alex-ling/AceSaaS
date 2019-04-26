@@ -7,6 +7,7 @@ namespace Acesoft.Rbac
     public enum ObjectType : int
     {
         Module = 0,
-        Page = 1
+        Page = 1,
+        App = 2
     }
 }

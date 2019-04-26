@@ -1,6 +1,5 @@
 {
   "settings": {
-    "oauth.enabled": false,
     "oauth.certpath": "config/acecms.pfx",
     "oauth.certpwd": "123456",
     "oauth.server": "http://localhost:5000/",

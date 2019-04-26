@@ -42,14 +42,6 @@ namespace Acesoft.Web.Controllers
         }
 
         #region login
-        [HttpPost, Action("获取Token")]
-        public async Task<IActionResult> Token([FromBody] JObject data)
-        {
-            var userName = data.GetValue<string>("username");
-            var password = data.GetValue<string>("password");
-            return Ok(await AppCtx.AC.GetToken(userName, password));
-        }
-
         [HttpPost, Action("用户登录")]
         public async Task<IActionResult> Login([FromBody] JObject data)
         {

@@ -52,6 +52,24 @@ namespace Acesoft.Web.IoT.Controllers
 
         #region crud
         [HttpGet, MultiAuthorize, DataSource, Action("查询设备")]
+        public IActionResult List()
+        {
+            CheckDataSourceParameter();
+
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetExtraParam(AppCtx.AC.Params);
+            var res = AppCtx.Session.Query(ctx);
+
+            // set online state from cache.
+            foreach (var item in res)
+            {
+                item.value = iotService.GetData((string)item.mac, true);
+            }
+
+            return Json(res);
+        }
+
+        [HttpGet, MultiAuthorize, DataSource, Action("查询设备")]
 		public IActionResult Grid([FromQuery] GridRequest request)
 		{
 			CheckDataSourceParameter();

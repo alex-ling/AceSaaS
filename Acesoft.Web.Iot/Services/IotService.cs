@@ -138,7 +138,7 @@ namespace Acesoft.Web.IoT.Services
             {
                 var length = param.Type == "C" ? 1 : param.Length;
                 var val = dataHex.Substring(2 * param.Start, 2 * length);
-                if (val != "EEEE")
+                if (val != "EEEE" && val != "EE")
                 {
                     switch (param.Type)
                     {

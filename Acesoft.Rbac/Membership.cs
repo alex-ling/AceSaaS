@@ -13,7 +13,7 @@ namespace Acesoft.Rbac
 {
     public class Membership
     {
-        public const string Auth_Multis = "Cookie";
+        public const string Auth_Multis = "Cookie,Bearer,Wechat";
         public const string Auth_Cookie = "Cookie";
         public const string AUth_WeChat = "Wechat";
         public const string Auth_Bearer = "Bearer";

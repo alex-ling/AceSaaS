@@ -99,52 +99,9 @@ namespace Acesoft.Rbac
             this.stateResolvers = new ConcurrentDictionary<string, Func<object>>();
         }
 
-        public Rbac_User CheckUser(string userName, string password)
-        {
-            int tryTimes = 0, lockMinutes = 60;
-            var user = userService.QueryByUserName(userName);
-
-            Check.Assert(user == null, "登录名不存在");
-            Check.Require(user.Enabled, "用户已被停用，禁止登录");
-            Check.Assert(tryTimes > 0 && user.TryTimes == tryTimes, $"密码错误超限，禁止登录{lockMinutes}分钟");
-
-            // Set try times to ZERO when after lock minutes
-            if (tryTimes > 0 && user.DLogin.HasValue && user.DLogin.Value.AddMinutes(lockMinutes) < DateTime.Now)
-            {
-                user.TryTimes = 0;
-            }
-
-            // Check password
-            if (user.Password != CryptoHelper.ComputeMD5(user.HashId, password))
-            {
-                if (tryTimes > 0)
-                {
-                    int hasTimes = tryTimes - ++user.TryTimes;
-                    Check.Assert(hasTimes <= 0,
-                        $"密码错误，帐号将锁定{lockMinutes}分钟",
-                        $"密码错误，还有{hasTimes}次尝试机会");
-                }
-                else
-                {
-                    throw new AceException("密码错误");
-                }
-            }
-            else
-            {
-                user.TryTimes = 0;
-            }
-
-            // Check having role
-            Check.Assert(user.LoginName != "root" && user.Rbac_UAs.Count == 0, "用户无任何角色权限");
-
-            // update login date and ip
-            userService.UpdateLogin(user);
-            return user;
-        }
-
         public Task Login(string userName, string password, bool persistent)
         {
-            var user = CheckUser(userName, password);
+            var user = userService.CheckUser(userName, password);
             return Login(user, persistent);
         }
 
@@ -165,7 +122,7 @@ namespace Acesoft.Rbac
             logger.LogDebug($"Get token begin with UserName \"{userName}\"");
 
             var settings = App.AppConfig.Settings;
-            var oauthServer = settings.GetValue<string>("oauth.server");
+            var oauthServer = settings.GetValue("oauth.server", App.GetWebRoot(true));
             var oauthClient = settings.GetValue<string>("oauth.client");
             var oauthSecret = settings.GetValue<string>("oauth.secret");
             var oauthScope = settings.GetValue<string>("oauth.scope");

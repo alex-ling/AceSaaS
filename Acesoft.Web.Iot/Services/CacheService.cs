@@ -155,6 +155,11 @@ namespace Acesoft.Web.IoT.Services
                 Cmd = "00F2",
                 Name = "开启实时上传"
             });
+            cmds.Add("00F4", new IotCmd
+            {
+                Cmd = "00F4",
+                Name = "查询配置"
+            });
 
             return cmds;
         }

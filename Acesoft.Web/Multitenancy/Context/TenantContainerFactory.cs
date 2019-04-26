@@ -51,6 +51,7 @@ namespace Acesoft.Web.Multitenancy
             }
 
             // configure services
+            //var authenticationBuilder = 
             startups.OrderBy(s => s.Order).Each(s => s.ConfigureServices(tenantServices));
 
             // build

@@ -35,6 +35,10 @@ namespace Acesoft.Rbac
         /// </summary>
         Rbac_User GetByMail(string mail);
         /// <summary>
+        /// Check user with pwd, roles
+        /// </summary>
+        Rbac_User CheckUser(string userName, string password);
+        /// <summary>
         /// Update user login information, such as IP, Time
         /// </summary>
         void UpdateLogin(Rbac_User user);

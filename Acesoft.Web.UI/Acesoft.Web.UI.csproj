@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="module.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
