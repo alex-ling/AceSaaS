@@ -229,7 +229,7 @@ $.extend($.fn.tree.methods, {
         var id = jq.tree('getSelectedId', opts);
         if (id == null) return;
         var url = opts.editUrl || 'edit';
-        url = AX.aurl("id", id);
+        url = AX.aurl(url, "id", id);
         if (opts.q) url += "&" + opts.q;
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
@@ -397,8 +397,8 @@ $.extend($.fn.datagrid.methods, {
      */
     edit: function (jq, id) {
         var o = jq.datagrid('options');
-        var url = opts.editUrl || 'edit';
-        url = AX.aurl("id", id);
+        var url = o.editUrl || 'edit';
+        url = AX.aurl(url, "id", id);
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
                 $.messager.info({ msg: '保存成功！' });
@@ -508,8 +508,8 @@ $.extend($.fn.treegrid.methods, {
      */
     edit: function (jq, id) {
         var o = jq.treegrid('options');
-        var url = opts.editUrl || 'edit';
-        url = AX.aurl("id", id);
+        var url = o.editUrl || 'edit';
+        url = AX.aurl(url, "id", id);
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
                 $.messager.info({ msg: '保存成功！' });
