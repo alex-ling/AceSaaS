@@ -355,7 +355,7 @@
         basePath: '/scripts/kindeditor/',
         pasteType: 1,
         allowFileManager: true,
-        uploadJson: '/api/file/postkind',
+        uploadJson: '/api/file/upload',
         fileManagerJson: '/api/file/getkind',
         filePostName: 'file',
         items: ['fullscreen', 'source', '|', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', 'emoticons', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'image', 'link', 'table', 'wordpaste'],

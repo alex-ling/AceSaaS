@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.Models;
 using System.Collections.Generic;
+using static IdentityServer4.IdentityServerConstants;
 
 namespace Acesoft.Rbac.Config
 {
@@ -27,9 +28,11 @@ namespace Acesoft.Rbac.Config
                     },
                     AllowedScopes =
                     {
-                        "api"
+                        "api", StandardScopes.OfflineAccess
                     },
-                    AccessTokenLifetime = 1296000,
+                    AccessTokenLifetime = 2592000,
+                    AbsoluteRefreshTokenLifetime = 2592000,
+                    RefreshTokenExpiration = TokenExpiration.Absolute,
                     AllowOfflineAccess = true
                 }
             };

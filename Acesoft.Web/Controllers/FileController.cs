@@ -117,7 +117,13 @@ namespace Acesoft.Web.Controllers
 		[HttpPost, MultiAuthorize, Action("上传文件")]
 		public IActionResult Upload(IFormCollection form)
 		{
-			var folder = App.GetQuery("folder", "uploads");
+			var folder = App.GetQuery("folder", "/uploads/");
+            var dir = App.GetQuery("dir", "");
+            if (dir.HasValue())
+            {
+                folder += $"{dir.TrimEnd('/')}/";
+            }
+
 			folder = AppCtx.AC.Replace(folder);
 			var path = App.GetLocalPath(folder, true);
 
@@ -129,25 +135,36 @@ namespace Acesoft.Web.Controllers
 			var fileName = DateTime.Now.ToDHMSF() + "_" + formFile.FileName;
             FileHelper.Write(path + fileName, formFile.OpenReadStream());
 
-			return Ok(folder + fileName);
+            if (dir.HasValue())
+            {
+                return Json(new
+                {
+                    error = 0,
+                    url = folder + fileName
+                });
+            }
+            else
+            {
+                return Ok(folder + fileName);
+            }
 		}
 
 		[HttpGet, Action("加载文件")]
-		public IActionResult GetKind(string folder)
+		public IActionResult GetKind(string dir)
 		{
 			var fileTypes = "gif,jpg,jpeg,png,bmp";
-			var rootPath = "/wwwroot/uploads/";
+			var rootPath = "/uploads/";
 			var rootUrl = "/uploads/";
             var curPath2 = "";
             var curUrl2 = "";
             var curDirPath2 = "";
             var upDirPath2 = "";
 
-            if (folder.HasValue())
+            if (dir.HasValue())
             {
-                folder = AppCtx.AC.Replace(folder);
-                rootPath = rootPath + folder + "/";
-                rootUrl = rootUrl + folder + "/";
+                dir = AppCtx.AC.Replace(dir);
+                rootPath = rootPath + dir + "/";
+                rootUrl = rootUrl + dir + "/";
             }
 
             var path = App.GetQuery("path", "");
@@ -209,15 +226,15 @@ namespace Acesoft.Web.Controllers
             var dirFileList = (List<Hashtable>)(result["file_list"] = new List<Hashtable>());
             for (int j = 0; j < dirList.Length; j++)
             {
-                var dir = new DirectoryInfo(dirList[j]);
+                var dirInfo = new DirectoryInfo(dirList[j]);
                 var hash = new Hashtable();
                 hash["is_dir"] = true;
-                hash["has_file"] = (dir.GetFileSystemInfos().Length != 0);
+                hash["has_file"] = (dirInfo.GetFileSystemInfos().Length != 0);
                 hash["filesize"] = 0;
                 hash["is_photo"] = false;
                 hash["filetype"] = "";
-                hash["filename"] = dir.Name;
-                hash["datetime"] = dir.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+                hash["filename"] = dirInfo.Name;
+                hash["datetime"] = dirInfo.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
                 dirFileList.Add(hash);
             }
             for (int i = 0; i < fileList.Length; i++)

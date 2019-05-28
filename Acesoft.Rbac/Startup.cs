@@ -57,6 +57,12 @@ namespace Acesoft.Rbac
                     CookieSlidingExpiration = true,
                     RequireAuthenticatedUserForSignOutMessage = true
                 };
+                opts.Caching = new CachingOptions
+                {
+                    ClientStoreExpiration = TimeSpan.FromHours(24.0),
+                    ResourceStoreExpiration = TimeSpan.FromHours(24.0),
+                    CorsExpiration = TimeSpan.FromHours(24.0 * 15)
+                };
                 #region option
                 /*opts.Events = new EventsOptions
                 {
@@ -77,20 +83,14 @@ namespace Acesoft.Rbac
                     LoginReturnUrlParameter = "returnurl",
                     LoginUrl = settings.GetValue("auth.loginurl", "/plat/account/login"),
                     LogoutUrl = settings.GetValue("auth.logouturl", "/plat/account/logout")
-                };*/
-                #endregion
-                opts.Caching = new CachingOptions
-                {
-                    ClientStoreExpiration = TimeSpan.FromHours(24.0),
-                    ResourceStoreExpiration = TimeSpan.FromHours(24.0),
-                    CorsExpiration = TimeSpan.FromHours(24.0 * 15)
-                };
+                };                
                 opts.Cors = new CorsOptions
                 {
                     CorsPaths = new PathString[] { "/" },
-                    CorsPolicyName = "default",
+                    CorsPolicyName = "all",
                     PreflightCacheDuration = new TimeSpan(1, 0, 0)
-                };
+                };*/
+                #endregion
             })
             .AddSigningCredential(new X509Certificate2(certPath, certPwd))
             .AddClientStore<ClientStore>()

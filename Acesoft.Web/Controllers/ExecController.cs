@@ -20,7 +20,9 @@ namespace Acesoft.Web.Controllers
 		{
 			CheckDataSourceParameter();
 
-			var ctx = new RequestContext(SqlScope, SqlId).SetParam(data.ToDictionary());
+			var ctx = new RequestContext(SqlScope, SqlId)
+                .SetParam(data.ToDictionary())
+                .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteAsync(ctx);
 
             return Ok(result);
@@ -32,10 +34,12 @@ namespace Acesoft.Web.Controllers
             CheckDataSourceParameter();
 
             var param = data.ToDictionary();
-            Check.Assert(param.ContainsKey("id"), "未提交ID参数");
+            Check.Require(param.ContainsKey("id"), "未提交ID参数");
             param["ids"] = param["id"].ToString().Split<long>();
 
-            var ctx = new RequestContext(SqlScope, SqlId).SetParam(param);
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetParam(param)
+                .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteAsync(ctx);
 
             return Ok(result);
@@ -47,13 +51,15 @@ namespace Acesoft.Web.Controllers
             CheckDataSourceParameter();
 
             var param = data.ToDictionary();
-            Check.Assert(param.ContainsKey("ids"), "未提交ID参数");
+            Check.Require(param.ContainsKey("id"), "未提交ID参数");
             var ids = param["id"].ToString().Split<string>(',');
 
             foreach (var id in ids)
             {
                 param["id"] = id;
-                var ctx = new RequestContext(SqlScope, SqlId).SetParam(param);
+                var ctx = new RequestContext(SqlScope, SqlId)
+                    .SetParam(param)
+                    .SetExtraParam(AppCtx.AC.Params);
                 await AppCtx.Session.ExecuteAsync(ctx);
             }
 
@@ -65,7 +71,9 @@ namespace Acesoft.Web.Controllers
 		{
             CheckDataSourceParameter();
 
-            var ctx = new RequestContext(SqlScope, SqlId).SetParam(data.ToDictionary());
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetParam(data.ToDictionary())
+                .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteScalarAsync(ctx);
 
             return Ok(result);
@@ -76,7 +84,9 @@ namespace Acesoft.Web.Controllers
 		{
             CheckDataSourceParameter();
 
-            var ctx = new RequestContext(SqlScope, SqlId).SetParam(data.ToDictionary());
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetParam(data.ToDictionary())
+                .SetExtraParam(AppCtx.AC.Params);
             var result = AppCtx.Session.Query(ctx).ToDictionary(item => item.id);
 
 			return Ok(result);
@@ -87,7 +97,9 @@ namespace Acesoft.Web.Controllers
         {
             CheckDataSourceParameter();
 
-            var ctx = new RequestContext(SqlScope, SqlId).SetParam(data.ToDictionary());
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetParam(data.ToDictionary())
+                .SetExtraParam(AppCtx.AC.Params);
             var result = AppCtx.Session.Query(ctx).Select(item => item.id);
 
 			return Ok(result);
@@ -98,7 +110,9 @@ namespace Acesoft.Web.Controllers
         {
             CheckDataSourceParameter();
 
-            var ctx = new RequestContext(SqlScope, SqlId).SetParam(data.ToDictionary());
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetParam(data.ToDictionary())
+                .SetExtraParam(AppCtx.AC.Params);
             var result = AppCtx.Session.Query(ctx);
 
 			return Ok(result);

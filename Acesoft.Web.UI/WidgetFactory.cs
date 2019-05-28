@@ -136,6 +136,11 @@ namespace Acesoft.Web.UI
 			return new HtmlerBuilder(new Htmler(this));
 		}
 
+        public virtual IdBoxBuilder IdBox()
+        {
+            return new IdBoxBuilder(new IdBox(this));
+        }
+
 		public virtual KindEditorBuilder KindEditor()
 		{
 			return new KindEditorBuilder(new KindEditor(this));

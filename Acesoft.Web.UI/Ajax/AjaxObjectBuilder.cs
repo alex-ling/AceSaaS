@@ -50,12 +50,12 @@ namespace Acesoft.Web.UI.Ajax
 
 		public virtual B HttpPost(string controller = null, string action = null, object routeValues = null)
 		{
-			return Route(HttpMethod.post, controller, action, routeValues);
+			return Route(HttpMethod.post, controller, action ?? "post", routeValues);
 		}
 
 		public virtual B HttpPut(string controller = null, string action = null, object routeValues = null)
 		{
-			return Route(HttpMethod.put, controller, action, routeValues);
+			return Route(HttpMethod.put, controller, action ?? "put", routeValues);
 		}
 
 		public virtual B HttpDelete(string controller = null, string action = null, object routeValues = null)

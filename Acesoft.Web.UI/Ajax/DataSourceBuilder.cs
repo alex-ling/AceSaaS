@@ -48,19 +48,30 @@ namespace Acesoft.Web.UI.Ajax
 			return this;
 		}
 
-		public virtual DataSourceBuilder Load(string sqlScope, string sqlId)
-		{
-			JsonObject.RouteValues["ds"] = sqlScope + "." + sqlId;
+        public virtual DataSourceBuilder Load(string sqlFullId, string requestId = "id")
+        {
+            return Load<long>(sqlFullId, requestId);
+        }
 
-            var ctx = new RequestContext(sqlScope, sqlId)
+        public virtual DataSourceBuilder Load<T>(string sqlFullId, string requestId = "id", T defaultId = default(T))
+        {
+            return Load(sqlFullId, new { id = App.GetQuery(requestId, defaultId) });
+        }
+
+        public virtual DataSourceBuilder Load(string sqlFullId, object param)
+        {
+            JsonObject.RouteValues["ds"] = sqlFullId;
+
+            var ctx = new RequestContext(sqlFullId)
                 .SetCmdType(CmdType.select)
+                .SetParam(param)
                 .SetExtraParam(JsonObject.Widget.Ace.AC.Params);
-			JsonObject.FormData = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
-			JsonObject.IsEdit = true;
-			return this;
-		}
+            JsonObject.FormData = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
+            JsonObject.IsEdit = true;
+            return this;
+        }
 
-		public virtual DataSourceBuilder Form(object data)
+        public virtual DataSourceBuilder Form(object data)
 		{
 			string query = App.GetQuery("id", "");
 			if (query.HasValue())

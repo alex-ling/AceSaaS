@@ -25,6 +25,8 @@ namespace Acesoft.Web.Controllers
 
             var path = "/pages" + App.GetQuery("path", "");
 			var temp = SqlMap.Params.GetValue("ex_tempfile", "temp.xlsx");
+            temp = temp.Replace("{tanent}", AppCtx.TenantContext.Tenant.Name);
+
 			var fileName = SqlMap.Params.GetValue("ex_filename", "down");
             var autoHeight = SqlMap.Params.GetValue("ex_autoheight", false);
             var xls = new XlsExport(res, App.GetLocalPath(path + temp), autoHeight);

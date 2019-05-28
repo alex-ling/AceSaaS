@@ -24,9 +24,14 @@ namespace Acesoft.Web.Controllers
         {
             CheckDataSourceParameter();
 
+            var param = data.ToDictionary();
+            var id = param.GetValue("id", App.IdWorker.NextId());
+            param["id"] = id;
+
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.insert)
-                .SetParam(data.ToDictionary());
+                .SetParam(param)
+                .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteAsync(ctx);
             if (result > 0)
             {
@@ -48,7 +53,8 @@ namespace Acesoft.Web.Controllers
         {
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.update)
-                .SetParam(data.ToDictionary());
+                .SetParam(data.ToDictionary())
+                .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteAsync(ctx);
 
             return Ok(result);
@@ -60,11 +66,8 @@ namespace Acesoft.Web.Controllers
             var ids = id.Split<string>(',');
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.delete)
-                .SetParam(new
-                {
-                    ids,
-                    id
-                });
+                .SetParam(new { ids, id })
+                .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteAsync(ctx);
 
             return Ok(result);
@@ -79,10 +82,8 @@ namespace Acesoft.Web.Controllers
             {
                 var ctx = new RequestContext(SqlScope, SqlId)
                     .SetCmdType(CmdType.delete)
-                    .SetParam(new
-                    {
-                        id = itemId
-                    });
+                    .SetParam(new { id = itemId })
+                    .SetExtraParam(AppCtx.AC.Params);
                 count += await AppCtx.Session.ExecuteAsync(ctx);
             }
 
@@ -94,10 +95,8 @@ namespace Acesoft.Web.Controllers
         {
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.select)
-                .SetParam(new
-                {
-                    id
-                });
+                .SetParam(new { id })
+                .SetExtraParam(AppCtx.AC.Params);
             var result = AppCtx.Session.QueryFirst(ctx);
 
             return Ok(result);

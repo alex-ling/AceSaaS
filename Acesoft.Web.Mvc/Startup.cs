@@ -34,6 +34,16 @@ namespace Acesoft.Web.Mvc
             // global config.
             App.SetAppConfig(Configuration.Get<AppConfig>());
 
+            // Add Cors
+            services.AddCors(opts => {
+                opts.AddPolicy("all", p => p
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .AllowAnyOrigin()
+                );
+            });
+
             // add SaaS
             services.AddMultitenancy();
 
@@ -80,6 +90,9 @@ namespace Acesoft.Web.Mvc
 
             // use anthentication
             app.UseAuthentication();
+
+            // Use Cors
+            app.UseCors("all");
 
             // Use SaaS middleware.
             app.UseMultitenancy();

@@ -136,6 +136,12 @@ namespace Acesoft.Web.UI.Builder
 			return this as Builder;
 		}
 
+        public virtual Builder Option(string name, object value)
+        {
+            Component.Options[name] = value;
+            return this as Builder;
+        }
+
 		public virtual Builder Build(Action<Widget> action)
 		{
 			action(Component);

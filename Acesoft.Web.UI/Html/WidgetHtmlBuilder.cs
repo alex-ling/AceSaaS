@@ -100,6 +100,11 @@ namespace Acesoft.Web.UI.Html
 			}
 
 			var dictionary = new Dictionary<string, object>(Options);
+            if (Component.Options.Any())
+            {
+                dictionary.Merge(Component.Options);
+            }
+
 			if (EventsToOption && Component.Events.Any())
 			{
                 dictionary.Merge(Component.Events);

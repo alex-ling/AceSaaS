@@ -9,7 +9,7 @@ namespace Acesoft.Web.WeChat
 {
     public static class WidgetFactoryExtensions
     {
-        public static void InitWeChatScript(this WidgetFactory ace, Action<IList<string>> actionScript, bool resetUrl = false)
+        public static void InitWeChatScript(this WidgetFactory ace, Action<IList<string>> actionScript, bool resetUrl = false, bool debug = false)
         {
             if (App.Context.SideInWeixinBrowser())
             {
@@ -19,12 +19,13 @@ namespace Acesoft.Web.WeChat
                 actionScript(list);
 
                 sb.Append("$(function() { AX.wxInit({ ");
-                sb.Append("appId:'" + jsApiToken.AppId + "',");
-                sb.Append("timestamp:'" + jsApiToken.Timestamp + "',");
-                sb.Append("nonce:'" + jsApiToken.Nonce + "',");
-                sb.Append("signature:'" + jsApiToken.Signature + "',");
-                sb.Append("jsApi:['" + list.Join("','") + "'],");
-                sb.Append("resetUrl:" + (resetUrl ? "1" : "0"));
+                sb.Append($"appId:'{jsApiToken.AppId}',");
+                sb.Append($"timestamp:'{jsApiToken.Timestamp}',");
+                sb.Append($"nonce:'{jsApiToken.Nonce}',");
+                sb.Append($"signature:'{jsApiToken.Signature}',");
+                sb.Append($"jsApi:['{list.Join("','")}'],");
+                sb.Append($"resetUrl:{resetUrl.ToString().ToLower()},");
+                sb.Append($"debug:{debug.ToString().ToLower()}");
                 sb.Append(" }) })");
 
                 ace.Context.AppendInitScripts(sb.ToString());

@@ -12,6 +12,7 @@ namespace Acesoft.Web.UI.Widgets
 		public Action<DataView> OnLoaded { get; set; }
 		public DataSource DataSource { get; set; }
         public Paging Paging { get; set; }
+        public object QueryParams { get; set; }
 
         public void DataBind()
 		{
@@ -25,11 +26,12 @@ namespace Acesoft.Web.UI.Widgets
 				};
 				var ctx = new RequestContext(ds)
                     .SetCmdType(CmdType.query)
-                    .SetParam(gridRequest);
+                    .SetParam(gridRequest)
+                    .SetExtraParam(QueryParams);
 				var gridResponse = Ace.Session.QueryPageTable(ctx, gridRequest);
 				base.Model = gridResponse.Data;
 				Paging.Load(gridResponse);
-				OnLoaded(this);
+				OnLoaded?.Invoke(this);
 			}
 		}
 

@@ -44,6 +44,10 @@
     border-left: 1px solid #95b8e7;
 }
 
+.container-fluid .row {
+    padding-top: 10px
+}
+
 /* aceui global */
 .upload-wrapper {
     width: 100%;
@@ -77,7 +81,7 @@
 }
 
 .aceui-form.front .row {
-    padding: 15px 0 0;
+    padding: 10px 0 0;
     border-bottom: 0;
 }
 
@@ -92,6 +96,7 @@
 
 .aceui-browse .container-fluid .row {
     margin-top: 10px;
+    padding-top: 0;
     font-size: 1.2em;
     color: #777;
     background: #ebe8e8;
@@ -134,7 +139,7 @@ a.l-btn-selected.aceui:hover {
 
 /* content styles */
 .alert-info {
-    margin: 0 15px;
+    /*margin: 0 15px;*/
     padding: 6px 12px;
     line-height: 18px;
     margin-bottom: 6px;

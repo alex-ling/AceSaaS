@@ -270,7 +270,7 @@ namespace Acesoft.Web.IoT.Services
         {
             var ctx = new RequestContext("iot", "userdevice")
                 .SetCmdType(CmdType.delete)
-                .SetParam(new { id });
+                .SetParam(new { id, ids = new long[] { id } });
             Session.Execute(ctx);
         }
         #endregion

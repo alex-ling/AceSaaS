@@ -129,7 +129,7 @@ namespace Acesoft
             if (Context != null)
             {
                 var query = Context.Request.Query[name];
-                if (query.Count > 0)
+                if (query.Count > 0 && query[0].HasValue())
                 {
                     return query[0].ToObject<T>();
                 }
@@ -148,7 +148,7 @@ namespace Acesoft
             if (Context != null)
             {
                 var query = Context.Request.Query[name];
-                if (query.Count > 0)
+                if (query.Count > 0 && query[0].HasValue())
                 {
                     return query[0].ToObject<T>();
                 }
@@ -161,7 +161,7 @@ namespace Acesoft
             if (Context != null)
             {
                 var query = Context.Request.Form[name];
-                if (query.Count > 0)
+                if (query.Count > 0 && query[0].HasValue())
                 {
                     return query[0].ToObject<T>();
                 }

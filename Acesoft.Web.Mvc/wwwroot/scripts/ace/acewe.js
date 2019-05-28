@@ -222,7 +222,7 @@
         wxInit: function (opts) {
             wx.config({
                 beta: true,
-                debug: false, 
+                debug: opts.debug, 
                 appId: opts.appId,
                 timestamp: opts.timestamp,
                 nonceStr: opts.nonce,
@@ -250,7 +250,7 @@
                 success: function (res) {
                     cb(res.resultStr);
                 }
-            })
+            });
         },
         wxWiFi: function (cb) {
             wx.invoke('configWXDeviceWiFi', {}, function (res) {

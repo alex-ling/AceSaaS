@@ -126,11 +126,16 @@ namespace Acesoft.Rbac
             var oauthClient = settings.GetValue<string>("oauth.client");
             var oauthSecret = settings.GetValue<string>("oauth.secret");
             var oauthScope = settings.GetValue<string>("oauth.scope");
+            logger.LogDebug($"Request OAuth server \"{oauthServer}\" with Scope \"{oauthScope}\"");
 
             // https://identitymodel.readthedocs.io/en/latest/client/discovery.html
             var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync(oauthServer);
-            Check.Assert(disco.IsError, $"OAuth认证服务器不能访问");
+            var disco = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = oauthServer,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+            Check.Assert(disco.IsError, disco.Error);
 
             // https://identitymodel.readthedocs.io/en/latest/client/token.html#requesting-a-token-using-the-password-grant-type
             var token = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
@@ -143,7 +148,50 @@ namespace Acesoft.Rbac
                 UserName = userName,
                 Password = password
             });
-            Check.Assert(token.IsError, token.ErrorDescription);
+            Check.Assert(token.IsError, token.ErrorDescription ?? token.Exception?.GetMessage());
+
+            logger.LogDebug("Get token end with: " + oauthServer + ", SUCCESS");
+            return new Token
+            {
+                Access_token = token.AccessToken,
+                Refresh_token = token.RefreshToken,
+                Token_type = token.TokenType,
+                Expires_in = token.ExpiresIn,
+                Created = DateTime.Now
+            };
+        }
+
+        public async Task<Token> RefreshToken(string refreshToken)
+        {
+            logger.LogDebug($"Refresh token begin with \"{refreshToken}\"");
+
+            var settings = App.AppConfig.Settings;
+            var oauthServer = settings.GetValue("oauth.server", App.GetWebRoot(true));
+            var oauthClient = settings.GetValue<string>("oauth.client");
+            var oauthSecret = settings.GetValue<string>("oauth.secret");
+            var oauthScope = settings.GetValue<string>("oauth.scope");
+            logger.LogDebug($"Request OAuth server \"{oauthServer}\" with Scope \"{oauthScope}\"");
+
+            // https://identitymodel.readthedocs.io/en/latest/client/discovery.html
+            var client = new HttpClient();
+            var disco = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = oauthServer,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+            Check.Assert(disco.IsError, disco.Error);
+
+            // https://identitymodel.readthedocs.io/en/latest/client/token.html#requesting-a-token-using-the-password-grant-type
+            var token = await client.RequestRefreshTokenAsync(new RefreshTokenRequest
+            {
+                // "/connect/token"
+                Address = disco.TokenEndpoint,
+                ClientId = oauthClient,
+                ClientSecret = oauthSecret,
+                Scope = oauthScope,
+                RefreshToken = refreshToken
+            });
+            Check.Assert(token.IsError, token.ErrorDescription ?? "RefreshToken已失效");
 
             logger.LogDebug("Get token end with: " + oauthServer + ", SUCCESS");
             return new Token

@@ -36,25 +36,35 @@
         return up.params;
     }
     function createProgress(up, file) {
+        if (up._opts.picView) {
+            up._files.find("#file-1").remove();
+            var having = false;
+            up._files.find("div.file").each(function () {
+                $(this).find("a.fr").click();
+                having = true;
+            });
+            if (having) return;
+        }
         var html = AX.format(
             '<div id="file-{0}" class="file" style="{4}">{5}\
-            <div class="file-name">\
+            <div class="file-name" style="{6}">\
             <a class="lk" target="_blank">{1}</a>\
             <span>{2}</span>\
             <b>{3}%</b>\
-            <a class="fr" href="javascript:;">删除</a>\
+            <a class="fr" href="javascript:;" style="{6}">删除</a>\
             <div class="clear"></div>\
             </div>\
-            <div class="progress">\
+            <div class="progress" style="{6}">\
             <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>\
             </div>\
             </div>',
             file.id,
             file.name,
-            file.size > 0 ? '（' + plupload.formatSize(file.size) + '）' : '',
+            file.size > 0 ? '(' + plupload.formatSize(file.size) + ')' : '',
             file.percent || 0,
             up._opts.picView ? AX.format('float:left;width:{0}px', up._opts.picWidth) : '',
-            up._opts.picView ? AX.format('<img style="width:100%;height:{0}px" />', up._opts.picHeight) : ''
+            up._opts.picView ? AX.format('<img style="width:100%;height:{0}px;border:1px solid #ccc" />', up._opts.picHeight) : '',
+            up._opts.picView && file.url == "/images/none.jpg" ? 'display:none' : ''
         );
         $(html).insertBefore(up._files.find('.clear').last()).find('a.fr').click(function () {
             if (file.percent >= 100) {
@@ -80,7 +90,24 @@
                 }
             }
             if (file.size > 0) up.removeFile(file);
-            $(this).closest('.file').slideUp(1000, function () { $(this).remove() });
+            $(this).closest('.file').slideUp(1000, function () {
+                $(this).remove();
+                if (up._opts.picView) {
+                    if (up.files.length) {
+                        createProgress(up, up.files[0]);
+                    }
+                    else {
+                        createProgress(up, {
+                            id: '1',
+                            name: 'none',
+                            ossName: '',
+                            url: '/images/none.jpg',
+                            size: 0,
+                            percent: 100
+                        });
+                    }
+                }
+            });
         });
         if (file.percent >= 100) {
             $('#file-' + file.id).find('.progress-bar')
@@ -145,8 +172,11 @@
             prevent_duplicates: true //不允许选取重复文件
         },
         init: {
-            PostInit: function () {
+            PostInit: function (up) {
                 var files = this._box.val().split(',');
+                if (up._opts.picView && files.length < 2) {
+                    files.push('/images/none.jpg');
+                }
                 for (var i = 1; i < files.length; i++){
                     var path = files[i];
                     var name = AX.filename(path).substr(11);

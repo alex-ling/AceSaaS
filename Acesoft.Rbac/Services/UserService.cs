@@ -53,6 +53,17 @@ namespace Acesoft.Rbac.Services
                 })
             );
         }
+
+        public Rbac_User GetByRefCode(string refcode)
+        {
+            return Session.QueryFirst<Rbac_User>(
+                new RequestContext("rbac", "get_user_by_refcode")
+                .SetParam(new
+                {
+                    refcode
+                })
+            );
+        }
         #endregion
 
         #region query

@@ -210,9 +210,8 @@ $.extend($.fn.tree.methods, {
         var parId = jq.tree('getSelectedId', opts);
         if (parId == null) return;
         var url = opts.editUrl || 'edit';
-        if (url.indexOf('?') < 0) url += '?parentid=' + parId;
-        else url = AX.aurl(url, "parentid", parId);
-        if (opts.q) url += "&" + opts.q;
+        url = AX.aurl(url, "parentid", parId);
+        if (opts.q) url += (url.indexOf('?') > 0 ? '&' : '?') + opts.q;
         if (AX.opts.dialogMode) {
             AX.dialog('添加', url, function () {
                 $.messager.info({ msg: '添加成功！' });
@@ -229,7 +228,8 @@ $.extend($.fn.tree.methods, {
         opts = $.extend({}, jq.tree('options'), opts);
         var id = jq.tree('getSelectedId', opts);
         if (id == null) return;
-        var url = AX.format("{0}?id={1}", (opts.editUrl || 'edit'), id);
+        var url = opts.editUrl || 'edit';
+        url = AX.aurl("id", id);
         if (opts.q) url += "&" + opts.q;
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
@@ -334,7 +334,8 @@ $.extend($.fn.datagrid.defaults, {
         // resize column width.
         dg.datagrid('resize');
         //dg.datagrid('fixColumnSize');
-        if (dg.datagrid('getColumnOption', 'action')) {
+        var colOption = dg.datagrid('getColumnOption', 'action');
+        if (colOption && colOption.width < 35) {
             dg.datagrid('autoSizeColumn', 'action');
         }
         opts.success.call(this, data);
@@ -381,7 +382,7 @@ $.extend($.fn.datagrid.methods, {
     add: function (jq, query) {
         var o = jq.datagrid('options');
         var url = o.editUrl || 'edit';
-        if (query) url += '?' + query;
+        if (query) url += (url.indexOf('?') > 0 ? '&' : '?') + query;
         if (AX.opts.dialogMode) {
             AX.dialog('添加', url, function () {
                 $.messager.info({ msg: '添加成功！' });
@@ -396,7 +397,8 @@ $.extend($.fn.datagrid.methods, {
      */
     edit: function (jq, id) {
         var o = jq.datagrid('options');
-        var url = AX.format("{0}?id={1}", (o.editUrl || 'edit'), id);
+        var url = opts.editUrl || 'edit';
+        url = AX.aurl("id", id);
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
                 $.messager.info({ msg: '保存成功！' });
@@ -453,7 +455,10 @@ $.extend($.fn.treegrid.defaults, {
         dg.treegrid('getPanel').find('.easyui-linkbutton').linkbutton({ plain: true });
         dg.treegrid('resize');
         //dg.treegrid('fixColumnSize');
-        dg.treegrid('autoSizeColumn', 'action');
+        var colOption = dg.datagrid('getColumnOption', 'action');
+        if (colOption && colOption.width < 35) {
+            dg.datagrid('autoSizeColumn', 'action');
+        }
         opts.success.call(this, row, data);
     },
     /* success: [+] added for parse content button after loading.
@@ -488,7 +493,7 @@ $.extend($.fn.treegrid.methods, {
     add: function (jq, query) {
         var o = jq.treegrid('options');
         var url = o.editUrl || 'edit';
-        if (query) url += '?' + query;
+        if (query) url += (url.indexOf('?') > 0 ? '&' : '?') + query;
         if (AX.opts.dialogMode) {
             AX.dialog('添加', url, function () {
                 $.messager.info({ msg: '添加成功！' });
@@ -503,7 +508,8 @@ $.extend($.fn.treegrid.methods, {
      */
     edit: function (jq, id) {
         var o = jq.treegrid('options');
-        var url = AX.format("{0}?id={1}", (o.editUrl || 'edit'), id);
+        var url = opts.editUrl || 'edit';
+        url = AX.aurl("id", id);
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
                 $.messager.info({ msg: '保存成功！' });

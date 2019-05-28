@@ -29,12 +29,10 @@ namespace Acesoft.Web.Controllers
             return Ok(await AppCtx.AC.GetToken(userName, password));
         }
 
-        [HttpPost, Action("获取Token")]
-        public async Task<IActionResult> Token([FromBody]JObject data)
+        [HttpGet, Action("刷新Token")]
+        public async Task<IActionResult> RefreshToken(string refreshToken)
         {
-            var userName = data.GetValue<string>("username");
-            var password = data.GetValue<string>("password");
-            return Ok(await AppCtx.AC.GetToken(userName, password));
+            return Ok(await AppCtx.AC.RefreshToken(refreshToken));
         }
 
         [HttpGet, MultiAuthorize, Action("获取模块")]

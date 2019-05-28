@@ -333,8 +333,8 @@
                     var html = '', ops = v.split(',');
                     for (var i = 0; i < ops.length; i++) {
                         var op = ops[i].split('=')[0], title = ops[i].split('=')[1];
-                        html += ax.format('<a class="easyui-linkbutton aceui" data-options="iconCls:\'fa fa-{0}\'" onclick="AX.gridAct(\'{4}\',\'{1}\',\'{3}\')" title="{2}"></a>',
-                            op.split('_').length > 1 ? op.split('_')[1] : op, op.split('_')[0], title, rd.id, exp);
+                        html += ax.format('<a class="easyui-linkbutton aceui" data-options="iconCls:\'fa fa-{0}\',text:\'{5}\'" onclick="AX.gridAct(\'{4}\',\'{1}\',\'{3}\')" title="{2}"></a>',
+                            op.split('_').length > 1 ? op.split('_')[1] : op, op.split('_')[0], title, rd.id, exp, op.split('_').length > 2 ? op.split('_')[2] : '');
                     }
                     return html;
                 case 'attach':

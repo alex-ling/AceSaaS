@@ -81,7 +81,7 @@ namespace Acesoft.Data.SqlMapper
 
             if (ctx.CmdType == CmdType.select)
             {
-                sql = Params.GetValue("selectsql", "");
+                sql = Params.GetValue("selectsql", Params.GetValue("sql", ""));
                 if (!sql.HasValue())
                 {
                     sql = BuildSelectSql(dialect, ctx);
@@ -193,7 +193,7 @@ namespace Acesoft.Data.SqlMapper
                 // 自动插入id列
                 sbIns.Append($"{dialect.QuoteForColumnName("id")}, ");
                 sbVal.Append($"@id, ");
-                ctx.DapperParams.AddDynamicParams(new { id = App.IdWorker.NextId() });
+                //ctx.DapperParams.AddDynamicParams(new { id = App.IdWorker.NextId() });
             }
             if (insertTime)
             {

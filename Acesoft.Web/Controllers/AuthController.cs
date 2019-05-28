@@ -126,14 +126,21 @@ namespace Acesoft.Web.Controllers
             var mail = data.GetValue<string>("mail");
             if (userService.GetByMail(mail) != null)
             {
-                throw new AceException("该邮箱已绑定其他用户");
+                throw new AceException("该邮箱已注册或已绑定其他用户");
             }
 
             var validCode = data.GetValue<string>("valid_code");
-            var cacheCode = App.Cache.GetString("mail_" + mail);
-            if ((cacheCode != null || !(validCode == "acecom")) && (cacheCode == null || cacheCode != validCode))
+            if (validCode.HasValue())
             {
-                throw new AceException("邮箱验证码输入错误");
+                var cacheCode = App.Cache.GetString("mail_" + mail);
+                if (cacheCode == null && validCode == "acecom")
+                {
+                    return mail;
+                }
+                if (cacheCode == null || cacheCode != validCode)
+                {
+                    throw new AceException("邮箱验证码输入错误");
+                }
             }
             return mail;
         }
@@ -147,7 +154,7 @@ namespace Acesoft.Web.Controllers
             var user = userService.GetByMobile(mobile);
             Check.Require(user != null, "手机号未注册或未绑定用户");
 
-            var pwd = data["pwd"].Value<string>();
+            var pwd = data.GetValue("pwd", data.GetValue("password", ""));
             user.Password = CryptoHelper.ComputeMD5(user.HashId, pwd);
             user.RstPwd = false;
             user.DRstPwd = DateTime.Now;
@@ -162,13 +169,13 @@ namespace Acesoft.Web.Controllers
         {
             Check.Require(AppCtx.AC.Logined, "未登录不能修改密码");
 
-            var pwd = data["pwd"].Value<string>();
+            var pwd = data.GetValue("pwd", data.GetValue("password", ""));
             var newPwd = data["newpwd"].Value<string>();
             Check.Assert(pwd == newPwd, "新密码不能与当前密码相同");
 
             var user = AppCtx.AC.User;
             var password = CryptoHelper.ComputeMD5(user.HashId, pwd);
-            Check.Assert(user.Password == password, "原密码输入不正确");
+            Check.Require(user.Password == password, "原密码输入不正确");
 
             user.Password = CryptoHelper.ComputeMD5(user.HashId, newPwd);
             user.RstPwd = false;
@@ -206,7 +213,7 @@ namespace Acesoft.Web.Controllers
             if (loginName.HasValue() && userService.GetByLoginName(loginName) != null)
             {
                 throw new AceException("用户名 [" + loginName + "] 已经使用");
-            }
+            }            
 
             var user = new Rbac_User();
             user.InitializeId();
@@ -225,11 +232,34 @@ namespace Acesoft.Web.Controllers
             //user.System = data.GetValue("system", 0) == 1;
             user.RegType = (RegType)data.GetValue("regtype", 9);
             user.Client_Id = data.GetValue<long?>("clientid");
-            user.RefCode = data.GetValue<string>("refcode");
 
             AppCtx.Session.BeginTransaction();
             try
             {
+                var refcode = data.GetValue("refcode", "");
+                var refname = data.GetValue("refname", "");
+                var checkInsertSql = SqlMap.Params.GetValue("checkinsertsql", "");
+                var checkInsertError = SqlMap.Params.GetValue("checkinserterror", "");
+                if (checkInsertSql.HasValue())
+                {
+                    var result = AppCtx.Session.QueryFirst(checkInsertSql, new
+                    {
+                        refid = data.GetValue("refid", App.IdWorker.NextId()),
+                        refcode,
+                        refname
+                    });
+                    if (result.cnt > 0)
+                    {
+                        throw new AceException(checkInsertError.FormatWith(refcode, refname));
+                    }
+                    refcode = result.refcode.ToString();
+                }
+                else if (checkInsertError.HasValue() && userService.GetByRefCode(refcode) != null)
+                {
+                    throw new AceException(checkInsertError.FormatWith(refcode, refname));
+                }
+                user.RefCode = refcode;
+
                 if (App.GetQuery("scale", 0) == 1)
                 {
                     var refId = data.GetValue<string>("ref_id");
@@ -309,7 +339,7 @@ namespace Acesoft.Web.Controllers
                 var searchUser = userService.GetByLoginName(loginName);
                 if (searchUser != null && searchUser.Id != user.Id)
                 {
-                    throw new AceException("用户名 [" + loginName + "] 已经使用");
+                    throw new AceException("登录名 [" + loginName + "] 已经使用");
                 }
                 user.LoginName = loginName;
             }
@@ -383,10 +413,6 @@ namespace Acesoft.Web.Controllers
             }
             userService.Update(user);
 
-            if (SqlMap.SqlId != "rbac.user")
-            {
-                SqlMapper.CacheManager.Flush(SqlMap.SqlId);
-            }
             SqlMapper.CacheManager.Flush("rbac.user");
             return Ok(null);
         }

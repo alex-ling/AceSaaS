@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Acesoft.Util.Helper;
 using Microsoft.AspNetCore.Html;
@@ -17,6 +18,25 @@ namespace Acesoft.Web.UI
                 return new HtmlString(trueStr);
             }
             return new HtmlString(falseStr);
+        }
+
+        public static HtmlString HtmlForNew(this WidgetFactory ace, object obj, int days)
+        {
+            if (obj is DateTime dateObj)
+            {
+                if (dateObj.AddDays(days) > DateTime.Now)
+                {
+                    return new HtmlString($"<img src=\"/images/new.png\" />");
+                }
+            }
+            else if (obj is string strObj)
+            {
+                if (strObj.HasValue())
+                {
+                    return ace.HtmlForNew(DateTime.Parse(strObj), days);
+                }
+            }
+            return new HtmlString("&nbsp;");
         }
 
         public static HtmlString HtmlForDate(this WidgetFactory ace, object obj, string format)
@@ -51,7 +71,7 @@ namespace Acesoft.Web.UI
             return new HtmlString("&nbsp;");
         }
 
-        public static HtmlString HtmlForDate(this WidgetFactory html, DateTime obj)
+        public static HtmlString HtmlForDate(this WidgetFactory ace, DateTime obj)
         {
             var text = "";
             var timeSpan = DateTime.Now - obj;
@@ -71,6 +91,11 @@ namespace Acesoft.Web.UI
 
         public static HtmlString HtmlForPhoto(this WidgetFactory ace, string photos, string width = "150px", string height = "120px", int index = 0, bool link = false)
         {
+            if (!photos.HasValue())
+            {
+                return new HtmlString("&nbsp;");
+            }
+
             var sb = new StringBuilder();
             photos.Split(',').Each(item =>
             {
@@ -92,16 +117,31 @@ namespace Acesoft.Web.UI
             return new HtmlString(sb.ToString());
         }
 
-        public static HtmlString HtmlForAttach(this WidgetFactory html, string attachs, string cls = "lh20")
+        public static string GetAttachSrc(this WidgetFactory ace, string attachs)
         {
-            StringBuilder sb = new StringBuilder();
+            if (!attachs.HasValue())
+            {
+                return "#";
+            }
+
+            return App.GetWebPath(attachs.Trim(',').Split(',').First());
+        }
+
+        public static HtmlString HtmlForAttach(this WidgetFactory ace, string attachs, string cls = "lh20")
+        {
+            if (!attachs.HasValue())
+            {
+                return new HtmlString("&nbsp;");
+            }
+
+            var sb = new StringBuilder();
             int index = 0;
             attachs.Trim(',').Split(',').Each(delegate (string item)
             {
                 if (item.HasValue())
                 {
-                    string text = App.GetWebPath(item, false);
-                    string attachTitle = html.GetAttachTitle(item);
+                    string text = App.GetWebPath(item);
+                    string attachTitle = ace.GetAttachTitle(item);
                     sb.Append("<div>");
                     sb.Append($"<a class=\"{cls}\" href=\"{text}\" target=\"_blank\" title=\"{attachTitle}\">{++index}.{attachTitle}</a>");
                     sb.Append("</div>");
@@ -149,9 +189,23 @@ namespace Acesoft.Web.UI
         {
             if (!text.HasValue())
             {
-                text = "";
+                text = "&nbsp;";
             }
-            text = ((!(tag == "br")) ? "<{0}>{1}</{0}>".FormatWith(tag, text.Replace("\n", "</{0}><{0}>".FormatWith(tag))) : text.Replace("\n", "<{0}/>".FormatWith(tag)));
+            else
+            {
+                if (!tag.HasValue())
+                {
+                    text = text.Replace("\n", "");
+                }
+                else if (tag == "br")
+                {
+                    text = text.Replace("\n", "<br/>");
+                }
+                else
+                {
+                    text = $"<{tag}>{text.Replace("\n", $"</{tag}><{tag}>")}</{tag}>";
+                }
+            }
             return new HtmlString(text);
         }
 
