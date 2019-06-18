@@ -3,7 +3,7 @@
     // 定义aceui及selector[.aceui-widget]转化方法
     $.aceui = {
         auto: true,
-        plugins: ['uploadbox', 'kindeditor', 'echart', 'iframe'],
+        plugins: ['uploadbox', 'kindeditor', 'echart', 'iframe', ['selectbox', 'combo'], 'player'],
         parse: function (context) {
             for (var i = 0; i < $.aceui.plugins.length; i++) {
                 var name = $.aceui.plugins[i], ctor = name;

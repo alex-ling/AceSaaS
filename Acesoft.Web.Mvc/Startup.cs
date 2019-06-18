@@ -28,7 +28,12 @@ namespace Acesoft.Web.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
             // app global config.
-            services.Configure<AppConfig>(Configuration);
+            services.AddJsonConfig<AppConfig>(opts =>
+            {
+                opts.ConfigFile = "app.config.json";
+                opts.Optional = false;
+            });
+            //services.Configure<AppConfig>(Configuration);
             //services.AddSingleton(Configuration);
 
             // global config.

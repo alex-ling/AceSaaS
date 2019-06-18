@@ -73,6 +73,11 @@ namespace Acesoft.Web.UI.Widgets.Html
 			{
 				base.Options["merged"] = base.Component.Merged;
 			}
+            if (base.Component.Type.HasValue)
+            {
+                //base.Options["type"] = base.Component.Type;
+                ScriptEvent.Regist(base.Component.Events, DataGridColumn.Styler, $"function(v,r,i){{return onColStyler({Component.Type},v,r,i)}}");
+            }
 			if (base.Component.Format.HasValue())
 			{
 				base.Options["format"] = base.Component.Format;

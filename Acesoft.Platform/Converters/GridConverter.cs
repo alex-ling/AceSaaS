@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Acesoft.Data;
-using System.Text;
 using Acesoft.Data.SqlMapper;
 
 namespace Acesoft.Platform
@@ -25,7 +26,7 @@ namespace Acesoft.Platform
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             GridResponse res = (GridResponse)value;
-            bool isTree = ((SqlMap)res.Map).Params.GetValue("istree", defaultValue: false);
+            bool isTree = ((SqlMap)res.Map).Params.GetValue("istree", false);
             bool num = isTree && res.Request.Id.HasValue;
             if (!num)
             {
@@ -45,6 +46,26 @@ namespace Acesoft.Platform
 
         private void WriteJson(bool isTree, GridResponse res, JsonWriter writer, JsonSerializer serializer)
         {
+            DataTable columnData = null;
+
+            var sqlMap = ((SqlMap)res.Map);
+            var dsColumnData = sqlMap.Params.GetValue("columndata", "");
+            var idField = sqlMap.Params.GetValue("idfield", "id");
+            if (dsColumnData.HasValue())
+            {
+                var ids = new List<object>();
+                foreach (DataRow row in res.Data.Rows)
+                {
+                    ids.Add(row[idField]);
+                }
+
+                var session = App.Context.RequestServices.GetService<ISession>();
+                columnData = session.QueryDataTable(new RequestContext(dsColumnData).SetParam(new
+                {
+                    ids
+                }));
+            }
+
             foreach (DataRow row in res.Data.Rows)
             {
                 writer.WriteStartObject();
@@ -56,6 +77,16 @@ namespace Acesoft.Platform
                     {
                         writer.WritePropertyName("state");
                         writer.WriteValue("closed");
+                    }
+                }
+                if (columnData != null)
+                {
+                    var id = row[idField];
+                    var rows = columnData.Select($"isnull(id,'{id}')='{id}'", "name");
+                    foreach (var r in rows)
+                    {
+                        writer.WritePropertyName(r["name"].ToString());
+                        writer.WriteValue(r["value"]);
                     }
                 }
                 foreach (DataColumn column in row.Table.Columns)

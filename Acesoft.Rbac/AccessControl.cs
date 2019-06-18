@@ -45,11 +45,11 @@ namespace Acesoft.Rbac
                     @params.Add("userid", user.Id);
                     @params.Add("loginname", user.LoginName);
                     @params.Add("username", user.UserName);
-                    @params.Add( "refcode", user.RefCode);
-                    @params.Add( "nickname", user.NickName);
-                    @params.Add( "scaleid", user.Scale_Id);
-                    @params.Add( "inroles", InRoles);
-                    @params.Add( "roleids", Roles);
+                    @params.Add("refcode", user.RefCode);
+                    @params.Add("nickname", user.NickName);
+                    @params.Add("scaleid", user.Scale_Id);
+                    @params.Add("inroles", InRoles);
+                    @params.Add("roleids", Roles);
 
                     if (Auths.ContainsKey("wechat"))
                     {

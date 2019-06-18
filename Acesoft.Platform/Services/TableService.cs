@@ -20,13 +20,23 @@ namespace Acesoft.Platform.Services
 		public Sys_Table Get(string tableName)
 		{
 			var sql = "select * from sys_table where [table]=@tableName";
-			return Session.QueryFirst<Sys_Table>(sql, new
-			{
-                tableName
-            });
+			return Session.QueryFirst<Sys_Table>(sql, new { tableName });
 		}
 
-		public void UpdateCreated(string tableName, int created)
+        public Sys_Table Query(string tableName)
+        {
+            var sql = "select * from sys_table where [table]=@tableName;"
+                + "select * from sys_field where [table]=@tableName and created=1 order by orderno";
+            var reader = Session.QueryMultiple(sql, new { tableName });
+            var table = reader.Read<Sys_Table>(true).SingleOrDefault();
+            if (table != null)
+            {
+                table.Fields = reader.Read<Sys_Field>(true).ToList();
+            }
+            return table;
+        }
+
+        public void UpdateCreated(string tableName, int created)
 		{
 			var sql = "update sys_table set created=@created where [table]=@tableName;" +
                 "update sys_field set created=@created where [table]=@tableName";

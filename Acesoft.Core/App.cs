@@ -98,6 +98,15 @@ namespace Acesoft
             return AppContext.BaseDirectory;
         }
 
+        public static string GetLocalBasePath(string path)
+        {
+            if (Path.IsPathRooted(path))
+            {
+                return path.Substring(GetLocalRoot().Length);
+            }
+            return path;
+        }
+
         public static string GetLocalPath(string virtualPath, bool mustCreatePath = false)
         {
             if (virtualPath.HasValue())

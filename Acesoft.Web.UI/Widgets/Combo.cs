@@ -5,9 +5,9 @@ using Acesoft.Web.UI.Widgets.Html;
 namespace Acesoft.Web.UI.Widgets
 {
 	public class Combo : TextBox
-	{
-		public static readonly ScriptEvent OnShowPanel = new ScriptEvent("onShowPanel", "");
-
+    {
+        public static readonly ScriptEvent OnBeforeShowPanel = new ScriptEvent("onBeforeShowPanel", "");
+        public static readonly ScriptEvent OnShowPanel = new ScriptEvent("onShowPanel", "");
 		public static readonly ScriptEvent OnHidePanel = new ScriptEvent("onHidePanel", "");
 
 		public int? PanelWidth { get; set; }

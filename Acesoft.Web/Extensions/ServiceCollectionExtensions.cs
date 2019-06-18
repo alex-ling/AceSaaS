@@ -68,6 +68,15 @@ namespace Acesoft.Web
 
         private static IMvcBuilder AddDefaultServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            // 引入HttpClient
+            services.AddHttpClient();
+
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRouting();
 
@@ -99,6 +108,7 @@ namespace Acesoft.Web
             {
                 opts.SerializerSettings.Converters.Add(new LongConverter());
                 opts.SerializerSettings.Converters.Add(new TreeConverter());
+                opts.SerializerSettings.Converters.Add(new TreeNodeConverter());
                 opts.SerializerSettings.Converters.Add(new GridConverter());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Latest);

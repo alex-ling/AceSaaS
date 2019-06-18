@@ -12,6 +12,6 @@ namespace Acesoft.Config
         public string ConfigPath { get; set; } = "config";
         public bool Optional { get; set; }
         public bool IsTenantConfig { get; set; }
-        public Action<BinderOptions> Binder { get; set; }
+        //public Action<BinderOptions> Binder { get; set; }
     }
 }

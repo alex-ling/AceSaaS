@@ -42,12 +42,6 @@ namespace Acesoft.Web.UI.Ajax
 			return this;
 		}
 
-		public virtual DataSourceBuilder Form(Func<object> func)
-		{
-			JsonObject.FormData = func();
-			return this;
-		}
-
         public virtual DataSourceBuilder Load(string sqlFullId, string requestId = "id")
         {
             return Load<long>(sqlFullId, requestId);
@@ -68,6 +62,18 @@ namespace Acesoft.Web.UI.Ajax
                 .SetExtraParam(JsonObject.Widget.Ace.AC.Params);
             JsonObject.FormData = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
             JsonObject.IsEdit = true;
+            return this;
+        }
+
+        public virtual DataSourceBuilder Edit(bool isEdit = true)
+        {
+            JsonObject.IsEdit = isEdit;
+            return this;
+        }
+
+        public virtual DataSourceBuilder Form(Func<object> func)
+        {
+            JsonObject.FormData = func();
             return this;
         }
 

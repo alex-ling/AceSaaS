@@ -12,6 +12,7 @@ using Acesoft.Cache;
 using Acesoft.Data;
 using Acesoft.Data.SqlMapper;
 using Acesoft.Platform.Models;
+using Acesoft.Workflow;
 
 namespace Acesoft.Web.Controllers
 {
@@ -19,33 +20,61 @@ namespace Acesoft.Web.Controllers
     [Route("api/[controller]/[action]")]
     public class CrudController : ApiControllerBase
     {
+        private readonly IWorkflowService workflowService;
+        public CrudController(IWorkflowService workflowService)
+        {
+            this.workflowService = workflowService;
+        }
+
         [HttpPost, MultiAuthorize, DataSource, Action("新增数据")]
         public async Task<IActionResult> Post([FromBody]JObject data)
         {
             CheckDataSourceParameter();
 
-            var param = data.ToDictionary();
-            var id = param.GetValue("id", App.IdWorker.NextId());
-            param["id"] = id;
-
-            var ctx = new RequestContext(SqlScope, SqlId)
-                .SetCmdType(CmdType.insert)
-                .SetParam(param)
-                .SetExtraParam(AppCtx.AC.Params);
-            var result = await AppCtx.Session.ExecuteAsync(ctx);
-            if (result > 0)
+            AppCtx.Session.BeginTransaction();
+            try
             {
-                var value = SqlMap.Params.GetValue("savetoredis", "");
-                if (value.HasValue())
-                {
-                    var array = value.Split('=');
-                    var key = array[0].Replace(ctx.DapperParams);
-                    var val = array[1].Replace(ctx.DapperParams);
-                    App.Cache.SetString(key, val, null);
-                }
-            }
+                var param = data.ToDictionary();
+                var appInstanceId = param.GetValue("id", App.IdWorker.NextId());
+                param["id"] = appInstanceId;
+                var ctx = new RequestContext(SqlScope, SqlId)
+                    .SetCmdType(CmdType.insert)
+                    .SetParam(param)
+                    .SetExtraParam(AppCtx.AC.Params);
+                var result = await AppCtx.Session.ExecuteAsync(ctx);
 
-            return Ok(result);
+                var taskId = App.GetQuery("taskid", "");
+                if (taskId.HasValue())
+                {
+                    // start workflow
+                    var runner = new WfRunner(AppCtx.AC)
+                    {
+                        TaskId = long.Parse(taskId),
+                        AppInstanceId = appInstanceId
+                    };
+                    workflowService.Start(runner);
+                }
+
+                if (result > 0)
+                {
+                    var value = SqlMap.Params.GetValue("savetoredis", "");
+                    if (value.HasValue())
+                    {
+                        var array = value.Split('=');
+                        var key = array[0].Replace(ctx.DapperParams);
+                        var val = array[1].Replace(ctx.DapperParams);
+                        App.Cache.SetString(key, val, null);
+                    }
+                }
+
+                AppCtx.Session.Commit();
+                return Ok(result);
+            }
+            catch
+            {
+                AppCtx.Session.Rollback();
+                throw;
+            }
         }
 
         [HttpPut, MultiAuthorize, DataSource, Action("编辑数据")]

@@ -44,7 +44,9 @@ namespace Acesoft.Web.UI.Widgets
 
 		public bool? Merged { get; set; }
 
-		public DataGrid Grid { get; set; }
+        public int? Type { get; set; }
+
+        public DataGrid Grid { get; set; }
 
 		public DataGridColumn(WidgetFactory ace)
 			: base(ace)

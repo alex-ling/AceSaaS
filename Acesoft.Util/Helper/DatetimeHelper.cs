@@ -36,6 +36,11 @@ namespace Acesoft.Util
             return (long)(DateTime.UtcNow - ZERO.ToUniversalTime()).TotalMilliseconds;
         }
 
+        public static int GetMonthDays(int year, int month)
+        {
+            return DateTime.DaysInMonth(year, month);
+        }
+
         public static long ToUnix(DateTime dt)
         {
             return (dt.Ticks - L_ZERO) / L_MULT - L_DIFF;

@@ -63,8 +63,12 @@ namespace Acesoft.Web.WeChat.Services
         {
             foreach (Wx_Media localMedia in GetLocalMedias(app.Id, mediaIds))
             {
-                UploadForeverMediaResult uploadForeverMediaResult = UploadMedia(app, localMedia.Url);
-                UpdateMedia(localMedia.Id, uploadForeverMediaResult.media_id, uploadForeverMediaResult.url);
+                var result = UploadMedia(app, localMedia.Url);
+                if (result.ErrorCodeValue != 0)
+                {
+                    throw new AceException(result.errcode.ToString());
+                }
+                UpdateMedia(localMedia.Id, result.media_id, result.url);
             }
         }
 
@@ -72,7 +76,11 @@ namespace Acesoft.Web.WeChat.Services
         {
             foreach (var remoteMedia in GetRemoteMedias(app.Id, mediaIds))
             {
-                MediaApi.DeleteForeverMedia(app.AppId, remoteMedia.MediaId);
+                var result = MediaApi.DeleteForeverMedia(app.AppId, remoteMedia.MediaId);
+                if (result.ErrorCodeValue != 0)
+                {
+                    throw new AceException(result.errcode.ToString());
+                }
             }
         }
 

@@ -16,17 +16,19 @@ namespace Acesoft.Web.UI.Widgets.Html
 			base.PreBuild();
 			if (base.Component.CheckBox)
 			{
-				int count = base.Component.Columns.Count;
-				DataGridColumn dataGridColumn = new DataGridColumn(base.Component.Ace)
+                var cols = Component.FrozenColumns.Count > 0 ? 
+                    Component.FrozenColumns : Component.Columns;
+				int count = cols.Count;
+				var colCk = new DataGridColumn(base.Component.Ace)
 				{
 					Field = "ck",
-					Checkbox = new bool?(true)
+					Checkbox = true
 				};
 				if (count > 1)
 				{
-					dataGridColumn.Rowspan = count;
+					colCk.Rowspan = count;
 				}
-				base.Component.Columns[0].Insert(0, dataGridColumn);
+                cols[0].Insert(0, colCk);
 			}
             if (!base.Component.Sortable)
             {

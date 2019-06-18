@@ -57,6 +57,9 @@ namespace Acesoft.Web.UI
 		{
 		}
 
+        public virtual void OnCreateControl()
+        { }
+
 		public void WriteTo(TextWriter writer, HtmlEncoder encoder)
 		{
 			VerifyProperties();
@@ -64,6 +67,10 @@ namespace Acesoft.Web.UI
 			{
 				((IDataBind)this).DataBind();
 			}
+
+            // builder之后render之前发生
+            this.OnCreateControl();
+
 			if (!IsOnlyScriptable)
 			{
 				IHtmlNode html = HtmlBuilder.Build();

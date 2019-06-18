@@ -294,7 +294,7 @@ $.extend($.fn.datagrid.defaults, {
         dg.datagrid('getPanel').find('.easyui-tooltip').tooltip();
 
         // merged cells.
-        var fields = dg.datagrid('getColumnFields'), rs = [];
+        var fields = dg.datagrid('getColumnFields', true).concat(dg.datagrid('getColumnFields')), rs = [];
         for (var c = 0; c < fields.length; c++) {
             var col = fields[c];
             rs.push([]);

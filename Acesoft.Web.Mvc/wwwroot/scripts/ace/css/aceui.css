@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+.tabs-tool {
+    padding: 0 10px;
+}
+
 .textbox-label {
     width: auto; /* label auto width */
 }
@@ -125,13 +129,16 @@ a.aceui {
     text-align: left;
 }
 
-a.aceui:hover {
+a.aceui:hover, 
+.tabs-tool a.l-btn:hover {
     background-color: #fcf495;
     border: 1px solid #e2d526;
 }
 
 a.l-btn-selected.aceui,
-a.l-btn-selected.aceui:hover {
+a.l-btn-selected.aceui:hover,
+.tabs-tool a.l-btn-selected,
+.tabs-tool a.l-btn-selected:hover {
     background-color: #fcf495;
     border: 1px solid #e2d526;
     padding: 0 5px 0 0;

@@ -83,7 +83,8 @@
 .ax-topbar .topbar-nav-btn {
     padding: 0 15px;
     display: inline-block;
-    height: 50px
+    height: 50px;
+    font-weight: bold;
 }
 
 .ax-topbar .topbar-info {
@@ -263,9 +264,9 @@
 
 .ax-sidebar .sidebar-nav .sidebar-title {
     height: 40px;
-    background: #222/*22282e*/;
+    background: #222 /*22282e*/;
     color: #fff;
-    font-size: 15px;
+    /*font-size: 15px;*/
     font-weight: bold;
     line-height: 40px;
     position: relative;
@@ -290,7 +291,7 @@
 }
 
 .ax-sidebar .sidebar-nav ul.sidebar-trans {
-    padding: 10px 0;
+    padding: 8px 0;
 }
 
 .ax-sidebar .sidebar-nav-fold ul.sidebar-trans {

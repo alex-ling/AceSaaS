@@ -211,7 +211,7 @@ namespace Acesoft.Data.SqlMapper
                     // 提交的值为空时不插入
                     continue;
                 }
-                if (key.StartsWith("r__"))
+                if (key == "id" || key.StartsWith("r__"))
                 {
                     // r__表示只读列
                     continue;

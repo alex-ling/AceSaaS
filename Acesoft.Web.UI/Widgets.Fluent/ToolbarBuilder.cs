@@ -8,5 +8,17 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 			: base(component)
 		{
 		}
+
+        public virtual ToolbarBuilder Buttons(string buttons)
+        {
+            Component.Buttons = buttons;
+            return this;
+        }
+
+        public virtual ToolbarBuilder Click(string handler)
+        {
+            Component.OnClick = handler;
+            return this;
+        }
 	}
 }

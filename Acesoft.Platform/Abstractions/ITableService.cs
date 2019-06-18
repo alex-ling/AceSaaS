@@ -9,8 +9,9 @@ namespace Acesoft.Platform
     public interface ITableService : IService<Sys_Table>
 	{
         Sys_Table Get(string tableName);
+        Sys_Table Query(string tableName);
 
-		void CreateTable(string tableName);
+        void CreateTable(string tableName);
 
 		void DropTable(string tableName);
 

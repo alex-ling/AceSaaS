@@ -17,6 +17,12 @@ namespace Acesoft.Data
             return mapper.GetSqlMap(sqlScope, sqlId);
         }
 
+        public static SqlMap GetSqlMap(this ISession s, string sqlFullId)
+        {
+            var items = sqlFullId.Split('.');
+            return s.GetSqlMap(items[0], items[1]);
+        }
+
         #region execute
         public static int Execute(this ISession s, RequestContext ctx)
         {

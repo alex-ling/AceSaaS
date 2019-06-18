@@ -59,7 +59,7 @@ namespace Acesoft.Web.WeChat
         }
 
         [HttpPost]
-        public async Task<IActionResult> WeLogin([FromBody] JObject data)
+        public async Task<IActionResult> WeLogin([FromBody]JObject data)
         {
             if (data.GetValue<string>("regtype").HasValue())
             {
@@ -168,10 +168,11 @@ namespace Acesoft.Web.WeChat
 
         #region media
         [HttpPost, MultiAuthorize]
-		public IActionResult UploadMedia([FromBody] JObject data)
+		public IActionResult UploadMedia([FromBody]JObject data)
 		{
-			var mediaUrl = data.Value<string>("mediaids");
-			return Ok(mediaService.UploadMedia(app, mediaUrl));
+			var mediaIds = data.Value<string>("mediaids");
+            mediaService.UploadMedias(app, mediaIds);
+            return Ok(null);
 		}
 
 		[HttpDelete, MultiAuthorize]
@@ -184,7 +185,7 @@ namespace Acesoft.Web.WeChat
 
         #region news
         [HttpPost, MultiAuthorize]
-		public IActionResult UploadNews([FromBody] JObject data)
+		public IActionResult UploadNews([FromBody]JObject data)
 		{
 			var newsIds = data.Value<string>("newsids");
 			var value = data.GetValue("comment", 1);
@@ -192,7 +193,7 @@ namespace Acesoft.Web.WeChat
 		}
 
 		[HttpPost, MultiAuthorize]
-		public IActionResult PreviewMedia([FromBody] JObject data)
+		public IActionResult PreviewMedia([FromBody]JObject data)
 		{
 			var mediaId = data.Value<long>("mediaid");
 			var wxNames = data.Value<string>("wxname");
@@ -201,7 +202,7 @@ namespace Acesoft.Web.WeChat
 		}
 
 		[HttpPost, MultiAuthorize]
-		public IActionResult SendMedia([FromBody] JObject data)
+		public IActionResult SendMedia([FromBody]JObject data)
 		{
 			var mediaId = data.Value<long>("mediaid");
 			return Ok(mediaService.SendMedia(app, mediaId));

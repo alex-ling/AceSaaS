@@ -25,7 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Web.Cloud\Acesoft.Web.Cloud.csproj" />
     <ProjectReference Include="..\Acesoft.Web.Iot\Acesoft.Web.IoT.csproj" />
+    <ProjectReference Include="..\Acesoft.Web.Pay\Acesoft.Web.Pay.csproj" />
     <ProjectReference Include="..\Acesoft.Web.UI\Acesoft.Web.UI.csproj" />
     <ProjectReference Include="..\Acesoft.Web.WeChat\Acesoft.Web.WeChat.csproj" />
     <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />
@@ -55,6 +57,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="SqlMaps\iot.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="SqlMaps\wf.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="SqlMaps\rbac.config">

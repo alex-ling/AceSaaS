@@ -28,16 +28,23 @@
             var ua = navigator.userAgent.toLowerCase();
             return ua.indexOf('micromessenger') != -1;
         },
-        query: function (name) {
+        query: function (name, url) {
+            if (typeof url == 'undefined') {
+                url = w.location.search;
+            }
+            else {
+                var ix = url.indexOf('?');
+                if (ix > 0) url = url.substr(ix);
+            }
             if (typeof name != 'undefined') {
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-                var r = w.location.search.substr(1).match(reg);
+                var r = url.substr(1).match(reg);
                 if (r != null) return unescape(r[2]);
                 return null;
             }
             else {
                 var vars = [], hash;
-                var hashes = w.location.search.substr(1).split('&');
+                var hashes = url.substr(1).split('&');
                 for (var i = 0; i < hashes.length; i++) {
                     hash = hashes[i].split('=');
                     vars.push(hash[0]);
@@ -204,13 +211,14 @@
         formLoad: function (fid, data) {
             $(fid).data('form').data = data;
             $(fid).form('load', data);
+            if (typeof onLoad == 'function') onLoad(data);
         },
         // combo.
         selShow: function () {
             var c = $(this), opts = c.combo('options');
             var val = opts.multiple ? (c.combo('getValues') + '&multi=1') : c.combo('getValue');
             ax.dialog('请选择', ax.aurl(opts.url, 'val', val), function (val, txt) {
-                if (!opts.onBeforeChange || opts.onBeforeChange.call(c, val, txt) != false) {
+                if (!opts.onSelect || opts.onSelect.call(c, val, txt) != false) {
                     c.combo('setValue', val);
                     c.combo('setText', txt);
                 } else {
@@ -219,12 +227,12 @@
             }, opts.panelWidth, opts.panelHeight);
             return false;
         },
-        btnShow: function (obj) {
-            var c = $(obj), opts = c.linkbutton('options');
-            var vBox = $('#' + opts.valueBox), tBox = $('#' + opts.textBox);
-            var val = vBox.textbox('getValue'), txt = tBox.textbox('getValue');
+        btnShow: function () {
+            var c = $(this), opts = c.linkbutton('options');
+            var vBox = $(opts.valBox), tBox = $(opts.txtBox);
+            var val = vBox.textbox('getValue');
             ax.dialog('请选择', ax.aurl(opts.url, 'val', val), function (val, txt) {
-                if (!opts.onBeforeChange || opts.onBeforeChange.call(c, val, txt) != false) {
+                if (!opts.onSelect || opts.onSelect.call(c, val, txt) != false) {
                     vBox.textbox('setValue', val);
                     tBox.textbox('setValue', txt);
                     if (opts.onChange) opts.onChange.call(c, val, txt);
@@ -290,7 +298,16 @@
                 jq.treegrid('getPager').pagination({ buttons: tb });
             }
         },
-        gridAdd: function (gid, query) {
+        gridAdd: function (gid, query, appendwf) {
+            var taskId = AX.query('taskid');
+            if (appendwf && taskId) {
+                if (!query) {
+                    query = 'taskid=' + taskId;
+                }
+                else {
+                    query = ax.aurl(query, 'taskid', taskId, true);
+                }
+            }
             if ($(gid).hasClass("easyui-datagrid")) $(gid).datagrid('add', query);
             else $(gid).treegrid('add', query);
         },
@@ -302,9 +319,14 @@
             if ($(gid).hasClass("easyui-datagrid")) $(gid).datagrid('del', id);
             else $(gid).treegrid('del', id);
         },
+        gridWf: function (gid, id) {
+            var taskId = ax.query("taskid");
+            AX.dialog('查看流程', '/plat/wf/track?appinstanceid=' + id + '&taskid=' + taskId, onWf, 800, 500);
+        },
         gridAct: function (gid, act, id) {
             if (act == 'del') ax.gridDel(gid, id);
             else if (act == 'edit') ax.gridEdit(gid, id);
+            else if (act == 'wf') ax.gridWf(gid, id);
             else new Function(ax.format('event_{0}_{1}("{2}","{3}");', gid.substr(1), act, gid, id))();
         },
         gridFmt: function (v, rd, ri) {
@@ -317,7 +339,7 @@
                 case 'bool':
                     return v == "1" ? '<span class="icon icon-ok"></span>' : '';
                 case 'action':
-                    return ax.format('<a href="javascript:void()" class="grid" onclick="{0}(\'' + v + '\',\'' + rd.id + '\')" title="{1}">', exp.split('=')) + v + '</a>';
+                    return ax.format('<a href="javascript:void()" class="grid" onclick="{0}(\'' + v.replace(/\\/g, '\\\\') + '\',\'' + rd.id + '\')" title="{1}">', exp.split('=')) + v + '</a>';
                 case 'link':
                     if (v.substr(0, 1) == ',') v = v.substr(1);
                     if (v != '') return '<a target="_blank" href="' + ax.objstr(exp, rd) + '">' + v + '</a>';
@@ -334,7 +356,7 @@
                     for (var i = 0; i < ops.length; i++) {
                         var op = ops[i].split('=')[0], title = ops[i].split('=')[1];
                         html += ax.format('<a class="easyui-linkbutton aceui" data-options="iconCls:\'fa fa-{0}\',text:\'{5}\'" onclick="AX.gridAct(\'{4}\',\'{1}\',\'{3}\')" title="{2}"></a>',
-                            op.split('_').length > 1 ? op.split('_')[1] : op, op.split('_')[0], title, rd.id, exp, op.split('_').length > 2 ? op.split('_')[2] : '');
+                            op.split('_').length > 1 ? op.split('_')[1] : op, op.split('_')[0], title, rd.id.replace(/\\/g, '\\\\'), exp, op.split('_').length > 2 ? op.split('_')[2] : '');
                     }
                     return html;
                 case 'attach':
@@ -493,14 +515,18 @@
                 return fmt.substr(0, fmt.length - val.length) + val;
             });
         },
-        aurl: function (url, name, val) {
+        aurl: function (url, name, val, search) {
             var i = url.indexOf(name + '=');
             if (i > 0) {
                 var e = url.indexOf('&', i);
                 if (e > i) return url.replace(url.substr(i, e - i), name + '=' + val);
                 else return url.substr(0, i) + name + '=' + val;
-            } else {
-                return url.indexOf('?') > 0 ? (url + '&' + name + '=' + val) : (url + '?' + name + '=' + val);
+            }
+            else {
+                if (search || url.indexOf('?') > 0) {
+                    return url + '&' + name + '=' + val;
+                }
+                return url + '?' + name + '=' + val;
             }
         },
         objstr: function (s, o) {

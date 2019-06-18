@@ -15,13 +15,20 @@ namespace Acesoft.Web.Controllers
 	[Route("api/[controller]/[action]")]
 	public class ExecController : ApiControllerBase
 	{
+        private IDictionary<string, object> GetParam(JObject data)
+        {
+            var dict = data.ToDictionary();
+            dict.Append("newid", App.IdWorker.NextId());
+            return dict;
+        }
+
 		[HttpPost, MultiAuthorize, DataSource, Action("执行语句")]
-		public async Task<IActionResult> ExecSql([FromBody] JObject data)
+		public async Task<IActionResult> ExecSql([FromBody]JObject data)
 		{
 			CheckDataSourceParameter();
 
 			var ctx = new RequestContext(SqlScope, SqlId)
-                .SetParam(data.ToDictionary())
+                .SetParam(GetParam(data))
                 .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteAsync(ctx);
 
@@ -29,11 +36,11 @@ namespace Acesoft.Web.Controllers
 		}
 
         [HttpPost, MultiAuthorize, DataSource, Action("执行语句")]
-        public async Task<IActionResult> ExecId([FromBody] JObject data)
+        public async Task<IActionResult> ExecId([FromBody]JObject data)
 		{
             CheckDataSourceParameter();
 
-            var param = data.ToDictionary();
+            var param = GetParam(data);
             Check.Require(param.ContainsKey("id"), "未提交ID参数");
             param["ids"] = param["id"].ToString().Split<long>();
 
@@ -46,11 +53,11 @@ namespace Acesoft.Web.Controllers
         }
 
         [HttpPost, MultiAuthorize, DataSource, Action("执行语句")]
-        public async Task<IActionResult> ExecIds([FromBody] JObject data)
+        public async Task<IActionResult> ExecIds([FromBody]JObject data)
 		{
             CheckDataSourceParameter();
 
-            var param = data.ToDictionary();
+            var param = GetParam(data);
             Check.Require(param.ContainsKey("id"), "未提交ID参数");
             var ids = param["id"].ToString().Split<string>(',');
 
@@ -67,12 +74,12 @@ namespace Acesoft.Web.Controllers
 		}
 
         [HttpPost, MultiAuthorize, DataSource, Action("执行语句")]
-        public async Task<IActionResult> ExecObj([FromBody] JObject data)
+        public async Task<IActionResult> ExecObj([FromBody]JObject data)
 		{
             CheckDataSourceParameter();
 
             var ctx = new RequestContext(SqlScope, SqlId)
-                .SetParam(data.ToDictionary())
+                .SetParam(GetParam(data))
                 .SetExtraParam(AppCtx.AC.Params);
             var result = await AppCtx.Session.ExecuteScalarAsync(ctx);
 
@@ -80,12 +87,12 @@ namespace Acesoft.Web.Controllers
 		}
 
         [HttpPost, MultiAuthorize, DataSource, Action("获取字典")]
-		public IActionResult ExecObjs([FromBody] JObject data)
+		public IActionResult ExecObjs([FromBody]JObject data)
 		{
             CheckDataSourceParameter();
 
             var ctx = new RequestContext(SqlScope, SqlId)
-                .SetParam(data.ToDictionary())
+                .SetParam(GetParam(data))
                 .SetExtraParam(AppCtx.AC.Params);
             var result = AppCtx.Session.Query(ctx).ToDictionary(item => item.id);
 
@@ -93,12 +100,12 @@ namespace Acesoft.Web.Controllers
 		}
 
         [HttpPost, MultiAuthorize, DataSource, Action("获取列表")]
-		public IActionResult ExecList([FromBody] JObject data)
+		public IActionResult ExecList([FromBody]JObject data)
         {
             CheckDataSourceParameter();
 
             var ctx = new RequestContext(SqlScope, SqlId)
-                .SetParam(data.ToDictionary())
+                .SetParam(GetParam(data))
                 .SetExtraParam(AppCtx.AC.Params);
             var result = AppCtx.Session.Query(ctx).Select(item => item.id);
 
@@ -106,12 +113,12 @@ namespace Acesoft.Web.Controllers
 		}
 
         [HttpPost, MultiAuthorize, DataSource, Action("获取查询")]
-		public IActionResult ExecQuery([FromBody] JObject data)
+		public IActionResult ExecQuery([FromBody]JObject data)
         {
             CheckDataSourceParameter();
 
             var ctx = new RequestContext(SqlScope, SqlId)
-                .SetParam(data.ToDictionary())
+                .SetParam(GetParam(data))
                 .SetExtraParam(AppCtx.AC.Params);
             var result = AppCtx.Session.Query(ctx);
 

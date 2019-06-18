@@ -23,7 +23,7 @@ namespace Acesoft.Web.Mvc
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseAppConfig()
+                //.UseAppConfig()
                 .UseStartup<Startup>()
                 .UseSerilog();
     }

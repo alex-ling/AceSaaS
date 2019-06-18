@@ -38,7 +38,7 @@ namespace Acesoft.Web.UI.Ajax
 		{
             names.Each(name =>
 			{
-				base.JsonObject.RouteValues[name] = App.GetQuery<string>(name, "");
+				base.JsonObject.RouteValues[name] = App.GetQuery(name, "");
 			});
 			return this as B;
 		}
@@ -78,6 +78,7 @@ namespace Acesoft.Web.UI.Ajax
 			{
 				base.JsonObject.RouteValues.Merge(routeValues, true);
 			}
+
 			base.JsonObject.GenerateUrl();
 			return this as B;
 		}

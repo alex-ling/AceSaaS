@@ -113,9 +113,15 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 		{
 			base.Component.Merged = merged;
 			return this;
-		}
+        }
 
-		public DataGridColumnBuilder Events(Action<DataGridColumnEventBuilder> clientEventsAction)
+        public virtual DataGridColumnBuilder Type(int type)
+        {
+            base.Component.Type = type;
+            return this;
+        }
+
+        public DataGridColumnBuilder Events(Action<DataGridColumnEventBuilder> clientEventsAction)
 		{
 			clientEventsAction(new DataGridColumnEventBuilder(base.Component.Events));
 			return this;

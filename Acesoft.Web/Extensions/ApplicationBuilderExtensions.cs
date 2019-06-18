@@ -23,6 +23,9 @@ namespace Acesoft.Web
             var services = app.ApplicationServices;
             var env = services.GetRequiredService<IHostingEnvironment>();
 
+            // cookie
+            app.UseCookiePolicy();
+
             // use webapi result to request.
             app.UseMiddleware<ExceptionMiddleware>();
 
