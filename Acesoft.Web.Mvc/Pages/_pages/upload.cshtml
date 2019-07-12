@@ -1,0 +1,27 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@inject Tenant Tenant
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "上传图片";
+
+    var path = $"/uploads/{Tenant.Name}/{App.GetQuery("path", "images")}/";
+}
+<div class="container-fluid">
+    <div class="row pt15">
+        <div class="col-xs-12">
+            @(Ace.UploadBox().Name("files").Width("100%").Max(5).Filters(f =>
+            {
+                f.max_file_size = "2Mb";
+                f.mime_types.Add(new MineType { title = "图片文件", extensions = "jpg,jpeg,gif,png,bmp" });
+            }).Dir(path))
+        </div>
+    </div>
+</div>
+@section Startup {
+    <script>
+        function onSubmit(cb) {
+            cb()
+        }
+    </script>
+}

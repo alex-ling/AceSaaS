@@ -3,15 +3,15 @@
     function create(target) {
         var id = target.id, owner = $(target).parent();
         var state = $.data(target, 'uploadbox');
-        var opts = $.extend({ browse_button: 'btn_' + id }, state.options);
+        var opts = $.extend({ id: id, browse_button: 'btn_' + id }, state.options);
         var html = AX.format(
             '<div class="upload-wrapper">\
             <div class="btn-wrapper">\
             <input type="button" value=" 选择文件 " id="btn_{0}" />\
-            <b class="ml5">单个文件不要超过{1}</b>\
+            <b class="ml5">{2}单个不要超过{1}</b>\
             </div>\
             <div class="file-wrapper"><div class="clear"></div></div>\
-            </div>', id, opts.filters.max_file_size);
+            </div>', id, opts.filters.max_file_size, opts.picView ? '' : '最多上传' + opts.max + '个文件，');
         $(html).insertAfter(target);
         var up = new plupload.Uploader(opts);
         state.options._uploader = up;
@@ -19,12 +19,24 @@
         up._box = $(target);
         up._files = $('.file-wrapper', owner);
         up.init();
+        if (!opts.picView) {
+            $('#btn_' + id).click(function () {
+                var cur = up._files.children().length - 1;
+                if (cur >= up._opts.max) {
+                    $.messager.error({ msg: "最多上传" + up._opts.max + "个文件" });
+                    up.disableBrowse(true);
+                }
+                else {
+                    up.disableBrowse(false);
+                }
+            });
+        }
     }
     function getParams(up) {
         var now = AX.tick();
         if (!up.params || up.params.expire < now + 3) {
             AX.ajax({
-                url: AX.api({ api: 'aliyun/getosssign' }),
+                url: AX.api({ api: 'cloud/getosssign' }),
                 data: { bucket: up._opts.bucket, dir: up._opts.dir },
                 type: 'get',
                 async: false,
@@ -70,7 +82,7 @@
             if (file.percent >= 100) {
                 if (up._opts.bucket) {
                     AX.ajax({
-                        url: AX.api({ api: 'aliyun/delossfile' }),
+                        url: AX.api({ api: 'cloud/delossfile' }),
                         data: { bucket: up._opts.bucket, key: file.ossName },
                         type: 'delete',
                         cb: function () {
@@ -81,7 +93,7 @@
                 else if (up._opts.dir) {
                     AX.ajax({
                         url: AX.api({ api: 'file/deletefile' }),
-                        data: { file: '/' + file.url },
+                        data: { id: file.url },
                         type: 'delete',
                         cb: function () {
                             up._box.val(up._box.val().replace("," + file.url, ""));
@@ -185,7 +197,7 @@
                         ossName = path.substr(path.indexOf('/', 10) + 1);
                     }
                     createProgress(this, {
-                        id: i,
+                        id: up._opts.id + i,
                         name: name,
                         ossName: ossName,
                         url: path,
@@ -195,11 +207,27 @@
                 }
             },
             FilesAdded: function (up, files) {
+                var cur = up._files.children().length - 1;
+                var removeFiles = 0;
                 plupload.each(files, function (file) {
-                    createProgress(up, file);
+                    if (!up._opts.picView) {
+                        if (cur < up._opts.max) {
+                            createProgress(up, file);
+                        }
+                        else {
+                            removeFiles++;
+                            up.removeFile(file);
+                        }
+                    }
+                    else {
+                        createProgress(up, file);
+                    }
                 });
                 if (up._opts.autoUpload) {
                     setTimeout(function () { up.start(); }, 100);
+                }
+                if (removeFiles > 0) {
+                    $.messager.error({ msg: "最多上传" + up._opts.max + "个文件，已移除队尾" + removeFiles + "个文件" });
                 }
             },
             BeforeUpload: function (up, file) {

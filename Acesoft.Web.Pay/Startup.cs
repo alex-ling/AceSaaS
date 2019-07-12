@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Acesoft.Config;
+using Acesoft.Web.Pay.Services;
+using Acesoft.Web.Multitenancy;
 
 namespace Acesoft.Web.Pay
 {
@@ -14,27 +16,7 @@ namespace Acesoft.Web.Pay
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            // config
-            services.AddJsonConfig(opts => 
-            {
-                opts.ConfigFile = "cloud.config.json";
-                opts.IsTenantConfig = true;
-            }, 
-            (opts, config) =>
-            {
-                // 添加alipays
-                foreach (var section in config.GetSection("alipays").GetChildren())
-                {
-                    if (section.Key == "alipay")
-                    {
-                        services.Configure<AlipayOptions>(section);
-                    }
-                    else
-                    {
-                        services.Configure<AlipayOptions>(section.Key, section);
-                    }
-                }
-            });
+            services.AddSingleton<IOrderService, OrderService>();
 
             //引入HttpClient API证书的使用(仅QPay / WeChatPay的部分API使用到)
             //services.AddHttpClient("qpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
@@ -60,6 +42,29 @@ namespace Acesoft.Web.Pay
             services.AddUnionPay();
             services.AddWeChatPay();
             services.AddLianLianPay();*/
+
+            // config
+            services.AddJsonConfig(opts =>
+            {
+                opts.ConfigFile = "pay.config.json";
+                opts.IsTenantConfig = true;
+            },
+            (opts, config) =>
+            {
+                // 添加alipays
+                var tenant = (Tenant as Tenant).Name;
+                foreach (var section in config.GetSection(tenant).GetChildren())
+                {
+                    if (section.Key == "alipay")
+                    {
+                        services.Configure<AlipayOptions>(section);
+                    }
+                    else if (section.Key.StartsWith("alipay"))
+                    {
+                        services.Configure<AlipayOptions>(section.Key, section);
+                    }
+                }
+            });
 
             services.AddWebEncoders(opt =>
             {

@@ -1,10 +1,15 @@
 ﻿@model Acesoft.Web.UI.RazorPages.WebPageBase
+@inject IConfigService ConfigService
+@{ 
+    var cfg = ConfigService.GetConfig(1);
+}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>@Html.Raw(ViewData["Title"])</title><environment include="Development">
+    <title>@Html.Raw(ViewData["Title"]) - @Html.Raw(cfg["sys_name"])</title>
+    <meta name="description" content="@Html.Raw(cfg["sys_description"])">
+    <meta name="keywords" content="@Html.Raw(cfg["sys_keywords"])"><environment include="Development">
     <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css">
@@ -20,7 +25,8 @@
     <link rel="stylesheet" href="~/content/back.min.css" asp-append-version="true" /></environment>
 </head>
 <body>
-@RenderBody()<environment include="Development"><script src="~/scripts/jquery/dist/jquery.js"></script>
+@RenderBody()<environment include="Development">
+<script src="~/scripts/jquery/dist/jquery.js"></script>
 <script src="~/scripts/bootstrap/dist/js/bootstrap.js"></script>
 <script src="~/scripts/plupload/js/plupload.full.min.js"></script>
 <script src="~/scripts/easyui/jquery.easyui.min.js"></script>
@@ -37,5 +43,7 @@
 <script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
 <script src="~/scripts/signalr/dist/browser/signalr.min.js"></script>
 <script src="~/scripts/ace/js/ace.min.js" asp-append-version="true"></script></environment>
-@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)</body>
+@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)
+@await Html.PartialAsync("_views/baidu")
+</body>
 </html>

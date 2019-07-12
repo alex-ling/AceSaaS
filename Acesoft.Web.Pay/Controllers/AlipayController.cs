@@ -12,20 +12,55 @@ using Acesoft.Web.Pay.Models;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
+using Acesoft.Web.Pay.Entity;
 
 namespace Acesoft.Web.Pay.Controllers
 {
+    [ApiExplorerSettings(GroupName = "plat")]
+    [Route("api/[controller]/[action]")]
     public class AlipayController : ApiControllerBase
     {
-        private readonly IAlipayClient _client;
-        private readonly IAlipayNotifyClient _notifyClient;
+        private readonly IAlipayClient client;
+        private readonly IAlipayNotifyClient notifyClient;
+        private readonly IOrderService orderService;
 
-        public AlipayController(IAlipayClient client, IAlipayNotifyClient notifyClient)
+        public AlipayController(IAlipayClient client, 
+            IAlipayNotifyClient notifyClient,
+            IOrderService orderService)
         {
-            _client = client;
-            _notifyClient = notifyClient;
+            this.client = client;
+            this.notifyClient = notifyClient;
+            this.orderService = orderService;
         }
 
+        [HttpPost, MultiAuthorize, Action("网站支付")]
+        public async Task<IActionResult> PostPay(PayRequest request)
+        {
+            var order = orderService.GetByRef(request.Id);
+            var model = new AlipayTradePagePayModel
+            {
+                Body = order.Remark,
+                Subject = order.Name,
+                TotalAmount = order.Order_Money.ToString("n"),
+                OutTradeNo = order.Order_SN,
+                ProductCode = "FAST_INSTANT_TRADE_PAY"
+            };
+            var req = new AlipayTradePagePayRequest();
+            req.SetBizModel(model);
+            req.SetNotifyUrl(request.NotifyUrl);
+            req.SetReturnUrl(request.ReturnUrl);
+
+            var response = await client.PageExecuteAsync(req);
+            return Content(response.Body, "text/html", Encoding.UTF8);
+        }
+
+        [HttpGet, MultiAuthorize, Action("网站支付通知")]
+        public async Task<IActionResult> GetReturn(long orderId)
+        {
+            return Ok(await orderService.AlipayNotify(notifyClient, orderId));
+        }
+
+        #region pay
         [HttpPost, MultiAuthorize, Action("当面付(扫码支付)")]
         public async Task<IActionResult> PreCreate(AlipayTradePreCreateViewModel viewModel)
         {
@@ -40,7 +75,7 @@ namespace Acesoft.Web.Pay.Controllers
             req.SetBizModel(model);
             req.SetNotifyUrl(viewModel.NotifyUrl);
 
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             return Ok(response);
         }
 
@@ -59,7 +94,7 @@ namespace Acesoft.Web.Pay.Controllers
             var req = new AlipayTradePayRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             return Ok(response);
         }
 
@@ -78,7 +113,7 @@ namespace Acesoft.Web.Pay.Controllers
             req.SetBizModel(model);
             req.SetNotifyUrl(viewModel.NotifyUrl);
 
-            var response = await _client.SdkExecuteAsync(req);
+            var response = await client.SdkExecuteAsync(req);
             //将response.Body给 ios/android端 由其去调起支付宝APP
             //(https://docs.open.alipay.com/204/105296/ https://docs.open.alipay.com/204/105295/)
             return Ok(response);
@@ -100,7 +135,7 @@ namespace Acesoft.Web.Pay.Controllers
             req.SetNotifyUrl(viewModel.NotifyUrl);
             req.SetReturnUrl(viewModel.ReturnUrl);
 
-            var response = await _client.PageExecuteAsync(req);
+            var response = await client.PageExecuteAsync(req);
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
@@ -120,7 +155,7 @@ namespace Acesoft.Web.Pay.Controllers
             req.SetNotifyUrl(viewMode.NotifyUrl);
             req.SetReturnUrl(viewMode.ReturnUrl);
 
-            var response = await _client.PageExecuteAsync(req);
+            var response = await client.PageExecuteAsync(req);
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
@@ -136,7 +171,7 @@ namespace Acesoft.Web.Pay.Controllers
             var req = new AlipayTradeQueryRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             return Ok(response);
         }
 
@@ -155,7 +190,7 @@ namespace Acesoft.Web.Pay.Controllers
             var req = new AlipayTradeRefundRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             return Ok(response);
         }
 
@@ -172,7 +207,7 @@ namespace Acesoft.Web.Pay.Controllers
             var req = new AlipayTradeFastpayRefundQueryRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -190,7 +225,7 @@ namespace Acesoft.Web.Pay.Controllers
             };
             var req = new AlipayFundTransToaccountTransferRequest();
             req.SetBizModel(model);
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -206,7 +241,7 @@ namespace Acesoft.Web.Pay.Controllers
 
             var req = new AlipayFundTransOrderQueryRequest();
             req.SetBizModel(model);
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -222,7 +257,7 @@ namespace Acesoft.Web.Pay.Controllers
 
             var req = new AlipayDataDataserviceBillDownloadurlQueryRequest();
             req.SetBizModel(model);
-            var response = await _client.ExecuteAsync(req);
+            var response = await client.ExecuteAsync(req);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -230,15 +265,16 @@ namespace Acesoft.Web.Pay.Controllers
         [HttpGet, MultiAuthorize, Action("电脑网站支付(回跳)")]
         public async Task<IActionResult> PagePayReturn()
         {
-            var notify = await _notifyClient.ExecuteAsync<AlipayTradePagePayReturn>(Request);
+            var notify = await notifyClient.ExecuteAsync<AlipayTradePagePayReturn>(Request);
             return Ok(notify);
         }
 
         [HttpGet, MultiAuthorize, Action("手机网站支付(回跳)")]
         public async Task<IActionResult> WapPayReturn()
         {
-            var notify = await _notifyClient.ExecuteAsync<AlipayTradeWapPayReturn>(Request);
+            var notify = await notifyClient.ExecuteAsync<AlipayTradeWapPayReturn>(Request);
             return Ok(notify);
         }
+        #endregion
     }
 }

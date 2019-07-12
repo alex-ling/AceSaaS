@@ -341,8 +341,33 @@
                 case 'action':
                     return ax.format('<a href="javascript:void()" class="grid" onclick="{0}(\'' + v.replace(/\\/g, '\\\\') + '\',\'' + rd.id + '\')" title="{1}">', exp.split('=')) + v + '</a>';
                 case 'link':
+                    var href = ax.objstr(exp, rd);
+                    if (href.substr(0, 1) == ',') href = href.substr(1);
                     if (v.substr(0, 1) == ',') v = v.substr(1);
-                    if (v != '') return '<a target="_blank" href="' + ax.objstr(exp, rd) + '">' + v + '</a>';
+                    if (v != '') {
+                        var items = href.replace(/=,/g, '=').split('|');
+                        if (items.length > 1) {
+                            var rv = v;
+                            for (var i = 0; i < items.length; i++) {
+                                var arr = items[i].split('=');
+                                if (arr[1]) {
+                                    var hrefs = arr[1].split(',');
+                                    if (hrefs.length > 1) {
+                                        for (var j = 0; j < hrefs.length; j++) {
+                                            rv += ' <a target="_blank" href="' + hrefs[j] + '">' + arr[0] + (j + 1).toString() + '</a>';
+                                        }
+                                    }
+                                    else {
+                                        rv += ' <a target="_blank" href="' + arr[1] + '">' + arr[0] + '</a>';
+                                    }
+                                }
+                            }
+                            return rv;
+                        }
+                        else {
+                            return '<a target="_blank" href="' + href + '">' + v + '</a>';
+                        }
+                    }
                     return v;
                 case 'href':
                     if (v.substr(0, 1) == ',') v = v.substr(1);

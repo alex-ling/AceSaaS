@@ -14,7 +14,7 @@
             })
             .Tools(tools =>
             {
-                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("onDelete('')");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
             });
         });
         layout.Add().Border(false).Region(Region.center).Controls(ctls =>

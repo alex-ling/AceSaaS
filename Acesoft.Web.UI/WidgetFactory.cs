@@ -175,6 +175,11 @@ namespace Acesoft.Web.UI
             return new LiteralNode(html);
         }
 
+        public virtual MaskedBoxBuilder MaskedBox()
+        {
+            return new MaskedBoxBuilder(new MaskedBox(this));
+        }
+
         public virtual MenuBuilder Menu()
 		{
 			return new MenuBuilder(new Menu(this));

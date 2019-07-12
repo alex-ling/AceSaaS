@@ -21,14 +21,14 @@
         });
         layout.Add().Border(false).Region(Region.center).Controls(ctls =>
         {
-            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false)
-            .DataSource("sys.cfgitem").Ajax(ds => ds.RouteQuery("cfgid").HttpGet()).Columns(c =>
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false).Nowrap(false)
+            .DataSource("sys.cfgitem").Ajax(ds => ds.RouteValue("_cfgid", 1).HttpGet()).Columns(c =>
             {
                 c.Add().Field("name").Title("配置名称").Width(15);
                 c.Add().Field("key").Title("配置键").Width(15);
                 c.Add().Field("value").Title("配置值").Width(30);
                 c.Add().Field("orderno").Title("排序号").Width(8).Align(Align.center);
-                c.Add().Field("action").Title("操作").Format("button");
+                c.Add().Field("action").Title("操作").Format("button").Width(5);
             });
         });
     }).Render();

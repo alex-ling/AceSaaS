@@ -7,8 +7,9 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@Html.Raw(ViewData["Title"])</title><environment include="Development">
+    <title>@Html.Raw(ViewData["Title"]) - @Html.Raw(cfg["sys_name"])</title>
+    <meta name="description" content="@Html.Raw(cfg["sys_description"])">
+    <meta name="keywords" content="@Html.Raw(cfg["sys_keywords"])"><environment include="Development">
     <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css">
@@ -23,23 +24,23 @@
     <link rel="stylesheet" href="~/scripts/ace/css/aceui.min.css" asp-append-version="true">
     <link rel="stylesheet" href="~/content/front.min.css" asp-append-version="true" /></environment>
 </head>
-<body>
+<body style="min-width:480px">
 <div class="header" style="position:relative">
-    <div class="container pt30 pb5">
-        <div class="col-md-6">
-            <a class="logo" href="/">
+    <div class="container pt15">
+        <div class="col-xs-6">
+            <a class="logow" href="/">
                 <img class="fl" src="@cfg["sys_logo"]" style="height:60px" />
-                <div class="fl ft30 fwb" style="line-height:60px;color:@cfg["sys_name_color"]">@cfg["sys_name"]</div>
+                <div class="fl ft30 fwb" style="line-height:60px;color:@cfg["sys_name_color"]">@Html.Raw(cfg["sys_name"])</div>
             </a>
         </div>
-        <div class="col-md-6 text-r">
+        <div class="col-xs-6 text-r">
             <div class="ft30 fwb" style="line-height:60px;color:@cfg["sys_tip_color"]">@cfg["sys_tip"]</div>
         </div>
     </div>
 </div>
 @RenderBody()<div class="footer">
-    <div>Copyright © @cfg["sys_copyright"]</div>
-    <div>技术支持：@cfg["sys_support"]</div>
+    <div>Copyright © @Html.Raw(cfg["sys_copyright"])</div>
+    <div class="pt5">技术支持：@Html.Raw(cfg["sys_support"])</div>
 </div><environment include="Development">
 <script src="~/scripts/jquery/dist/jquery.js"></script>
 <script src="~/scripts/bootstrap/dist/js/bootstrap.js"></script>
@@ -56,5 +57,7 @@
 <script src="~/scripts/easyui/jquery.easyui.min.js"></script>
 <script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
 <script src="~/scripts/ace/js/ace.min.js" asp-append-version="true"></script></environment>
-@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)</body>
+@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)
+@await Html.PartialAsync("_views/baidu")
+</body>
 </html>

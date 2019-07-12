@@ -1,8 +1,11 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@inject Tenant Tenant
 @{
     Layout = "_shared/edit";
-    ViewData["Title"] = "选择图片";   
+    ViewData["Title"] = "选择图片";
+
+    var path = $"/uploads/{Tenant.Name}/{App.GetQuery("path", "images")}/";
 }
 <style>
     .photo.cur img { border:2px solid red }
@@ -21,16 +24,21 @@
     function onSubmit(cb) {
         cb($('.photo.cur').find('img').attr('src'))
     }
+    function onUpload() {
+        AX.dialog('上传图片', 'upload', function () {
+            AX.refresh()
+        }, 650, 400)
+    }
     function onSelect(e) {
         $('.photo').removeClass('cur')
         $(e).addClass('cur')
     }
     $(function () {
-        var path = '/user', warp = $('#warp')
+        var path = '@path', warp = $('#warp')
         var append = function (row) {
             warp.append(
                 '<div class="col-xs-3 text-c pt10 photo" style="cursor:pointer" onclick="onSelect(this)">\
-                    <img src="/user/' + row.file_name + '" title="' + row.file_time + '" /><br/>\
+                    <img src="@path' + row.file_name + '" title="' + row.file_time + '" /><br/>\
                     <span>' + row.file_name + '</span>\
                 </div>'
             )

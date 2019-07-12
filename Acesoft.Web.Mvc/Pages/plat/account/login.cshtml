@@ -2,9 +2,11 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
 @inject IConfigService ConfigService
 @{
+    Layout = "_shared/site";
+    Ace.RenderAuthOptions = true;
+
     var cfg = ConfigService.GetConfig(1);
     ViewData["Title"] = "登录";
-    Ace.RenderAuthOptions = true;
 
     var success =  Ace.AC.WeChatAuthorize(Membership.Auth_OpenID);
 }
@@ -12,19 +14,6 @@
 {
     <link rel="stylesheet" href="~/scripts/swiper/dist/css/swiper.min.css">
     <script src="~/scripts/swiper/dist/js/swiper.min.js"></script>
-    <div class="header" style="position:relative">
-        <div class="container pt30 pb5">
-            <div class="col-md-6">
-                <a class="logo" href="/">
-                    <img class="fl" src="@cfg["sys_logo"]" style="height:60px" />
-                    <div class="fl ft30 fwb" style="line-height:60px;color:@cfg["sys_name_color"]">@cfg["sys_name"]</div>
-                </a>
-            </div>
-            <div class="col-md-6 text-r">
-                <div class="ft30 fwb" style="line-height:60px;color:@cfg["sys_tip_color"]">@cfg["sys_tip"]</div>
-            </div>
-        </div>
-    </div>
     <div class="swiper-container" style="height:440px">
         <div class="swiper-wrapper">
             @foreach (var photo in cfg["sys_login_photos"].Split('|'))
@@ -36,10 +25,10 @@
             <div class="container">
                 <div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8">
                     <div style="margin:50px 0;padding:30px;background:#fff;opacity:0.90">
-                        <h3 style="color:#08c">系统登录</h3>
+                        <h3 style="color:#08c">平台登录</h3>
                         @{
                             Ace.Form().Id("log").Ajax(a => a.RouteQuery("ReturnUrl").HttpPost("auth", "login")).Content(
-                                @<div class="pt15 pb15">
+                                @<div class="pt15">
                                     @if (Ace.AC.Logined)
                                     {
                                         <div class="pt20 ft16 lh35">
@@ -66,12 +55,15 @@
                                         <div class="pt15">
                                             @Ace.CheckBox().Name("persistent").Text("保持登录状态").Checked().Value("true")
                                             <span class="fr">
-                                                <a href="regist">用户注册</a>
+                                                @*<a href="regist">用户注册</a>*@
                                             </span>
                                         </div>
                                         <div class="pt15">
                                             @Html.AntiForgeryToken()
                                             <a class="btn btn-primary" style="width:100%" onclick="login()">登录</a>
+                                        </div>
+                                        <div class="pt15">
+                                            <a href="backpwd">忘记密码</a>
                                         </div>
                                     }
                                 </div>
@@ -91,9 +83,12 @@
             });
         }
         new Swiper('.swiper-container', { direction: 'vertical', loop: true, autoplay: true });
+        if (window.parent != window) {
+            window.parent.location = '/plat/account/login';
+        }
     </script>
 }
 else
 {
-    <div class="p15">非法访问，微信内请从菜单进入！</div>
+    <div class="p30 text-c ft25 cr-a" style="min-height:500px">非法访问，微信内请从菜单进入！</div>
 }

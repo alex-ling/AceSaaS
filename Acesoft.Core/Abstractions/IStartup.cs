@@ -15,6 +15,14 @@ namespace Acesoft
         /// 设定一个启动顺序，默认为0
         /// </summary>
         int Order { get; }
+        /// <summary>
+        /// 租户对象
+        /// </summary>
+        object Tenant { get; }
+        /// <summary>
+        /// 设置租户
+        /// </summary>
+        IStartup SetTenant(object tenant);
 
         /// <summary>
         /// 由框架调用，用于Plugin配置、注入等

@@ -1,0 +1,32 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "生成";
+
+    Ace.View().Id("view").Ajax(ds => ds.Form(new
+    {
+        temp = App.GetQuery("temp", ""),
+        path = "pages/",
+        table = ""
+    }).HttpPost("code", "createcode")).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 模板路径：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("temp").Width("100%").Disabled()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 数据模型：</div>
+                <div class="col-xs-6">@Ace.ComboTree().Name("table").Width("100%").Required().Ajax(ds => ds.DataSource("sys.table_tree").HttpGet())</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 生成路径：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("path").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

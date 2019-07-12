@@ -4,5 +4,13 @@
     ViewData["Title"] = "进入";
 
     var roles = Ace.AC.Roles;
-    App.Context.Response.Redirect("/proj/index");
+    if (roles.Contains(978665085142564864) || roles.Contains(305049547120312320))
+    {
+        // 前端角色：IoT用户、Viewer用户
+        App.Context.Response.Redirect("/iot/index/front");
+    }
+    else
+    {
+        App.Context.Response.Redirect("/plat/index");
+    }
 }

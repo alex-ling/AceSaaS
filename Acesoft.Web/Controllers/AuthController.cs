@@ -219,7 +219,7 @@ namespace Acesoft.Web.Controllers
             user.InitializeId();
             user.DCreate = DateTime.Now;
             user.Enabled = data.GetValue("enable", 1) == 1;
-            user.UserType = (UserType)data.GetValue("usertype", 1);
+            user.UserType = (UserType)data.GetValue<int>("usertype", 0);
             user.LoginName = loginName;
             user.UserName = data.GetValue<string>("username");
             user.NickName = data.GetValue("nickname", mobile);

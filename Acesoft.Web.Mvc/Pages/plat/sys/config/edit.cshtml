@@ -29,14 +29,13 @@
             </div>
             <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red">*</span> 配置值：</div>
-                <div class="col-xs-6">@Ace.TextBox().Name("value").Width("100%").Required()</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("value").Width("100%").Required().Height(80)</div>
                 <div class="col-xs-4">
                     @Ace.LinkButton().Text("选择图片").Click("onSelect()").Css("c1").Width("80px")
                     @Ace.LinkButton().Text("选择颜色").Click("onColor()").Css("c1").Width("80px")
                 </div>
             </div>
             <div>
-                <div class="ph15 pt20 pb10 bd-b-dashed">操作说明</div>
                 <ul class="pt5" style="list-style:decimal;padding-left:2em">
                     <li class="pt10">
                         <b>配置类型：</b>

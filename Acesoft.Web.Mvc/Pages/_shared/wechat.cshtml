@@ -1,10 +1,16 @@
 ﻿@model Acesoft.Web.UI.RazorPages.WebPageBase
+@inject IConfigService ConfigService
+@{ 
+    var cfg = ConfigService.GetConfig(1);
+}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=430,user-scalable=0" />
-    <title>@Html.Raw(ViewData["Title"])</title><environment include="Development">
+    <meta name="viewport" content="width=480,user-scalable=0" />
+    <title>@Html.Raw(ViewData["Title"])</title>
+    <meta name="description" content="@Html.Raw(cfg["sys_description"])">
+    <meta name="keywords" content="@Html.Raw(cfg["sys_keywords"])"><environment include="Development">
     <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="~/scripts/jqweui/dist/lib/weui.css" />
     <link rel="stylesheet" href="~/scripts/jqweui/dist/css/jquery-weui.css" />
@@ -14,7 +20,7 @@
     <link rel="stylesheet" href="~/scripts/jqweui/dist/css/jquery-weui.min.css" />
     <link rel="stylesheet" href="~/scripts/ace/css/acewe.min.css" /></environment>
 </head>
-<body style="min-width:430px">
+<body style="min-width:480px">
 @RenderBody()<environment include="Development">
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="~/scripts/jquery/dist/jquery.js"></script>
@@ -28,5 +34,7 @@
 <script src="~/scripts/jqweui/dist/js/jquery-weui.min.js"></script>
 <script src="~/scripts/signalr/dist/browser/signalr.min.js"></script>
 <script src="~/scripts/ace/js/acewe.min.js"></script></environment>
-@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)</body>
+@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)
+@await Html.PartialAsync("_views/baidu")
+</body>
 </html>

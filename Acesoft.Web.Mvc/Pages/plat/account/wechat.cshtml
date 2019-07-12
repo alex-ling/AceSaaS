@@ -1,5 +1,6 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
+@inject IConfigService ConfigService
 @{ 
     ViewData["Title"] = "微信登录";
 
@@ -9,6 +10,7 @@
     var redirectUrl = App.GetQuery("redirect_uri", "/wechat");
     var external = redirectUrl.StartsWith("http");
     var regUrl = $"/plat/account/wechatreg?appid={appId}";
+    var cfg = ConfigService.GetConfig(1);
 
     if (Ace.AC.TryWechatAutoLogin(external, out openId))
     {
@@ -47,18 +49,18 @@
 @if (needBindUser)
 {
 <div class="ph15">
-    <div class="pt30 text-c">
-        <img src="~/images/logo.jpg" />
+    <div class="pt30 pb20 text-c">
+        <img src="@cfg["sys_logo"]" style="height:80px" />
     </div>
     <div class="pt20 text-c ft12 cr-a lh20">
         <div class="pb15 cr-7" style="font-size:18px">微信首次登录请绑定现有用户或注册新用户</div>
         <div>
-            云平台用户(环都新风APP、云平台网站注册)请直接绑定登录<br/>
+            云平台用户(云平台APP、云平台网站注册)请直接绑定登录<br/>
             绑定登录成功后，下次将以微信身份直接登录(无需帐户密码)
         </div>
     </div>
     @{
-        Ace.Form().Id("log").Ajax(a => a.RouteQuery("appid").HttpPost("wechat", "login")).Content(
+        Ace.Form().Id("log").Ajax(a => a.RouteQuery("appid").HttpPost("wechat", "welogin")).Content(
         @<div class="pt10 pb30">
             <div class="pt15">
                 @(Ace.TextBox().Name("username").Required().IconCls("icon-man").IconAlign(Align.left).IconWidth(30)

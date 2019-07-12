@@ -48,8 +48,95 @@
     border-left: 1px solid #95b8e7;
 }
 
-.container-fluid .row {
+.aceui-form .container-fluid .row {
     padding-top: 10px
+}
+
+/* aceui-navigation */
+.aceui-navigation.nav-h {
+}
+
+.aceui-navigation.nav-h > li {
+    position: relative;
+    float: left;
+    margin: 0 5px;
+}
+
+.aceui-navigation.nav-h > li > a {
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    transition: .5s;
+    padding: 10px 8px;
+    line-height: 40px;
+    text-decoration: none;
+}
+
+.aceui-navigation.nav-h > li > a:hover {
+    /*color: red;*/
+}
+
+.aceui-navigation.nav-h > li > a:after {
+    content: "";
+    width: 0;
+    height: 15px;
+    border-top: 3px solid #ff4500;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    transition: all .5s ease 0s;
+}
+
+.aceui-navigation.nav-h > li:hover > a:after {
+    width: 100%;
+}
+
+.aceui-navigation.nav-h > li > .dropdown-list {
+    display: none;
+    position: absolute;
+    opacity: .9;
+    color: #fff;
+    background: #2ea7e0;
+    top: 70px;
+    left: 0;
+    overflow: hidden;
+    transition: all .5s ease 0s;
+}
+
+.aceui-navigation.nav-h > li:hover .dropdown-list {
+    display: block;
+    width: 100%;
+}
+
+.aceui-navigation.nav-h ul {
+    position: absolute;
+    z-index: 999;
+    background: #2ea7e0;
+    /*opacity: 0.9;*/
+    display: none;
+    padding: 10px 0;
+    min-width: 150px;
+}
+
+.aceui-navigation.nav-h ul li a {
+    display: block;
+    font-size: 15px;
+    color: #fff;
+    padding: 6px 20px;
+}
+
+.aceui-navigation.nav-h ul > li:first-child a {
+    padding-top: 0.3em;
+}
+
+.aceui-navigation.nav-h ul > li:last-child a {
+    padding-bottom: 0.5em;
+}
+
+.aceui-navigation.nav-h ul li:hover a {
+    /*font-weight: bold;*/
+    /*text-decoration: underline;*/
+    /*color: red;*/
 }
 
 /* aceui global */

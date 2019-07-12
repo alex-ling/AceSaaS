@@ -1,0 +1,83 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "模板管理";
+    Layout = "_shared/back";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Region(Region.west).Border(false).Split().MinWidth(200).Width(250).MaxWidth(300).Controls(wst =>
+        {
+            Ace.Layout().AppendTo(wst).Fit().Items(lay =>
+            {
+                lay.Add().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Toolbar().AppendTo(ctls).Controls(c =>
+                    {
+                        Ace.Button().AppendTo(c).IconCls("fa fa-plus").Click("AX.treeAdd('#tree')");
+                        Ace.Button().AppendTo(c).IconCls("fa fa-edit").Click("AX.treeEdit('#tree', -1)");
+                        Ace.Button().AppendTo(c).IconCls("fa fa-remove").Click("AX.treeDel('#tree', 0)");
+                        Ace.Button().AppendTo(c).Text("复制").IconCls("fa fa-copy").Click("onCopy()");
+                        Ace.Button().AppendTo(c).Text("生成").IconCls("fa fa-file-code-o").Click("onCreate()");
+                    });
+                });
+                lay.Add().Region(Region.center).Controls(ctls =>
+                {
+                    Ace.Tree().AppendTo(ctls).Id("tree").Root("模板").Delete("file/deletefolder")
+                        .Ajax(ds => ds.Controller("file").Action("getfolders")
+                            .RouteValue("path", "pages").RouteValue("search", "_*").HttpGet())
+                        .Events(e => e.OnSelect("onSelect"));
+                });
+            });
+        });
+
+        layout.Add().Region(Region.center).Border(false).Controls(cnt =>
+        {
+            Ace.Layout().AppendTo(cnt).Fit(true).Items(lay =>
+            {
+                lay.Add().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+                    {
+                        Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+                    })
+                    .Tools(tools =>
+                    {
+                        Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+                    });
+                });
+                lay.Add().Region(Region.center).Controls(ctls =>
+                {
+                    Ace.DataGrid().Id("grid").AppendTo(ctls).Border(false).Pagination(false).Delete("file/deletefile")
+                    .Ajax(ds => ds.Controller("file").Action("getfiles").QueryParams(new { path = "pages" }).HttpGet())
+                    .Columns(c =>
+                    {
+                        c.Add().Field("id").Title("路径").Width(30).Format("action:onSource=点击编辑源码文件");
+                        c.Add().Field("created").Title("创建时间").Width(10).Format("date:yyyy-MM-dd HH:mm");
+                        c.Add().Field("modified").Title("修改时间").Width(10).Format("date:yyyy-MM-dd HH:mm");
+                        c.Add().Field("action").Title("操作").Format("button");
+                    });
+                });
+            });
+        });
+    }).Render();
+}
+<script>
+    function onCopy() {
+        $('#tree').tree('edit', { editUrl: 'copy' });
+    }
+    function onSelect(node) {
+        $('#grid').datagrid('load', { path: node.id });
+    }
+    function onSource(v, id) {
+        window.open('/_pages/editor?path=' + id);
+    }
+    function event_grid_copy(cid, id) {
+        AX.gridEdit(cid, id + "&method=post");
+    }
+    function onCreate() {
+        var node = $('#tree').tree('getSelected');
+        if (node == null) $.messager.error({ msg: "请选择某一模板节点！" });
+        AX.dialog('生成模块', 'create?temp=' + node.id, AX.ok);
+    }
+</script>

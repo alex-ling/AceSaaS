@@ -1,0 +1,27 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "查看流程";
+    Layout = "_shared/back";
+    ViewBag.ShowNav = false;
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false)
+            .CheckBox(false).Sortable(false).DataSource("wf.workflow")
+            .Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("dcreate").Title("开始时间").Width(10).Format("date:MM-dd HH:mm");
+                c.Add().Field("dupdate").Title("结束时间").Width(10).Format("date:MM-dd HH:mm");
+                c.Add().Field("process_name").Title("业务流程").Width(10);
+                c.Add().Field("task_name").Title("业务单元").Width(10);
+                c.Add().Field("user_name").Title("办理人").Width(10);
+                c.Add().Field("taskstate_name").Title("办理状态").Width(10);
+                c.Add().Field("audit_name").Title("审核状态").Width(10);
+                c.Add().Field("audit_opinion").Title("审核意见").Width(30);
+            });
+        });
+    }).Render();
+}

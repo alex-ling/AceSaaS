@@ -31,11 +31,6 @@
                 <div class="col-xs-4"><div class="text-warning"></div></div>
             </div>
             <div class="row">
-                <div class="col-xs-2 text-r">备注：</div>
-                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
-                <div class="col-xs-4"></div>
-            </div>
-            <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red">*</span> 类型：</div>
                 <div class="col-xs-6">
                     @(Ace.ComboBox().Name("type").Events(e => e.OnChange("onTypeChange"))
@@ -75,14 +70,19 @@
                 <div class="col-xs-6">@Ace.NumberSpinner().Name("orderno").Increment(10).Width("100%").Required()</div>
                 <div class="col-xs-4"><div class="text-warning">设置时建议按10，20递增！</div></div>
             </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4"></div>
+            </div>
         </div>
     ).Render();
 }
 @section startup{
 <script>
     var loading = true;
-    var len = [20, 20, 16, 1, 4, 8, 18, 128, 8, 20, 8, 8, 20];
-    var dis = [0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0];
+    var len = [20, 20, 16, 1, 4, 8, 18, 128, 20, 4, 8, 8, 8, 20];
+    var dis = [0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0];
     function onSubmit(cb) {
         $('#ref').textbox('enable');
         $('#length').numberbox('enable');
@@ -102,13 +102,15 @@
         if (dis[index]) $('#length').numberbox('disable');
         else $('#length').numberbox('enable');
 
-        if (index == 8) {
+        if (index == 8 || index == 9) {
             $('#dict').combotree({ required: true }).combotree('enable');
             $('#ref').textbox('disableValidation').textbox('disable');
-        } else if (index > 9) {
+        }
+        else if (index > 10) {
             $('#dict').combotree({ required: false }).combotree('disable');
             $('#ref').textbox('enable').textbox('enableValidation');
-        } else {
+        }
+        else {
             $('#dict').combotree({ required: false }).combotree('disable');
             $('#ref').textbox('disableValidation').textbox('disable');
         }

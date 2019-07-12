@@ -223,6 +223,7 @@ namespace Acesoft.Platform.Services
                     return DbType.Boolean;
 
                 case FieldType.integer:
+                case FieldType.idict:
                     return DbType.Int32;
 
                 case FieldType.datetime:

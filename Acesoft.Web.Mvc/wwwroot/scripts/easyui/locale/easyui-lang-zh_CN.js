@@ -1,10 +1,10 @@
-if ($.fn.pagination){
+﻿if ($.fn.pagination){
 	$.fn.pagination.defaults.beforePageText = '第';
 	$.fn.pagination.defaults.afterPageText = '共{pages}页';
 	$.fn.pagination.defaults.displayMsg = '显示{from}到{to},共{total}记录';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = '正在处理，请稍待。。。';
+	$.fn.datagrid.defaults.loadMsg = '正在加载，请稍待…';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;
@@ -15,10 +15,10 @@ if ($.messager){
 }
 $.map(['validatebox','textbox','passwordbox','filebox','searchbox',
 		'combo','combobox','combogrid','combotree',
-		'datebox','datetimebox','numberbox',
+		'datebox','datetimebox','numberbox','maskedbox',
 		'spinner','numberspinner','timespinner','datetimespinner'], function(plugin){
 	if ($.fn[plugin]){
-		$.fn[plugin].defaults.missingMessage = '该输入项为必输项';
+		$.fn[plugin].defaults.missingMessage = '必填项';
 	}
 });
 if ($.fn.validatebox){

@@ -4,7 +4,7 @@
     Layout = "_shared/edit";
     ViewData["Title"] = "编辑";
 
-    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.menu").Form(new {
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.media").Form(new {
         app_id = App.GetQuery("appid", ""),
         type = "",
         name = "",
@@ -38,7 +38,7 @@
 }
 <script>
     function onSelect() {
-        AX.dialog('选择素材', '/_pages/media', function (res) {
+        AX.dialog('选择素材', '/_pages/photo', function (res) {
             $('#url').textbox('setValue', res)
         }, 650, 500)
     }

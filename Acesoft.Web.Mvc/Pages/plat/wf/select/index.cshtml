@@ -1,0 +1,31 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "选择流程";
+    
+    var multi = App.GetQuery("multi", "") == "1";
+
+    Ace.Tree().Id("tree").CheckBox(multi).OnlyLeafCheck()
+    .DataSource("wf.workflow")
+    .Ajax(ds => ds.Events(e => e.OnSuccess("onLoad")).HttpGet())
+    .Render();
+}
+<script>
+    function onLoad() {
+        var val = AX.query('val');
+        if (val) {
+            var node = $('#tree').tree('find', val);
+            if (node) $('#tree').tree('select', node.target);
+        }
+    }
+    function onSubmit(cb) {
+        var node = $('#tree').tree('getSelected');
+        if (node != null && $('#tree').tree('getParent', node.target) != null) {
+            cb(node.id);
+        }
+        else {
+            $.messager.error({ msg: '请选择某一流程任务节点！' });
+        }
+    }
+</script>

@@ -50,7 +50,7 @@
                 });
                 lay.Add().Border(false).Region(Region.center).Controls(ctls =>
                 {
-                    Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination().PageSize(50).Edit("field")
+                    Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination().PageSize(50).Edit("field", 800, 500)
                     .DataSource("sys.field").Ajax(ds => ds.HttpGet()).Columns(c =>
                     {
                         c.Add().Field("field").Title("字段").Width(10);

@@ -40,6 +40,7 @@ namespace Acesoft.Platform.Services
                     value = $"{prefix}{"1".PadLeft(length, '0')}";
 
                     seed = new Sys_Seed();
+                    seed.InitializeId();
                     seed.Name = name;
                     seed.Value = $"{prefix}{"0".PadLeft(length, '0')}";
                     seed.DCreate = DateTime.Now;

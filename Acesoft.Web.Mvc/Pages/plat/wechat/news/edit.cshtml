@@ -1,5 +1,6 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPage
+@inject Tenant Tenant
 @{
     Layout = "_shared/edit";
     ViewData["Title"] = "编辑";
@@ -30,7 +31,7 @@
                             title = "图片文件",
                             extensions = "jpg,jpeg,gif,png,bmp"
                         });
-                    }).OssBucket("mp-yqyy").Dir("img"))
+                    }).Dir($"/uploads/{Tenant.Name}/wechat/"))
                 </div>
                 <div class="col-xs-4"><span class="text-warning">单个文件不要超过500K</span></div>
             </div>

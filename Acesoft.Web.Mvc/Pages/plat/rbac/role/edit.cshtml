@@ -9,7 +9,6 @@
         name = "",
         remark = "",
         orderno = 10,
-        visible = 1,
         system = 0
     }).HttpSave()).Content(
         @<div class="container-fluid">
@@ -26,7 +25,6 @@
             <div class="row">
                 <div class="col-xs-2 text-r">角色设置：</div>
                 <div class="col-xs-6">
-                    @Ace.CheckBox().Name("visible").Text("可见　")
                     @Ace.CheckBox().Name("system").Text("系统")
                 </div>
                 <div class="col-xs-4"><div class="text-warning">系统属性不能删除！</div></div>

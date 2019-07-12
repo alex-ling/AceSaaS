@@ -31,7 +31,7 @@ namespace Acesoft.Web.Cloud.Controllers
             return Ok(result);
         }
 
-        [HttpGet, MultiAuthorize, Action("删除文件")]
+        [HttpDelete, MultiAuthorize, Action("删除文件")]
         public IActionResult DelOssFile(string bucket, string key)
         {
             cloudService.GetOssService().DeleteFile(bucket, key);

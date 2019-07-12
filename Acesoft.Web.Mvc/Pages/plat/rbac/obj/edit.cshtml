@@ -6,7 +6,7 @@
 
     Ace.View().Id("view").Ajax(ds => ds.DataSource("rbac.object").Form(new {
         parentid = App.GetQuery("parentid", ""),
-        type = 0,
+        type = App.GetQuery("type", 0),
         name = "",
         remark = "",
         url = "",
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red"></span> 模块Url：</div>
                 <div class="col-xs-6">@Ace.TextBox().Name("url").Width("100%")</div>
-                <div class="col-xs-4"></div>
+                <div class="col-xs-4">@Ace.LinkButton().Text("选择流程").Click("onSelect()").Width(100).Css("c1")</div>
             </div>
             <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red"></span> 模块图标：</div>
@@ -62,3 +62,12 @@
         </div>
     ).Render();
 }
+<script>
+    function onSelect() {
+        var url = $('#url').textbox('getValue');
+        var taskId = AX.query('taskid', url) || '';
+        AX.dialog('选择流程', '/plat/wf/select?val=' + taskId, function (id) {
+            $('#url').textbox('setValue', AX.aurl(url, 'taskid', id));
+        }, 500, 500)
+    }
+</script>

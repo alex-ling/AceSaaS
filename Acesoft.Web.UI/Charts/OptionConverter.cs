@@ -53,8 +53,9 @@ namespace Acesoft.Web.UI.Charts
 				stringBuilder.Append("{");
 				stringBuilder.Append("type:'" + item.Type.ToString() + "'");
 				stringBuilder.Append(scriptor.Serialize(item.Options, false));
-				stringBuilder.Append("}");
+				stringBuilder.Append("},");
 			}
+            stringBuilder.Remove();
 			stringBuilder.Append("]");
 			stringBuilder.Append(scriptor.Serialize(option.Options, false));
 			writer.WriteRaw(stringBuilder.ToString());

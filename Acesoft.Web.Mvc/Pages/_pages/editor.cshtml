@@ -1,11 +1,12 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
 @{
-    Layout = "_shared/back";
     ViewData["Title"] = "编辑代码";
+    Layout = "_shared/back";
+    ViewBag.ShowNav = false;
 }
 <script src="~/scripts/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
-@{
+@{ 
     Ace.Layout().Fit(true).Items(layout =>
     {
         layout.Add().Region(Region.north).Height(44).Controls(ctls =>
@@ -19,13 +20,13 @@
         {
             Ace.Tabs().AppendTo(ctls).Id("tabs").Fit(true).Border(false).Items(() =>
             {
-                var path = App.GetQuery<string>("path");
+                var path = App.GetQuery("path", "");
                 if (path.HasValue())
                 {
                     var folder = App.GetLocalPath(path);
                     if (Directory.Exists(folder))
                     {
-                        return Directory.GetFiles(folder).Select<string, AceSource>(filePath =>
+                        return Directory.GetFiles(folder).Select(filePath =>
                         {
                             var file = new FileInfo(filePath);
                             return new AceSource
@@ -35,6 +36,18 @@
                                 Content = file.Read()
                             };
                         });
+                    }
+                    else if (System.IO.File.Exists(folder))
+                    {
+                        var file = new FileInfo(folder);
+                        return new AceSource[] {
+                            new AceSource
+                            {
+                                FileName = file.Name,
+                                Extension = file.Extension,
+                                Content = file.Read()
+                            }
+                        };
                     }
                 }
                 return null;
@@ -50,43 +63,43 @@
         });
     }).Render();
 }
-@section startup { 
-<script>
-    function onSave() {
-        var tab = $('#tabs').tabs('getSelected');
-        if (!tab) return;
+@section startup {
+    <script>
+        function onSave() {
+            var tab = $('#tabs').tabs('getSelected');
+            if (!tab) return;
 
-        var opts = tab.panel("options");
-        var path = AX.query('path');
-        if (path.indexOf(opts.title) < 0) {
-            path += '/' + opts.title;
-        }
-        AX.ajax({
-            url: AX.format('{0}api/file/putfile?file={1}', AX.opts.root, path),
-            type: 'put',
-            data: {
-                content: ace.edit("ed_" + opts.title).getValue()
-            },
-            cb: function () {
-                $.messager.info({ msg: '保存成功！' });
+            var opts = tab.panel("options");
+            var path = AX.query('path');
+            if (path.indexOf(opts.title) < 0) {
+                path += '/' + opts.title;
             }
-        });
-    }
-    function loadEditor(id, mode) {
-        if (mode == ".cshtml") mode = "html";
-        else if (mode == ".js") mode = "javascript";
-        else if (mode == ".config") mode = "xml";
-        else mode = mode.substr(1);
+            AX.ajax({
+                url: AX.format('{0}api/file/putfile?file={1}', AX.opts.root, path),
+                type: 'put',
+                data: {
+                    content: ace.edit("ed_" + opts.title).getValue()
+                },
+                cb: function () {
+                    $.messager.info({ msg: '保存成功！' });
+                }
+            });
+        }
+        function loadEditor(id, mode) {
+            if (mode == ".cshtml") mode = "html";
+            else if (mode == ".js") mode = "javascript";
+            else if (mode == ".config") mode = "xml";
+            else mode = mode.substr(1);
 
-        var editor = ace.edit("ed_" + id);
-        editor.setTheme("ace/theme/clouds");
-        editor.getSession().setMode("ace/mode/" + mode);
-    }
-    $(function () {
-        $($('#tabs').tabs('tabs')).each(function (index, tab) {
-            var opts = tab.panel('options');
-            loadEditor(opts.title, AX.ext(opts.title));
+            var editor = ace.edit("ed_" + id);
+            editor.setTheme("ace/theme/clouds");
+            editor.getSession().setMode("ace/mode/" + mode);
+        }
+        $(function () {
+            $($('#tabs').tabs('tabs')).each(function (index, tab) {
+                var opts = tab.panel('options');
+                loadEditor(opts.title, AX.ext(opts.title));
+            });
         });
-    });
-</script>
+    </script>
 }

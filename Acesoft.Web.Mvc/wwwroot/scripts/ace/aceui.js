@@ -3,7 +3,7 @@
     // 定义aceui及selector[.aceui-widget]转化方法
     $.aceui = {
         auto: true,
-        plugins: ['uploadbox', 'kindeditor', 'echart', 'iframe', ['selectbox', 'combo'], 'player'],
+        plugins: ['uploadbox', 'kindeditor', 'navigation', 'echart', 'iframe', ['selectbox', 'combo'], 'player'],
         parse: function (context) {
             for (var i = 0; i < $.aceui.plugins.length; i++) {
                 var name = $.aceui.plugins[i], ctor = name;
@@ -242,6 +242,59 @@
             return cookieValue;
         }
     };
+})(jQuery);
+
+// $.fn.navigation: Use jQuery.
+(function ($) {
+    function create(target) {
+        var t = $(target);
+        if (t.hasClass('nav')) {
+            var items = t.find('> li > a'), sub = t.find('ul');
+            items.on('click', function (event) {
+                event.preventDefault();
+                if ($(this).attr('class') != 'active') {
+                    sub.slideUp('normal');
+                    $(this).next().stop(true, true).slideToggle('normal');
+                    items.removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+            items.first().addClass('active').next().slideDown('normal');
+        }
+        else {
+            t.find('> li').hover(function (event) {
+                event.preventDefault();
+                $(this).find('ul').stop(true, true).slideToggle('normal');
+            });
+        }
+    }
+
+    $.fn.navigation = function (options, param) {
+        if (typeof options == 'string') {
+            return $.fn.navigation.methods[options](this, param);
+        }
+
+        options = options || {};
+        return this.each(function () {
+            var state = $.data(this, 'navigation');
+            if (state) {
+                $.extend(state.options, options);
+            } else {
+                state = $.data(this, 'navigation', {
+                    options: $.extend({}, $.fn.navigation.defaults, $.parser.parseOptions(this), options)
+                });
+            }
+            create(this);
+        });
+    };
+
+    $.fn.navigation.methods = {
+        options: function (jq) {
+            return $.data(jq[0], 'navigation').options;
+        }
+    };
+
+    $.fn.navigation.defaults = {};
 })(jQuery);
 
 // $.fn.echart: Use ECharts.

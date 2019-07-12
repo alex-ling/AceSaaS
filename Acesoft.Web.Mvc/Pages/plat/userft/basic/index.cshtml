@@ -9,7 +9,7 @@
 </div>
 <div class="alert alert-info">请完善以下信息，方便我们更好的为您服务！</div>
 @{ 
-    Ace.View().Id("view").Css("front").Ajax(ds => ds.Load("user", "regist").HttpPut("auth", "putuser")).Content(
+    Ace.View().Id("view").Css("front").Ajax(ds => ds.Load("rbac", "regist").HttpPut("auth", "putuser")).Content(
     @<div class="container-fluid">
         <div class="pt20 pb10 bd-b-dashed">基本信息</div>
         <div class="row">
@@ -24,9 +24,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 text-r"><span class="cr-red">*</span> 真实姓名：</div>
+            <div class="col-md-2 text-r"><span class="cr-red"></span> 真实姓名：</div>
             <div class="col-md-5">
-                @Ace.TextBox().Name("username").Required().Width("100%")
+                @Ace.TextBox().Name("username").Required(false).Width("100%")
             </div>
             <div class="col-md-5">
                 <span class="text-warning">

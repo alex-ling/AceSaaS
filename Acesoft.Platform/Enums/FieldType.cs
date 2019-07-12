@@ -14,6 +14,7 @@ namespace Acesoft.Platform
 		media = 7,
 		attach = 8,
 		dict = 9,
+        idict = 10,
 		key = 90,
 		fkey = 91,
 		rkey = 92,

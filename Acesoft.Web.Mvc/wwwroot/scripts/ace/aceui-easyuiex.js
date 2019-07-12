@@ -198,7 +198,7 @@ $.extend($.fn.tree.methods, {
             if (opts.editUrl) {
                 opts.editUrl = AX.objstr(opts.editUrl, node.attributes);
             }
-            return opts.idField ? node.attributes[opts.idField] : node.id;
+            return opts.idField ? (node.attributes ? node.attributes[opts.idField] : '') : node.id;
         }
         return null;
     },
@@ -208,9 +208,11 @@ $.extend($.fn.tree.methods, {
     add: function (jq, opts) {
         opts = $.extend({}, jq.tree('options'), opts);
         var parId = jq.tree('getSelectedId', opts);
+        var parNo = jq.tree('getSelectedId', { idField: 'no' });
         if (parId == null) return;
         var url = opts.editUrl || 'edit';
         url = AX.aurl(url, "parentid", parId);
+        if (parNo) url = AX.aurl(url, "parentno", parNo);
         if (opts.q) url += (url.indexOf('?') > 0 ? '&' : '?') + opts.q;
         if (AX.opts.dialogMode) {
             AX.dialog('添加', url, function () {
@@ -335,7 +337,7 @@ $.extend($.fn.datagrid.defaults, {
         dg.datagrid('resize');
         //dg.datagrid('fixColumnSize');
         var colOption = dg.datagrid('getColumnOption', 'action');
-        if (colOption && colOption.width < 35) {
+        if (colOption && colOption.width < 40) {
             dg.datagrid('autoSizeColumn', 'action');
         }
         opts.success.call(this, data);
@@ -456,7 +458,7 @@ $.extend($.fn.treegrid.defaults, {
         dg.treegrid('resize');
         //dg.treegrid('fixColumnSize');
         var colOption = dg.datagrid('getColumnOption', 'action');
-        if (colOption && colOption.width < 35) {
+        if (colOption && colOption.width < 40) {
             dg.datagrid('autoSizeColumn', 'action');
         }
         opts.success.call(this, row, data);

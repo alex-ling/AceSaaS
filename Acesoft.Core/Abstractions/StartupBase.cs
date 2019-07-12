@@ -10,6 +10,13 @@ namespace Acesoft
     {
         /// <inheritdoc />
         public virtual int Order { get; } = 0;
+        public object Tenant { get; protected set; }
+
+        public IStartup SetTenant(object tenant)
+        {
+            Tenant = tenant;
+            return this;
+        }
 
         /// <inheritdoc />
         public virtual void ConfigureServices(IServiceCollection services)

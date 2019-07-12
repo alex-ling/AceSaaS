@@ -29,7 +29,7 @@
             .DataSource("wx.media").Ajax(ds => ds.HttpGet()).Columns(c =>
             {
                 c.Add().Field("name").Title("素材名称").Width(10);
-                c.Add().Field("type").Title("素材类别").Width(5);
+                c.Add().Field("type_name").Title("素材类别").Width(5);
                 c.Add().Field("url").Title("素材URL").Width(5).Format("href:查看");
                 c.Add().Field("mediaid").Title("素材微信Id").Width(10);
                 c.Add().Field("wxurl").Title("素材微信Url").Width(5).Format("href:查看");
@@ -49,19 +49,24 @@
     }
     function onUpload() {
         var appid = getAppId();
+        var ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
         if (appid != '') {
             AX.ajax({
                 url: AX.api({
                     api: 'wechat/uploadmedia',
                     q: 'appid=' + appid
                 }),
-                type: 'get',
+                type: 'post',
+                data: { mediaids: ids },
                 cb: AX.ok
             });
         }
     }
     function onDelete() {
         var appid = getAppId();
+        var ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
         if (appid != '') {
             AX.ajax({
                 url: AX.api({
@@ -69,6 +74,7 @@
                     q: 'appid=' + appid
                 }),
                 type: 'delete',
+                data: { mediaids: ids },
                 cb: AX.ok
             });
         }

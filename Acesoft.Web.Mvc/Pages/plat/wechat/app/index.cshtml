@@ -1,5 +1,6 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPage
+@inject Tenant Tenant
 @{
     ViewData["Title"] = "公众号接入";
     Layout = "_shared/back";
@@ -26,7 +27,7 @@
                 c.Add().Field("name").Title("公众号名称").Width(8);
                 c.Add().Field("type_name").Title("类别").Width(5);
                 c.Add().Field("appid").Title("AppId").Width(8);
-                c.Add().Field("url").Title("接入URL").Width(20).Format("link:http://trade.miniplat.com{url}");
+                c.Add().Field("url").Title("接入URL").Width(20).Format($"link:http://{Tenant.HostNames[0]}{{url}}");
                 c.Add().Field("remark").Title("备注").Width(10);
                 c.Add().Field("action").Title("操作").Format("button");
             });
