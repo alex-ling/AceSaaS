@@ -1,0 +1,60 @@
+﻿@{
+    var table = Model.Table.Split('_')[1].ToLower();
+}@@page
+@@inherits Acesoft.Web.UI.RazorPages.WebPage
+@@{
+    ViewData["Title"] = "@Model.Name";
+    Layout = "_shared/back";
+
+    Ace.Layout().Fit().Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+            {
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("AX.gridAdd('#grid')");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).DataSource("@Model.Table.Replace("_", ".")")
+            .Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+        @foreach (var f in Model.Fields)
+        {
+            var field = f.Field.ToLower();
+            if (field == "dcreate")
+            {
+                <c>c.Add().Field("@field").Title("@f.Name").Width(10).Format("date:yyyy-MM-dd");</c>
+            }
+            else if (field == "orderno")
+            {
+                <c>c.Add().Field("@(field)").Title("@f.Name").Width(10).Align(Align.center);</c>
+            }
+            else if (f.Type == Acesoft.Platform.FieldType.boolean)
+            {
+                <c>c.Add().Field("@field").Title("@f.Name").Format("bool").Align(Align.center);</c>
+            }
+            else if (f.Type == Acesoft.Platform.FieldType.attach)
+            {
+                <c>c.Add().Field("@field").Title("@f.Name").Width(10).Format("attach");</c>
+            }
+            else if (f.Type == Acesoft.Platform.FieldType.dict)
+            {
+                <c>c.Add().Field("@(field)_name").Title("@f.Name").Width(10);</c>
+            }
+            else if (field != "id" && field != "dupdate")
+            {
+                <c>c.Add().Field("@field").Title("@f.Name").Width(10);</c>
+            }
+        }
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
