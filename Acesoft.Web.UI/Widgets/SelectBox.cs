@@ -10,6 +10,8 @@ namespace Acesoft.Web.UI.Widgets
     public class SelectBox : Combo
     {
         public string SelectUrl { get; set; }
+        public string Parent { get; set; }
+        public string Param { get; set; }
 
         public static readonly ScriptEvent OnSelect = new ScriptEvent("onSelect", "id,text");
 

@@ -16,6 +16,14 @@ namespace Acesoft.Web.UI.Widgets.Html
             {
                 Options["url"] = Component.SelectUrl;
             }
+            if (Component.Parent.HasValue())
+            {
+                Options["parent"] = Component.Parent;
+            }
+            if (Component.Param.HasValue())
+            {
+                Options["param"] = Component.Param;
+            }
         }
     }
 }

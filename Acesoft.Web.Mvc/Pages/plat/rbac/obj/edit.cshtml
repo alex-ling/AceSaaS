@@ -14,13 +14,14 @@
         opnames = "",
         orderno = 10,
         visible = 1
-    }).HttpSave()).Content(
+    }).HttpSave()).Content<dynamic>(
         @<div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-2 text-r"><span class="cr-red"></span> 父级模块：</div>
-                <div class="col-xs-6">@Ace.ComboTree().Name("parentid").Width("100%").Ajax(a => a.DataSource("rbac.object_tree").HttpGet())</div>
-                <div class="col-xs-4"></div>
-            </div>
+             <div class="row">
+                 @{ var type = (string)App.GetQuery("type", item.type.ToString()); }
+                 <div class="col-xs-2 text-r"><span class="cr-red"></span> 父级模块：</div>
+                 <div class="col-xs-6">@Ace.ComboTree().Name("parentid").Width("100%").Ajax(a => a.DataSource("rbac.object_tree").RouteValue("type", type).HttpGet())</div>
+                 <div class="col-xs-4"></div>
+             </div>
             <div class="row">
                 <div class="col-xs-2 text-r"><span class="cr-red">*</span> 模块名称：</div>
                 <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>

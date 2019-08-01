@@ -17,6 +17,13 @@ namespace Acesoft.Web.UI.Widgets.Fluent
             return this;
         }
 
+        public virtual SelectBoxBuilder Parent(string parentId, string param)
+        {
+            Component.Parent = parentId;
+            Component.Param = param;
+            return this;
+        }
+
         public SelectBoxBuilder Events(Action<SelectBoxEventBuilder> clientEventsAction)
         {
             clientEventsAction(new SelectBoxEventBuilder(base.Component.Events));

@@ -9,6 +9,7 @@
             maxW: $(w.top).width(),
             maxH: $(w.top).height(),
             dialogMode: true,
+            _loading: false,
             _modified: false,
             _curTreeId: null,
             _uploadedFiles: [],
@@ -210,14 +211,17 @@
         },
         formLoad: function (fid, data) {
             $(fid).data('form').data = data;
+            ax._loading = true;
             $(fid).form('load', data);
             if (typeof onLoad == 'function') onLoad(data);
+            ax._loading = false;
         },
         // combo.
         selShow: function () {
-            var c = $(this), opts = c.combo('options');
+            var c = $(this), opts = c.combo('options'), url = opts.url;
+            if (opts.parent) url = ax.aurl(url, opts.param, $('#' + opts.parent).combo('getValue'));
             var val = opts.multiple ? (c.combo('getValues') + '&multi=1') : c.combo('getValue');
-            ax.dialog('请选择', ax.aurl(opts.url, 'val', val), function (val, txt) {
+            ax.dialog('请选择', ax.aurl(url, 'val', val), function (val, txt) {
                 if (!opts.onSelect || opts.onSelect.call(c, val, txt) != false) {
                     c.combo('setValue', val);
                     c.combo('setText', txt);
@@ -336,6 +340,7 @@
             switch (fmt) {
                 case 'date':
                     if (ax.isdate(v)) return ax.datestr(v, exp);
+                    else return v;
                 case 'bool':
                     return v == "1" ? '<span class="icon icon-ok"></span>' : '';
                 case 'action':
@@ -350,7 +355,7 @@
                             var rv = v;
                             for (var i = 0; i < items.length; i++) {
                                 var arr = items[i].split('=');
-                                if (arr[1]) {
+                                if (arr[1] && arr[1] != 'null') {
                                     var hrefs = arr[1].split(',');
                                     if (hrefs.length > 1) {
                                         for (var j = 0; j < hrefs.length; j++) {
@@ -371,7 +376,11 @@
                     return v;
                 case 'href':
                     if (v.substr(0, 1) == ',') v = v.substr(1);
-                    return '<a target="_blank" href="' + v + '">' + exp + '</a>'
+                    var its = exp.split('|');
+                    if (its.length > 1) {
+                        return '<a target="_blank" href="' + AX.format(its[1], v) + '">' + its[0] + '</a>';
+                    }
+                    return '<a target="_blank" href="' + v + '">' + exp + '</a>';
                 case 'icon':
                     return '<span class="icon ' + v + '"></span>';
                 case 'text':
@@ -385,13 +394,13 @@
                     }
                     return html;
                 case 'attach':
-                    var items = v.split(','), html = '';
-                    for (var i = 1; i < items.length; i++) {
-                        html += ax.format('<div class="lh20"><a href="{0}{1}" target="_blank" title="{2}">{3}{2}</a></div>',
-                            items[i].substr(0, 4) == 'http' ? '' : ax.opts.root, 
-                            items[i], ax.filename(items[i]).substr(11), (items.length > 2 ? (i + '.') : ''));
+                    var itms = v.split(','), hml = '';
+                    for (var i = 1; i < itms.length; i++) {
+                        hml += ax.format('<div class="lh20"><a href="{0}{1}" target="_blank" title="{2}">{3}{2}</a></div>',
+                            itms[i].substr(0, 4) == 'http' ? '' : ax.opts.root, 
+                            itms[i], ax.filename(itms[i]).substr(11), (itms.length > 2 ? (i + '.') : ''));
                     }
-                    return html;
+                    return hml;
                 case 'qrcode':
                     return ax.format('<img src="/api/draw/getqrcode?text={0}" />', v);
                 case 'tip':

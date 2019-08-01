@@ -70,7 +70,18 @@ namespace Acesoft.Web.WeChat
         public static bool WeChatAuthorize(this IAccessControl ac, string openIdParamName)
         {
             var context = ac.Context;
-            if (!context.SideInWeixinBrowser()) return true;
+
+            // 是否微信运行
+            if (!context.SideInWeixinBrowser())
+            {
+                return true;
+            }
+
+            // 检查是否wechat oauth, 是否传入appid
+            if (!App.GetQuery("appid", "").HasValue())
+            {
+                return true;
+            }
 
             try
             {

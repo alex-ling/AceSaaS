@@ -4,10 +4,9 @@
 @inject IObjectService ObjectService
 @{
     Ace.RenderAuthOptions = true;
+    ViewData["Title"] = "管理";
 
     var cfg = ConfigService.GetConfig(1);
-    ViewData["Title"] = cfg["sys_name"];
-
     var modules = ObjectService.Gets(Model.Ace.AC.Roles, ObjectType.Module, Model.Ace.AC.User.LoginName);
     var menus = new List<Rbac_Object>();
     var index = 0;

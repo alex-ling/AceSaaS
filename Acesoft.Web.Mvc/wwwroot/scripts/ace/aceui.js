@@ -3,7 +3,7 @@
     // 定义aceui及selector[.aceui-widget]转化方法
     $.aceui = {
         auto: true,
-        plugins: ['uploadbox', 'kindeditor', 'navigation', 'echart', 'iframe', ['selectbox', 'combo'], 'player'],
+        plugins: ['uploadbox', 'kindeditor', 'navigation', 'echart', 'iframe', 'addressbox', ['selectbox', 'combo'], 'player'],
         parse: function (context) {
             for (var i = 0; i < $.aceui.plugins.length; i++) {
                 var name = $.aceui.plugins[i], ctor = name;
@@ -449,5 +449,94 @@
     };
 
     $.fn.iframe.defaults = {
+    };
+})(jQuery);
+
+// $.fn.address.
+(function ($) {
+    function load(target) {
+        var opts = $.data(target, 'addressbox').options;
+        var name = target.name.split('_')[0];
+        opts.input = $(AX.format('<input type="hidden" id="{0}" name="{0}" />', name)).insertAfter(target);
+        opts.combo = $(target).combo({
+            required: opts.required == true,
+            onBeforeShowPanel: function () {
+                opts.picker.show();
+                return false;
+            },
+            onChange: function (nv) {
+                if (AX._loading) {
+                    var arr;
+                    if (nv > 9999) arr = [nv.substr(0, 2), nv.substr(0, 4), nv];
+                    else if (nv > 99) arr = [nv.substr(0, 2), nv];
+                    else arr = [nv];
+                    opts.picker.setSelectedData(arr);
+                }
+            }
+        });
+        opts.picker = new addressPicker({
+            id: $(target).combo('textbox').get(0).id,
+            level: opts.level || 3,
+            isInitClick: false,
+            separator: opts.separator || '/',
+            btnConfig: opts.required ? [] : [{
+                text: '清除数据',
+                click: function () {
+                    opts.picker.clearSelectedData();
+                    opts.input.val('');
+                    opts.combo.combo('setText', '').combo('setValue', '');
+                }
+            }]
+        });
+        opts.picker.on('click', function () {
+            var address = opts.picker.getTotalValueAsText();
+            var cur = opts.picker.getCurrentObject();
+            opts.input.val(address);
+            opts.combo.combo('setText', address).combo('setValue', cur.code);
+            if (cur.level == (opts.level || 3)) opts.picker.hide();
+        });
+    }
+
+    $.fn.addressbox = function (options, param) {
+        if (typeof options == 'string') {
+            return $.fn.addressbox.methods[options](this, param);
+        }
+
+        options = options || {};
+        return this.each(function () {
+            var state = $.data(this, 'addressbox');
+            if (state) {
+                $.extend(state.options, options);
+            } else {
+                state = $.data(this, 'addressbox', {
+                    options: $.extend({}, $.fn.addressbox.defaults, $.parser.parseOptions(this), options)
+                });
+            }
+            load(this);
+        });
+    };
+
+    $.fn.addressbox.methods = {
+        options: function (jq) {
+            return $.data(jq[0], 'addressbox').options;
+        }
+    };
+
+    $.fn.addressbox.defaults = {
+        level: 3, //1-5
+        levelDesc: ["省份", "城市", "区县", "乡镇", "社区"], //每级联动标题展示文字,默认如左显示
+        index: "996", //浮动面板的z-index，默认`996`
+        separator: "/", //选择后返回的文字值分隔符，例如`四川省 / 成都市 / 武侯区`,默认` / `
+        isInitClick: true, //是否为元素id自动绑定点击事件,默认`true`
+        isWithMouse: false, //浮动面板是否跟随鼠标点击时坐标展示(而不是根据元素id的坐标).默认`false`
+        offsetX: 0, //浮动面板x坐标偏移量，默认`0`
+        offsetY: 0, //浮动面板y坐标偏移量,默认`0`
+        emptyText: "暂无数据", //数据为空时展示文字,默认'暂无数据'
+        color: "#56b4f8", //主题颜色，默认#56b4f8
+        fontSize: '14px', //字体大小，默认14px
+        isAsync: false, //是否异步加载数据，默认false，如果设置true的话asyncUrl必传
+        asyncUrl: "/json/china-city.json", //异步加载url，data数据将无效
+        btnConfig: [], //面板下方展示的自定义按钮组，格式见后面说明。默认不传
+        data: "" //┌──未指定isAsync的时候以data为准，一次性加载所有数据
     };
 })(jQuery);

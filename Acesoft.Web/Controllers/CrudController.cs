@@ -68,7 +68,7 @@ namespace Acesoft.Web.Controllers
                 }
 
                 AppCtx.Session.Commit();
-                return Ok(result);
+                return Ok(appInstanceId);
             }
             catch
             {

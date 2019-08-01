@@ -16,8 +16,7 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnRemoveTag = new ScriptEvent("onRemoveTag", "value");
 
-		public TagBox(WidgetFactory ace)
-			: base(ace)
+		public TagBox(WidgetFactory ace) : base(ace)
 		{
 			base.Widget = "tagbox";
 		}

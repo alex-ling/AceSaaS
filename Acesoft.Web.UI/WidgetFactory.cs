@@ -40,6 +40,11 @@ namespace Acesoft.Web.UI
 			return new AccordionBuilder(new Accordion(this));
 		}
 
+        public virtual AddressBoxBuilder AddressBox()
+        {
+            return new AddressBoxBuilder(new AddressBox(this));
+        }
+
         public virtual BrowseBuilder Browse()
         {
             return new BrowseBuilder(new Browse(this));

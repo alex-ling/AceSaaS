@@ -99,7 +99,7 @@ namespace Acesoft.Data.SqlMapper
                 var insSql = Params.GetValue("afterinsertsql", "");
                 if (insSql.HasValue())
                 {
-                    sql += insSql;
+                    sql += " " + insSql;
                 }
             }
             else if (ctx.CmdType == CmdType.update)
@@ -114,7 +114,7 @@ namespace Acesoft.Data.SqlMapper
                 var updSql = Params.GetValue("afterupdatesql", "");
                 if (updSql.HasValue())
                 {
-                    sql += updSql;
+                    sql += " " + updSql;
                 }
             }
             else if (ctx.CmdType == CmdType.delete)
@@ -161,6 +161,11 @@ namespace Acesoft.Data.SqlMapper
                     {
                         // r__表示只读列，a__表示数组
                         sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key}, ");
+                    }
+                    else if (key.StartsWith("e__"))
+                    {
+                        // e__表示编辑列
+                        sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key.Substring(3)}, ");
                     }
                     else
                     {
@@ -211,9 +216,9 @@ namespace Acesoft.Data.SqlMapper
                     // 提交的值为空时不插入
                     continue;
                 }
-                if (key == "id" || key.StartsWith("r__"))
+                if (key == "id" || key.StartsWith("r__") || key.StartsWith("e__"))
                 {
-                    // r__表示只读列
+                    // r__表示只读列，e__表示编辑列
                     continue;
                 }
 

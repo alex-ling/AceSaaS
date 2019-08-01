@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=480,user-scalable=0" />
-    <title>@Html.Raw(ViewData["Title"])</title>
+    <title>@Html.Raw(ViewData["Title"]) - @Html.Raw(cfg["sys_name"])</title>
     <meta name="description" content="@Html.Raw(cfg["sys_description"])">
     <meta name="keywords" content="@Html.Raw(cfg["sys_keywords"])"><environment include="Development">
     <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.css" />
@@ -22,13 +22,13 @@
 </head>
 <body style="min-width:480px">
 @RenderBody()<environment include="Development">
-<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script src="~/scripts/jquery/dist/jquery.js"></script>
 <script src="~/scripts/jqweui/dist/js/swiper.min.js"></script>
 <script src="~/scripts/jqweui/dist/js/jquery-weui.js"></script>
 <script src="~/scripts/signalr/dist/browser/signalr.js"></script>
 <script src="~/scripts/ace/acewe.js"></script></environment><environment exclude="Development">
-<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script src="~/scripts/jquery/dist/jquery.min.js"></script>
 <script src="~/scripts/jqweui/dist/js/swiper.min.js"></script>
 <script src="~/scripts/jqweui/dist/js/jquery-weui.min.js"></script>

@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Acesoft.Web.WeChat
         private IMenuService menuService;
         private IMediaService mediaService;
         private INewsService newsService;
+        private IActivityService activityService;
         private Wx_App app;
 
 		public WeChatController(
@@ -34,6 +36,7 @@ namespace Acesoft.Web.WeChat
             IMenuService menuService,
             IMediaService mediaService,
             INewsService newsService,
+            IActivityService activityService,
             IUserService userService,
             IScaleService scaleService,
             IUAService uAService,
@@ -48,6 +51,7 @@ namespace Acesoft.Web.WeChat
             this.menuService = menuService;
             this.mediaService = mediaService;
             this.newsService = newsService;
+            this.activityService = activityService;
 		}
 
         #region external
@@ -105,7 +109,8 @@ namespace Acesoft.Web.WeChat
 
 			var maxRecordCount = 10;
 			var str = new StreamReader(Request.Body).ReadToEnd();
-			var h = new WeChatHandler(new MemoryStream(Encoding.UTF8.GetBytes(str)), model, maxRecordCount);
+			var h = new WeChatHandler(HttpContext.RequestServices, app,
+                new MemoryStream(Encoding.UTF8.GetBytes(str)), model, maxRecordCount);
 
 			try
 			{
@@ -207,6 +212,16 @@ namespace Acesoft.Web.WeChat
 			var mediaId = data.Value<long>("mediaid");
 			return Ok(mediaService.SendMedia(app, mediaId));
 		}
+        #endregion
+
+        #region activity
+        [HttpPost, MultiAuthorize]
+        public IActionResult CreateQrCode([FromBody]JObject data)
+        {
+            var activityIds = data.Value<string>("activityids");
+            activityService.CreateQrCode(app, activityIds);
+            return Ok(null);
+        }
         #endregion
     }
 }

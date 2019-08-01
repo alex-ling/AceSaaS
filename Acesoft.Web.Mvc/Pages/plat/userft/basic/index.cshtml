@@ -9,7 +9,7 @@
 </div>
 <div class="alert alert-info">请完善以下信息，方便我们更好的为您服务！</div>
 @{ 
-    Ace.View().Id("view").Css("front").Ajax(ds => ds.Load("rbac", "regist").HttpPut("auth", "putuser")).Content(
+    Ace.View().Id("view").Css("front").Ajax(ds => ds.Load("rbac.regist").HttpPut("auth", "putuser")).Content(
     @<div class="container-fluid">
         <div class="pt20 pb10 bd-b-dashed">基本信息</div>
         <div class="row">

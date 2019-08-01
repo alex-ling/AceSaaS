@@ -3,6 +3,7 @@ using System.Linq;
 
 using Acesoft.Data;
 using Acesoft.Web.WeChat.Entity;
+using Microsoft.Extensions.Logging;
 using Senparc.Weixin.Entities;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Entities;
@@ -12,6 +13,13 @@ namespace Acesoft.Web.WeChat.Services
 {
 	public class MenuService : Service<Wx_Menu>, IMenuService
 	{
+        private readonly ILogger<MenuService> logger;
+
+        public MenuService(ILogger<MenuService> logger)
+        {
+            this.logger = logger;
+        }
+
 		public IEnumerable<Wx_Menu> GetMenus(long appId)
 		{
 			return Session.Query<Wx_Menu>(
@@ -57,7 +65,7 @@ namespace Acesoft.Web.WeChat.Services
                     menu.button.Add(GetButton(btn));
                 }
             });
-
+            
             return CommonApi.CreateMenu(app.AppId, menu);
         }
 
@@ -119,10 +127,23 @@ namespace Acesoft.Web.WeChat.Services
                         name = b.Name,
                         key = b.Value
                     };
+                case WxButton.media_id:
+                    return new SingleMediaIdButton
+                    {
+                        name = b.Name,
+                        media_id = b.Value
+                    };
+                case WxButton.view_limited:
+                    return new SingleViewLimitedButton
+                    {
+                        name = b.Name,
+                        media_id = b.Value
+                    };
                 default:
                     return new SingleClickButton
                     {
-                        name = b.Name
+                        name = b.Name,
+                        key = b.Value
                     };
             }
         }

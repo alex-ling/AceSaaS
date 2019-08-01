@@ -59,14 +59,14 @@
     <div class="row ph15">
         <div class="fl pr15" style="width:16%">
             <div class="ax-sidebar" style="height:850px">
-                @*<div class="sidebar-nav">
+                <div class="sidebar-nav">
                     <div class="nav-item @if (homeUrl.StartsWith(url)){ @("active") }">
                         <a href="@homeUrl">
                             <span class="nav-item-icon glyphicon glyphicon-home"></span>
                             <span class="nav-item-text">用户首页</span>
                         </a>
                     </div>
-                </div>*@
+                </div>
                 @foreach (var obj in modules.Where(o => !o.ParentId.HasValue).OrderBy(o => o.OrderNo))
                 {
                     var childs = modules.Where(o => o.ParentId == obj.Id).OrderBy(o => o.OrderNo);

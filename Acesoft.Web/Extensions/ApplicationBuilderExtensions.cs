@@ -36,6 +36,10 @@ namespace Acesoft.Web
                 ContentTypeProvider = new FileExtensionContentTypeProvider(new Dictionary<string, string>
                 {
                     {
+                        ".json",
+                        "application/json"
+                    },
+                    {
                         ".apk",
                         "application/vnd.android.package-archive"
                     },
