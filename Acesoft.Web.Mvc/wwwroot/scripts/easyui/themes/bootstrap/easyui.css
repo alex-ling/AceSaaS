@@ -136,8 +136,8 @@
   font-size: 12px;
   font-weight: bold;
   color: #777;
-  height: 20px;
-  line-height: 20px;
+  height: 16px;
+  line-height: 16px;
 }
 .panel-footer {
   border: 1px solid #D4D4D4;
@@ -213,14 +213,12 @@
 .panel-hright>.panel-header .panel-icon {
   margin-top: 0;
   top: 5px;
-  left: 50%;
-  margin-left: -8px;
 }
 .panel-hleft>.panel-header .panel-title,
 .panel-hright>.panel-header .panel-title {
   position: absolute;
   min-width: 16px;
-  left: 25px;
+  left: 21px;
   top: 5px;
   bottom: auto;
   white-space: nowrap;
@@ -240,7 +238,7 @@
   min-width: 16px;
   left: 21px;
   top: auto;
-  bottom: 0px;
+  bottom: 5px;
   text-align: right;
   white-space: nowrap;
   word-wrap: normal;
@@ -624,10 +622,10 @@
   display: inline-block;
   vertical-align: top;
   width: auto;
-  line-height: 28px;
+  line-height: 24px;
   font-size: 12px;
   padding: 0;
-  margin: 0 6px;
+  margin: 0 4px;
 }
 .l-btn-icon {
   display: inline-block;
@@ -656,16 +654,16 @@
   background-position: right center;
 }
 .l-btn-icon-left .l-btn-text {
-  margin: 0 6px 0 26px;
+  margin: 0 4px 0 24px;
 }
 .l-btn-icon-left .l-btn-icon {
-  left: 6px;
+  left: 4px;
 }
 .l-btn-icon-right .l-btn-text {
-  margin: 0 26px 0 6px;
+  margin: 0 24px 0 4px;
 }
 .l-btn-icon-right .l-btn-icon {
-  right: 6px;
+  right: 4px;
 }
 .l-btn-icon-top .l-btn-text {
   margin: 20px 4px 0 4px;
@@ -685,7 +683,7 @@
   margin: 0 0 0 -8px;
 }
 .l-btn-left .l-btn-empty {
-  margin: 0 6px;
+  margin: 0 4px;
   width: 16px;
 }
 .l-btn-plain:hover {
@@ -695,7 +693,7 @@
   outline: #0000FF dotted thin;
 }
 .l-btn-large .l-btn-text {
-  line-height: 44px;
+  line-height: 40px;
 }
 .l-btn-large .l-btn-icon {
   width: 32px;
@@ -726,7 +724,7 @@
   margin: 0 0 0 -16px;
 }
 .l-btn-large .l-btn-left .l-btn-empty {
-  margin: 0 6px;
+  margin: 0 4px;
   width: 32px;
 }
 .l-btn {
@@ -817,7 +815,7 @@
   font-size: 12px;
   border: 0;
   margin: 0;
-  padding: 0 4px;
+  padding: 4px;
   white-space: normal;
   vertical-align: top;
   outline-style: none;
@@ -825,8 +823,6 @@
   -moz-border-radius: 5px 5px 5px 5px;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  height: 28px;
-  line-height: 28px;
 }
 .textbox textarea.textbox-text {
   line-height: normal;
@@ -885,8 +881,8 @@
 .textbox-label {
   display: inline-block;
   width: 80px;
-  height: 30px;
-  line-height: 30px;
+  height: 22px;
+  line-height: 22px;
   vertical-align: middle;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1029,8 +1025,7 @@
 .combobox-group,
 .combobox-stick {
   font-size: 12px;
-  padding: 6px 4px;
-  line-height: 20px;
+  padding: 3px;
 }
 .combobox-item-disabled {
   opacity: 0.5;
@@ -1762,7 +1757,7 @@
 }
 .datagrid-header-row,
 .datagrid-row {
-  height: 32px;
+  height: 25px;
 }
 .datagrid-header td,
 .datagrid-body td,
@@ -1975,8 +1970,8 @@
 }
 .datagrid-moving-proxy {
   border: 1px solid #0070a9;
-  height: 32px;
-  line-height: 32px;
+  height: 25px;
+  line-height: 25px;
   padding: 0 4px;
 }
 .propertygrid .datagrid-view1 .datagrid-body td {
@@ -2103,7 +2098,6 @@
 }
 .pagination {
   zoom: 1;
-  padding: 2px;
 }
 .pagination table {
   float: left;
@@ -2124,7 +2118,7 @@
   border-style: solid;
   margin: 0 2px;
   padding: 2px;
-  width: 3em;
+  width: 2em;
   height: auto;
   text-align: center;
   font-size: 12px;
@@ -2154,7 +2148,7 @@
   margin: 0;
   padding: 0 .5em;
   width: auto;
-  min-width: 28px;
+  min-width: 24px;
 }
 .pagination-first {
   background: url('images/pagination_icons.png') no-repeat 0 center;
@@ -2200,19 +2194,19 @@
 }
 .calendar-header {
   position: relative;
-  height: 28px;
+  height: 22px;
 }
 .calendar-title {
   text-align: center;
-  height: 28px;
+  height: 22px;
 }
 .calendar-title span {
   position: relative;
   display: inline-block;
-  top: 0px;
+  top: 2px;
   padding: 0 3px;
-  height: 28px;
-  line-height: 28px;
+  height: 18px;
+  line-height: 18px;
   font-size: 12px;
   cursor: pointer;
   -moz-border-radius: 5px 5px 5px 5px;
@@ -2225,9 +2219,9 @@
 .calendar-nextyear {
   position: absolute;
   top: 50%;
-  margin-top: -8px;
-  width: 16px;
-  height: 16px;
+  margin-top: -7px;
+  width: 14px;
+  height: 14px;
   cursor: pointer;
   font-size: 1px;
   -moz-border-radius: 5px 5px 5px 5px;
@@ -2290,15 +2284,14 @@
   padding-bottom: 5px;
 }
 .calendar-menu-year {
-  width: 80px;
-  line-height: 26px;
+  width: 50px;
   text-align: center;
   border-width: 1px;
   border-style: solid;
   outline-style: none;
   resize: none;
   margin: 0;
-  padding: 0;
+  padding: 2px;
   font-weight: bold;
   font-size: 12px;
   -moz-border-radius: 5px 5px 5px 5px;
@@ -2308,8 +2301,8 @@
 .calendar-menu-prev,
 .calendar-menu-next {
   display: inline-block;
-  width: 25px;
-  height: 28px;
+  width: 21px;
+  height: 21px;
   vertical-align: top;
   cursor: pointer;
   -moz-border-radius: 5px 5px 5px 5px;
@@ -2363,7 +2356,7 @@
 }
 .calendar-body th {
   background: #F5F5F5;
-  padding: 4px 0;
+  padding: 2px 0;
 }
 .calendar-hover,
 .calendar-nav-hover,
@@ -2382,10 +2375,10 @@
   padding: 0;
 }
 .datebox-calendar-inner {
-  height: 250px;
+  height: 180px;
 }
 .datebox-button {
-  padding: 4px 0;
+  padding: 0 5px;
   text-align: center;
 }
 .datebox-button a {
