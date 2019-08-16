@@ -1,0 +1,57 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@inject Tenant Tenant
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.activity").Form(new {
+        name = "",
+        poster = "",
+        qrcode = "",
+        dstart = "",
+        dend = "",
+        ref_id = "",
+        remark = ""
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r">活动名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">报名班级：</div>
+                <div class="col-xs-6">@Ace.ComboTree().Name("ref_id").Width("100%").Required().Ajax(ds => ds.DataSource("st.class_tree").HttpGet())</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">有效期：</div>
+                <div class="col-xs-3">@Ace.DateBox().Name("dstart").Width("100%").Required().Prompt("起始日期")</div>
+                <div class="col-xs-3">@Ace.DateBox().Name("dend").Width("100%").Required().Prompt("结束日期")</div>
+                <div class="col-xs-4 text-warning">在有效期内方可参与活动</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextArea().Name("remark").Width("100%").Height(80)</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 海报图片：</div>
+                <div class="col-xs-6" style="min-height:80px">
+                    @(Ace.UploadBox().Name("poster").Width("100%").Max(1).Filters(f =>
+                    {
+                        f.max_file_size = "800kb";
+                        f.mime_types.Add(new MineType 
+                        {
+                            title = "图片文件",
+                            extensions = "jpg,jpeg,gif,png,bmp"
+                        });
+                    }).Dir($"/uploads/{Tenant.Name}/wechat/"))
+                </div>
+                <div class="col-xs-4 text-warning">请在海报中包含活动二维码</div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

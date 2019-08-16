@@ -18,7 +18,7 @@ namespace Acesoft.Web.Pay.Services
             return Session.QueryFirst<Pay_Order>(sql, new { refId });
         }
 
-        public int Update(long id, decimal payMoney, string payTime, int payType)
+        public int Update(long id, decimal payMoney, string payTime, PayType payType)
         {
             var sql = "update pay_order set " +
                 "dupdate=@dupdate," +
@@ -33,24 +33,8 @@ namespace Acesoft.Web.Pay.Services
                 dupdate = DateTime.Now,
                 payMoney,
                 payTime,
-                payType
+                payType = (int)payType
             });
-        }
-
-        public async Task<int> AlipayNotify(IAlipayNotifyClient client, long id)
-        {
-            try
-            {
-                var notify = await client.ExecuteAsync<AlipayTradePagePayReturn>(App.Context.Request);
-                return Update(id,
-                    notify.TotalAmount.ToObject<decimal>(),
-                    notify.Timestamp,
-                    (int)PayType.Alipay);
-            }
-            catch
-            {
-                return 0;
-            }
         }
     }
 }

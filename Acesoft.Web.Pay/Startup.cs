@@ -3,6 +3,8 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
 using Essensoft.AspNetCore.Payment.Alipay;
+using Essensoft.AspNetCore.Payment.WeChatPay;
+using Essensoft.AspNetCore.Payment.UnionPay;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ namespace Acesoft.Web.Pay
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IOrderService, OrderService>();
+            services.AddSingleton<IAlipayService, AlipayService>();
 
             //引入HttpClient API证书的使用(仅QPay / WeChatPay的部分API使用到)
             //services.AddHttpClient("qpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
@@ -37,10 +40,10 @@ namespace Acesoft.Web.Pay
 
             // 引入Payment 依赖注入
             services.AddAlipay();
+            services.AddWeChatPay();
+            services.AddUnionPay();
             /*services.AddJDPay();
             services.AddQPay();
-            services.AddUnionPay();
-            services.AddWeChatPay();
             services.AddLianLianPay();*/
 
             // config
@@ -62,6 +65,22 @@ namespace Acesoft.Web.Pay
                     else if (section.Key.StartsWith("alipay"))
                     {
                         services.Configure<AlipayOptions>(section.Key, section);
+                    }
+                    else if (section.Key == "wepay")
+                    {
+                        services.Configure<WeChatPayOptions>(section);
+                    }
+                    else if (section.Key.StartsWith("wepay"))
+                    {
+                        services.Configure<WeChatPayOptions>(section.Key, section);
+                    }
+                    else if (section.Key == "unionpay")
+                    {
+                        services.Configure<UnionPayOptions>(section);
+                    }
+                    else if (section.Key.StartsWith("unionpay"))
+                    {
+                        services.Configure<UnionPayOptions>(section.Key, section);
                     }
                 }
             });

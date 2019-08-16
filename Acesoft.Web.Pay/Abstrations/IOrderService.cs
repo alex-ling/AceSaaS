@@ -12,8 +12,6 @@ namespace Acesoft.Web.Pay
     public interface IOrderService : IService<Pay_Order>
     {
         Pay_Order GetByRef(long refId);
-        int Update(long id, decimal payMoney, string payTime, int payType);
-
-        Task<int> AlipayNotify(IAlipayNotifyClient client, long id);
+        int Update(long id, decimal payMoney, string payTime, PayType payType);
     }
 }

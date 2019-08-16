@@ -14,6 +14,7 @@ using Acesoft.Rbac;
 using Acesoft.Web.Controllers;
 using Acesoft.Web.WeChat.Entity;
 using Acesoft.Web.WeChat.WeOpen;
+using Acesoft.Web.Mvc;
 
 namespace Acesoft.Web.WeChat
 {
@@ -27,6 +28,7 @@ namespace Acesoft.Web.WeChat
         private IMediaService mediaService;
         private INewsService newsService;
         private IActivityService activityService;
+        private IVoteService voteService;
         private Wx_App app;
 
 		public WeChatController(
@@ -37,6 +39,7 @@ namespace Acesoft.Web.WeChat
             IMediaService mediaService,
             INewsService newsService,
             IActivityService activityService,
+            IVoteService voteService,
             IUserService userService,
             IScaleService scaleService,
             IUAService uAService,
@@ -52,6 +55,7 @@ namespace Acesoft.Web.WeChat
             this.mediaService = mediaService;
             this.newsService = newsService;
             this.activityService = activityService;
+            this.voteService = voteService;
 		}
 
         #region external
@@ -221,6 +225,18 @@ namespace Acesoft.Web.WeChat
             var activityIds = data.Value<string>("activityids");
             activityService.CreateQrCode(app, activityIds);
             return Ok(null);
+        }
+        #endregion
+
+        #region vote
+        [HttpPost, Action("微信投票")]
+        public IActionResult PostVote([FromBody]JObject data)
+        {
+            var voteItemId = data.GetValue<long>("voteitemid");
+            var openId = data.GetValue<string>("openid");
+            var content = data.GetValue<string>("content", "");
+            var result = voteService.Vote(voteItemId, openId, content);
+            return Ok(result);
         }
         #endregion
     }

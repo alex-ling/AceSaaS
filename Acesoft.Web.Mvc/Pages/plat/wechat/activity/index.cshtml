@@ -1,0 +1,71 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信推广";
+    Layout = "_shared/back";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").For("grid").Controls(query =>
+            {
+                Ace.ComboBox().Id("appid").AppendTo(query).Label("公众号：").Width("220px")
+                    .Ajax(ds => ds.DataSource("wx.appgzh_list").Events(e => e.OnLoadSuccess("onAppLoad")).HttpGet())
+                    .Events(e => e.OnChange("onAppChange"));
+                Ace.TextBox().Name("keyword").AppendTo(query).Label("　关键字：");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("生成活动二维码").IconCls("fa fa-qrcode").Click("onQrCode()");
+                Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("AX.gridAdd('#grid')");
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.TreeGrid().Id("grid").TreeField("title").AppendTo(ctls).Pagination()
+            .DataSource("wx.activity").Ajax(ds => ds.HttpGet()).Columns(c =>
+            {
+                c.Add().Field("dcreate").Title("创建日期").Width(5).Format("date:yyyy-MM-dd");
+                c.Add().Field("name").Title("活动名称").Width(10);
+                c.Add().Field("dvalid").Title("有效期").Width(6);
+                c.Add().Field("qrcode").Title("二维码").Width(3).Format("href:查看|/api/draw/getqrcode?text={0}");
+                c.Add().Field("poster").Title("海报").Width(3).Format("href:查看");
+                c.Add().Field("url").Title("报名").Width(3).Format("href:生成|javascript:onApply('{0}')");
+                c.Add().Field("remark").Title("备注").Width(15).Format("text");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}
+<script>
+    function onApply(url) {
+        AX.dialog('生成报名链接', '/plat/wechat/activity/url?appid=' + getAppId() + '&url=' + url, null, 650, 400);
+    }
+    function getAppId() {
+        return $('#appid').combobox('getValue');
+    }
+    function onAppLoad() {
+        $('#appid').combobox('setIndex', 0);
+    }
+    function onAppChange(val) {
+        $('#grid').treegrid('load', { _appid: val });
+    }
+    function onQrCode() {
+        var ids = $('#grid').datagrid('getCheckedId');
+        if (ids == '') return;
+        AX.ajax({
+            url: AX.api({
+                api: 'wechat/createqrcode',
+                q: 'appid=' + getAppId()
+            }),
+            type: 'post',
+            data: { activityids: ids },
+            cb: function () {
+                AX.ok()
+                $('#grid').treegrid('reload')
+            }
+        });
+    }
+</script>

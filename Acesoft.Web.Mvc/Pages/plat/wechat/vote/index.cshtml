@@ -1,0 +1,73 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "微信投票";
+    Layout = "_shared/back";
+
+    Ace.Layout().Fit().Items(lay =>
+    {
+        lay.Add().Region(Region.west).Border(false).Split().MinWidth(200).Width(250).MaxWidth(300).Controls(wst =>
+        {
+            Ace.Layout().AppendTo(wst).Fit().Items(layout =>
+            {
+                layout.Add().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Toolbar().AppendTo(ctls).Controls(c =>
+                    {
+                        Ace.Button().AppendTo(c).Text("添加").IconCls("fa fa-plus").Click("AX.treeAdd('#tree')");
+                        Ace.Button().AppendTo(c).Text("编辑").IconCls("fa fa-edit").Click("AX.treeEdit('#tree', -1)");
+                        Ace.Button().AppendTo(c).Text("删除").IconCls("fa fa-remove").Click("AX.treeDel('#tree', 0)");
+                    });
+                });
+                layout.Add().Css("oy").Region(Region.center).Controls(ctls =>
+                {
+                    Ace.Tree().AppendTo(ctls).Id("tree").Root("投票列表").Edit("vote")
+                        .DataSource("wx.vote").Ajax(ds => ds.HttpGet())
+                        .Events(e => e.OnSelect("onSelect"));
+                });
+            });
+        });
+
+        lay.Add().Region(Region.center).Border(false).Controls(cnt =>
+        {
+            Ace.Layout().AppendTo(cnt).Fit().Items(layout =>
+            {
+                layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+                {
+                    Ace.Search().Id("search").AppendTo(ctls).For("grid").Controls(query =>
+                    {
+                        Ace.TextBox().Name("keyword").AppendTo(query).Label("关键字：");
+                    })
+                    .Tools(tools =>
+                    {
+                        Ace.Button().AppendTo(tools).Text("添加").IconCls("fa fa-plus").Click("gridAdd('')");
+                        Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+                    });
+                });
+                layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+                {
+                    Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination()
+                    .DataSource("wx.voteitem").Ajax(ds => ds.HttpGet()).Columns(c =>
+                    {
+                        c.Add().Field("name").Title("名称").Width(10);
+                        c.Add().Field("photo").Title("图片").Width(5).Format("href:查看");
+                        c.Add().Field("url").Title("链接Url").Width(5).Format("href:查看");
+                        c.Add().Field("vote_count").Title("投票次数").Width(5).Align(Align.center);
+                        c.Add().Field("remark").Title("备注").Width(10);
+                        c.Add().Field("action").Title("操作").Format("button");
+                    });
+                });
+            });
+        });
+    }).Render();
+}
+<script>
+    function onSelect(node) {
+        var level = $('#tree').tree('getLevel', node.target);
+        if (level == 2) $('#grid').datagrid('load', { _voteid: node.id });
+    }
+    function gridAdd() {
+        var id = $('#tree').tree('getSelectedId', { level: 2 });
+        if (id != null) AX.gridAdd('#grid', AX.format('voteid={0}', id));
+    }
+</script>

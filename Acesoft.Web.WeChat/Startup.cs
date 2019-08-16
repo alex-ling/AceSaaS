@@ -30,6 +30,7 @@ namespace Acesoft.Web.WeChat
             services.AddSingleton<IMenuService, MenuService>();
             services.AddSingleton<INewsService, NewsService>();
             services.AddSingleton<IActivityService, ActivityService>();
+            services.AddSingleton<IVoteService, VoteService>();
 
             // wechat config.
             var configuration = ConfigContext.GetJsonConfig(opts =>

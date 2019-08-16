@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Essensoft.AspNetCore.Payment.Alipay" Version="2.3.2" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.Alipay" Version="2.4.3" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.UnionPay" Version="2.4.3" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="2.4.3" />
   </ItemGroup>
 
   <ItemGroup>

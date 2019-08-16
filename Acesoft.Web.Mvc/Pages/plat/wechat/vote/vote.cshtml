@@ -1,0 +1,62 @@
+@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.vote").Form(new
+    {
+        name = "",
+        desc = "",
+        votetype = "",
+        votecount = "",
+        state = "",
+        remark = "",
+        dstart = "",
+        dend = ""
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r">名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">说明：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("desc").Width("100%")</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">投票开始：</div>
+                <div class="col-xs-6">@Ace.DateBox().Name("dstart").Width("100%").Required()</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">投票结束：</div>
+                <div class="col-xs-6">@Ace.DateBox().Name("dend").Width("100%").Required()</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">投票方式：</div>
+                <div class="col-xs-6">@Ace.ComboBox().Name("votetype").Width("100%").PanelHeight(100).Ajax(ds => ds.Dict("WXVOTE").HttpGet())</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">最大投票数：</div>
+                <div class="col-xs-6">@Ace.NumberSpinner().Name("votecount").Width("100%")</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">发布状态：</div>
+                <div class="col-xs-6">@Ace.ComboBox().Name("state").Width("100%").PanelHeight(100).Ajax(ds => ds.Dict("PUBSTATE").HttpGet())</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
