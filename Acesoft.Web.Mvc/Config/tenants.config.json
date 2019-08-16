@@ -5,16 +5,9 @@
   "tenants": [
     {
       "name": "ace",
-      "hostnames": [ "localhost:5000" ],
+      "hostnames": [ "localhost:84", "localhost:5000" ],
       "indexpage": "plat/index",
-      "modules": [ "Cloud", "IoT" ],
-      "theme": ""
-    },
-    {
-      "name": "xile",
-      "hostnames": [ "localhost:82" ],
-      "indexpage": "plat/index",
-      "modules": [ "Cloud", "IoT" ],
+      "modules": [ "Cloud", "IoT", "Pay", "WebUI", "WeChat" ],
       "theme": ""
     }
   ]

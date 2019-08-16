@@ -20,6 +20,7 @@ namespace Acesoft.Web.Pay
         {
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<IAlipayService, AlipayService>();
+            services.AddSingleton<IWepayService, WepayService>();
 
             //引入HttpClient API证书的使用(仅QPay / WeChatPay的部分API使用到)
             //services.AddHttpClient("qpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
@@ -41,7 +42,7 @@ namespace Acesoft.Web.Pay
             // 引入Payment 依赖注入
             services.AddAlipay();
             services.AddWeChatPay();
-            services.AddUnionPay();
+            //services.AddUnionPay();
             /*services.AddJDPay();
             services.AddQPay();
             services.AddLianLianPay();*/
