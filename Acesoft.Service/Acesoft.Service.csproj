@@ -6,7 +6,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acesoft.Core\Acesoft.Core.csproj" />
+    <ProjectReference Include="..\Acesoft.Util\Acesoft.Util.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SpreadsheetGear">
+      <HintPath>..\Lib\SpreadsheetGear.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>System.Data</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess">
+      <HintPath>System.ServiceProcess</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>System.Xml</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

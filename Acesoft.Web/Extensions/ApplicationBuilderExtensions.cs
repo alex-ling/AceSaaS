@@ -11,6 +11,8 @@ using Acesoft.Web.Multitenancy;
 using Acesoft.Web.Modules;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.StaticFiles;
+using Acesoft.Web.Middleware;
 
 namespace Acesoft.Web
 {
@@ -21,9 +23,36 @@ namespace Acesoft.Web
             var services = app.ApplicationServices;
             var env = services.GetRequiredService<IHostingEnvironment>();
 
-            // use common
+            // cookie
+            app.UseCookiePolicy();
+
+            // use webapi result to request.
+            app.UseMiddleware<ExceptionMiddleware>();
+
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = new FileExtensionContentTypeProvider(new Dictionary<string, string>
+                {
+                    {
+                        ".json",
+                        "application/json"
+                    },
+                    {
+                        ".apk",
+                        "application/vnd.android.package-archive"
+                    },
+                    {
+                        ".nupkg",
+                        "application/zip"
+                    },
+                    {
+                        ".exe",
+                        "application/octet-stream"
+                    }
+                })
+            });
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(App.GetLocalPath("logs", true)),

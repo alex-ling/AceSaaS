@@ -1,4 +1,6 @@
-namespace Acesoft.Web.Cloud
+using System;
+
+namespace Acesoft.Web.Cloud.Config
 {
 	public class CloudAccess
 	{

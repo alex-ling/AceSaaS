@@ -39,20 +39,30 @@ namespace Acesoft.Web.Modules
                     opts.ConfigPath = moduleFolder;
                 });
 
-                var assembly = Assembly.LoadFrom(Path.Combine(moduleFolder, module.MainAssembly));
-                var startupType = assembly.GetTypes().FirstOrDefault(t => typeof(IStartup).IsAssignableFrom(t));
-                var startup = (IStartup)Dynamic.GetInstanceCreator(startupType)();
+                Type startupType = null;
+                if (module.StartupType.HasValue())
+                {
+                    // auto load startup type directly.
+                    startupType = Type.GetType(module.StartupType);
+                }
+                if (startupType == null)
+                {
+                    var assembly = Assembly.LoadFrom(Path.Combine(moduleFolder, module.MainAssembly));
+                    startupType = assembly.GetTypes().FirstOrDefault(t => typeof(IStartup).IsAssignableFrom(t));
+
+                    // load mvc ApplicationPart
+                    var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
+                    foreach (var part in partFactory.GetApplicationParts(assembly))
+                    {
+                        logger?.LogDebug($"Found mvc application part: {part.Name}.");
+                        mvcBuilder.PartManager.ApplicationParts.Add(part);
+                    }
+                }
 
                 // this simple add/replace module.
+                var startup = (IStartup)Dynamic.GetInstanceCreator(startupType)();
                 Modules[module.Name] = new ModuleWarpper(module, startup);
                 logger.LogDebug($"Found module {module.Name} with type: {startupType.FullName}.");
-                
-                var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
-                foreach (var part in partFactory.GetApplicationParts(assembly))
-                {
-                    logger?.LogDebug($"Found mvc application part: {part.Name}.");
-                    mvcBuilder.PartManager.ApplicationParts.Add(part);
-                }
             }
         }
     }

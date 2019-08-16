@@ -1,0 +1,216 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "工作流设计";
+    Layout = "_shared/back";
+}
+@section toolbar {
+    <a class="btn btn-default btn-xs ml20" href="@Ace.GetAppUrl("wf/index")">
+        <span class="fa fa-chevron-left"></span> 返回
+    </a>
+}
+<style>
+    .back{background:url('/scripts/mxclient/images/grid.gif')}
+    .canvas{height:100%;overflow:hidden}
+</style>
+@{ 
+    Ace.Layout().Fit().Items(lay =>
+    {
+        lay.Add().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            var buttons = "save=&nbsp;保存,-,undo=&nbsp;撤销,redo_repeat=&nbsp;重做,-,"
+                + "copy=&nbsp;复制,cut=&nbsp;剪切,paste=&nbsp;粘贴,delete_remove=删除,-,"
+                + "group_check-square=&nbsp;分组,ungroup_check-square-o=&nbsp;取消,-,"
+                + "zoomIn_search-plus=&nbsp;放大,zoomOut_search-minus=&nbsp;缩小,actualSize_search=&nbsp;实际,fit_arrows=&nbsp;适应,-,"
+                + "show_camera=&nbsp;显示,print=&nbsp;打印,export_download=&nbsp;导出";
+            Ace.Toolbar().AppendTo(ctls).Click("toolbar_click").Buttons(buttons);
+        });
+        lay.Add().Region(Region.west).Width(50).Content(@<div id="toolbox" style="padding:12px;"></div>);
+        lay.Add().Region(Region.center).Border().Css("back").Content(@<div id="graph" class="canvas"></div>);
+        lay.Add().Region(Region.east).Border().Title("缩略图").Collapsible(false).Width(200).Controls(est =>
+        {
+            Ace.Layout().AppendTo(est).Fit().Items(layout =>
+            {
+                layout.Add().Region(Region.north).Border(false).Title("图例").Css("oy").Height(150).Content(
+                    @<div id="outline" style="padding:0;margin:0;height:100%;overflow:hidden">
+                    </div>
+                );
+                layout.Add().Region(Region.center).Border(false).Title("属性").Css("oy").Content(
+                    @<table id="pg" class="easyui-propertygrid" data-options="fit:true,border:false,columns:[[
+                        {title:'名称',field:'name',width:10,sortable:false},
+                        {title:'值',field:'value',width:15,sortable:false,resizable:false,formatter:onFormatter}]],
+                        fitColumns:true,striped:false,idField:'id',pagination:false,rownumbers:false,
+                        singleSelect:true,checkOnSelect:false,selectOnCheck:false,showGroup:false,
+                        onAfterEdit:onAfterEdit"></table>
+                );
+            });
+        });
+    }).Render();
+}
+@section Startup {
+<script type="text/javascript">
+    var mxBasePath = "/scripts/mxclient";
+    var mxCfgXml = mxBasePath + "/config/config.xml";
+    var mxEdgeSrc = mxBasePath + "/images/connector.gif";
+</script>
+<script src="/scripts/mxclient/js/mxClient.js"></script>
+<script>
+    var editor, id = AX.query('wfid'), currentTask;
+    function toolbar_click(action, name) {
+        if (action == "save") {
+            var enc = new mxCodec(mxUtils.createXmlDocument());
+            var node = enc.encode(editor.graph.getModel());
+            var xml = mxUtils.getPrettyXml(node);
+            AX.ajax({
+                type: 'post',
+                url: AX.api({ api: 'flow/postxml' }),
+                data: { processid: id, xml: xml },
+                cb: AX.ok
+            });
+        }
+        else if (action == "export") {
+            var enc = new mxCodec(mxUtils.createXmlDocument());
+            var node = enc.encode(editor.graph.getModel());
+            var xml = mxUtils.getPrettyXml(node);
+            var w = window.open('');
+            w.document.write('<textarea readonly="true" style="width:100%;height:100%">');
+            w.document.write(xml);
+            w.document.write('</textarea>');
+            w.document.close();
+        }
+        else {
+            editor.execute(action);
+        }
+    }
+    function onSelect(t) {
+        var data = [];
+        if (!t) {
+            currentTask = null;
+        }
+        else {
+            currentTask = t;
+
+            data.push({ id: 'id', name: '编号', value: t.id });
+            data.push({ id: 'label', name: '名称', value: editor.graph.getLabel(t), editor: 'text' });
+            if (t.value.nodeName == 'Task') {
+                //data.push({ id: 'x', name: '坐标-X', value: t.geometry.x/*, editor: 'numberbox'*/ });
+                //data.push({ id: 'y', name: '坐标-Y', value: t.geometry.y/*, editor: 'numberbox'*/ });
+                //data.push({ id: 'width', name: '长度', value: t.geometry.width/*, editor: 'numberbox'*/ });
+                //data.push({ id: 'height', name: '高度', value: t.geometry.height/*, editor: 'numberbox'*/ });
+                var type = getAttr(t.value, 'type');
+                if (type != 1 && type != 2) {
+                    data.push({
+                        id: 'type', name: '任务类型', value: type, editor: {
+                            type: 'combobox', options: {
+                                method: 'get',
+                                url: '/api/crud/list?ds=sys.dictitem_list&dict=TASKTYPE&app=plat',
+                                required: true
+                            }
+                        }
+                    });
+                    data.push({
+                        id: 'in', name: '入口类型', value: getAttr(t.value, 'in'), editor: {
+                            type: 'combobox', options: {
+                                method: 'get',
+                                url: '/api/crud/list?ds=sys.dictitem_list&dict=INTYPE&app=plat',
+                                required: true
+                            }
+                        }
+                    });
+                    data.push({
+                        id: 'out', name: '出口类型', value: getAttr(t.value, 'out'), editor: {
+                            type: 'combobox', options: {
+                                method: 'get',
+                                url: '/api/crud/list?ds=sys.dictitem_list&dict=OUTTYPE&app=plat',
+                                required: true
+                            }
+                        }
+                    });
+                    //data.push({ id: 'action', name: '操作名称', value: getAttr(t.value, 'action'), editor: 'text' });
+                    data.push({
+                        id: 'fetch', name: '必须取件', value: getAttr(t.value, 'fetch'), editor: {
+                            type: 'checkbox', options: { on: '1', off: '0' }
+                        }
+                    });
+                }
+            }
+            else if (t.value.nodeName == 'Line') {
+                data.push({
+                    id: 'rule', name: '流转条件', value: getAttr(t.value, 'rule'), editor: {
+                        type: 'textbox', options: { height: 80, multiline: true, prompt: '请填写分支或跳转条件' }
+                    }
+                });
+            }
+        }
+        $('#pg').propertygrid('loadData', data);
+    }
+    function onFormatter(value, row, index) {
+        var field = row['id'];
+        if (field == 'type') return { 0: '普通节点', 3: '会签节点', 4: '循环节点', 5: '子流程节点' }[value];
+        else if (field == 'in') return { 0: '默认', 1: '并行合并(And)', 2: '或合并(Or)', 3: '异合合并(XOr)' }[value];
+        else if (field == 'out') return { 0: '默认', 1: '并行分支(And)', 2: '或分支(Or)', 3: '异合分支(XOr)' }[value];
+        else if (field == 'fetch') return { 0: '否', 1: '是' }[value];
+        else return value;
+    }
+    function getAttr(elt, name, def) {
+        if (elt.getAttribute(name) == null) return def == undefined ? '' : def;
+        else return elt.getAttribute(name);
+    }
+    function onAfterEdit(rowIndex, rowData, changes) {
+        if (changes.value != undefined) {
+            var elt = currentTask.value.cloneNode(true);
+            elt.setAttribute(rowData.id, changes.value);
+            editor.graph.model.setValue(currentTask, elt);
+        }
+    }
+    function onLoad() {
+        AX.ajax({
+            type: 'get',
+            url: AX.api({ api: 'flow/getxml' }),
+            data: { processid: id },
+            cb: function (rv) {
+                if (rv.value == null || rv.value == "") {
+                    var enc = new mxCodec(mxUtils.createXmlDocument());
+                    var node = enc.encode(editor.graph.getModel());
+                    enc.decode(node, editor.graph.getModel())
+                }
+                else {
+                    var doc = mxUtils.parseXml(rv.value);
+                    var dec = new mxCodec(doc);
+                    dec.decode(doc.documentElement, editor.graph.getModel());
+                }
+            }
+        });
+    }
+    $(function () {
+        if (!mxClient.isBrowserSupported()) {
+            mxUtils.error('浏览器不支持！', 200, false);
+        }
+        else {
+            editor = new mxEditor();
+            editor.configure(mxUtils.load(mxCfgXml).getDocumentElement());
+
+            editor.graph.setConnectable(true);
+            editor.graph.connectionHandler.setCreateTarget(true);
+            editor.graph.getSelectionModel().addListener(mxEvent.CHANGE, function (sender, evt) {
+                onSelect(sender.cells[0]);
+            });
+
+            mxGraphHandler.prototype.guidesEnabled = true;
+            mxEdgeHandler.prototype.snapToTerminals = true;
+            mxConnectionHandler.prototype.connectImage = new mxImage(mxEdgeSrc, 16, 16);
+
+            var outln = new mxOutline(editor.graph, $("#outline")[0]);
+            outln.outline.labelsVisible = true;
+            outln.outline.setHtmlLabels(true);
+
+            var s = editor.graph.getStylesheet().getDefaultEdgeStyle();
+            s[mxConstants.STYLE_LABEL_BACKGROUNDCOLOR] = '#FFFFFF';
+            s[mxConstants.STYLE_STROKEWIDTH] = '2';
+            s[mxConstants.STYLE_ROUNDED] = true;
+
+            onLoad();
+        }
+    });
+</script>
+}

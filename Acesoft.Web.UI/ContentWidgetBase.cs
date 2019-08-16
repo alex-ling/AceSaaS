@@ -8,17 +8,9 @@ namespace Acesoft.Web.UI
 {
 	public abstract class ContentWidgetBase : WidgetBase, IContentWidget
 	{
-		public object Data
-		{
-			get;
-			set;
-		}
+		public object Model { get; set; }
 
-		public IHtmlTemplate Template
-		{
-			get;
-			set;
-		}
+		public IHtmlTemplate Template { get; set; }
 
 		public IList<IHtmlContent> Controls
 		{

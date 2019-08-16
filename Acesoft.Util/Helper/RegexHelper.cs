@@ -47,6 +47,15 @@ namespace Acesoft.Util
             return Regex.Matches(str, pattern, options);
         }
 
+        public static void Matchs(string str, string pattern, Action<Match> action)
+        {
+            var matchs = GetMatchValues(str, pattern);
+            foreach (Match m in matchs)
+            {
+                action(m);
+            }
+        }
+
         public static string Replace(string str, string pattern, string replace)
         {
             return Regex.Replace(str, pattern, replace, options);

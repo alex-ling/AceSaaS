@@ -8,71 +8,27 @@ namespace Acesoft.Web.UI.Widgets
 	{
 		public static readonly ScriptEvent OnChange = new ScriptEvent("onChange", "checked");
 
-		public int? Width
-		{
-			get;
-			set;
-		}
+		public int? Width { get; set; }
 
-		public int? Height
-		{
-			get;
-			set;
-		}
+		public int? Height { get; set; }
 
-		public int? HandleWidth
-		{
-			get;
-			set;
-		}
+		public int? HandleWidth { get; set; }
 
-		public bool? Checked
-		{
-			get;
-			set;
-		}
+		public bool? Checked { get; set; }
 
-		public bool? Disabled
-		{
-			get;
-			set;
-		}
+		public bool? Disabled { get; set; }
 
-		public bool? Readonly
-		{
-			get;
-			set;
-		}
+		public bool? Readonly { get; set; }
 
-		public bool? Reversed
-		{
-			get;
-			set;
-		}
+		public bool? Reversed { get; set; }
 
-		public string OnText
-		{
-			get;
-			set;
-		}
+		public string OnText { get; set; }
 
-		public string OffText
-		{
-			get;
-			set;
-		}
+		public string OffText { get; set; }
 
-		public string HandleText
-		{
-			get;
-			set;
-		}
+		public string HandleText { get; set; }
 
-		public string Value
-		{
-			get;
-			set;
-		}
+		public string Value { get; set; }
 
 		public SwitchButton(WidgetFactory ace)
 			: base(ace)

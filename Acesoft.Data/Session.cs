@@ -29,6 +29,10 @@ namespace Acesoft.Data
             this.isolationLevel = isolationLevel;
 
             Connection = store.Option.ConnectionFactory.CreateConnection();
+            if (Connection.State != ConnectionState.Open)
+            {
+                Connection.Open();
+            }
         }
 
         public void BeginTranscation()

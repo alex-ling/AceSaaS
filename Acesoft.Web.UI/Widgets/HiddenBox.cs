@@ -5,17 +5,9 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class HiddenBox : WidgetBase
 	{
-		public string Value
-		{
-			get;
-			set;
-		}
+		public string Value { get; set; }
 
-		public InputType Type
-		{
-			get;
-			set;
-		}
+		public InputType Type { get; set; }
 
 		public HiddenBox(WidgetFactory ace)
 			: base(ace)

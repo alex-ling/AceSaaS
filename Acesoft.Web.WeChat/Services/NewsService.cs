@@ -157,6 +157,10 @@ namespace Acesoft.Web.WeChat.Services
             if (!news.ThumbMediaId.HasValue())
             {
                 var result = mediaService.UploadMedia(app, news.ThumbUrl.TrimStart(','));
+                if (result.ErrorCodeValue != 0)
+                {
+                    throw new AceException(result.errcode.ToString());
+                }
                 news.ThumbMediaId = result.media_id;
                 news.ThumbWxUrl = result.url;
                 UpdateThumbMedia(news);

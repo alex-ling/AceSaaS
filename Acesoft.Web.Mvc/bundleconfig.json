@@ -24,6 +24,7 @@
   {
     "outputFileName": "wwwroot/scripts/ace/css/acewe.min.css",
     "inputFiles": [
+      "wwwroot/content/site.css",
       "wwwroot/scripts/ace/css/acewe.css"
     ]
   },
@@ -45,6 +46,7 @@
     "outputFileName": "wwwroot/scripts/ace/js/acewe.min.js",
     "inputFiles": [
       "wwwroot/scripts/ace/aceweui*.js",
+      "wwwroot/scripts/ace/ace.js",
       "wwwroot/scripts/ace/acewe.js"
     ],
     // Optionally specify minification options

@@ -3,10 +3,9 @@ using System;
 
 namespace Acesoft.Web.UI.Widgets.Fluent
 {
-	public class AccordionBuilder : ListBuilder<Accordion, AccordionItem, AccordionBuilder>
+	public class AccordionBuilder : ListBuilder<Accordion, AccordionBuilder, AccordionItem, AccordionItemBuilder>
 	{
-		public AccordionBuilder(Accordion component)
-			: base(component)
+		public AccordionBuilder(Accordion component) : base(component)
 		{
 		}
 

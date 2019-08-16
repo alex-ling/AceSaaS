@@ -57,6 +57,11 @@ namespace Acesoft.Web.Multitenancy
             });
         }
 
+        public TenantContext GetContext(string tenant)
+        {
+            return contexts[tenant];
+        }
+
         public void ReloadContext(Tenant tenant)
         {
             if (contexts.TryRemove(tenant.Name, out TenantContext context))

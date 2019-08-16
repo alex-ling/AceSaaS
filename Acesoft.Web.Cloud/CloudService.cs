@@ -6,16 +6,20 @@ using Acesoft.Web.Cloud.Aliyun;
 using Acesoft.Web.Cloud.Mail;
 using Acesoft.Web.Cloud.Moji;
 using Acesoft.Web.Cloud.Tencent;
+using Acesoft.Web.Cloud.Config;
+using Acesoft.Web.Multitenancy;
 
 namespace Acesoft.Web.Cloud
 {
 	public class CloudService : ICloudService
 	{
         private CloudConfig cloudConfig;
+        private readonly Tenant tenant;
 
         public CloudService()
         {
-            cloudConfig = ConfigContext.GetConfig<CloudConfig>("", (config, key) =>
+            tenant = App.Context.GetTenantContext().Tenant; 
+            cloudConfig = ConfigContext.GetConfig<CloudConfig>(tenant.Name, (config, key) =>
             {
                 cloudConfig = config;
             });

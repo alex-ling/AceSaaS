@@ -2,12 +2,12 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
     ViewData["Title"] = "安全中心 > 修改密码";
-    Layout = "_shared/body";
+    Layout = "_shared/back";
 }
 @section toolbar {
-    <button class="btn btn-default btn-xs ml20" data-cmd="back">
+    <a class="btn btn-default btn-xs ml20" href="@Ace.GetAppUrl("user/safe/index", "nav")">
         <span class="fa fa-chevron-left"></span> 返回
-    </button>
+    </a>
 }
 <div class="alert alert-info">建议您定期更换密码，设置安全性高的密码可以使帐号更安全。</div>
 @{

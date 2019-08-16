@@ -23,6 +23,7 @@ namespace Acesoft.Platform
             services.AddSingleton<IConfigService, ConfigService>();
             services.AddSingleton<ITableService, TableService>();
             services.AddSingleton<IFieldService, FieldService>();
+            services.AddSingleton<ISeedService, SeedService>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)

@@ -5,11 +5,7 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class TreeNode : TreeNodeWidgetBase<Tree, TreeNode>
 	{
-		public string Url
-		{
-			get;
-			set;
-		}
+		public string Url { get; set; }
 
 		public TreeNode(WidgetFactory ace, Tree tree)
 			: base(ace, tree)

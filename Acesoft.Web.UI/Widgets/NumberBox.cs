@@ -12,47 +12,19 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnParser = new ScriptEvent("parser", "s");
 
-		public int? Min
-		{
-			get;
-			set;
-		}
+		public int? Min { get; set; }
 
-		public int? Max
-		{
-			get;
-			set;
-		}
+		public int? Max { get; set; }
 
-		public int? Precision
-		{
-			get;
-			set;
-		}
+		public int? Precision { get; set; }
 
-		public string DecimalSeparator
-		{
-			get;
-			set;
-		}
+		public string DecimalSeparator { get; set; }
 
-		public string GroupSeparator
-		{
-			get;
-			set;
-		}
+		public string GroupSeparator { get; set; }
 
-		public string Prefix
-		{
-			get;
-			set;
-		}
+		public string Prefix { get; set; }
 
-		public string Suffix
-		{
-			get;
-			set;
-		}
+		public string Suffix { get; set; }
 
 		public NumberBox(WidgetFactory ace)
 			: base(ace)

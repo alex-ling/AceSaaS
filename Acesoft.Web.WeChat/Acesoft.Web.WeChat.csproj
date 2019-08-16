@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.9.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Senparc.Weixin.MP.MVC" Version="7.2.6" />
-    <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.8" />
+    <PackageReference Include="Senparc.Weixin.MP.MVC" Version="7.2.7.2" />
+    <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.10" />
   </ItemGroup>
 
   <ItemGroup>

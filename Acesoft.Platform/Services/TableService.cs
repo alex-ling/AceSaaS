@@ -20,13 +20,23 @@ namespace Acesoft.Platform.Services
 		public Sys_Table Get(string tableName)
 		{
 			var sql = "select * from sys_table where [table]=@tableName";
-			return Session.QueryFirst<Sys_Table>(sql, new
-			{
-                tableName
-            });
+			return Session.QueryFirst<Sys_Table>(sql, new { tableName });
 		}
 
-		public void UpdateCreated(string tableName, int created)
+        public Sys_Table Query(string tableName)
+        {
+            var sql = "select * from sys_table where [table]=@tableName;"
+                + "select * from sys_field where [table]=@tableName and created=1 order by orderno";
+            var reader = Session.QueryMultiple(sql, new { tableName });
+            var table = reader.Read<Sys_Table>(true).SingleOrDefault();
+            if (table != null)
+            {
+                table.Fields = reader.Read<Sys_Field>(true).ToList();
+            }
+            return table;
+        }
+
+        public void UpdateCreated(string tableName, int created)
 		{
 			var sql = "update sys_table set created=@created where [table]=@tableName;" +
                 "update sys_field set created=@created where [table]=@tableName";
@@ -102,7 +112,7 @@ namespace Acesoft.Platform.Services
 			Session.BeginTransaction();
 			try
 			{
-                new SchemaBuilder(Session).DropTable(tableName);
+                new SchemaBuilder(Session).DropTable(table.Table);
 
 				UpdateCreated(table.Table, 0);
 
@@ -124,7 +134,7 @@ namespace Acesoft.Platform.Services
 			Session.BeginTransaction();
 			try
 			{
-                var sb = new SchemaBuilder(Session).AlterTable(tableName, t =>
+                var sb = new SchemaBuilder(Session).AlterTable(table.Table, t =>
                 {
                     foreach (var item in fields)
                     {
@@ -149,7 +159,7 @@ namespace Acesoft.Platform.Services
                         "id");
                 }
 
-                UpdateCreated(tableName, fieldIds, 1);
+                UpdateCreated(table.Table, fieldIds, 1);
 
 				Session.Commit();
 			}
@@ -164,7 +174,7 @@ namespace Acesoft.Platform.Services
 		{
 			var table = Get(tableName);
             Check.Require(table.Created, $"表 [{table.Table}.{table.Name}] 未构建，无需撤销");
-            var fields = fieldService.Gets(tableName, fieldIds);
+            var fields = fieldService.Gets(tableName, fieldIds, 1);
 
 			Session.BeginTransaction();
 			try
@@ -180,10 +190,10 @@ namespace Acesoft.Platform.Services
 
                 foreach (var item in fields)
                 {
-                    sb.AlterTable(table.Name, t => t.DropColumn(item.Field));
+                    sb.AlterTable(table.Table, t => t.DropColumn(item.Field));
                 }
 
-                UpdateCreated(tableName, fieldIds, 0);
+                UpdateCreated(table.Table, fieldIds, 0);
 
 				Session.Commit();
 			}
@@ -207,13 +217,13 @@ namespace Acesoft.Platform.Services
                 case FieldType.varchar:
                 case FieldType.dict:
                 case FieldType.rcode:
-                case FieldType.rkey:
                     return DbType.AnsiString;
 
                 case FieldType.boolean:
                     return DbType.Boolean;
 
                 case FieldType.integer:
+                case FieldType.idict:
                     return DbType.Int32;
 
                 case FieldType.datetime:
@@ -224,6 +234,7 @@ namespace Acesoft.Platform.Services
 
                 case FieldType.key:
                 case FieldType.fkey:
+                case FieldType.rkey:
                     return DbType.Int64;
 
                 default:

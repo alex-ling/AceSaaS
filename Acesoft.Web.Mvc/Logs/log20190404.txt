@@ -1,0 +1,1400 @@
+2019-04-04 15:40:57.051 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-04 15:41:01.158 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-04 15:41:14.756 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/plat  
+2019-04-04 15:41:14.837 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:41:14.872 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-04 15:41:14.877 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-04 15:41:14.893 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-04 15:41:14.894 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-04 15:41:14.896 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-04 15:41:14.909 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-04 15:41:14.909 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-04 15:41:14.909 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-04 15:41:15.076 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-04 15:41:15.078 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-04 15:41:15.081 +08:00 [DBG] Done initialize tentants.
+2019-04-04 15:41:15.081 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:41:15.088 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:41:15.091 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:41:15.094 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:41:15.102 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:41:15.104 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:41:15.222 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:41:15.222 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:41:15.222 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:41:15.222 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:41:15.222 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:41:15.223 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:41:15.223 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:41:15.224 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:41:18.619 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:41:18.648 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:41:18.649 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:41:19.586 +08:00 [DBG] Store has initlialized with database "ace"
+2019-04-04 15:41:19.590 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:41:19.940 +08:00 [DBG] Query 3 users from "ace" store
+2019-04-04 15:41:19.941 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:41:19.941 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:41:19.956 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:41:19.956 +08:00 [DBG] Initalize ISqlMapper for name: ace
+2019-04-04 15:41:19.958 +08:00 [DBG] SqlMapper initalize the folder: D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\SqlMaps
+2019-04-04 15:41:19.968 +08:00 [DBG] CacheManager load FlushSqlMaps!
+2019-04-04 15:41:19.972 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:41:20.126 +08:00 [INF] Executed page /Error in 1502.9401ms
+2019-04-04 15:41:20.127 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:41:20.221 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:41:20.350 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Acesoft.AceException: SqlMapper can't find Scope: sys
+   at Acesoft.Data.SqlMapper.SqlMapper.GetSqlMap(RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 82
+   at Acesoft.Data.SqlMapper.SqlMapper.DoRequest[T](ISession s, RequestContext ctx, Func`2 func) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 96
+   at Acesoft.Data.SqlMapper.SqlMapper.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 313
+   at Acesoft.Data.ISessionExtensions.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\ISessionExtensions.cs:line 68
+   at Acesoft.Platform.Services.ConfigService.GetConfig(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_site.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\site.cshtml:line 4
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 28
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 83
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-04-04 15:41:20.636 +08:00 [INF] Request finished in 5882.2983ms 500 text/html; charset=utf-8
+2019-04-04 15:41:35.242 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/plat  
+2019-04-04 15:41:35.243 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:41:35.243 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:41:35.243 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:41:35.243 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:41:35.243 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:41:35.243 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:41:35.243 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:41:35.246 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:41:35.246 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:41:35.246 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:41:35.246 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:41:35.247 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:41:35.247 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:41:35.247 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:41:35.247 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:41:35.248 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:41:35.249 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:41:35.249 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:41:35.253 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:41:35.254 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:41:35.254 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:41:35.340 +08:00 [INF] Executed page /Error in 91.3477ms
+2019-04-04 15:41:35.340 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:41:35.416 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:41:35.526 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Acesoft.AceException: SqlMapper can't find Scope: sys
+   at Acesoft.Data.SqlMapper.SqlMapper.GetSqlMap(RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 82
+   at Acesoft.Data.SqlMapper.SqlMapper.DoRequest[T](ISession s, RequestContext ctx, Func`2 func) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 96
+   at Acesoft.Data.SqlMapper.SqlMapper.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\SqlMapper.cs:line 313
+   at Acesoft.Data.ISessionExtensions.Query[T](ISession s, RequestContext ctx) in D:\acecms\src\Acesoft.Data.SqlMapper\ISessionExtensions.cs:line 68
+   at Acesoft.Platform.Services.ConfigService.GetConfig(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_site.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\site.cshtml:line 4
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 28
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 83
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-04-04 15:41:35.588 +08:00 [INF] Request finished in 346.1065ms 500 text/html; charset=utf-8
+2019-04-04 15:45:09.431 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-04 15:45:10.900 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-04 15:45:24.224 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:45:24.289 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:45:24.324 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-04 15:45:24.331 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-04 15:45:24.352 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-04 15:45:24.355 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-04 15:45:24.357 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-04 15:45:24.373 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-04 15:45:24.375 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-04 15:45:24.375 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-04 15:45:24.517 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-04 15:45:24.517 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-04 15:45:24.518 +08:00 [DBG] Done initialize tentants.
+2019-04-04 15:45:24.518 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:24.524 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:24.527 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:24.529 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:24.533 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:24.534 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:24.625 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:28.200 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:45:28.229 +08:00 [INF] Authorization failed.
+2019-04-04 15:45:28.238 +08:00 [INF] Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+2019-04-04 15:45:28.249 +08:00 [INF] Executing ChallengeResult with authentication schemes ([]).
+2019-04-04 15:45:28.268 +08:00 [INF] AuthenticationScheme: Cookie was challenged.
+2019-04-04 15:45:28.278 +08:00 [INF] Executed page /plat/index/index in 67.66940000000001ms
+2019-04-04 15:45:28.279 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:28.318 +08:00 [INF] Request finished in 4096.8613ms 302 
+2019-04-04 15:45:28.332 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/account/login?ReturnUrl=%2Fplat%2Findex  
+2019-04-04 15:45:28.333 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:45:28.334 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:28.334 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:28.334 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:28.334 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:28.335 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:28.335 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:28.350 +08:00 [INF] Executing endpoint 'Page: /plat/account/login'
+2019-04-04 15:45:28.867 +08:00 [INF] Route matched with {page = "/plat/account/login", action = "", controller = ""}. Executing page /plat/account/login
+2019-04-04 15:45:28.892 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:28.892 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:29.086 +08:00 [DBG] Store has initlialized with database "ace"
+2019-04-04 15:45:29.088 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:29.473 +08:00 [DBG] Query 3 users from "ace" store
+2019-04-04 15:45:29.475 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:29.475 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:29.489 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:29.490 +08:00 [DBG] Initalize ISqlMapper for name: ace
+2019-04-04 15:45:29.494 +08:00 [DBG] SqlMapper initalize the folder: D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\SqlMaps
+2019-04-04 15:45:29.557 +08:00 [DBG] CacheManager load FlushSqlMaps!
+2019-04-04 15:45:29.560 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:30.051 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:30.053 +08:00 [INF] SqlMapper do request: rbac.query_user_by_username, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:30.065 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_username:userName=guest, Success: False !
+2019-04-04 15:45:30.176 +08:00 [DBG] CacheManager SetCache SqlId: rbac.query_user_by_username:userName=guest
+2019-04-04 15:45:31.170 +08:00 [INF] Executed page /plat/account/login in 2302.8296ms
+2019-04-04 15:45:31.170 +08:00 [INF] Executed endpoint 'Page: /plat/account/login'
+2019-04-04 15:45:31.170 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:31.179 +08:00 [INF] Request finished in 2847.1525ms 200 text/html; charset=utf-8
+2019-04-04 15:45:31.226 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/user/logo.png  
+2019-04-04 15:45:31.230 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:45:31.257 +08:00 [INF] Sending file. Request path: '/user/logo.png'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\user\logo.png'
+2019-04-04 15:45:31.257 +08:00 [INF] Request finished in 31.2793ms 200 image/png
+2019-04-04 15:45:31.275 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/user/s2.png  
+2019-04-04 15:45:31.275 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/user/s1.png  
+2019-04-04 15:45:31.277 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:45:31.278 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/user/s3.png  
+2019-04-04 15:45:31.279 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:45:31.279 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:45:31.432 +08:00 [INF] Sending file. Request path: '/user/s1.png'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\user\s1.png'
+2019-04-04 15:45:31.433 +08:00 [INF] Sending file. Request path: '/user/s2.png'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\user\s2.png'
+2019-04-04 15:45:31.436 +08:00 [INF] Sending file. Request path: '/user/s3.png'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\user\s3.png'
+2019-04-04 15:45:31.453 +08:00 [INF] Request finished in 178.7456ms 200 image/png
+2019-04-04 15:45:31.453 +08:00 [INF] Request finished in 178.367ms 200 image/png
+2019-04-04 15:45:31.454 +08:00 [INF] Request finished in 177.3096ms 200 image/png
+2019-04-04 15:45:37.080 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:82/api/auth/login?ReturnUrl=%2Fplat%2Findex&app=plat application/json 246
+2019-04-04 15:45:37.139 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-04-04 15:45:37.141 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:37.141 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:37.141 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:37.141 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:37.141 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:37.141 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:37.214 +08:00 [INF] Executing endpoint 'Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)'
+2019-04-04 15:45:37.368 +08:00 [INF] Route matched with {action = "Login", controller = "Auth", page = ""}. Executing action Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)
+2019-04-04 15:45:37.376 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:37.376 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:37.521 +08:00 [DBG] Execute WebApi action "用户登录" with "Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)"
+2019-04-04 15:45:37.704 +08:00 [INF] Executing action method Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web) with arguments (["{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\",\r\n  \"persistent\": \"true\",\r\n  \"__RequestVerificationToken\": \"CfDJ8JmUAGG27HxKvFkOYmwdhe5LPVPMwDir9NpyYrUC3YKgSyQhUA5jKgk5YA1OX_LFmECnI_kmaGhZUUGV31TnNPC0QpNSUmVgcoR2TGPfoY0WpLImr7PSNb4iqE5Px6oP38l3AiqUl9AwjKMNHF3esMM\"\r\n}"]) - Validation state: "Valid"
+2019-04-04 15:45:37.718 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:37.718 +08:00 [INF] SqlMapper do request: rbac.query_user_by_username, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:37.718 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_username:userName=admin, Success: False !
+2019-04-04 15:45:37.797 +08:00 [DBG] CacheManager SetCache SqlId: rbac.query_user_by_username:userName=admin
+2019-04-04 15:45:38.014 +08:00 [DBG] Login with the user "289469215771983872:admin"
+2019-04-04 15:45:38.025 +08:00 [INF] AuthenticationScheme: Cookie signed in.
+2019-04-04 15:45:38.033 +08:00 [INF] Executed action method Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 320.973ms.
+2019-04-04 15:45:38.042 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-04 15:45:38.117 +08:00 [INF] Executed action Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web) in 748.78590000000008ms
+2019-04-04 15:45:38.117 +08:00 [INF] Executed endpoint 'Acesoft.Web.Controllers.AuthController.Login (Acesoft.Web)'
+2019-04-04 15:45:38.117 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:38.117 +08:00 [INF] Request finished in 1036.744ms 200 application/json; charset=utf-8
+2019-04-04 15:45:38.150 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:45:38.155 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:38.155 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:38.155 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:38.155 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:38.155 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:38.155 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:38.155 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:38.155 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:45:38.160 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:38.171 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:38.171 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:38.196 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:38.198 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:38.198 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:38.278 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:38.278 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:38.279 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: False !
+2019-04-04 15:45:38.345 +08:00 [DBG] CacheManager SetCache SqlId: rbac.query_user_by_id:id=289469215771983872
+2019-04-04 15:45:38.351 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:38.352 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:45:39.003 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:39.003 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:39.104 +08:00 [INF] Executed page /plat/index/index in 948.7797ms
+2019-04-04 15:45:39.104 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:39.104 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:39.104 +08:00 [INF] Request finished in 954.007ms 200 text/html; charset=utf-8
+2019-04-04 15:45:39.145 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/content/front.css  
+2019-04-04 15:45:39.146 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:45:39.156 +08:00 [INF] Sending file. Request path: '/content/front.css'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\content\front.css'
+2019-04-04 15:45:39.156 +08:00 [INF] Request finished in 10.3944ms 200 text/css
+2019-04-04 15:45:39.158 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:39.158 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:39.158 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:39.158 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:39.159 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:39.159 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:39.161 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:39.682 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:45:39.682 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:39.685 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:39.685 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:39.694 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:39.695 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:39.695 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:40.256 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:40.256 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:40.256 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:45:40.894 +08:00 [INF] Executed page /plat/index/welcome in 1211.6744ms
+2019-04-04 15:45:40.894 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:40.894 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:40.894 +08:00 [INF] Request finished in 1747.7947ms 200 text/html; charset=utf-8
+2019-04-04 15:45:48.627 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:45:48.628 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:48.628 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:48.628 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:48.628 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:48.629 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:48.629 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:48.629 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:48.629 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:45:48.629 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:48.630 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:48.631 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:48.631 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:48.631 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:48.631 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:48.687 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:48.687 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:48.687 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:45:48.688 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:48.688 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:45:48.742 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:48.742 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:48.798 +08:00 [INF] Executed page /plat/index/index in 169.38680000000002ms
+2019-04-04 15:45:48.798 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:48.799 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:48.799 +08:00 [INF] Request finished in 171.1731ms 200 text/html; charset=utf-8
+2019-04-04 15:45:48.847 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:45:48.848 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:48.848 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:48.848 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:48.848 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:48.849 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:48.849 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:48.851 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:48.851 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:45:48.851 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:48.852 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:48.852 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:48.852 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:48.853 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:48.853 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:49.013 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:49.013 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:49.013 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:45:49.014 +08:00 [INF] Executed page /plat/index/welcome in 162.5695ms
+2019-04-04 15:45:49.014 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:49.014 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:49.014 +08:00 [INF] Request finished in 166.5504ms 200 text/html; charset=utf-8
+2019-04-04 15:45:49.114 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:45:49.118 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:45:49.118 +08:00 [INF] Request finished in 3.5541ms 200 image/x-icon
+2019-04-04 15:45:50.268 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:45:50.269 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:50.269 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:50.269 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:50.269 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:50.269 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:50.269 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:50.269 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:50.269 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:45:50.269 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:50.269 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:50.269 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:50.269 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:50.270 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:50.271 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:50.322 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:50.322 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:50.323 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:45:50.323 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:50.323 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:45:50.377 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:50.377 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:50.427 +08:00 [INF] Executed page /plat/index/index in 157.8125ms
+2019-04-04 15:45:50.427 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:50.427 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:50.427 +08:00 [INF] Request finished in 158.8485ms 200 text/html; charset=utf-8
+2019-04-04 15:45:50.488 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:45:50.488 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:50.488 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:50.488 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:50.488 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:50.488 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:50.488 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:50.488 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:50.488 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:45:50.488 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:50.489 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:50.489 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:50.489 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:50.489 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:50.489 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:50.633 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:50.633 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:50.633 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:45:50.633 +08:00 [INF] Executed page /plat/index/welcome in 144.7165ms
+2019-04-04 15:45:50.633 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:50.633 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:50.633 +08:00 [INF] Request finished in 145.7329ms 200 text/html; charset=utf-8
+2019-04-04 15:45:50.735 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:45:50.736 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:45:50.737 +08:00 [INF] Request finished in 1.4885ms 200 image/x-icon
+2019-04-04 15:45:54.748 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:45:54.750 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:54.750 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:54.750 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:54.750 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:54.750 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:54.750 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:54.750 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:54.750 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:45:54.750 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:54.750 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:54.750 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:54.751 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:54.751 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:54.751 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:54.819 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:54.819 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:54.819 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:45:54.819 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:54.819 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:45:54.905 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:54.905 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:54.964 +08:00 [INF] Executed page /plat/index/index in 213.8146ms
+2019-04-04 15:45:54.964 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:45:54.964 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:54.965 +08:00 [INF] Request finished in 216.5329ms 200 text/html; charset=utf-8
+2019-04-04 15:45:55.008 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:45:55.008 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:45:55.008 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:45:55.008 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:45:55.008 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:45:55.008 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:45:55.008 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:45:55.008 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:55.009 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:45:55.009 +08:00 [INF] Authorization was successful.
+2019-04-04 15:45:55.009 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:45:55.009 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:45:55.009 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:45:55.009 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:55.009 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:45:55.184 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:45:55.184 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:45:55.184 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:45:55.184 +08:00 [INF] Executed page /plat/index/welcome in 175.72910000000002ms
+2019-04-04 15:45:55.184 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:45:55.184 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:45:55.184 +08:00 [INF] Request finished in 176.7235ms 200 text/html; charset=utf-8
+2019-04-04 15:45:55.261 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:45:55.270 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:45:55.270 +08:00 [INF] Request finished in 9.6894ms 200 image/x-icon
+2019-04-04 15:46:05.830 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:46:05.830 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:46:05.830 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:46:05.831 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:46:05.831 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:46:05.831 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:46:05.831 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:46:05.831 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:46:05.831 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:46:05.832 +08:00 [INF] Authorization was successful.
+2019-04-04 15:46:05.833 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:46:05.833 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:46:05.834 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:46:05.835 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:05.835 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:46:05.890 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:05.890 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:46:05.890 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:46:05.891 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:05.891 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:46:05.952 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:05.952 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:46:06.004 +08:00 [INF] Executed page /plat/index/index in 172.8753ms
+2019-04-04 15:46:06.004 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:46:06.004 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:46:06.004 +08:00 [INF] Request finished in 174.3302ms 200 text/html; charset=utf-8
+2019-04-04 15:46:06.052 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:46:06.052 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:46:06.052 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:46:06.052 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:46:06.052 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:46:06.053 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:46:06.053 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:46:06.053 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:46:06.053 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:46:06.053 +08:00 [INF] Authorization was successful.
+2019-04-04 15:46:06.053 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:46:06.053 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:46:06.053 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:46:06.054 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:06.054 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:46:06.206 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:06.206 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:46:06.206 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:46:06.206 +08:00 [INF] Executed page /plat/index/welcome in 153.6406ms
+2019-04-04 15:46:06.206 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:46:06.207 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:46:06.207 +08:00 [INF] Request finished in 154.7449ms 200 text/html; charset=utf-8
+2019-04-04 15:46:06.292 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:46:06.295 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:46:06.295 +08:00 [INF] Request finished in 2.6369ms 200 image/x-icon
+2019-04-04 15:46:33.195 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:46:33.196 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:46:33.196 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:46:33.196 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:46:33.197 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:46:33.197 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:46:33.197 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:46:33.197 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:46:33.197 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:46:33.197 +08:00 [INF] Authorization was successful.
+2019-04-04 15:46:33.197 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:46:33.197 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:46:33.197 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:46:33.198 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:33.198 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:46:33.248 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:33.248 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:46:33.248 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:46:33.249 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:33.249 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:46:33.312 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:33.312 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:46:33.362 +08:00 [INF] Executed page /plat/index/index in 165.1312ms
+2019-04-04 15:46:33.362 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:46:33.362 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:46:33.362 +08:00 [INF] Request finished in 166.9383ms 200 text/html; charset=utf-8
+2019-04-04 15:46:33.411 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:46:33.412 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:46:33.412 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:46:33.413 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:46:33.413 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:46:33.413 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:46:33.413 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:46:33.413 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:46:33.413 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:46:33.413 +08:00 [INF] Authorization was successful.
+2019-04-04 15:46:33.413 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:46:33.413 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:46:33.414 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:46:33.414 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:33.414 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:46:33.578 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:46:33.578 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:46:33.578 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:46:33.579 +08:00 [INF] Executed page /plat/index/welcome in 165.6459ms
+2019-04-04 15:46:33.579 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:46:33.579 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:46:33.579 +08:00 [INF] Request finished in 167.9018ms 200 text/html; charset=utf-8
+2019-04-04 15:46:33.682 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:46:33.684 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:46:33.684 +08:00 [INF] Request finished in 2.1399ms 200 image/x-icon
+2019-04-04 15:48:02.518 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:48:02.519 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:48:02.520 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:48:02.520 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:48:02.520 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:48:02.520 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:48:02.520 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:48:02.535 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:48:03.306 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:48:03.306 +08:00 [INF] Authorization was successful.
+2019-04-04 15:48:03.311 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:48:03.311 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:48:03.364 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:48:03.365 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:03.365 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:48:03.515 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:03.515 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:48:03.515 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:48:03.515 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:03.516 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:48:03.632 +08:00 [INF] Executed page /plat/index/index in 326.2241ms
+2019-04-04 15:48:03.632 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:48:03.632 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:48:03.632 +08:00 [INF] Request finished in 1114.5804ms 200 text/html; charset=utf-8
+2019-04-04 15:48:03.704 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:48:03.704 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:48:03.704 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:48:03.704 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:48:03.705 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:48:03.705 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:48:03.705 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:48:03.711 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:48:03.723 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:48:03.723 +08:00 [INF] Authorization was successful.
+2019-04-04 15:48:03.723 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:48:03.723 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:48:03.724 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:48:03.724 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:03.724 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:48:03.938 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:03.938 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:48:03.938 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:48:03.939 +08:00 [INF] Executed page /plat/index/welcome in 215.2166ms
+2019-04-04 15:48:03.939 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:48:03.939 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:48:03.939 +08:00 [INF] Request finished in 234.777ms 200 text/html; charset=utf-8
+2019-04-04 15:48:04.056 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:48:04.058 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:48:04.058 +08:00 [INF] Request finished in 2.1018ms 200 image/x-icon
+2019-04-04 15:48:06.975 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:48:06.976 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:48:06.976 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:48:06.976 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:48:06.976 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:48:06.976 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:48:06.976 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:48:06.977 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:48:06.977 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:48:06.977 +08:00 [INF] Authorization was successful.
+2019-04-04 15:48:06.978 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:48:06.978 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:48:06.978 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:48:06.979 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:06.979 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:48:07.067 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:07.068 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:48:07.068 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:48:07.068 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:07.069 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:48:07.130 +08:00 [INF] Executed page /plat/index/index in 153.6355ms
+2019-04-04 15:48:07.130 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:48:07.130 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:48:07.131 +08:00 [INF] Request finished in 156.0473ms 200 text/html; charset=utf-8
+2019-04-04 15:48:07.189 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:48:07.190 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:48:07.190 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:48:07.190 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:48:07.190 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:48:07.190 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:48:07.190 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:48:07.192 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:48:07.192 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:48:07.192 +08:00 [INF] Authorization was successful.
+2019-04-04 15:48:07.192 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:48:07.192 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:48:07.192 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:48:07.192 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:07.192 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:48:07.382 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:07.382 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:48:07.382 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:48:07.387 +08:00 [INF] Executed page /plat/index/welcome in 192.6721ms
+2019-04-04 15:48:07.387 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:48:07.388 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:48:07.388 +08:00 [INF] Request finished in 198.2947ms 200 text/html; charset=utf-8
+2019-04-04 15:48:07.530 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:48:07.531 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:48:07.531 +08:00 [INF] Request finished in 1.1431ms 200 image/x-icon
+2019-04-04 15:48:09.219 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:48:09.221 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:48:09.221 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:48:09.221 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:48:09.221 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:48:09.221 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:48:09.221 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:48:09.221 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:48:09.221 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:48:09.221 +08:00 [INF] Authorization was successful.
+2019-04-04 15:48:09.221 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:48:09.221 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:48:09.221 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:48:09.222 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:09.222 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:48:09.306 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:09.307 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:48:09.307 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:48:09.307 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:09.307 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:48:09.393 +08:00 [INF] Executed page /plat/index/index in 172.5535ms
+2019-04-04 15:48:09.394 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:48:09.394 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:48:09.394 +08:00 [INF] Request finished in 174.819ms 200 text/html; charset=utf-8
+2019-04-04 15:48:09.459 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:48:09.459 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:48:09.459 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:48:09.459 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:48:09.459 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:48:09.459 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:48:09.459 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:48:09.460 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:48:09.460 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:48:09.460 +08:00 [INF] Authorization was successful.
+2019-04-04 15:48:09.460 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:48:09.460 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:48:09.460 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:48:09.460 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:09.460 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:48:09.718 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:48:09.719 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:48:09.719 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:48:09.720 +08:00 [INF] Executed page /plat/index/welcome in 259.86240000000004ms
+2019-04-04 15:48:09.720 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:48:09.720 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:48:09.720 +08:00 [INF] Request finished in 261.2175ms 200 text/html; charset=utf-8
+2019-04-04 15:48:09.873 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:48:09.874 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:48:09.874 +08:00 [INF] Request finished in 1.0519ms 200 image/x-icon
+2019-04-04 15:49:53.552 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:49:53.552 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:49:53.552 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:49:53.552 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:49:53.553 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:49:53.553 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:49:53.553 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:49:53.553 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:49:53.588 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:49:53.589 +08:00 [INF] Authorization was successful.
+2019-04-04 15:49:53.589 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:49:53.589 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:49:53.589 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:49:53.589 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:49:53.589 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:49:53.655 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:49:53.655 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:49:53.655 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:49:53.656 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:49:53.656 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:49:53.731 +08:00 [INF] Executed page /plat/index/index in 142.3834ms
+2019-04-04 15:49:53.731 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:49:53.731 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:49:53.731 +08:00 [INF] Request finished in 179.3957ms 200 text/html; charset=utf-8
+2019-04-04 15:49:53.778 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:49:53.778 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:49:53.778 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:49:53.778 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:49:53.778 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:49:53.778 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:49:53.778 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:49:53.791 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:49:54.488 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:49:54.488 +08:00 [INF] Authorization was successful.
+2019-04-04 15:49:54.490 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:49:54.490 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:49:54.505 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:49:54.505 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:49:54.505 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:49:54.622 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:49:54.622 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:49:54.622 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:49:54.623 +08:00 [INF] Executed page /plat/index/welcome in 134.54590000000002ms
+2019-04-04 15:49:54.623 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:49:54.623 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:49:54.623 +08:00 [INF] Request finished in 845.2737ms 200 text/html; charset=utf-8
+2019-04-04 15:49:54.747 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:49:54.751 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:49:54.751 +08:00 [INF] Request finished in 3.6348ms 200 image/x-icon
+2019-04-04 15:50:40.980 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index  
+2019-04-04 15:50:40.980 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:40.980 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:40.980 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:40.980 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:40.980 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:40.981 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:40.981 +08:00 [INF] Executing endpoint 'Page: /plat/index/index'
+2019-04-04 15:50:40.981 +08:00 [INF] Route matched with {page = "/plat/index/index", action = "", controller = ""}. Executing page /plat/index/index
+2019-04-04 15:50:40.981 +08:00 [INF] Authorization was successful.
+2019-04-04 15:50:40.981 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:40.981 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:40.981 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:40.982 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:40.982 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:41.034 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:41.034 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:50:41.034 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:50:41.035 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:41.035 +08:00 [INF] SqlMapper do request: rbac.get_objects_by_roles, type: System.Collections.Generic.IEnumerable`1[Acesoft.Rbac.Entity.Rbac_Object]
+2019-04-04 15:50:41.102 +08:00 [INF] Executed page /plat/index/index in 121.5976ms
+2019-04-04 15:50:41.102 +08:00 [INF] Executed endpoint 'Page: /plat/index/index'
+2019-04-04 15:50:41.102 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:41.103 +08:00 [INF] Request finished in 122.9795ms 200 text/html; charset=utf-8
+2019-04-04 15:50:41.161 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/plat/index/welcome?bg=eaedf1  
+2019-04-04 15:50:41.161 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:41.161 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:41.161 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:41.161 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:41.162 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:41.162 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:41.164 +08:00 [INF] Executing endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:50:41.164 +08:00 [INF] Route matched with {page = "/plat/index/welcome", action = "", controller = ""}. Executing page /plat/index/welcome
+2019-04-04 15:50:41.165 +08:00 [INF] Authorization was successful.
+2019-04-04 15:50:41.165 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:41.165 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:41.165 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:41.166 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:41.166 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:41.318 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:41.318 +08:00 [INF] SqlMapper do request: rbac.query_user_by_id, type: Acesoft.Rbac.Entity.Rbac_User
+2019-04-04 15:50:41.318 +08:00 [DBG] CacheManager GetCache SqlId: rbac.query_user_by_id:id=289469215771983872, Success: True !
+2019-04-04 15:50:41.319 +08:00 [INF] Executed page /plat/index/welcome in 155.0522ms
+2019-04-04 15:50:41.319 +08:00 [INF] Executed endpoint 'Page: /plat/index/welcome'
+2019-04-04 15:50:41.319 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:41.319 +08:00 [INF] Request finished in 158.5333ms 200 text/html; charset=utf-8
+2019-04-04 15:50:41.426 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 15:50:41.427 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 15:50:41.427 +08:00 [INF] Request finished in 1.598ms 200 image/x-icon
+2019-04-04 15:50:44.677 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/index  
+2019-04-04 15:50:44.677 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:44.677 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:44.677 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:44.678 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:44.678 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:44.678 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:44.692 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:44.692 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:44.692 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:44.692 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:44.692 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:44.692 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:44.693 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:45.191 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:45.192 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:45.192 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:45.200 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:45.200 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:45.200 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:45.252 +08:00 [INF] Executed page /Error in 60.4742ms
+2019-04-04 15:50:45.252 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:45.252 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:45.252 +08:00 [INF] Request finished in 575.555ms 404 text/html; charset=utf-8
+2019-04-04 15:50:48.797 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/index  
+2019-04-04 15:50:48.807 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:48.807 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:48.807 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:48.807 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:48.807 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:48.807 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:48.807 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:48.807 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:48.807 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:48.807 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:48.807 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:48.807 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:48.807 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:48.807 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:48.808 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:48.808 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:48.808 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:48.808 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:48.808 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:48.857 +08:00 [INF] Executed page /Error in 49.123000000000005ms
+2019-04-04 15:50:48.857 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:48.857 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:48.857 +08:00 [INF] Request finished in 60.2522ms 404 text/html; charset=utf-8
+2019-04-04 15:50:49.820 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/index  
+2019-04-04 15:50:49.820 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:49.820 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:49.820 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:49.820 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:49.820 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:49.820 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:49.820 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:49.820 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:49.820 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:49.821 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:49.821 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:49.821 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:49.821 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:49.821 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:49.821 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:49.821 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:49.821 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:49.823 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:49.823 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:49.875 +08:00 [INF] Executed page /Error in 53.8232ms
+2019-04-04 15:50:49.875 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:49.875 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:49.875 +08:00 [INF] Request finished in 54.9327ms 404 text/html; charset=utf-8
+2019-04-04 15:50:51.188 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/gate  
+2019-04-04 15:50:51.188 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:51.188 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:51.188 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:51.188 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:51.188 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:51.188 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:51.189 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:51.189 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:51.189 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:51.189 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:51.189 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:51.189 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:51.189 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:51.189 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:51.189 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:51.190 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:51.190 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:51.190 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:51.190 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:51.241 +08:00 [INF] Executed page /Error in 51.671ms
+2019-04-04 15:50:51.241 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:51.241 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:51.241 +08:00 [INF] Request finished in 53.2628ms 404 text/html; charset=utf-8
+2019-04-04 15:50:52.314 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/plat  
+2019-04-04 15:50:52.315 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:52.315 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:52.315 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:52.315 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:52.315 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:52.315 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:52.315 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:52.315 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:52.315 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:52.315 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:52.315 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:52.315 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:52.315 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:52.315 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:52.315 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:52.315 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:52.315 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:52.317 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:52.317 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:52.374 +08:00 [INF] Executed page /Error in 58.894200000000005ms
+2019-04-04 15:50:52.374 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:52.374 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:52.374 +08:00 [INF] Request finished in 59.9178ms 404 text/html; charset=utf-8
+2019-04-04 15:50:56.361 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/gate  
+2019-04-04 15:50:56.362 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:56.362 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:56.362 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:56.362 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:56.362 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:56.362 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:56.362 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:56.362 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:56.362 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:56.362 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:56.362 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:56.362 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:56.362 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:56.362 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:56.362 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:56.362 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:56.362 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:56.363 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:56.363 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:56.412 +08:00 [INF] Executed page /Error in 49.438100000000006ms
+2019-04-04 15:50:56.412 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:56.412 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:56.412 +08:00 [INF] Request finished in 50.4697ms 404 text/html; charset=utf-8
+2019-04-04 15:50:57.131 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/plat  
+2019-04-04 15:50:57.131 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:57.131 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:57.131 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:57.131 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:57.131 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:57.131 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:57.131 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:57.131 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:57.131 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:57.131 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:57.131 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:57.131 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:57.131 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:57.131 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:57.132 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:57.132 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:57.132 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:57.132 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:57.132 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:57.188 +08:00 [INF] Executed page /Error in 56.832800000000006ms
+2019-04-04 15:50:57.188 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:57.188 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:57.188 +08:00 [INF] Request finished in 57.6908ms 404 text/html; charset=utf-8
+2019-04-04 15:50:57.642 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/opt  
+2019-04-04 15:50:57.643 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:57.643 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:57.643 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:57.643 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:57.643 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:57.643 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:57.643 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:57.643 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:57.643 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:57.643 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:57.643 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:57.643 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:57.643 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:57.643 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:57.643 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:57.643 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:57.643 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:57.644 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:57.644 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:57.694 +08:00 [INF] Executed page /Error in 50.569900000000004ms
+2019-04-04 15:50:57.694 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:57.694 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:57.694 +08:00 [INF] Request finished in 51.4401ms 404 text/html; charset=utf-8
+2019-04-04 15:50:58.182 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/rec  
+2019-04-04 15:50:58.183 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:58.183 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:58.183 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:58.183 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:58.183 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:58.183 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:58.183 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:50:58.183 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:50:58.183 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:50:58.183 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:50:58.183 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:50:58.183 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:50:58.183 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:50:58.183 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:50:58.183 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:50:58.183 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:50:58.183 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 15:50:58.184 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 15:50:58.184 +08:00 [INF] SqlMapper do request: sys.get_sys_cfg, type: System.Collections.Generic.IEnumerable`1[Acesoft.Platform.Models.ConfigItem]
+2019-04-04 15:50:58.235 +08:00 [INF] Executed page /Error in 52.263600000000004ms
+2019-04-04 15:50:58.235 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:50:58.235 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 15:50:58.236 +08:00 [INF] Request finished in 53.3139ms 404 text/html; charset=utf-8
+2019-04-04 15:52:15.825 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/rec  
+2019-04-04 15:52:15.826 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:15.826 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:15.826 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:15.826 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:15.826 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:15.826 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:15.836 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:15.836 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:15.836 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:15.836 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:15.836 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:15.836 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:15.836 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:16.802 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:16.803 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:16.803 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:16.812 +08:00 [INF] Executed page /Error in 10.1945ms
+2019-04-04 15:52:16.812 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:16.812 +08:00 [INF] Request finished in 987.3155ms 404 text/html; charset=utf-8
+2019-04-04 15:52:18.022 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/opt  
+2019-04-04 15:52:18.023 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:18.023 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:18.023 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:18.023 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:18.023 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:18.023 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:18.026 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:18.028 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:18.028 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:18.028 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:18.029 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:18.029 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:18.029 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:18.030 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:18.030 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:18.030 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:18.031 +08:00 [INF] Executed page /Error in 1.7546000000000002ms
+2019-04-04 15:52:18.032 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:18.032 +08:00 [INF] Request finished in 9.3807ms 404 text/html; charset=utf-8
+2019-04-04 15:52:18.717 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/plat  
+2019-04-04 15:52:18.717 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:18.717 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:18.718 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:18.718 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:18.718 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:18.718 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:18.718 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:18.718 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:18.718 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:18.718 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:18.718 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:18.718 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:18.718 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:18.719 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:18.719 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:18.719 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:18.720 +08:00 [INF] Executed page /Error in 1.0003ms
+2019-04-04 15:52:18.720 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:18.720 +08:00 [INF] Request finished in 2.7848ms 404 text/html; charset=utf-8
+2019-04-04 15:52:19.264 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/gate  
+2019-04-04 15:52:19.264 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:19.264 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:19.264 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:19.264 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:19.264 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:19.265 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:19.265 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:19.265 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:19.265 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:19.265 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:19.266 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:19.266 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:19.266 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:19.266 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:19.266 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:19.266 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:19.268 +08:00 [INF] Executed page /Error in 1.6447ms
+2019-04-04 15:52:19.268 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:19.269 +08:00 [INF] Request finished in 5.1939ms 404 text/html; charset=utf-8
+2019-04-04 15:52:19.824 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/index  
+2019-04-04 15:52:19.824 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:19.824 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:19.824 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:19.824 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:19.824 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:19.824 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:19.824 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:19.824 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:19.824 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:19.825 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:19.825 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:19.825 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:19.825 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:19.828 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:19.829 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:19.829 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:19.830 +08:00 [INF] Executed page /Error in 2.0383ms
+2019-04-04 15:52:19.830 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:19.830 +08:00 [INF] Request finished in 6.7621ms 404 text/html; charset=utf-8
+2019-04-04 15:52:20.563 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/gate  
+2019-04-04 15:52:20.563 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:20.563 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:20.563 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:20.563 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:20.563 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:20.563 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:20.563 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:20.563 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:20.563 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:20.563 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:20.563 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:20.563 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:20.564 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:20.564 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:20.564 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:20.564 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:20.565 +08:00 [INF] Executed page /Error in 0.9656ms
+2019-04-04 15:52:20.565 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:20.565 +08:00 [INF] Request finished in 2.0338ms 404 text/html; charset=utf-8
+2019-04-04 15:52:21.032 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/plat  
+2019-04-04 15:52:21.032 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:21.032 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:21.032 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:21.032 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:21.032 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:21.032 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:21.032 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:21.032 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:21.032 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:21.032 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:21.032 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:21.032 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:21.033 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:21.033 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:21.033 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:21.033 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:21.034 +08:00 [INF] Executed page /Error in 1.1191ms
+2019-04-04 15:52:21.034 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:21.034 +08:00 [INF] Request finished in 2.1823ms 404 text/html; charset=utf-8
+2019-04-04 15:52:21.547 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/opt  
+2019-04-04 15:52:21.547 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:21.547 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:21.547 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:21.547 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:21.547 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:21.547 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:21.548 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:21.548 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:21.548 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:21.548 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:21.548 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:21.548 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:21.548 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:21.548 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:21.548 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:21.548 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:21.550 +08:00 [INF] Executed page /Error in 1.794ms
+2019-04-04 15:52:21.550 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:21.550 +08:00 [INF] Request finished in 3.4343ms 404 text/html; charset=utf-8
+2019-04-04 15:52:22.706 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/iot/server/plat  
+2019-04-04 15:52:22.706 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:22.706 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:22.706 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:22.706 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:22.706 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:22.706 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:22.706 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:22.706 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:22.706 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:22.706 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:22.706 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:22.706 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:22.706 +08:00 [INF] Executing endpoint 'Page: /Error'
+2019-04-04 15:52:22.707 +08:00 [INF] Route matched with {page = "/Error", action = "", controller = ""}. Executing page /Error
+2019-04-04 15:52:22.707 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-04-04 15:52:22.707 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-04-04 15:52:22.707 +08:00 [INF] Executed page /Error in 0.5812ms
+2019-04-04 15:52:22.707 +08:00 [INF] Executed endpoint 'Page: /Error'
+2019-04-04 15:52:22.708 +08:00 [INF] Request finished in 1.5183ms 404 text/html; charset=utf-8
+2019-04-04 15:52:36.860 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/iot/startclient  
+2019-04-04 15:52:36.861 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 15:52:36.861 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 15:52:36.861 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 15:52:36.861 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 15:52:36.861 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 15:52:36.861 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 15:52:36.862 +08:00 [INF] Executing endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 15:52:36.876 +08:00 [INF] Route matched with {action = "StartClient", controller = "Iot", page = ""}. Executing action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)
+2019-04-04 16:01:40.985 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-04 16:01:43.253 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-04 16:01:47.444 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/iot/startclient  
+2019-04-04 16:01:47.604 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-04 16:01:47.617 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-04 16:01:47.635 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-04 16:01:47.639 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-04 16:01:47.640 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-04 16:01:47.683 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-04 16:01:47.683 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-04 16:01:47.684 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-04 16:01:47.913 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-04 16:01:47.913 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-04 16:01:47.913 +08:00 [DBG] Done initialize tentants.
+2019-04-04 16:01:47.913 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 16:01:47.926 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 16:01:47.933 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 16:01:47.937 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 16:01:47.952 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 16:01:47.954 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 16:01:48.123 +08:00 [INF] Executing endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:01:48.202 +08:00 [INF] Route matched with {action = "StartClient", controller = "Iot", page = ""}. Executing action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)
+2019-04-04 16:01:48.256 +08:00 [ERR] Execute with exception!!!
+System.InvalidOperationException: Cannot consume scoped service 'Acesoft.Web.Multitenancy.Tenant' from singleton 'Acesoft.Web.IoT.IIotWsClient'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitScoped(ScopedCallSite scopedCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitConstructor(ConstructorCallSite constructorCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitSingleton(SingletonCallSite singletonCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.ValidateCallSite(IServiceCallSite callSite)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.Microsoft.Extensions.DependencyInjection.ServiceLookup.IServiceProviderEngineCallback.OnCreate(IServiceCallSite callSite)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 28
+2019-04-04 16:01:48.271 +08:00 [INF] Executed action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT) in 55.050000000000004ms
+2019-04-04 16:01:48.273 +08:00 [INF] Executed endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:01:48.984 +08:00 [INF] Request finished in 1545.5253ms 500 application/json;charset=utf-8
+2019-04-04 16:03:10.783 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/iot/startclient  
+2019-04-04 16:03:10.815 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 16:03:10.815 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 16:03:10.815 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 16:03:10.815 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 16:03:10.818 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 16:03:10.818 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 16:03:10.834 +08:00 [INF] Executing endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:03:10.835 +08:00 [INF] Route matched with {action = "StartClient", controller = "Iot", page = ""}. Executing action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)
+2019-04-04 16:03:10.839 +08:00 [ERR] Execute with exception!!!
+System.InvalidOperationException: Cannot consume scoped service 'Acesoft.Web.Multitenancy.Tenant' from singleton 'Acesoft.Web.IoT.IIotWsClient'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitScoped(ScopedCallSite scopedCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitConstructor(ConstructorCallSite constructorCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitSingleton(SingletonCallSite singletonCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.ValidateCallSite(IServiceCallSite callSite)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.Microsoft.Extensions.DependencyInjection.ServiceLookup.IServiceProviderEngineCallback.OnCreate(IServiceCallSite callSite)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 28
+2019-04-04 16:03:10.841 +08:00 [INF] Executed action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT) in 5.6800000000000006ms
+2019-04-04 16:03:10.841 +08:00 [INF] Executed endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:03:10.960 +08:00 [INF] Request finished in 176.5615ms 500 application/json;charset=utf-8
+2019-04-04 16:03:11.028 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 16:03:11.078 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 16:03:11.078 +08:00 [INF] Request finished in 50.3025ms 200 image/x-icon
+2019-04-04 16:08:21.217 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-04 16:08:24.119 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-04 16:08:27.470 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/iot/startclient  
+2019-04-04 16:08:27.593 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-04 16:08:27.602 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-04 16:08:27.620 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-04 16:08:27.621 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-04 16:08:27.623 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-04 16:08:27.641 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-04 16:08:27.641 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-04 16:08:27.641 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-04 16:08:27.816 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-04 16:08:27.816 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-04 16:08:27.817 +08:00 [DBG] Done initialize tentants.
+2019-04-04 16:08:27.817 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 16:08:27.826 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 16:08:27.829 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 16:08:27.835 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 16:08:27.844 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 16:08:27.849 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 16:08:27.977 +08:00 [INF] Executing endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:08:28.024 +08:00 [INF] Route matched with {action = "StartClient", controller = "Iot", page = ""}. Executing action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)
+2019-04-04 16:08:28.289 +08:00 [DBG] Store has initlialized with database "ace"
+2019-04-04 16:08:28.291 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 16:08:28.645 +08:00 [DBG] Query 3 users from "ace" store
+2019-04-04 16:08:28.648 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 16:08:28.648 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 16:08:28.650 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 16:08:28.651 +08:00 [DBG] Initalize ISqlMapper for name: ace
+2019-04-04 16:08:28.655 +08:00 [DBG] SqlMapper initalize the folder: D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\SqlMaps
+2019-04-04 16:08:28.719 +08:00 [DBG] CacheManager load FlushSqlMaps!
+2019-04-04 16:08:28.842 +08:00 [INF] Executing action method Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT) - Validation state: "Valid"
+2019-04-04 16:08:38.781 +08:00 [INF] Executed action method Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 9931.3645ms.
+2019-04-04 16:08:38.816 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-04 16:08:39.185 +08:00 [INF] Executed action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT) in 11155.045900000001ms
+2019-04-04 16:08:39.187 +08:00 [INF] Executed endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:08:39.188 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 16:08:39.242 +08:00 [INF] Request finished in 11775.9755ms 200 application/json; charset=utf-8
+2019-04-04 16:08:39.255 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 16:08:39.275 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 16:08:39.275 +08:00 [INF] Request finished in 20.8924ms 200 image/x-icon
+2019-04-04 16:11:32.680 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-04-04 16:11:35.374 +08:00 [WRN] Overriding address(es) 'http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead.
+2019-04-04 16:11:39.145 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/api/iot/startclient  
+2019-04-04 16:11:39.252 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-04-04 16:11:39.259 +08:00 [DBG] Found module Cloud with type: Acesoft.Web.Cloud.Startup.
+2019-04-04 16:11:39.280 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-04-04 16:11:39.281 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-04-04 16:11:39.284 +08:00 [DBG] Found module IoT with type: Acesoft.Web.IoT.Startup.
+2019-04-04 16:11:39.301 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-04-04 16:11:39.302 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-04-04 16:11:39.302 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-04-04 16:11:39.590 +08:00 [DBG] Load Tenant with name "ace" successful.
+2019-04-04 16:11:39.593 +08:00 [DBG] Load Tenant with name "xile" successful.
+2019-04-04 16:11:39.593 +08:00 [DBG] Done initialize tentants.
+2019-04-04 16:11:39.594 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-04-04 16:11:39.602 +08:00 [DBG] Tenant not present in cache with key "localhost:82". Attempting to resolve.
+2019-04-04 16:11:39.608 +08:00 [DBG] Resolved tenant "ace" with default tenant.
+2019-04-04 16:11:39.612 +08:00 [DBG] Tenant "ace" resolved. Caching with keys "localhost:5000".
+2019-04-04 16:11:39.626 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-04-04 16:11:39.627 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-04-04 16:11:39.828 +08:00 [INF] Executing endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:11:39.911 +08:00 [INF] Route matched with {action = "StartClient", controller = "Iot", page = ""}. Executing action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)
+2019-04-04 16:11:40.225 +08:00 [DBG] Store has initlialized with database "ace"
+2019-04-04 16:11:40.227 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 16:11:40.543 +08:00 [DBG] Query 3 users from "ace" store
+2019-04-04 16:11:40.545 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 16:11:40.545 +08:00 [DBG] Open new session with database "ace"
+2019-04-04 16:11:40.546 +08:00 [DBG] Get ISqlMapper for name: ace
+2019-04-04 16:11:40.547 +08:00 [DBG] Initalize ISqlMapper for name: ace
+2019-04-04 16:11:40.551 +08:00 [DBG] SqlMapper initalize the folder: D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\SqlMaps
+2019-04-04 16:11:40.611 +08:00 [DBG] CacheManager load FlushSqlMaps!
+2019-04-04 16:11:40.749 +08:00 [INF] Executing action method Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT) - Validation state: "Valid"
+2019-04-04 16:11:40.797 +08:00 [INF] Executed action method Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 42.6988ms.
+2019-04-04 16:11:40.811 +08:00 [DBG] IotClient has connected to server!
+2019-04-04 16:11:40.825 +08:00 [INF] Executing ObjectResult, writing value of type 'Acesoft.Web.Models.ApiResult'.
+2019-04-04 16:11:41.161 +08:00 [INF] Executed action Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT) in 1245.2305000000001ms
+2019-04-04 16:11:41.162 +08:00 [INF] Executed endpoint 'Acesoft.Web.IoT.Controllers.IotController.StartClient (Acesoft.Web.IoT)'
+2019-04-04 16:11:41.162 +08:00 [DBG] Dispose session with database "ace"
+2019-04-04 16:11:41.174 +08:00 [INF] Request finished in 2032.3607ms 200 application/json; charset=utf-8
+2019-04-04 16:11:41.217 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:82/favicon.ico  
+2019-04-04 16:11:41.239 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\acecms\src\Acesoft.Web.Mvc\wwwroot\favicon.ico'
+2019-04-04 16:11:41.240 +08:00 [INF] Request finished in 23.1961ms 200 image/x-icon

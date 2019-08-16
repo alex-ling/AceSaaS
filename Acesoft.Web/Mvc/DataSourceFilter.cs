@@ -15,7 +15,7 @@ namespace Acesoft.Web.Mvc
 				operation.Parameters = new List<IParameter>();
 			}
 
-			if (context.ApiDescription.ActionAttributes().Any(a => a.GetType() == typeof(DataSourceAttribute)))
+			if (context.MethodInfo.CustomAttributes.OfType<DataSourceAttribute>().Any())
 			{
 				operation.Parameters.Add(new NonBodyParameter
 				{

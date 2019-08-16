@@ -2,10 +2,9 @@
 using System.Net;
 using System.Threading.Tasks;
 
-using Acesoft.Web.Controllers;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Acesoft.Web.Models;
 
 namespace Acesoft.Web.Middleware
 {

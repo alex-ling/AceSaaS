@@ -12,29 +12,13 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnSpinDown = new ScriptEvent("onSpinDown", "");
 
-		public int? Min
-		{
-			get;
-			set;
-		}
+		public int? Min { get; set; }
 
-		public int? Max
-		{
-			get;
-			set;
-		}
+		public int? Max { get; set; }
 
-		public int? Increment
-		{
-			get;
-			set;
-		}
+		public int? Increment { get; set; }
 
-		public Align? SpinAlign
-		{
-			get;
-			set;
-		}
+		public Align? SpinAlign { get; set; }
 
 		public Spinner(WidgetFactory ace)
 			: base(ace)

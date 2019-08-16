@@ -3,6 +3,7 @@ using System;
 using Aliyun.OSS;
 using Newtonsoft.Json.Linq;
 using Acesoft.Util;
+using Acesoft.Web.Cloud.Config;
 
 namespace Acesoft.Web.Cloud.Aliyun
 {

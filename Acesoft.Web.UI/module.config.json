@@ -1,0 +1,8 @@
+﻿{
+  "name": "UI",
+  "description": "WebUI",
+  "mainAssembly": "Acesoft.Web.UI.dll",
+  "category": "component",
+  "version": "v1.0.0",
+  "dependencies": [ ]
+}

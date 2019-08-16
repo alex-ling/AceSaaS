@@ -27,16 +27,19 @@ namespace Acesoft.Rbac.StateProviders
                     if (claim != null)
                     { 
                         var userId = NaryHelper.ToNary(claim.Value, 36);
-                        return userService.QueryById(userId);
+                        var authId = ctx.User.FindFirst("authid")?.Value ?? "none";
+
+                        logger.LogDebug($"Sync user from \"{ctx.User.Identity.AuthenticationType}\" with \"{userId}:{authId}\"");
+                        return userService.QueryById(userId, authId);
                     }
                     else
                     {
-                        logger.LogError($"Create user from \"{ctx.User.Identity.AuthenticationType}\" with error");
+                        logger.LogError($"Sync user from \"{ctx.User.Identity.AuthenticationType}\" with error");
                         return null;
                     }
                 }
 
-                return userService.QueryByUserName("guest");
+                return userService.QueryByUserName("guest", "none");
             };
         }
     }

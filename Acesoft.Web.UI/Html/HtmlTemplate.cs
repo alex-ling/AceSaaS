@@ -1,6 +1,10 @@
-using Microsoft.AspNetCore.Mvc.Razor;
 using System;
+using System.Data;
 using System.IO;
+
+using Microsoft.AspNetCore.Mvc.Razor;
+using Acesoft.Data;
+using System.Collections.Generic;
 
 namespace Acesoft.Web.UI.Html
 {
@@ -21,7 +25,37 @@ namespace Acesoft.Web.UI.Html
 		{
 			node.Template(delegate(TextWriter writer)
 			{
-				WriteItem(writer, (T)data);
+                if (data is DataTable dt)
+                {
+                    int index = 1;
+                    dt.Rows.Each<DataRow>(row =>
+                    {
+                        WriteItem(writer, row.ToObject<T>(index++));
+                    });
+                }
+                else if (data is IEnumerable<DataRow> list)
+                {
+                    int index = 1;
+                    list.Each(row =>
+                    {
+                        WriteItem(writer, row.ToObject<T>(index++));
+                    });
+                }
+                else if (data is DataRow row)
+                {
+                    WriteItem(writer, row.ToObject<T>());
+                }
+                else if (data is IEnumerable<T> list2)
+                {
+                    list2.Each(item =>
+                    {
+                        WriteItem(writer, item);
+                    });
+                }
+                else
+                {
+                    WriteItem(writer, (T)data);
+                }
 			});
 		}
 
@@ -29,7 +63,8 @@ namespace Acesoft.Web.UI.Html
 		{
 			object obj = Tempate(item);
 			HelperResult helperResult = obj as HelperResult;
-			if (helperResult != null)
+
+            if (helperResult != null)
 			{
 				helperResult.Render(writer);
 			}
@@ -39,6 +74,7 @@ namespace Acesoft.Web.UI.Html
 			}
 		}
 	}
+
 	public class HtmlTemplate : IHtmlTemplate
 	{
 		public Action<TextWriter> Action

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Acesoft.Web.Cloud
+namespace Acesoft.Web.Cloud.Config
 {
 	public class CloudConfig
 	{

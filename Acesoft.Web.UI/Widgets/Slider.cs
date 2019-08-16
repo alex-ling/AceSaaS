@@ -19,77 +19,29 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnComplete = new ScriptEvent("onComplete", "value");
 
-		public int? Width
-		{
-			get;
-			set;
-		}
+		public int? Width { get; set; }
 
-		public int? Height
-		{
-			get;
-			set;
-		}
+		public int? Height { get; set; }
 
-		public Direction? Mode
-		{
-			get;
-			set;
-		}
+		public Direction? Mode { get; set; }
 
-		public bool? Reversed
-		{
-			get;
-			set;
-		}
+		public bool? Reversed { get; set; }
 
-		public bool? ShowTip
-		{
-			get;
-			set;
-		}
+		public bool? ShowTip { get; set; }
 
-		public bool? Disabled
-		{
-			get;
-			set;
-		}
+		public bool? Disabled { get; set; }
 
-		public bool? Range
-		{
-			get;
-			set;
-		}
+		public bool? Range { get; set; }
 
-		public int? Value
-		{
-			get;
-			set;
-		}
+		public int? Value { get; set; }
 
-		public int? Min
-		{
-			get;
-			set;
-		}
+		public int? Min { get; set; }
 
-		public int? Max
-		{
-			get;
-			set;
-		}
+		public int? Max { get; set; }
 
-		public int? Step
-		{
-			get;
-			set;
-		}
+		public int? Step { get; set; }
 
-		public IList<string> Rule
-		{
-			get;
-			set;
-		}
+		public IList<string> Rule { get; set; }
 
 		public Slider(WidgetFactory ace)
 			: base(ace)

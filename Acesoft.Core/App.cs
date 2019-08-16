@@ -10,6 +10,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Acesoft.Config;
 using Acesoft.Core;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Acesoft
 {
@@ -33,7 +34,7 @@ namespace Acesoft
                 }
                 return appConfig;
             }
-        }        
+        }
 
         public static HtmlEncoder DefaultEncoder => HtmlEncoder.Create(UnicodeRanges.All);
         public static HttpContext Context => httpContextAccessor?.HttpContext;
@@ -56,7 +57,12 @@ namespace Acesoft
             Cache = httpService.GetService<IDistributedCache>();
 
             return service;
-        }        
+        }
+
+        public static void SetAppConfig(AppConfig appConfig = null)
+        {
+            App.appConfig = appConfig;
+        }
 
         #region path
         public static string GetWebRoot(bool fullPath = false)
@@ -92,11 +98,20 @@ namespace Acesoft
             return AppContext.BaseDirectory;
         }
 
+        public static string GetLocalBasePath(string path)
+        {
+            if (Path.IsPathRooted(path))
+            {
+                return path.Substring(GetLocalRoot().Length);
+            }
+            return path;
+        }
+
         public static string GetLocalPath(string virtualPath, bool mustCreatePath = false)
         {
             if (virtualPath.HasValue())
             {
-                var path = Path.Combine(AppContext.BaseDirectory, virtualPath);
+                var path = Path.Combine(AppContext.BaseDirectory, virtualPath.TrimStart('/'));
                 if (mustCreatePath && !Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
@@ -123,7 +138,7 @@ namespace Acesoft
             if (Context != null)
             {
                 var query = Context.Request.Query[name];
-                if (query.Count > 0)
+                if (query.Count > 0 && query[0].HasValue())
                 {
                     return query[0].ToObject<T>();
                 }
@@ -142,7 +157,7 @@ namespace Acesoft
             if (Context != null)
             {
                 var query = Context.Request.Query[name];
-                if (query.Count > 0)
+                if (query.Count > 0 && query[0].HasValue())
                 {
                     return query[0].ToObject<T>();
                 }
@@ -155,7 +170,7 @@ namespace Acesoft
             if (Context != null)
             {
                 var query = Context.Request.Form[name];
-                if (query.Count > 0)
+                if (query.Count > 0 && query[0].HasValue())
                 {
                     return query[0].ToObject<T>();
                 }

@@ -118,6 +118,17 @@ $.extend($.fn.tree.defaults, {
     }
 });
 $.extend($.fn.tree.methods, {
+    /* select first leaf node 
+     */
+    selectLeaf: function (jq) {
+        var node = jq.tree('getRoot');
+        var childs = jq.tree('getChildren', node.target);
+        while (childs.length) {
+            node = childs[0];
+            childs = jq.tree('getChildren', node.target);
+        }
+        jq.tree('select', node.target);
+    },
     /* getLevel: return level or the level's node when error msg when null.
      * target as: 
      * 1. underfined: selectedLevel(n), null(0)
@@ -187,7 +198,7 @@ $.extend($.fn.tree.methods, {
             if (opts.editUrl) {
                 opts.editUrl = AX.objstr(opts.editUrl, node.attributes);
             }
-            return opts.idField ? node.attributes[opts.idField] : node.id;
+            return opts.idField ? (node.attributes ? node.attributes[opts.idField] : '') : node.id;
         }
         return null;
     },
@@ -197,11 +208,12 @@ $.extend($.fn.tree.methods, {
     add: function (jq, opts) {
         opts = $.extend({}, jq.tree('options'), opts);
         var parId = jq.tree('getSelectedId', opts);
+        var parNo = jq.tree('getSelectedId', { idField: 'no' });
         if (parId == null) return;
         var url = opts.editUrl || 'edit';
-        if (url.indexOf('?') < 0) url += '?parentid=' + parId;
-        else url = AX.aurl(url, "parentid", parId);
-        if (opts.q) url += "&" + opts.q;
+        url = AX.aurl(url, "parentid", parId);
+        if (parNo) url = AX.aurl(url, "parentno", parNo);
+        if (opts.q) url += (url.indexOf('?') > 0 ? '&' : '?') + opts.q;
         if (AX.opts.dialogMode) {
             AX.dialog('添加', url, function () {
                 $.messager.info({ msg: '添加成功！' });
@@ -218,7 +230,8 @@ $.extend($.fn.tree.methods, {
         opts = $.extend({}, jq.tree('options'), opts);
         var id = jq.tree('getSelectedId', opts);
         if (id == null) return;
-        var url = AX.format("{0}?id={1}", (opts.editUrl || 'edit'), id);
+        var url = opts.editUrl || 'edit';
+        url = AX.aurl(url, "id", id);
         if (opts.q) url += "&" + opts.q;
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
@@ -283,7 +296,7 @@ $.extend($.fn.datagrid.defaults, {
         dg.datagrid('getPanel').find('.easyui-tooltip').tooltip();
 
         // merged cells.
-        var fields = dg.datagrid('getColumnFields'), rs = [];
+        var fields = dg.datagrid('getColumnFields', true).concat(dg.datagrid('getColumnFields')), rs = [];
         for (var c = 0; c < fields.length; c++) {
             var col = fields[c];
             rs.push([]);
@@ -323,7 +336,8 @@ $.extend($.fn.datagrid.defaults, {
         // resize column width.
         dg.datagrid('resize');
         //dg.datagrid('fixColumnSize');
-        if (dg.datagrid('getColumnOption', 'action')) {
+        var colOption = dg.datagrid('getColumnOption', 'action');
+        if (colOption && colOption.width < 40) {
             dg.datagrid('autoSizeColumn', 'action');
         }
         opts.success.call(this, data);
@@ -370,7 +384,7 @@ $.extend($.fn.datagrid.methods, {
     add: function (jq, query) {
         var o = jq.datagrid('options');
         var url = o.editUrl || 'edit';
-        if (query) url += '?' + query;
+        if (query) url += (url.indexOf('?') > 0 ? '&' : '?') + query;
         if (AX.opts.dialogMode) {
             AX.dialog('添加', url, function () {
                 $.messager.info({ msg: '添加成功！' });
@@ -385,7 +399,8 @@ $.extend($.fn.datagrid.methods, {
      */
     edit: function (jq, id) {
         var o = jq.datagrid('options');
-        var url = AX.format("{0}?id={1}", (o.editUrl || 'edit'), id);
+        var url = o.editUrl || 'edit';
+        url = AX.aurl(url, "id", id);
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
                 $.messager.info({ msg: '保存成功！' });
@@ -442,7 +457,10 @@ $.extend($.fn.treegrid.defaults, {
         dg.treegrid('getPanel').find('.easyui-linkbutton').linkbutton({ plain: true });
         dg.treegrid('resize');
         //dg.treegrid('fixColumnSize');
-        dg.treegrid('autoSizeColumn', 'action');
+        var colOption = dg.datagrid('getColumnOption', 'action');
+        if (colOption && colOption.width < 40) {
+            dg.datagrid('autoSizeColumn', 'action');
+        }
         opts.success.call(this, row, data);
     },
     /* success: [+] added for parse content button after loading.
@@ -477,7 +495,7 @@ $.extend($.fn.treegrid.methods, {
     add: function (jq, query) {
         var o = jq.treegrid('options');
         var url = o.editUrl || 'edit';
-        if (query) url += '?' + query;
+        if (query) url += (url.indexOf('?') > 0 ? '&' : '?') + query;
         if (AX.opts.dialogMode) {
             AX.dialog('添加', url, function () {
                 $.messager.info({ msg: '添加成功！' });
@@ -492,7 +510,8 @@ $.extend($.fn.treegrid.methods, {
      */
     edit: function (jq, id) {
         var o = jq.treegrid('options');
-        var url = AX.format("{0}?id={1}", (o.editUrl || 'edit'), id);
+        var url = o.editUrl || 'edit';
+        url = AX.aurl(url, "id", id);
         if (AX.opts.dialogMode) {
             AX.dialog('编辑', url, function () {
                 $.messager.info({ msg: '保存成功！' });

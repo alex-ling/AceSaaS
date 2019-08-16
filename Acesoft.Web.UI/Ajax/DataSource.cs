@@ -14,29 +14,13 @@ namespace Acesoft.Web.UI.Ajax
 
 		public static readonly ScriptEvent OnLoadError = new ScriptEvent("onLoadError", "xhr,status,error");
 
-		public dynamic FormData
-		{
-			get;
-			set;
-		}
+		public dynamic FormData { get; set; }
 
-		public Filter? Mode
-		{
-			get;
-			set;
-		}
+		public Filter? Mode { get; set; }
 
-		public dynamic QueryParams
-		{
-			get;
-			set;
-		}
+		public dynamic QueryParams { get; set; }
 
-		public bool IsEdit
-		{
-			get;
-			set;
-		}
+		public bool IsEdit { get; set; }
 
 		public DataSource(IWidget widget)
 			: base(widget)

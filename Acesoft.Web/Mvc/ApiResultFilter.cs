@@ -4,6 +4,7 @@ using System.Text;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Acesoft.Web.Models;
 
 namespace Acesoft.Web.Mvc
 {

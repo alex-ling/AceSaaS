@@ -2,23 +2,13 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
 @inject IConfigService ConfigService
 @{
-    var cfg = ConfigService.GetConfig(1);
+    Layout = "_shared/site";
     ViewData["Title"] = "注册";
     Ace.RenderAuthOptions = true;
+
+    var cfg = ConfigService.GetConfig(1);
+    var type = Guid.NewGuid().ToString("N");
 }
-<div class="header" style="position:relative">
-    <div class="container pt30 pb5">
-        <div class="col-md-6">
-            <a class="logo" href="/">
-                <img class="fl" src="@cfg["sys_logo"]" style="height:60px" />
-                <div class="fl ft30 fwb" style="line-height:60px;color:@cfg["sys_name_color"]">@cfg["sys_name"]</div>
-            </a>
-        </div>
-        <div class="col-md-6 text-r">
-            <div class="ft30 fwb" style="line-height:60px;color:@cfg["sys_tip_color"]">@cfg["sys_tip"]</div>
-        </div>
-    </div>
-</div>
 <div style="height:440px;padding-top:40px;background-image:url(/images/rbg.jpg);background-position:center">
     <div style="margin:0 auto;width:630px;padding:30px 15px;background:#fff;opacity:0.90">
         <div class="ph15 pb10">
@@ -26,7 +16,7 @@
         </div>        
         @{
             Ace.Form().Id("view").Css("front")
-            .Ajax(ds => ds.DataSource("user.regist").HttpPost("auth", "postuser"))
+            .Ajax(ds => ds.DataSource("rbac.regist").HttpPost("auth", "postuser"))
             .Events(e => e.OnSuccess("onSuccess")).Content(
                 @<div class="container-fluid">
                     <div class="row">
@@ -40,7 +30,7 @@
                         <div class="col-md-2">图片验证码</div>
                         <div class="col-md-6">
                             @Ace.TextBox().Id("code").Required().ValidType("length[5,5]").Prompt("5位验证码").Width("32%").TipPosition(Position.bottom)
-                            <img id="vimg" src="/api/draw/getvalidimage" onclick="onRefresh(this)" class="hand" />
+                            <img id="vimg" src="/api/draw/getvalidimage?type=@type" onclick="onRefresh(this)" class="hand" />
                             @Ace.LinkButton().Name("btnc").Text("发送验证码").Width(100).Events(e => e.OnClick("onCode"))
                         </div>
                         <div class="col-md-4"><span class="text-warning">请输入图片验证码</span></div>
@@ -81,7 +71,7 @@
 </div>
 <script>
     function onRefresh(ele) {
-        $(ele).attr('src', AX.opts.root + 'api/draw/getvalidimage?d=' + Math.random());
+        $(ele).attr('src', AX.opts.root + 'api/draw/getvalidimage?type=@(type)&d=' + Math.random());
     }
     function onSuccess() {
         $.messager.alert('提示', '<h4 class="cr">注册成功！</h4><h5>请返回登录页面进行登录！</h5>', 'info', function () {
@@ -117,8 +107,8 @@
             $("#btnc").linkbutton("disable");
             $("#btnc").find('.l-btn-text').text("正在发送…");
             AX.ajax({
-                url: AX.api({ api: 'msg/getsms', ds: 'user.regist' }),
-                data: { mobile: $('#mobile').val(), code: $('#code').val() },
+                url: AX.api({ api: 'cloud/getsms', ds: 'rbac.regist' }),
+                data: { type: '@type', mobile: $('#mobile').val(), code: $('#code').val() },
                 type: 'get',
                 error: function (xhr) {
                     AX.ajaxerror(xhr);

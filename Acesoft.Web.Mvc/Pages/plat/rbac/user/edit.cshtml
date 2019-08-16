@@ -1,14 +1,14 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
-    Layout = "_shared/back";
+    Layout = "_shared/edit";
     ViewData["Title"] = "编辑";
 
     var isEdit = false;
     Ace.View().Id("view").Ajax(ds => ds.DataSource("rbac.user").Form(new {
         scale_id = App.GetQuery("scaleid", ""),
         creator = App.GetQuery("creator", ""),
-        type = App.GetQuery("type", "0"),
+        regtype = App.GetQuery("type", "0"),
         loginname = "",
         password = "",
         username = "",
@@ -17,8 +17,7 @@
         mail = "",
         //refcode = "",
         remark = "",
-        enable = 1,
-        system = 0
+        enabled = 1
     }).HttpSave("auth", "user")).Do(x => isEdit = x.Component.DataSource.IsEdit).Content(
         @<div class="container-fluid">
             <div class="row">
@@ -41,8 +40,8 @@
                 <div class="col-xs-4"><span class="text-warning">4-20位，区分大小写！</span></div>
             </div>
             <div class="row">
-                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 姓名：</div>
-                <div class="col-xs-6">@Ace.TextBox().Name("username").Width("100%").Required()</div>
+                <div class="col-xs-2 text-r"><span class="cr-red"></span> 姓名：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("username").Width("100%")</div>
                 <div class="col-xs-4"><span class="text-warning">真实的姓名！</span></div>
             </div>
             <div class="row">
@@ -73,8 +72,7 @@
             <div class="row">
                 <div class="col-xs-2 text-r">设置：</div>
                 <div class="col-xs-6">
-                    @Ace.CheckBox().Name("enable").Text("启用　")
-                    @Ace.CheckBox().Name("system").Text("系统")
+                    @Ace.CheckBox().Name("enabled").Text("启用　")
                 </div>
                 <div class="col-xs-4"><span class="text-warning">系统属性不能删除！</span></div>
             </div>

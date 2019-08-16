@@ -8,17 +8,9 @@ namespace Acesoft.Web.UI.Widgets
 	{
 		public static readonly ScriptEvent OnGroupFormatter = new ScriptEvent("groupFormatter", "group,rows");
 
-		public bool? ShowGroup
-		{
-			get;
-			set;
-		}
+		public bool? ShowGroup { get; set; }
 
-		public string GroupField
-		{
-			get;
-			set;
-		}
+		public string GroupField { get; set; }
 
 		public PropertyGrid(WidgetFactory ace)
 			: base(ace)

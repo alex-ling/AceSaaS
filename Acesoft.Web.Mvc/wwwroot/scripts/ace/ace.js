@@ -9,6 +9,7 @@
             maxW: $(w.top).width(),
             maxH: $(w.top).height(),
             dialogMode: true,
+            _loading: false,
             _modified: false,
             _curTreeId: null,
             _uploadedFiles: [],
@@ -28,16 +29,23 @@
             var ua = navigator.userAgent.toLowerCase();
             return ua.indexOf('micromessenger') != -1;
         },
-        query: function (name) {
+        query: function (name, url) {
+            if (typeof url == 'undefined') {
+                url = w.location.search;
+            }
+            else {
+                var ix = url.indexOf('?');
+                if (ix > 0) url = url.substr(ix);
+            }
             if (typeof name != 'undefined') {
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-                var r = w.location.search.substr(1).match(reg);
+                var r = url.substr(1).match(reg);
                 if (r != null) return unescape(r[2]);
                 return null;
             }
             else {
                 var vars = [], hash;
-                var hashes = w.location.search.substr(1).split('&');
+                var hashes = url.substr(1).split('&');
                 for (var i = 0; i < hashes.length; i++) {
                     hash = hashes[i].split('=');
                     vars.push(hash[0]);
@@ -90,23 +98,21 @@
         app: function (url) {
             return ax.format("{0}{1}/{2}", ax.opts.root, ax.opts.app, url);
         },
+
+        // 加载页面
+        load: function (url) {
+            if (url.substr(0, 1) != '/') url = ax.path(url);
+            $('.ct-wrap').find('iframe').attr('src', url);
+        },
         go: function (url) {
             var ix = url.indexOf('|');
-            var mod = ix > 0 ? url.substr(0, ix) : url;
-            AX.goMod($("a[data-url='" + mod + "']"));
-            if (ix > 0) {
-                url = url.substr(ix + 1);
-                var acts = url.split('/');
-                if (acts.length > 1) {
-                    $('.ct-navbar .nav-item').removeClass('active');
-                    $("li[data-url='/" + mod + "/" + acts[0] + "']").addClass('active');
-                    AX.opts._curMods = [];
-                    AX.opts._curMods.push("/" + mod + "/" + acts[0]);
-                    AX.load("/" + mod + "/" + url)
-                }
-                else {
-                    $("li[data-url='/" + mod + "/" + acts[0] + "']").trigger('click');
-                }
+            var acts, mod = ix > 0 ? url.substr(0, ix) : url;
+            $("[data-url='" + mod + "']").trigger('click');
+            url = url.substr(ix + 1);
+            acts = url.split('/');
+            $("[data-url='" + mod + "/" + acts[0] + "']").trigger('click');
+            if (acts.length > 1) {
+                AX.load("/" + mod + "/" + url);
             }
         },
         gourl: function (url) {
@@ -126,52 +132,30 @@
                 }
             });
         },
-        // 返回上一级
-        back: function () {
-            AX.opts._curMods.pop();
-            AX.load(AX.opts._curMods.pop());
-        },
-        // 刷新
-        reload: function () {
-            AX.load(AX.opts._curMods[AX.opts._curMods.length - 1]);
-        },
-        // 加载页面
-        load: function (url) {
-            if (url.substr(0, 1) != '/') url = ax.path(url);
-            var prev = AX.opts._curMods[AX.opts._curMods.length - 1];
-            if (url != prev) AX.opts._curMods.push(url);
-            AX.opts._uploadedFiles = [];
-            $('body > div.combo-p, body > div.datagrid-cell').remove();
-            $('.ct-wrap').prepend('<div class="loading"><div class="load"></div></div>').load(url, function (res, status, xhr) {
-                if (xhr.status == 200) {
-                    $.parser.parse('.ct-wrap');
-                    $.aceui.parse('.ct-wrap');
-                    if (typeof onLoad == "function") onLoad();
-                    $('.ct-title').append('<button class="fr btn btn-default btn-xs ml20 mt5" data-cmd="reload"><span class="fa fa-refresh"></span> 刷新</button>');
-                    $('.ct-wrap .btn[data-cmd]').click(function () {
-                        var cmd = $(this).attr('data-cmd');
-                        if (cmd == 'reload') AX.reload();
-                        else if (cmd == 'back') AX.back();
-                        else if (cmd == 'save') onSubmit(AX.ok);
-                        else if (cmd == 'save-back') {
-                            onSubmit(function () {
-                                AX.ok();
-                                if (cmd.indexOf('back') >= 0) AX.back();
-                            });
-                        }
+        initBk: function () {
+            $('.ct-title').append('<button class="fr btn btn-default btn-xs ml10 mt8" data-cmd="max"><span class="fa fa-window-maximize"></span> 全屏打开</button>');
+            $('.ct-title').append('<button class="fr btn btn-default btn-xs ml20 mt8" data-cmd="reload"><span class="fa fa-refresh"></span> 刷新</button>');
+            $('.ct-wrap .btn[data-cmd]').click(function () {
+                var cmd = $(this).attr('data-cmd');
+                if (cmd == 'reload') AX.reload();
+                else if (cmd == 'max') window.open(window.location.href.replace('&nav=1', ''));
+                else if (cmd == 'back') AX.back();
+                else if (cmd == 'save') onSubmit(AX.ok);
+                else if (cmd == 'save-back') {
+                    onSubmit(function () {
+                        AX.ok();
+                        if (cmd.indexOf('back') >= 0) AX.back();
                     });
-                }
-                else {
-                    $(this).html(status + ':' + xhr.status);
                 }
             });
         },
-        goMod: function (jq) {
-            $('.ax-content').removeClass('mini').find('.ct-split').show('normal');
-            $('.nav-item').removeClass('active');
-            jq.closest('.nav-item').addClass('active');
-            $('.ct-navbar-title').text(jq.find('span.nav-title').text());
-            return $('.ct-navbar-list ul').removeClass('active').eq(jq.index('.nav-item a')).addClass('active');
+        // 返回上一级
+        back: function () {
+            w.history.back();
+        },
+        // 刷新
+        reload: function () {
+            AX.refresh();
         },
 
         // form.
@@ -179,7 +163,7 @@
             AX.formSubmit('#log', function (url) {
                 $.messager.info({ msg: '登录成功' });
                 window.location = url;
-            })
+            });
         },
         formSubmit: function (fid, cb, q, x) {
             var jq = $(fid);
@@ -227,14 +211,18 @@
         },
         formLoad: function (fid, data) {
             $(fid).data('form').data = data;
+            ax._loading = true;
             $(fid).form('load', data);
+            if (typeof onLoad == 'function') onLoad(data);
+            ax._loading = false;
         },
         // combo.
         selShow: function () {
-            var c = $(this), opts = c.combo('options');
+            var c = $(this), opts = c.combo('options'), url = opts.url;
+            if (opts.parent) url = ax.aurl(url, opts.param, $('#' + opts.parent).combo('getValue'));
             var val = opts.multiple ? (c.combo('getValues') + '&multi=1') : c.combo('getValue');
-            ax.dialog('请选择', ax.aurl(opts.url, 'val', val), function (val, txt) {
-                if (!opts.onBeforeChange || opts.onBeforeChange.call(c, val, txt) != false) {
+            ax.dialog('请选择', ax.aurl(url, 'val', val), function (val, txt) {
+                if (!opts.onSelect || opts.onSelect.call(c, val, txt) != false) {
                     c.combo('setValue', val);
                     c.combo('setText', txt);
                 } else {
@@ -243,12 +231,12 @@
             }, opts.panelWidth, opts.panelHeight);
             return false;
         },
-        btnShow: function (obj) {
-            var c = $(obj), opts = c.linkbutton('options');
-            var vBox = $('#' + opts.valueBox), tBox = $('#' + opts.textBox);
-            var val = vBox.textbox('getValue'), txt = tBox.textbox('getValue');
+        btnShow: function () {
+            var c = $(this), opts = c.linkbutton('options');
+            var vBox = $(opts.valBox), tBox = $(opts.txtBox);
+            var val = vBox.textbox('getValue');
             ax.dialog('请选择', ax.aurl(opts.url, 'val', val), function (val, txt) {
-                if (!opts.onBeforeChange || opts.onBeforeChange.call(c, val, txt) != false) {
+                if (!opts.onSelect || opts.onSelect.call(c, val, txt) != false) {
                     vBox.textbox('setValue', val);
                     tBox.textbox('setValue', txt);
                     if (opts.onChange) opts.onChange.call(c, val, txt);
@@ -278,12 +266,12 @@
         },
         // grid.
         gridSrh: function (gid, fid) {
-            var jq = $(gid), form = $(fid);
+            var param, jq = $(gid), form = $(fid);
             if (jq.hasClass("easyui-datagrid")) {
-                var param = $.extend(jq.datagrid('options').queryParams, form.serializeObject());
+                param = $.extend(jq.datagrid('options').queryParams, form.serializeObject());
                 jq.datagrid('load', param);
             } else {
-                var param = $.extend(jq.treegrid('options').queryParams, form.serializeObject());
+                param = $.extend(jq.treegrid('options').queryParams, form.serializeObject());
                 jq.treegrid('load', param);
             }
         },
@@ -292,20 +280,13 @@
             ax.gridSrh(gid, fid);
         },
         gridEx: function (gid) {
-            var jq = $(gid), q, ds;
-            if (jq.hasClass("easyui-datagrid")) {
-                q = jq.datagrid('options').queryParams;
-                ds = jq.datagrid('options').ds;
-            } else {
-                q = jq.treegrid('options').queryParams;
-                ds = jq.treegrid('options').ds;
-            }
-            var url = ax.api({ api: 'excel/down', ds: ds, q: 'page=1&rows=0&path=' + ax.opts.path }), inputs = '';
-            $.each($.param(q).split('&'), function () {
-                var p = this.split('=');
-                inputs += '<input type="hidden" name="' + p[0] + '" value="' + p[1] + '" />';
-            });
-            var form = ax.format('<form action="{0}" method="post">{1}</form>', url, inputs);
+            var jq = $(gid);
+            var opts = jq.hasClass("easyui-datagrid") ? jq.datagrid('options') : jq.datagrid('options');
+            var q = opts.url.split('?').length > 1 ? opts.url.split('?')[1] : '';
+            var qp = $.param(opts.queryParams);
+            if (qp) q += '&' + $.param(opts.queryParams);
+            var url = ax.api({ api: 'excel/down', q: q + '&path=' + ax.opts.path });
+            var form = ax.format('<form action="{0}" method="post"></form>', AX.aurl(url, 'rows', '0'));
             $(form).appendTo('body').submit().remove();
         },
         gridTb: function (gid) {
@@ -321,7 +302,16 @@
                 jq.treegrid('getPager').pagination({ buttons: tb });
             }
         },
-        gridAdd: function (gid, query) {
+        gridAdd: function (gid, query, appendwf) {
+            var taskId = AX.query('taskid');
+            if (appendwf && taskId) {
+                if (!query) {
+                    query = 'taskid=' + taskId;
+                }
+                else {
+                    query = ax.aurl(query, 'taskid', taskId, true);
+                }
+            }
             if ($(gid).hasClass("easyui-datagrid")) $(gid).datagrid('add', query);
             else $(gid).treegrid('add', query);
         },
@@ -333,9 +323,14 @@
             if ($(gid).hasClass("easyui-datagrid")) $(gid).datagrid('del', id);
             else $(gid).treegrid('del', id);
         },
+        gridWf: function (gid, id) {
+            var taskId = ax.query("taskid");
+            AX.dialog('查看流程', '/plat/wf/track?appinstanceid=' + id + '&taskid=' + taskId, onWf, 800, 500);
+        },
         gridAct: function (gid, act, id) {
             if (act == 'del') ax.gridDel(gid, id);
             else if (act == 'edit') ax.gridEdit(gid, id);
+            else if (act == 'wf') ax.gridWf(gid, id);
             else new Function(ax.format('event_{0}_{1}("{2}","{3}");', gid.substr(1), act, gid, id))();
         },
         gridFmt: function (v, rd, ri) {
@@ -345,17 +340,47 @@
             switch (fmt) {
                 case 'date':
                     if (ax.isdate(v)) return ax.datestr(v, exp);
+                    else return v;
                 case 'bool':
                     return v == "1" ? '<span class="icon icon-ok"></span>' : '';
                 case 'action':
-                    return ax.format('<a class="grid" onclick="{0}(\'' + v + '\',\'' + rd.id + '\')" title="{1}">', exp.split('=')) + v + '</a>';
+                    return ax.format('<a href="javascript:void()" class="grid" onclick="{0}(\'' + v.replace(/\\/g, '\\\\') + '\',\'' + rd.id + '\')" title="{1}">', exp.split('=')) + v + '</a>';
                 case 'link':
+                    var href = ax.objstr(exp, rd);
+                    if (href.substr(0, 1) == ',') href = href.substr(1);
                     if (v.substr(0, 1) == ',') v = v.substr(1);
-                    if (v != '') return '<a target="_blank" href="' + ax.objstr(exp, rd) + '">' + v + '</a>';
+                    if (v != '') {
+                        var items = href.replace(/=,/g, '=').split('|');
+                        if (items.length > 1) {
+                            var rv = v;
+                            for (var i = 0; i < items.length; i++) {
+                                var arr = items[i].split('=');
+                                if (arr[1] && arr[1] != 'null') {
+                                    var hrefs = arr[1].split(',');
+                                    if (hrefs.length > 1) {
+                                        for (var j = 0; j < hrefs.length; j++) {
+                                            rv += ' <a target="_blank" href="' + hrefs[j] + '">' + arr[0] + (j + 1).toString() + '</a>';
+                                        }
+                                    }
+                                    else {
+                                        rv += ' <a target="_blank" href="' + arr[1] + '">' + arr[0] + '</a>';
+                                    }
+                                }
+                            }
+                            return rv;
+                        }
+                        else {
+                            return '<a target="_blank" href="' + href + '">' + v + '</a>';
+                        }
+                    }
                     return v;
                 case 'href':
                     if (v.substr(0, 1) == ',') v = v.substr(1);
-                    return '<a target="_blank" href="' + v + '">' + exp + '</a>'
+                    var its = exp.split('|');
+                    if (its.length > 1) {
+                        return '<a target="_blank" href="' + AX.format(its[1], v) + '">' + its[0] + '</a>';
+                    }
+                    return '<a target="_blank" href="' + v + '">' + exp + '</a>';
                 case 'icon':
                     return '<span class="icon ' + v + '"></span>';
                 case 'text':
@@ -364,18 +389,18 @@
                     var html = '', ops = v.split(',');
                     for (var i = 0; i < ops.length; i++) {
                         var op = ops[i].split('=')[0], title = ops[i].split('=')[1];
-                        html += ax.format('<a class="easyui-linkbutton aceui" data-options="iconCls:\'fa fa-{0}\'" onclick="AX.gridAct(\'{4}\',\'{1}\',\'{3}\')" title="{2}"></a>',
-                            op.split('_').length > 1 ? op.split('_')[1] : op, op.split('_')[0], title, rd.id, exp);
+                        html += ax.format('<a class="easyui-linkbutton aceui" data-options="iconCls:\'fa fa-{0}\',text:\'{5}\'" onclick="AX.gridAct(\'{4}\',\'{1}\',\'{3}\')" title="{2}"></a>',
+                            op.split('_').length > 1 ? op.split('_')[1] : op, op.split('_')[0], title, rd.id.replace(/\\/g, '\\\\'), exp, op.split('_').length > 2 ? op.split('_')[2] : '');
                     }
                     return html;
                 case 'attach':
-                    var items = v.split(','), html = '';
-                    for (var i = 1; i < items.length; i++) {
-                        html += ax.format('<div class="lh20"><a href="{0}{1}" target="_blank" title="{2}">{3}{2}</a></div>',
-                            items[i].substr(0, 4) == 'http' ? '' : ax.opts.root, 
-                            items[i], ax.filename(items[i]).substr(11), (items.length > 2 ? (i + '.') : ''));
+                    var itms = v.split(','), hml = '';
+                    for (var i = 1; i < itms.length; i++) {
+                        hml += ax.format('<div class="lh20"><a href="{0}{1}" target="_blank" title="{2}">{3}{2}</a></div>',
+                            itms[i].substr(0, 4) == 'http' ? '' : ax.opts.root, 
+                            itms[i], ax.filename(itms[i]).substr(11), (itms.length > 2 ? (i + '.') : ''));
                     }
-                    return html;
+                    return hml;
                 case 'qrcode':
                     return ax.format('<img src="/api/draw/getqrcode?text={0}" />', v);
                 case 'tip':
@@ -492,7 +517,7 @@
             var l = 0;
             for (var i = 0; i < s.length; i++ , l++) {
                 if (s[i].match(/[^x00-xff]/ig) != null) l++;
-            };
+            }
             return l;
         },        
         now: function () {
@@ -524,14 +549,18 @@
                 return fmt.substr(0, fmt.length - val.length) + val;
             });
         },
-        aurl: function (url, name, val) {
+        aurl: function (url, name, val, search) {
             var i = url.indexOf(name + '=');
             if (i > 0) {
                 var e = url.indexOf('&', i);
                 if (e > i) return url.replace(url.substr(i, e - i), name + '=' + val);
                 else return url.substr(0, i) + name + '=' + val;
-            } else {
-                return url.indexOf('?') > 0 ? (url + '&' + name + '=' + val) : (url + '?' + name + '=' + val);
+            }
+            else {
+                if (search || url.indexOf('?') > 0) {
+                    return url + '&' + name + '=' + val;
+                }
+                return url + '?' + name + '=' + val;
             }
         },
         objstr: function (s, o) {
@@ -549,6 +578,13 @@
                 rv += chars.charAt(Math.floor(Math.random() * maxPos));
             }
             return rv;
+        },
+        tohex: function (n, len) {
+            var num = typeof n == 'number' ? n : parseInt(n);
+            return ax.pad(num.toString(16).toUpperCase(), '0', len, 1);
+        },
+        fromhex: function (s) {
+            return parseInt(s, 16);
         },
         isdate: function (s) {
             var d = ax.dateobj(s);
@@ -591,6 +627,38 @@
                     default: return $0.substr(1, $0.length - 2);
                 }
             });
+        },
+        iframe: {
+            resolution: 200,
+            iframes: [],
+            interval: null,
+            Iframe: function () {
+                this.element = arguments[0];
+                this.cb = arguments[1];
+                this.hasTracked = false;
+            },
+            track: function (element, cb) {
+                this.iframes.push(new this.Iframe(element, cb));
+                if (!this.interval) {
+                    var _this = this;
+                    this.interval = setInterval(function () { _this.checkClick(); }, this.resolution);
+                }
+            },
+            checkClick: function () {
+                if (document.activeElement) {
+                    var activeElement = document.activeElement;
+                    for (var i in this.iframes) {
+                        if (activeElement === this.iframes[i].element) {
+                            if (this.iframes[i].hasTracked == false) {
+                                this.iframes[i].cb.apply(window, []);
+                                this.iframes[i].hasTracked = true;
+                            }
+                        } else {
+                            this.iframes[i].hasTracked = false;
+                        }
+                    }
+                }
+            }
         }
     };
 
@@ -606,35 +674,4 @@ $(function () {
     }
     // auto focus.
     AX.tfocus();
-
-    // 加载
-    $('.sidebar-fold').click(function () {
-        var val = 'full';
-        $('.ax-body').toggleClass('ax-sidebar-full').toggleClass('ax-sidebar-mini');
-        if ($('.ax-body').hasClass('ax-sidebar-mini')) {
-            val = 'mini';
-            $('.aceui-tooltip').acetip();
-        } else {
-            val = 'full';
-            $('.aceui-tooltip').tooltip('destroy');
-        }
-        $('.easyui-layout').layout('resize', { width: '100%' });
-        $.cookie('aceplat.layout', val, { expires: 15 });
-    })
-    $('.sidebar-title').click(function () {
-        $(this).closest('.sidebar-nav').toggleClass('sidebar-nav-fold');
-    })
-    $('.nav-item a').click(function () {
-        AX.goMod($(this)).find('.nav-item').first().trigger('click');
-    });
-    $('.ct-split-collapse').click(function () {
-        $(this).closest('.ax-content').toggleClass('mini');
-        $('.easyui-layout').layout('resize', { width: '100%' });
-    });
-    $('.ct-navbar .nav-item').click(function () {
-        $('.ct-navbar .nav-item').removeClass('active');
-        $(this).addClass('active');
-        AX.opts._curMods = [];
-        AX.load($(this).attr('data-url'));
-    })
 });

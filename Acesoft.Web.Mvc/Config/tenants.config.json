@@ -1,13 +1,20 @@
 {
-  "defaultTenant": "default",
+  "defaultTenant": "ace",
   "unresolvedRedirect": "",
   "RedirectPermanent": false,
   "tenants": [
     {
-      "name": "default",
+      "name": "ace",
       "hostnames": [ "localhost:5000" ],
       "indexpage": "plat/index",
-      "modules": [ "plat", "cms", "hr", "iot", "shop", "wechat" ],
+      "modules": [ "Cloud", "IoT" ],
+      "theme": ""
+    },
+    {
+      "name": "xile",
+      "hostnames": [ "localhost:82" ],
+      "indexpage": "plat/index",
+      "modules": [ "Cloud", "IoT" ],
       "theme": ""
     }
   ]

@@ -1,0 +1,27 @@
+{
+  "accesses": {
+    "aliyunoss": {
+      "endpoint": "oss-cn-beijing.aliyuncs.com",
+      "accessKeyId": "LTAIwYP4daI9blue",
+      "accessKeySecret": "NZkfQvDIHuj5lloVmytr6bmQrmILPs"
+    },
+    "aliyunsms": {
+      "endpoint": "cn-beijing",
+      "accessKeyId": "LTAIwYP4daI9blue",
+      "accessKeySecret": "NZkfQvDIHuj5lloVmytr6bmQrmILPs"
+    }
+  },
+  "mailconfigs": {
+    "mail163": {
+      "host": "smtp.163.com",
+      "port": 994, //25
+      "ssl": true
+    }
+  },
+  "settings": {
+    "mojiweather": {
+      "appcode": "2d5ed303a5e14d8caf17e0c1ffcdc576",
+      "refreshMinutes": 120
+    }
+  }
+}

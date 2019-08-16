@@ -96,8 +96,9 @@ namespace Acesoft.Rbac.Schema
                     )
                     .CreateTable("rbac_auth", t => t.PrimaryKey()
                         .Column<long>("user_id", c => c.NotNull())
+                        .Column<long>("app_id", c => c.NotNull())
                         .Column<string>("authtype", c => c.WithLength(20))
-                        .Column<string>("authid", c => c.WithLength(20))
+                        .Column<string>("authid", c => c.WithLength(50))
                         .Column<DateTime>("dcreate")
                         .Column<DateTime>("dupdate")
                     )
@@ -220,7 +221,7 @@ namespace Acesoft.Rbac.Schema
                 guest.UserName = "游客";
                 guest.NickName = "游客";
                 guest.Creator = root.Id.ToString();
-                guest.Password = CryptoHelper.ComputeMD5("guest", guest.HashId);
+                guest.Password = CryptoHelper.ComputeMD5(guest.HashId, "guest");
                 guest.DCreate = DateTime.Now;
                 guest.Enabled = true;
                 session.Insert(guest);

@@ -1,0 +1,46 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "客户端APP";
+    Layout = "_shared/back";
+
+    Ace.Layout().Fit(true).Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).Height("38px").Button(false).Controls(query =>
+            {
+                Ace.Button().AppendTo(query).Text("添加客户端应用").IconCls("fa fa-plus").Click("AX.gridAdd('#grid')");
+            })
+            .Tools(tools =>
+            {                
+            });
+        });
+        layout.Add().Border(false).Region(Region.west).Width(600).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false).CheckBox(false)
+            .Events(e => e.OnSelect("onSelect"))
+            .DataSource("sys.client").Ajax(ds => ds.Events(e => e.OnSuccess("onLoad")).HttpGet()).Columns(c =>
+            {
+                c.Add().Field("name").Title("应用名称").Width(5).Format("link:/plat/app?clientid={id}");
+                c.Add().Field("remark").Title("备注").Width(15);
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Content(
+            @<div class="text-c pt30">
+                <b>客户端APP下载二维码</b><br/><br />
+                <img id="qrcode" style="width:300px;height:300px;border:1px dashed #ccc" />
+            </div>
+        );
+    }).Render();
+}
+<script>
+    function onSelect(index, row) {
+        var url = '@App.GetWebPath("/plat/app?clientid=", true)' + row.id;
+        $('#qrcode').attr('src', '/api/draw/getqrcode?text=' + url);
+    }
+    function onLoad() {
+        $(this).datagrid('selectRow', 0);
+    }
+</script>

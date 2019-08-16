@@ -4,10 +4,9 @@ using System;
 
 namespace Acesoft.Web.UI.Widgets.Fluent
 {
-	public class CheckBoxListBuilder : ListBuilder<CheckBoxList, CheckBox, CheckBoxListBuilder>
+	public class CheckBoxListBuilder : ListBuilder<CheckBoxList, CheckBoxListBuilder, CheckBox, CheckBoxBuilder>
 	{
-		public CheckBoxListBuilder(CheckBoxList component)
-			: base(component)
+		public CheckBoxListBuilder(CheckBoxList component) : base(component)
 		{
 		}
 
@@ -28,7 +27,13 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 			return Items(addAction, () => new CheckBox(base.Component.Ace), (CheckBox item) => new CheckBoxBuilder(item));
 		}
 
-		public CheckBoxListBuilder Events(Action<EventBuilder> clientEventsAction)
+        public CheckBoxListBuilder Ajax(Action<DataSourceBuilder> ajaxAction)
+        {
+            ajaxAction(new DataSourceBuilder(Component.DataSource).Controller("crud").Action("list"));
+            return this;
+        }
+
+        public CheckBoxListBuilder Events(Action<EventBuilder> clientEventsAction)
 		{
 			clientEventsAction(new EventBuilder(base.Component.Events));
 			return this;

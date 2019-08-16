@@ -16,44 +16,19 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnRemove = new ScriptEvent("onRemove", "title,index");
 
-		public bool? Fit
-		{
-			get;
-			set;
-		}
+		public bool? Fit { get; set; }
 
-		public bool? Border
-		{
-			get;
-			set;
-		}
+		public bool? Border { get; set; }
 
-		public bool? Animate
-		{
-			get;
-			set;
-		}
+		public bool? Animate { get; set; }
 
-		public bool? Multiple
-		{
-			get;
-			set;
-		}
+		public bool? Multiple { get; set; }
 
-		public int? Selected
-		{
-			get;
-			set;
-		}
+		public int? Selected { get; set; }
 
-		public Align? HAlign
-		{
-			get;
-			set;
-		}
+		public Align? HAlign { get; set; }
 
-		public Accordion(WidgetFactory ace)
-			: base(ace)
+		public Accordion(WidgetFactory ace) : base(ace)
 		{
 			base.Widget = "accordion";
 		}

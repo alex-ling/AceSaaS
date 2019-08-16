@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Acesoft.Rbac
 {
-    public enum UserType
+    public enum UserType : int
     {
         User = 0,
         Customer = 1,

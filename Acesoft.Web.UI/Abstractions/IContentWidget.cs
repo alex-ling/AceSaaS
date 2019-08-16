@@ -7,7 +7,7 @@ namespace Acesoft.Web.UI
 {
 	public interface IContentWidget
 	{
-		object Data { get; set; }
+		object Model { get; set; }
 		IHtmlTemplate Template { get; }
 		IList<IHtmlContent> Controls { get; }
 	}

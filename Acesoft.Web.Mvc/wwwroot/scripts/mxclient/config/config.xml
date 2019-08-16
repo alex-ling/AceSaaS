@@ -1,0 +1,222 @@
+﻿<mxEditor defaultGroup="group" defaultEdge="connector">
+  <include name="/scripts/mxclient/config/editor.xml"/>
+  <include name="/scripts/mxclient/config/keyhandler.xml"/>
+  <ui>
+    <add as="graph" element="graph" />
+    <add as="toolbar" element="toolbox" />
+  </ui>
+  <Array as="templates">
+    <add as="group">
+      <Group label="">
+        <mxCell vertex="1" style="group" connectable="0"/>
+      </Group>
+    </add>
+    <add as="text">
+      <Text label="文字">
+        <mxCell vertex="1" connectable="0">
+          <mxGeometry as="geometry" width="80" height="20" />
+        </mxCell>
+      </Text>
+    </add>
+    <add as="item">
+      <Task label="任务" type="0" url="" in="0" out="0" fetch="1">
+        <mxCell vertex="1">
+          <mxGeometry as="geometry" width="80" height="40" />
+        </mxCell>
+      </Task>
+    </add>
+    <add as="container">
+      <Container label="容器">
+        <mxCell vertex="1" connectable="0">
+          <mxGeometry as="geometry" width="200" height="200" />
+        </mxCell>
+      </Container>
+    </add>
+    <add as="connector">
+      <Line label="" rule="">
+        <mxCell edge="1">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+      </Line>
+    </add>
+  </Array>
+  <mxGraph as="graph" alternateEdgeStyle="vconnect" allowLoops="1" dropEnabled="1">
+    <mxGraphModel as="model">
+      <add as="valueForCellChanged"><![CDATA[
+        function(cell, value)
+        {
+          var previous = null;					
+          if (value == null || isNaN(value.nodeType))
+          {
+            previous = cell.value.getAttribute('label');
+            if (value == null)
+            {
+              cell.value.removeAttribute('label');
+            }
+            else
+            {
+              cell.setAttribute('label', value);
+            }
+          }
+          else
+          {
+            previous = cell.value;
+            cell.value = value;
+          }					
+          return previous;
+        }]]>
+      </add>
+      <root>
+        <Diagram id="0" label="流程图">
+          <mxCell/>
+        </Diagram>
+        <Layer id="1" label="默认层">
+          <mxCell parent="0"/>
+        </Layer>
+        <Task id="2" label="开始" type="1" in="0" out="0" url="">
+          <mxCell style="ellipse;fontStyle=1;fontColor=red" vertex="1" parent="1">
+            <mxGeometry x="50" y="175" width="50" height="50" as="geometry"/>
+          </mxCell>
+        </Task>
+        <Task id="3" label="停止" type="2" in="0" out="0" url="">
+          <mxCell style="ellipse;fontStyle=1;fontColor=red" vertex="1" parent="1">
+            <mxGeometry x="700" y="175" width="50" height="50" as="geometry"/>
+          </mxCell>
+        </Task>
+      </root>
+    </mxGraphModel>
+    <add as="isAutoSizeCell"><![CDATA[
+      function(cell){
+	    return mxUtils.isNode(this.model.getValue(cell), 'text');
+      }]]>
+    </add>
+    <add as="convertValueToString"><![CDATA[
+      function(cell){
+	    return cell.getAttribute('label');
+      }]]>
+    </add>
+    <mxStylesheet as="stylesheet">
+      <add as="vconnect">
+        <add as="elbow" value="vertical"/>
+      </add>
+      <add as="group">
+        <add as="shape" value="rectangle"/>
+        <add as="perimeter" value="rectanglePerimeter"/>
+        <add as="fontSize" value="10"/>
+        <add as="align" value="left"/>
+        <add as="verticalAlign" value="top"/>
+        <add as="strokeColor" value="gray"/>
+        <add as="dashed" value="1"/>
+      </add>
+      <add as="text">
+        <add as="shape" value="rectangle"/>
+        <add as="perimeter" value="rectanglePerimeter"/>
+        <add as="fontSize" value="14"/>
+        <add as="align" value="left"/>
+        <add as="verticalAlign" value="middle"/>
+        <add as="shadow" value="0"/>
+        <add as="strokeColor" value="none"/>
+        <add as="fillColor" value="none"/>
+        <add as="gradientColor" value="none"/>
+      </add>
+      <add as="container">
+        <add as="shape" value="swimlane"/>
+        <add as="shadow" value="0"/>
+        <add as="startSize" value="23"/>
+        <add as="align" value="center"/>
+        <add as="verticalAlign" value="top"/>
+        <add as="strokeColor" value="#CCCCCC"/>
+        <add as="fillColor" value="#D4D4D4"/>
+      </add>
+      <add as="rectangle">
+        <add as="shape" value="rectangle"/>
+        <add as="perimeter" value="rectanglePerimeter"/>
+      </add>
+      <add as="rounded">
+        <add as="shape" value="rectangle"/>
+        <add as="rounded" value="1" />
+        <add as="perimeter" value="rectanglePerimeter"/>
+      </add>
+      <add as="ellipse">
+        <add as="shape" value="ellipse"/>
+        <add as="perimeter" value="ellipsePerimeter"/>
+      </add>
+      <add as="dellipse">
+        <add as="shape" value="doubleEllipse"/>
+        <add as="perimeter" value="ellipsePerimeter"/>
+      </add>
+      <add as="rhombus">
+        <add as="shape" value="rhombus"/>
+        <add as="perimeter" value="rhombusPerimeter"/>
+      </add>
+      <add as="triangle">
+        <add as="shape" value="triangle"/>
+        <add as="perimeter" value="trianglePerimeter"/>
+      </add>
+      <add as="hexagon">
+        <add as="shape" value="hexagon"/>
+        <add as="perimeter" value="ellipsePerimeter"/>
+      </add>
+      <add as="actor">
+        <add as="shape" value="actor"/>
+        <add as="height" value="80"/>
+      </add>
+      <add as="cloud">
+        <add as="shape" value="cloud"/>
+        <add as="perimeter" value="ellipsePerimeter"/>
+      </add>
+      <add as="cylinder">
+        <add as="shape" value="cylinder"/>
+        <add as="spacingTop" value="10"/>
+      </add>
+      <add as="image">
+        <add as="shape" value="image"/>
+        <add as="perimeter" value="rectanglePerimeter"/>
+        <add as="align" value="center"/>
+        <add as="verticalAlign" value="middle"/>
+        <add as="image" value=" /scripts/mxclient/images/mx.jpg"/>
+      </add>
+    </mxStylesheet>
+  </mxGraph>
+  <mxDefaultToolbar as="toolbar">
+    <add as="直连线" mode="connect" icon=" /scripts/mxclient/images/straight.gif"><![CDATA[
+      function (editor){
+        var s = editor.graph.getStylesheet().getDefaultEdgeStyle();
+	    s[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
+      }]]>
+    </add>
+    <br/>
+    <add as="折连线" mode="connect" icon=" /scripts/mxclient/images/connect.gif"><![CDATA[
+      function (editor){
+        var s = editor.graph.getStylesheet().getDefaultEdgeStyle();
+	    s[mxConstants.STYLE_EDGE] = mxEdgeStyle.ElbowConnector;
+      }]]>
+    </add>
+    <br/>
+    <add as="文本" template="text" style="text" icon=" /scripts/mxclient/images/text.gif" />
+    <br/>
+    <add as="容器" template="container" style="container" icon=" /scripts/mxclient/images/swimlane.gif"/>
+    <br/>
+    <add as="长方形" template="item" style="rectangle" icon=" /scripts/mxclient/images/rectangle.gif"/>
+    <br/>
+    <add as="圆角形" template="item" style="rounded" icon=" /scripts/mxclient/images/rounded.gif"/>
+    <br/>
+    <add as="椭圆" template="item" style="ellipse" icon=" /scripts/mxclient/images/ellipse.gif"/>
+    <br/>
+    <add as="双椭圆" template="item" style="dellipse" icon=" /scripts/mxclient/images/doubleellipse.gif"/>
+    <br/>
+    <add as="菱形" template="item" style="rhombus" icon=" /scripts/mxclient/images/rhombus.gif"/>
+    <br/>
+    <add as="三角形" template="item" style="triangle" icon=" /scripts/mxclient/images/triangle.gif"/>
+    <br/>
+    <add as="六角形" template="item" style="hexagon" icon=" /scripts/mxclient/images/hexagon.gif"/>
+    <br/>
+    <add as="角色" template="item" style="actor" icon=" /scripts/mxclient/images/actor.gif"/>
+    <br/>
+    <add as="柱形" template="item" style="cylinder" icon=" /scripts/mxclient/images/cylinder.gif"/>
+    <br/>
+    <add as="云" template="item" style="cloud" icon=" /scripts/mxclient/images/cloud.gif"/>
+    <br/>
+    <add as="图片" template="item" style="image" icon=" /scripts/mxclient/images/image.gif"/>
+  </mxDefaultToolbar>
+</mxEditor>

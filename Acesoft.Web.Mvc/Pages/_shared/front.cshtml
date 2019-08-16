@@ -3,141 +3,134 @@
 @inject IConfigService ConfigService
 @{ 
     Model.Ace.RenderAuthOptions = true;
-    var modules = ObjectService.Gets(Model.Ace.AC.Roles, ObjectType.Module, Model.Ace.AC.User.LoginName);
-    var rootUserModule = 233342651854749696;
+
+    var homeUrl = ViewBag.HomeUrl ?? "/plat/index/front";
     var url = Model.Ace.Path.ToLower();
+    var modules = ObjectService.Gets(Model.Ace.AC.Roles, ObjectType.Page, Model.Ace.AC.User.LoginName);
     var cfg = ConfigService.GetConfig(1);
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@Html.Raw(ViewData["Title"])</title>
-    <environment include="Development">
-        <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css" />
-        <link rel="stylesheet" href="~/scripts/easyui/themes/color.css" />
-        <link rel="stylesheet" href="~/scripts/easyui/themes/icon.css" />
-        <link rel="stylesheet" href="~/scripts/ace/css/aceui.css" />
-        <link rel="stylesheet" href="~/content/site.css" />
-        <link rel="stylesheet" href="~/content/front.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css" />
-        <link rel="stylesheet" href="~/scripts/easyui/themes/color.css" />
-        <link rel="stylesheet" href="~/scripts/easyui/themes/icon.css" />
-        <link rel="stylesheet" href="~/scripts/ace/css/aceui.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/content/front.min.css" asp-append-version="true" />
-    </environment>
+    <title>@Html.Raw(ViewData["Title"]) - @Html.Raw(cfg["sys_name"])</title>
+    <meta name="description" content="@Html.Raw(cfg["sys_description"])">
+    <meta name="keywords" content="@Html.Raw(cfg["sys_keywords"])"><environment include="Development">
+    <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/color.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/icon.css" />
+    <link rel="stylesheet" href="~/scripts/ace/css/aceui.css" />
+    <link rel="stylesheet" href="~/content/site.css" />
+    <link rel="stylesheet" href="~/content/front.css" /></environment><environment exclude="Development">
+    <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/color.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/icon.css" />
+    <link rel="stylesheet" href="~/scripts/ace/css/aceui.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/content/front.min.css" asp-append-version="true" /></environment>
 </head>
-<body style="min-width:1200px;background:url(/user/back.jpg) repeat-x #aee2f3">
-    <div class="container pt30 pb5">
-        <div class="col-md-6">
-            <a class="logo" href="/">
-                <img class="fl" src="@cfg["sys_plat_logo"]" style="height:60px" />
-                <div class="fl ft30 fwb" style="line-height:60px;color:#fff">@cfg["sys_name"]</div>
-            </a>
+<body style="min-width:1200px;background:url(@cfg["sys_front_back"]) repeat-x #f7f8f3">
+<div class="container pt30 pb5">
+    <div class="col-xs-6">
+        <a class="logo" href="@homeUrl">
+            <img class="fl" src="@cfg["sys_plat_logo"]" style="height:60px" />
+            <div class="fl" style="font-size:35px;line-height:60px;color:#fff">@cfg["sys_name"]</div>
+        </a>
+    </div>
+    <div class="col-xs-6 text-r">
+        <div class="ft30 fwb" style="line-height:60px;color:#fff">@cfg["sys_tip"]</div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="padding-top:12px">
+        <div class="col-xs-6 ft16 lh40" style="height:40px">
+            <span id="sTime"></span>欢迎您，<span style="color:#09c;font-weight:bold">@Model.Ace.AC.User.NickName</span>！
         </div>
-        <div class="col-md-6 text-r">
-            <div class="ft30 fwb" style="line-height:60px;color:#fff">@cfg["sys_tip"]</div>
+        <div class="col-xs-6 text-r" style="padding-top:7px">
+            @Model.Ace.LinkButton().Text("修改密码").Css("c1").Width("100px").Height("28px").Click("AX.gourl('/plat/userft/safe/pwd')")
+            @Model.Ace.LinkButton().Text("退出登录").Css("c1").Width("100px").Height("28px").Click("AX.logout()")
         </div>
     </div>
-    <div class="container">
-        <div class="row" style="padding-top:12px">
-            <div class="col-md-6 ft16 lh40" style="height:40px">
-                <span id="sTime"></span>欢迎您，<span style="color:#09c;font-weight:bold">@Model.Ace.AC.User.NickName</span>！
-            </div>
-            <div class="col-md-6 text-r" style="padding-top:7px">
-                @Model.Ace.LinkButton().Text("修改密码").Css("c1").Width("100px").Height("28px").Click("AX.gourl('/plat/userft/safe/pwd')")
-                @Model.Ace.LinkButton().Text("退出登录").Css("c1").Width("100px").Height("28px").Click("AX.logout()")
-            </div>
-        </div>
-    </div>
-    <div class="container pt20 pb20">
-        <div class="row ph15">
-            <div class="fl pr15" style="width:16%">
-                <div class="ax-sidebar" style="min-height:715px">
+</div>
+<div class="container pt20 pb20">
+    <div class="row ph15">
+        <div class="fl pr15" style="width:16%">
+            <div class="ax-sidebar" style="height:850px">
+                <div class="sidebar-nav">
+                    <div class="nav-item @if (homeUrl.StartsWith(url)){ @("active") }">
+                        <a href="@homeUrl">
+                            <span class="nav-item-icon glyphicon glyphicon-home"></span>
+                            <span class="nav-item-text">用户首页</span>
+                        </a>
+                    </div>
+                </div>
+                @foreach (var obj in modules.Where(o => !o.ParentId.HasValue).OrderBy(o => o.OrderNo))
+                {
+                    var childs = modules.Where(o => o.ParentId == obj.Id).OrderBy(o => o.OrderNo);
                     <div class="sidebar-nav">
-                        <div class="nav-item @if ("/home/index/".StartsWith(url)){ @("active") }">
-                            <a href="/home/index">
-                                <span class="nav-item-icon glyphicon glyphicon-home"></span>
-                                <span class="nav-item-text">用户首页</span>
-                            </a>
-                        </div>
+                        @if (childs.Any())
+                        {
+                            <div class="nav-title">
+                                <span class="nav-title-icon @obj.Icon"></span>
+                                <span class="nav-title-text">@obj.Name</span>
+                                <span class="nav-icon fa fa-caret-down"></span>
+                            </div>
+                            <ul class="nav-body">
+                                @foreach (var item in childs)
+                                {
+                                    <li class="nav-item @if (("/" + item.Url + "/").StartsWith(url)){ @("active") }">
+                                        <a href="/@item.Url">
+                                            <span class="nav-item-title">@item.Name</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="nav-item @if (("/" + obj.Url + "/").StartsWith(url)){ @("active") }">
+                                <a data-url="@obj.Url">
+                                    <span class="nav-item-icon @obj.Icon"></span>
+                                    <span class="nav-item-text">@obj.Name</span>
+                                </a>
+                            </div>
+                        }
                     </div>
-                    @foreach (var obj in modules.Where(o => o.ParentId == rootUserModule).OrderBy(o => o.OrderNo))
-                    {
-                        var childs = modules.Where(o => o.ParentId == obj.Id).OrderBy(o => o.OrderNo);
-                        <div class="sidebar-nav">
-                            @if (childs.Any())
-                            {
-                                <div class="nav-title">
-                                    <span class="nav-title-icon @obj.Icon"></span>
-                                    <span class="nav-title-text">@obj.Name</span>
-                                    <span class="nav-icon fa fa-caret-down"></span>
-                                </div>
-                                <ul class="nav-body">
-                                    @foreach (var item in childs)
-                                    {
-                                        <li class="nav-item @if (("/" + item.Url + "/").StartsWith(url)){ @("active") }">
-                                            <a href="/@item.Url">
-                                                <span class="nav-item-title">@item.Name</span>
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                            else
-                            {
-                                <div class="nav-item @if (("/" + obj.Url + "/").StartsWith(url)){ @("active") }">
-                                    <a data-url="@obj.Url">
-                                        <span class="nav-item-icon @obj.Icon"></span>
-                                        <span class="nav-item-text">@obj.Name</span>
-                                    </a>
-                                </div>
-                            }
-                        </div>
-                    }
-                </div>
+                }
             </div>
-            <div class="fr" style="width:84%">
-                <div class="ax-content" style="min-height:714px">
-                    <div class="ct-wrap">
-                        @RenderBody()
-                    </div>
+        </div>
+        <div class="fr" style="width:84%">
+            <div class="ax-content" style="height:850px;overflow:hidden">
+                <div class="ct-wrap">
+                    @RenderBody()
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer" style="margin-top:3px">
-        <div>Copyright © @cfg["sys_copyright"]</div>
-        <div>技术支持：@cfg["sys_support"]</div>
-    </div>
-    <environment include="Development">
-        <script src="~/scripts/jquery/dist/jquery.js"></script>
-        <script src="~/scripts/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/scripts/plupload/js/plupload.full.min.js"></script>
-        <script src="~/scripts/easyui/jquery.easyui.min.js"></script>
-        <script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
-        <script src="~/scripts/ace/aceui-easyuiex.js"></script>
-        <script src="~/scripts/ace/aceui.js"></script>
-        <script src="~/scripts/ace/aceui-upload.js"></script>
-        <script src="~/scripts/ace/ace.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/scripts/jquery/dist/jquery.min.js"></script>
-        <script src="~/scripts/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="~/scripts/plupload/js/plupload.full.min.js"></script>
-        <script src="~/scripts/easyui/jquery.easyui.min.js"></script>
-        <script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
-        <script src="~/scripts/ace/js/ace.min.js" asp-append-version="true"></script>
-    </environment>
-    @Model.Ace.RenderInitScripts(true)
-    @RenderSection("startup", false)
-    <script>$(function () { AX.initFt() })</script>
+</div>
+<div class="footer pt5" style="border-top:5px solid #aee2f3">
+    <div>Copyright © @Html.Raw(cfg["sys_copyright"])</div>
+    <div>技术支持：@Html.Raw(cfg["sys_support"])</div>
+</div><environment include="Development">
+<script src="~/scripts/jquery/dist/jquery.js"></script>
+<script src="~/scripts/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/scripts/plupload/js/plupload.full.min.js"></script>
+<script src="~/scripts/easyui/jquery.easyui.min.js"></script>
+<script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
+<script src="~/scripts/ace/aceui-easyuiex.js"></script>
+<script src="~/scripts/ace/aceui.js"></script>
+<script src="~/scripts/ace/aceui-upload.js"></script>
+<script src="~/scripts/ace/ace.js"></script></environment><environment exclude="Development">
+<script src="~/scripts/jquery/dist/jquery.min.js"></script>
+<script src="~/scripts/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/scripts/plupload/js/plupload.full.min.js"></script>
+<script src="~/scripts/easyui/jquery.easyui.min.js"></script>
+<script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
+<script src="~/scripts/ace/js/ace.min.js" asp-append-version="true"></script></environment>
+@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)<script>$(function () { AX.initFt() })</script>
+@await Html.PartialAsync("_views/baidu")
 </body>
 </html>

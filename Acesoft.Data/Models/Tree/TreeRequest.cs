@@ -10,5 +10,6 @@ namespace Acesoft.Data
         public string RootId { get; set; }
         public string RootName { get; set; }
         public string RootIcon { get; set; }
+        public bool NullSelect { get; set; }
     }
 }

@@ -41,17 +41,23 @@ namespace Acesoft.Data
                 return string.Empty;
             }
 
-            var rv = string.Empty;
             var type = items.Length > 1 ? items[1].ToLower() : "text";
             var format = items.Length > 2 ? items[2] : null;
 
+            var rv = string.Empty;
             switch (type)
             {
                 case "text":
-                    rv = value.ToString();
+                    rv = value.ToString().Replace("\r\n", "");
+                    break;
+                case "num":
+                    rv = Convert.ToDouble(value).ToString(format);
                     break;
                 case "date":
                     rv = (Convert.ToDateTime(value)).ToString(format ?? "yyyy-MM-dd");
+                    break;
+                case "bool":
+                    rv = Convert.ToBoolean(value) ? format : "";
                     break;
                 default:
                     rv = value.ToString();

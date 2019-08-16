@@ -27,6 +27,7 @@ namespace Acesoft.Web.UI
         public string For { get; set; }
         public IDictionary<string, object> Attributes { get; private set; }
         public IDictionary<string, object> Events { get; private set; }
+        public IDictionary<string, object> Options { get; private set; }
         public IDictionary<string, object> Styles { get; private set; }
         public IHtmlBuilder HtmlBuilder
 		{
@@ -56,6 +57,9 @@ namespace Acesoft.Web.UI
 		{
 		}
 
+        public virtual void OnCreateControl()
+        { }
+
 		public void WriteTo(TextWriter writer, HtmlEncoder encoder)
 		{
 			VerifyProperties();
@@ -63,6 +67,10 @@ namespace Acesoft.Web.UI
 			{
 				((IDataBind)this).DataBind();
 			}
+
+            // builder之后render之前发生
+            this.OnCreateControl();
+
 			if (!IsOnlyScriptable)
 			{
 				IHtmlNode html = HtmlBuilder.Build();
@@ -88,6 +96,7 @@ namespace Acesoft.Web.UI
 			Attributes = new RouteValueDictionary();
 			Events = new Dictionary<string, object>();
 			Styles = new Dictionary<string, object>();
+            Options = new Dictionary<string, object>();
 		}
 
 		public WidgetBase(WidgetFactory ace) : this()

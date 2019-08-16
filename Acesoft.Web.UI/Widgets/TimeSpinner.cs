@@ -11,29 +11,13 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnParser = new ScriptEvent("parser", "s");
 
-		public string Separator
-		{
-			get;
-			set;
-		}
+		public string Separator { get; set; }
 
-		public bool? ShowSeconds
-		{
-			get;
-			set;
-		}
+		public bool? ShowSeconds { get; set; }
 
-		public int? Highlight
-		{
-			get;
-			set;
-		}
+		public int? Highlight { get; set; }
 
-		public IList<IList<int>> Selections
-		{
-			get;
-			set;
-		}
+		public IList<IList<int>> Selections { get; set; }
 
 		public TimeSpinner(WidgetFactory ace)
 			: base(ace)

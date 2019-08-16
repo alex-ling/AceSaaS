@@ -18,12 +18,13 @@ namespace Acesoft.Platform.Services
             }).ToList();
 		}
 
-		public IList<Sys_Field> Gets(string tableName, long[] fieldIds)
+		public IList<Sys_Field> Gets(string tableName, long[] fieldIds, int created = 0)
 		{
-			var sql = "select * from sys_field where [table]=@tableName and created=0 and id in @fieldIds";
+			var sql = "select * from sys_field where [table]=@tableName and created=@created and id in @fieldIds";
 			return Session.Query<Sys_Field>(sql, new
 			{
                 tableName,
+                created,
 				fieldIds
 			}).ToList();
 		}

@@ -181,25 +181,23 @@ namespace Acesoft.Data.SqlMapper
             bool hasFilterParamValue = false;
             foreach (var query in map.Query)
             {
-                if (query.Value == "qs" || query.Value == "ac")
+                if (query.Value != "qs" && query.Value != "ac")
                 {
-                    // 若为固定参数，已经处理，此外不再拼接条件
-                    continue;
-                }
+                    // 拼接条件
+                    if (query.Key.StartsWith("_"))
+                    {
+                        hasFilterParam = true;
+                    }
+                    queryValue = App.GetQuery(query.Key, "").Trim();
+                    if (queryValue.HasValue())
+                    {
+                        // 此处同步添加ctx的params
+                        ctx.Params[query.Key] = queryValue;
 
-                if (query.Key.StartsWith("_"))
-                {
-                    hasFilterParam = true;
-                }
-                queryValue = App.GetParam(query.Key, "").Trim();
-                if (queryValue.HasValue())
-                {
-                    // 此处同步添加ctx的params
-                    ctx.Params[query.Key] = queryValue;
-
-                    // 拼接查询条件
-                    hasFilterParamValue = hasFilterParam;
-                    q += $" and ({string.Format(query.Value, queryValue.Split(','))})";
+                        // 拼接查询条件
+                        hasFilterParamValue = hasFilterParam;
+                        q += $" and ({string.Format(query.Value, queryValue.Split(','))})";
+                    }
                 }
             }
             if (q.HasValue() && (!isTree || (isTree && !grid.Id.HasValue)))

@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Acesoft.Data.SqlMapper\Acesoft.Data.SqlMapper.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Office\Pdf\" />
+  </ItemGroup>
+
 </Project>

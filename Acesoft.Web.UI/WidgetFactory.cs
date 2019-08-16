@@ -1,9 +1,10 @@
 using Acesoft.Data;
 using Acesoft.Rbac;
 using Acesoft.Web.UI.Charts;
+using Acesoft.Web.UI.Html;
 using Acesoft.Web.UI.Widgets;
 using Acesoft.Web.UI.Widgets.Fluent;
-
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +39,16 @@ namespace Acesoft.Web.UI
 		{
 			return new AccordionBuilder(new Accordion(this));
 		}
+
+        public virtual AddressBoxBuilder AddressBox()
+        {
+            return new AddressBoxBuilder(new AddressBox(this));
+        }
+
+        public virtual BrowseBuilder Browse()
+        {
+            return new BrowseBuilder(new Browse(this));
+        }
 
 		public virtual LinkButtonBuilder Button()
 		{
@@ -81,7 +92,10 @@ namespace Acesoft.Web.UI
 
 		public virtual DataGridBuilder DataGrid()
 		{
-			return new DataGridBuilder(new DataGrid(this)).IdField("id").FitColumns(true).MultiSort(true)
+			return new DataGridBuilder(new DataGrid(this))
+                .IdField("id")
+                .FitColumns(true)
+                .MultiSort(true)
 				.CheckBox(true)
 				.Fit(true);
 		}
@@ -124,12 +138,22 @@ namespace Acesoft.Web.UI
 		public virtual HiddenBoxBuilder HiddenBox()
 		{
 			return new HiddenBoxBuilder(new HiddenBox(this));
-		}
+        }
 
-		public virtual HtmlerBuilder Htmler()
+        public virtual IHtmlContent Html(string html)
+        {
+            return new HtmlString(html);
+        }
+
+        public virtual HtmlerBuilder Htmler()
 		{
 			return new HtmlerBuilder(new Htmler(this));
 		}
+
+        public virtual IdBoxBuilder IdBox()
+        {
+            return new IdBoxBuilder(new IdBox(this));
+        }
 
 		public virtual KindEditorBuilder KindEditor()
 		{
@@ -144,14 +168,24 @@ namespace Acesoft.Web.UI
 		public virtual LayoutBuilder Layout()
 		{
 			return new LayoutBuilder(new Layout(this));
-		}
+        }
 
-		public virtual LinkButtonBuilder LinkButton()
+        public virtual LinkButtonBuilder LinkButton()
 		{
 			return new LinkButtonBuilder(new LinkButton(this));
-		}
+        }
 
-		public virtual MenuBuilder Menu()
+        public virtual IHtmlNode LiteralNode(string html)
+        {
+            return new LiteralNode(html);
+        }
+
+        public virtual MaskedBoxBuilder MaskedBox()
+        {
+            return new MaskedBoxBuilder(new MaskedBox(this));
+        }
+
+        public virtual MenuBuilder Menu()
 		{
 			return new MenuBuilder(new Menu(this));
 		}
@@ -165,6 +199,16 @@ namespace Acesoft.Web.UI
 		{
 			return new ComboBoxBuilder(new MonthBox(this));
 		}
+
+        public virtual MonthDataGridBuilder MonthDataGrid()
+        {
+            return new MonthDataGridBuilder(new MonthDataGrid(this))
+                .IdField("id")
+                .FitColumns(true)
+                .MultiSort(true)
+                .CheckBox(true)
+                .Fit(true);
+        }
 
 		public virtual NumberBoxBuilder NumberBox()
 		{
@@ -216,6 +260,11 @@ namespace Acesoft.Web.UI
 			return new SearchBuilder(new Search(this)).Height("42px");
 		}
 
+        public virtual SelectBoxBuilder SelectBox()
+        {
+            return new SelectBoxBuilder(new SelectBox(this));
+        }
+
 		public virtual SplitButtonBuilder SplitButton()
 		{
 			return new SplitButtonBuilder(new SplitButton(this));
@@ -263,7 +312,10 @@ namespace Acesoft.Web.UI
 
 		public virtual TreeGridBuilder TreeGrid()
 		{
-			return new TreeGridBuilder(new TreeGrid(this)).FitColumns(true).MultiSort(true).CheckBox(true)
+			return new TreeGridBuilder(new TreeGrid(this))
+                .FitColumns(true)
+                .MultiSort(true)
+                .CheckBox(true)
 				.Fit(true)
 				.IdField("id");
 		}

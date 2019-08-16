@@ -12,65 +12,25 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnClick = new ScriptEvent("onClick", "item");
 
-		public int? ZIndex
-		{
-			get;
-			set;
-		}
+		public int? ZIndex { get; set; }
 
-		public int? Left
-		{
-			get;
-			set;
-		}
+		public int? Left { get; set; }
 
-		public int? Top
-		{
-			get;
-			set;
-		}
+		public int? Top { get; set; }
 
-		public Align? Align
-		{
-			get;
-			set;
-		}
+		public Align? Align { get; set; }
 
-		public int? MinWidth
-		{
-			get;
-			set;
-		}
+		public int? MinWidth { get; set; }
 
-		public int? ItemHeight
-		{
-			get;
-			set;
-		}
+		public int? ItemHeight { get; set; }
 
-		public int? Duration
-		{
-			get;
-			set;
-		}
+		public int? Duration { get; set; }
 
-		public bool? HideOnUnhover
-		{
-			get;
-			set;
-		}
+		public bool? HideOnUnhover { get; set; }
 
-		public bool? Inline
-		{
-			get;
-			set;
-		}
+		public bool? Inline { get; set; }
 
-		public bool? Fit
-		{
-			get;
-			set;
-		}
+		public bool? Fit { get; set; }
 
 		public Menu(WidgetFactory ace)
 			: base(ace)

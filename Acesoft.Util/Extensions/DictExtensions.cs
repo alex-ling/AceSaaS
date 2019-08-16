@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Text;
 
 using Acesoft.Util;
@@ -8,6 +9,24 @@ namespace Acesoft
 {
     public static class DictExtensions
     {
+        public static T GetValue<T>(this NameValueCollection dict, string key)
+        {
+            var val = dict[key];
+            Check.Require(val.HasValue(), $"字典中不包含查询项{key}");
+
+            return val.ToObject<T>();
+        }
+
+        public static T GetValue<T>(this NameValueCollection dict, string key, T defaultValue)
+        {
+            var val = dict[key];
+            if (val.HasValue())
+            {
+                return val.ToObject<T>();
+            }
+            return defaultValue;
+        }
+
         public static T GetValue<T>(this IDictionary<string, string> dict, string key)
         {
             Check.Require(dict.ContainsKey(key), $"字典中不包含查询项{key}");

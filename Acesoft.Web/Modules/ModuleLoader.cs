@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Acesoft.Web.Modules
 {
@@ -39,10 +40,11 @@ namespace Acesoft.Web.Modules
             if (!loaded)
             {
                 // load modules in references
-                Startups.Add(new Acesoft.Startup());
+                Startups.Add(new Acesoft.Core.Startup());
                 Startups.Add(new Acesoft.Data.Startup());
                 Startups.Add(new Acesoft.Platform.Startup());
                 Startups.Add(new Acesoft.Rbac.Startup());
+                Startups.Add(new Acesoft.Workflow.Startup());
 
                 // Web plugin must add tenant's pipeline DI
                 //Startups.Add(new Acesoft.Web.Startup());

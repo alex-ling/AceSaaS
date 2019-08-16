@@ -94,10 +94,6 @@ a:hover {
     text-decoration: none;
 }
 
-.fl, .fr {
-    display: inline;
-}
-
 .fl, .fr s {
     float: left;
 }
@@ -169,6 +165,10 @@ h6, .h6 {
     font-size: 16px;
 }
 
+.ft18 {
+    font-size: 18px;
+}
+
 .ft20 {
     font-size: 20px;
 }
@@ -205,6 +205,14 @@ h6, .h6 {
 
 .pr {
     position: relative;
+}
+
+.fit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 .pa {
@@ -658,9 +666,14 @@ h6, .h6 {
     padding-right: 20px;
 }
 
-.ph24 {
-    padding-left: 24px;
-    padding-right: 24px;
+.ph25 {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.ph30 {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .ph40 {
@@ -1053,6 +1066,46 @@ h6, .h6 {
 
 .w920 {
     width: 920px;
+}
+
+.wp10 {
+    width: 10%;
+}
+
+.wp20 {
+    width: 20%;
+}
+
+.wp30 {
+    width: 30%;
+}
+
+.wp40 {
+    width: 40%;
+}
+
+.wp50 {
+    width: 50%;
+}
+
+.wp60 {
+    width: 60%;
+}
+
+.wp70 {
+    width: 70%;
+}
+
+.wp80 {
+    width: 80%;
+}
+
+.wp100 {
+    width: 100%;
+}
+
+.wp90 {
+    width: 90%;
 }
 
 .h10 {

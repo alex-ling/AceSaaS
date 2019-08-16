@@ -1,0 +1,54 @@
+@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("wx.voteitem").Form(new
+    {
+        vote_id = App.GetQuery("voteid", ""),
+        name = "",
+        photo = "",
+        url = "",
+        remark = ""
+    }).HttpSave()).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r">名称：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("name").Width("100%").Required()</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">图片：</div>
+                <div class="col-xs-6" style="min-height:180px">
+                    @(Ace.PictureBox().Name("photo").PicWidth(120).PicHeight(100).Filters(f =>
+                    {
+                        f.max_file_size = "500kb";
+                        f.mime_types.Add(new MineType
+                        {
+                            title = "图片文件",
+                            extensions = "jpg,jpeg,png,bmp"
+                        });
+                    }).Dir("/uploads/gmlogos/").Events(e => e.OnUploaded("onUpload")))
+                </div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">链接Url：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("url").Width("100%")</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r">备注：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("remark").Width("100%")</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}
+<script>
+    function onUpload(file) {
+        $('#name').textbox('setValue', file.name.split('.')[0]);
+    }
+</script>

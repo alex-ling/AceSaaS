@@ -38,7 +38,7 @@ namespace Acesoft.Web.UI.Ajax
 		{
             names.Each(name =>
 			{
-				base.JsonObject.RouteValues[name] = App.GetQuery<string>(name, "");
+				base.JsonObject.RouteValues[name] = App.GetQuery(name, "");
 			});
 			return this as B;
 		}
@@ -50,12 +50,12 @@ namespace Acesoft.Web.UI.Ajax
 
 		public virtual B HttpPost(string controller = null, string action = null, object routeValues = null)
 		{
-			return Route(HttpMethod.post, controller, action, routeValues);
+			return Route(HttpMethod.post, controller, action ?? "post", routeValues);
 		}
 
 		public virtual B HttpPut(string controller = null, string action = null, object routeValues = null)
 		{
-			return Route(HttpMethod.put, controller, action, routeValues);
+			return Route(HttpMethod.put, controller, action ?? "put", routeValues);
 		}
 
 		public virtual B HttpDelete(string controller = null, string action = null, object routeValues = null)
@@ -78,6 +78,7 @@ namespace Acesoft.Web.UI.Ajax
 			{
 				base.JsonObject.RouteValues.Merge(routeValues, true);
 			}
+
 			base.JsonObject.GenerateUrl();
 			return this as B;
 		}

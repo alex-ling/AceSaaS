@@ -1,0 +1,10 @@
+{
+  "enabledDistributedCache": true,
+  "connectionString": "127.0.0.1:6379,pass=123,defaultDatabase=13,ssl=false,writeBuffer=10240,poolsize=50,prefix=",
+  "enabledCluster": false,
+  "connectionStrings": [
+    "127.0.0.1:6371,pass=123,defaultDatabase=13,ssl=false,writeBuffer=10240,poolsize=50,prefix=",
+    "127.0.0.1:6372,pass=123,defaultDatabase=13,ssl=false,writeBuffer=10240,poolsize=50,prefix=",
+    "127.0.0.1:6373,pass=123,defaultDatabase=13,ssl=false,writeBuffer=10240,poolsize=50,prefix="
+  ]
+}

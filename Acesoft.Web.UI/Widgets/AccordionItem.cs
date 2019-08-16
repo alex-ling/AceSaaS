@@ -5,11 +5,7 @@ namespace Acesoft.Web.UI.Widgets
 {
 	public class AccordionItem : Panel
 	{
-		public bool? Selected
-		{
-			get;
-			set;
-		}
+		public bool? Selected { get; set; }
 
 		public AccordionItem(WidgetFactory ace)
 			: base(ace)

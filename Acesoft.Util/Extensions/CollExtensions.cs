@@ -69,5 +69,12 @@ namespace Acesoft
         {
             return list.ToList().CloneRange(offset, length);
         }
+
+        public static T[] CloneRange<T>(this T[] array, int offset, int length)
+        {
+            var result = new T[length];
+            Array.Copy(array, offset, result, 0, length);
+            return result;
+        }
     }
 }

@@ -1,7 +1,5 @@
 using System;
 
-using System;
-
 namespace Acesoft.Web.Cloud
 {
 	public class AqiResult : WeaResult

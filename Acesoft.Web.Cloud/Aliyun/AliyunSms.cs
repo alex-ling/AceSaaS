@@ -7,6 +7,7 @@ using Aliyun.Net.SDK.Core.Profile;
 using Microsoft.Extensions.Logging;
 using Acesoft.Logger;
 using Acesoft.Util;
+using Acesoft.Web.Cloud.Config;
 
 namespace Acesoft.Web.Cloud.Aliyun
 {

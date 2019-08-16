@@ -29,6 +29,12 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 			return this;
 		}
 
+        public DataViewBuilder QueryParams(object queryParams)
+        {
+            base.Component.QueryParams = queryParams;
+            return this;
+        }
+
 		public DataViewBuilder OnLoaded(Action<DataView> action)
 		{
 			base.Component.OnLoaded = action;

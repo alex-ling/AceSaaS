@@ -4,6 +4,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 
+using Acesoft.Web.Cloud.Config;
+
 namespace Acesoft.Web.Cloud.Mail
 {
     public class MailService : IMailService

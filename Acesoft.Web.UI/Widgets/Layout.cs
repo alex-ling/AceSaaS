@@ -14,11 +14,7 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnRemove = new ScriptEvent("onRemove", "region");
 
-		public bool? Fit
-		{
-			get;
-			set;
-		}
+		public bool? Fit { get; set; }
 
 		public Layout(WidgetFactory ace)
 			: base(ace)

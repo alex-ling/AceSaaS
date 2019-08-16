@@ -1,0 +1,24 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@inject IConfigService ConfigService
+@{
+    Layout = "_shared/front";
+
+    var cfg = ConfigService.GetConfig(1);
+    ViewData["Title"] = cfg["sys_name"];
+}
+<div class="pt30 pb20 text-c">
+    <span class="text-warning h3">欢迎您访问@(cfg["sys_name"])！</span>
+</div>
+<div class="container-fluid">
+    <div class="pt20 pb10 bd-b-dashed">系统提示</div>
+    <ul class="pt5" style="list-style:decimal;padding-left:2em">
+        <li class="pt10">
+            <b>用户中心</b>
+            <div class="pt10 pb10 lh25">
+                包括用户基本资料、安全设置等功能；<br />
+                安全设置里可以修改密码、绑定手机号、邮箱等安全信息。
+            </div>
+        </li>
+    </ul>
+</div>

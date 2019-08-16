@@ -4,35 +4,15 @@ namespace Acesoft.Web.UI.Charts
 {
 	public class Option : OptionBase<Option>
 	{
-		public Title Title
-		{
-			get;
-			set;
-		}
+		public Title Title { get; set; }
 
-		public Legend Legend
-		{
-			get;
-			set;
-		}
+		public Legend Legend { get; set; }
 
-		public Axis XAxis
-		{
-			get;
-			set;
-		}
+		public Axis XAxis { get; set; }
 
-		public Axis YAxis
-		{
-			get;
-			set;
-		}
+		public Axis YAxis { get; set; }
 
-		public IList<Series> Series
-		{
-			get;
-			set;
-		} = new List<Series>();
+		public IList<Series> Series { get; set; }= new List<Series>();
 
 
 		public Title AddTitle()

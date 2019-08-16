@@ -20,77 +20,29 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnChange = new ScriptEvent("onChange", "nDate,oDate");
 
-		public int? Width
-		{
-			get;
-			set;
-		}
+		public int? Width { get; set; }
 
-		public int? Height
-		{
-			get;
-			set;
-		}
+		public int? Height { get; set; }
 
-		public bool? Fit
-		{
-			get;
-			set;
-		}
+		public bool? Fit { get; set; }
 
-		public bool? Border
-		{
-			get;
-			set;
-		}
+		public bool? Border { get; set; }
 
-		public bool? ShowWeek
-		{
-			get;
-			set;
-		}
+		public bool? ShowWeek { get; set; }
 
-		public string WeekNumberHeader
-		{
-			get;
-			set;
-		}
+		public string WeekNumberHeader { get; set; }
 
-		public int? FirstDay
-		{
-			get;
-			set;
-		}
+		public int? FirstDay { get; set; }
 
-		public IList<string> Weeks
-		{
-			get;
-			set;
-		}
+		public IList<string> Weeks { get; set; }
 
-		public IList<string> Months
-		{
-			get;
-			set;
-		}
+		public IList<string> Months { get; set; }
 
-		public int? Year
-		{
-			get;
-			set;
-		}
+		public int? Year { get; set; }
 
-		public int? Month
-		{
-			get;
-			set;
-		}
+		public int? Month { get; set; }
 
-		public DateTime? Current
-		{
-			get;
-			set;
-		}
+		public DateTime? Current { get; set; }
 
 		public Calendar(WidgetFactory ace)
 			: base(ace)

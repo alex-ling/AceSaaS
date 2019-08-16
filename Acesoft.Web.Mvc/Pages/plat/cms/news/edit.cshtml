@@ -1,7 +1,7 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
-    Layout = "_shared/back";
+    Layout = "_shared/edit";
     ViewData["Title"] = "编辑";
 
     Ace.View().Id("view").Ajax(ds => ds.DataSource("cms.news").Form(new {
@@ -14,7 +14,7 @@
         author = Ace.AC.User.NickName,
         state = "0",
         audit = "0",
-        dpublish = DateEx.GetCurShort(),
+        dpublish = DateTime.Now.ToDateStr(),
         comment = ""
     }).HttpSave()).Content(
         @<div class="container-fluid">
@@ -44,7 +44,7 @@
                             title = "图片文件",
                             extensions = "jpg,jpeg,gif,png,bmp"
                         });
-                    }).OssBucket("mp-yqyy").Dir("img"))
+                    }).Dir("uploads/images"))
                 </div>
                 <div class="col-xs-4"><span class="text-warning">单个文件不要超过500K</span></div>
             </div>

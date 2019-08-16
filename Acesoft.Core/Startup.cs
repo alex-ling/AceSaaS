@@ -11,7 +11,7 @@ using Acesoft.Config;
 using Acesoft.Logger;
 using Acesoft.Security;
 
-namespace Acesoft
+namespace Acesoft.Core
 {
     public class Startup : StartupBase
     {
@@ -23,7 +23,7 @@ namespace Acesoft
 
             // add util
             services.AddSingleton<FileWatcher>();
-            services.AddSingleton<IByteCrypto, SwapByteCrypto>();
+            //services.AddSingleton<IByteCrypto, SwapByteCrypto>();
             //services.AddScoped<IRSACrypto, RSACrypto>();
 
             // add logging

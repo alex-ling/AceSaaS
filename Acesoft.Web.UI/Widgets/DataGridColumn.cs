@@ -12,107 +12,41 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent Sorter = new ScriptEvent("sorter", "a,b");
 
-		public string Title
-		{
-			get;
-			set;
-		}
+		public string Title { get; set; }
 
-		public string Field
-		{
-			get;
-			set;
-		}
+		public string Field { get; set; }
 
-		public int? Width
-		{
-			get;
-			set;
-		}
+		public int? Width { get; set; }
 
-		public int? Rowspan
-		{
-			get;
-			set;
-		}
+		public int? Rowspan { get; set; }
 
-		public int? Colspan
-		{
-			get;
-			set;
-		}
+		public int? Colspan { get; set; }
 
-		public Align? Align
-		{
-			get;
-			set;
-		}
+		public Align? Align { get; set; }
 
-		public Align? Halign
-		{
-			get;
-			set;
-		}
+		public Align? Halign { get; set; }
 
-		public bool? Sortable
-		{
-			get;
-			set;
-		}
+		public bool? Sortable { get; set; }
 
-		public Order? Order
-		{
-			get;
-			set;
-		}
+		public Order? Order { get; set; }
 
-		public bool? Resizable
-		{
-			get;
-			set;
-		}
+		public bool? Resizable { get; set; }
 
-		public bool? Fixed
-		{
-			get;
-			set;
-		}
+		public bool? Fixed { get; set; }
 
-		public bool? Hidden
-		{
-			get;
-			set;
-		}
+		public bool? Hidden { get; set; }
 
-		public bool? Checkbox
-		{
-			get;
-			set;
-		}
+		public bool? Checkbox { get; set; }
 
-		public string Editor
-		{
-			get;
-			set;
-		}
+		public string Editor { get; set; }
 
-		public string Format
-		{
-			get;
-			set;
-		}
+		public string Format { get; set; }
 
-		public bool? Merged
-		{
-			get;
-			set;
-		}
+		public bool? Merged { get; set; }
 
-		public DataGrid Grid
-		{
-			get;
-			set;
-		}
+        public int? Type { get; set; }
+
+        public DataGrid Grid { get; set; }
 
 		public DataGridColumn(WidgetFactory ace)
 			: base(ace)

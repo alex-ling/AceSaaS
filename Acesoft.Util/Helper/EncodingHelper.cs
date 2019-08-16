@@ -52,6 +52,16 @@ namespace Acesoft.Util
             return sb.ToString();
         }
 
+        public static string BytesToHex(IEnumerable<byte> bytes)
+        {
+            var sb = new StringBuilder();
+            foreach (var b in bytes)
+            {
+                sb.Append(b.ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
         public static bool IsUtf8Text(byte[] bytes)
         {
             int encodingBytesCount = 0;

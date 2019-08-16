@@ -1,0 +1,29 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "编辑";
+
+    var id = App.GetQuery("id", "");
+    var path = App.GetQuery("parentid", id.Left(id.LastIndexOf("/")));
+
+    Ace.View().Id("view").Ajax(ds => ds.Edit(id.HasValue()).Form(() => new
+    {
+        path = path,
+        newpath = id.HasValue() ? id : $"{path}/"
+    }).HttpSave("file", "folder")).Content(
+        @<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 模板路径：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("path").Width("100%").Disabled()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-r"><span class="cr-red">*</span> 模板目录：</div>
+                <div class="col-xs-6">@Ace.TextBox().Name("newpath").Width("100%").Required()</div>
+                <div class="col-xs-4"></div>
+            </div>
+            @Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

@@ -81,7 +81,7 @@ namespace Acesoft.Data.SqlMapper
 
             if (ctx.CmdType == CmdType.select)
             {
-                sql = Params.GetValue("selectsql", "");
+                sql = Params.GetValue("selectsql", Params.GetValue("sql", ""));
                 if (!sql.HasValue())
                 {
                     sql = BuildSelectSql(dialect, ctx);
@@ -99,7 +99,7 @@ namespace Acesoft.Data.SqlMapper
                 var insSql = Params.GetValue("afterinsertsql", "");
                 if (insSql.HasValue())
                 {
-                    sql += insSql;
+                    sql += " " + insSql;
                 }
             }
             else if (ctx.CmdType == CmdType.update)
@@ -114,7 +114,7 @@ namespace Acesoft.Data.SqlMapper
                 var updSql = Params.GetValue("afterupdatesql", "");
                 if (updSql.HasValue())
                 {
-                    sql += updSql;
+                    sql += " " + updSql;
                 }
             }
             else if (ctx.CmdType == CmdType.delete)
@@ -151,27 +151,37 @@ namespace Acesoft.Data.SqlMapper
         private string BuildSelectSql(ISqlDialect dialect, RequestContext ctx)
         {
             var props = ConvertHelper.ObjectToDictionary(ctx.NewObj);
-            var sb = new StringBuilder($"select {dialect.QuoteForColumnName("id")}, ");
-
-            foreach (var key in props.Keys)
+            var sb = new StringBuilder($"select ");
+            if (props.Count > 0)
             {
-                if (key.StartsWith("__"))
+                sb.Append($"{dialect.QuoteForColumnName("id")}, ");
+                foreach (var key in props.Keys)
                 {
-                    // rd表示只读列
-                    continue;
+                    if (key.StartsWith("r__") || key.StartsWith("a__"))
+                    {
+                        // r__表示只读列，a__表示数组
+                        sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key}, ");
+                    }
+                    else if (key.StartsWith("e__"))
+                    {
+                        // e__表示编辑列
+                        sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key.Substring(3)}, ");
+                    }
+                    else
+                    {
+                        sb.Append($"{dialect.QuoteForColumnName(key)}, ");
+                    }
                 }
-                if (key.StartsWith("a_"))
-                {
-                    // ar表示数组
-                    sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key}, ");
-                }
-                else
-                {
-                    sb.Append($"{dialect.QuoteForColumnName(key)}, ");
-                }
+                sb.Remove(2);
             }
-            sb.Remove(2).Append($" from {dialect.QuoteForTableName(GetTableName())} where {dialect.QuoteForColumnName("id")}=@id");
+            else
+            {
+                sb.Append("*");
+            }
 
+            var idField = Params.GetValue("idfield", "id");
+            sb.Append($" from {dialect.QuoteForTableName(GetTableName(true))}")
+                .Append($" where {dialect.QuoteForColumnName(idField)}=@id");
             return sb.ToString();
         }
 
@@ -188,7 +198,7 @@ namespace Acesoft.Data.SqlMapper
                 // 自动插入id列
                 sbIns.Append($"{dialect.QuoteForColumnName("id")}, ");
                 sbVal.Append($"@id, ");
-                ctx.DapperParams.AddDynamicParams(new { id = App.IdWorker.NextId() });
+                //ctx.DapperParams.AddDynamicParams(new { id = App.IdWorker.NextId() });
             }
             if (insertTime)
             {
@@ -206,12 +216,19 @@ namespace Acesoft.Data.SqlMapper
                     // 提交的值为空时不插入
                     continue;
                 }
-                if (key.StartsWith("r_") || key.StartsWith("__"))
+                if (key == "id" || key.StartsWith("r__") || key.StartsWith("e__"))
                 {
-                    // rd表示只读列
+                    // r__表示只读列，e__表示编辑列
                     continue;
                 }
-                sbIns.Append($"{dialect.QuoteForColumnName(key)}, ");
+
+                var field = key;
+                if (key.StartsWith("a__"))
+                {
+                    // a__表示数组
+                    field = field.Substring(3);
+                }
+                sbIns.Append($"{dialect.QuoteForColumnName(field)}, ");
                 sbVal.Append($"@{key}, ");
             }
             sbIns.Remove(2).Append(")");
@@ -234,23 +251,32 @@ namespace Acesoft.Data.SqlMapper
 
             foreach (var key in ctx.DapperParams.ParameterNames)
             {
-                if (key == "id" || key.StartsWith("r_") || key.StartsWith("__"))
+                if (key == "id" || key.StartsWith("r__"))
                 {
-                    // rd表示只读列
+                    // r__表示只读列
                     continue;
                 }
 
                 var obj = ctx.DapperParams.Get<object>(key);
+                var field = key;
+                if (key.StartsWith("a__"))
+                {
+                    // a__表示数组
+                    field = field.Substring(3);
+                }
+
                 if (obj is string str && !str.HasValue())
                 {
-                    sb.Append($"{dialect.QuoteForColumnName(key)}=null, ");
+                    sb.Append($"{dialect.QuoteForColumnName(field)}=null, ");
                 }
                 else
                 {
-                    sb.Append($"{dialect.QuoteForColumnName(key)}=@{key}, ");
+                    sb.Append($"{dialect.QuoteForColumnName(field)}=@{key}, ");
                 }
             }
 
+            // 更新时还是按Id列来更新数据
+            //var idField = Params.GetValue("idfield", "id");
             sb.Remove(2).Append($" where {dialect.QuoteForColumnName("id")}=@id");
             return sb.ToString();
         }
@@ -258,12 +284,15 @@ namespace Acesoft.Data.SqlMapper
         private string BuildDeleteSql(ISqlDialect dialect, RequestContext ctx)
         {
             // 默认的删除语句用in，支付多个id
-            return $"delete from {dialect.QuoteForTableName(GetTableName())} where {dialect.QuoteForColumnName("id")} in @ids";
+            var idField = Params.GetValue("idfield", "id");
+            return $"delete from {dialect.QuoteForTableName(GetTableName())} " +
+                $"where {dialect.QuoteForColumnName(idField)} in @ids";
         }
 
-        private string GetTableName()
+        private string GetTableName(bool read = false)
         {
-            var table = Params.GetValue("writetable", Params.GetValue("table", ""));
+            var table = Params.GetValue("table", "");
+            if (!read) table = Params.GetValue("writetable", table);
             if (!table.HasValue())
             {
                 throw new AceException($"SqlMap must have \"table\" or \"writetable\" params");

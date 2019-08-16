@@ -2,7 +2,6 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
 @using Microsoft.AspNetCore.Diagnostics
 @{
-    Layout = "_shared/back";
     ViewData["Title"] = "Error." + Ace.Context.Response.StatusCode;
 
     var requestId = Activity.Current?.Id ?? Ace.Context.TraceIdentifier;
@@ -10,18 +9,15 @@
     var scFeature = Ace.Context.Features.Get<IStatusCodeReExecuteFeature>();
 }
 <div class="container">
-    <div class="pt15">
+    <div class="pt30">
         <h1 class="text-danger">Error. @Ace.Context.Response.StatusCode</h1>
     </div>
-    <div class="pt15">
-        <h2 class="text-danger">An error occurred while processing your request.</h2>
-    </div>
-    @*@if (requestId.HasValue())
+    @if (requestId.HasValue())
     {
         <p class="pt20">
             <strong>Request ID:</strong> <code>@requestId</code>
         </p>
-    }*@
+    }
     @if (exFeature != null)
     {
         <p><h2 class="text-danger">Exception: @exFeature.Error.GetMessage()</h2></p>
@@ -29,17 +25,8 @@
         <p><strong>StackTrace:</strong></p>
         <p><code>@exFeature.Error.StackTrace</code></p>
     }
-    @*@else if (scFeature != null)
+    else if (scFeature != null)
     {
         <p><strong>RequestPath:</strong> <code>@scFeature.OriginalPath</code></p>
     }
-    <div class="pt50">
-        <h3>Development Mode</h3>
-    </div>
-    <p>
-        Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-    </p>
-    <p>
-        <strong>Development environment should not be enabled in deployed applications</strong>, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>, and restarting the application.
-    </p>*@
 </div>

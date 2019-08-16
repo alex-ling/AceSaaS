@@ -81,7 +81,7 @@ namespace Acesoft.Web.UI.Html
 		{
 			if (content.Template != null)
 			{
-				content.Template.Apply(content.Data, html);
+				content.Template.Apply(content.Model, html);
 			}
 			else if (content.Controls.Any())
 			{
@@ -100,6 +100,11 @@ namespace Acesoft.Web.UI.Html
 			}
 
 			var dictionary = new Dictionary<string, object>(Options);
+            if (Component.Options.Any())
+            {
+                dictionary.Merge(Component.Options);
+            }
+
 			if (EventsToOption && Component.Events.Any())
 			{
                 dictionary.Merge(Component.Events);

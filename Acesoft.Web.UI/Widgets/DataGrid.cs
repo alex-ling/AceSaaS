@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Acesoft.Web.UI.Widgets
 {
-	public class DataGrid : Panel, IDataSourceWidget, IWidget, IHtml, IHtmlContent
+	public class DataGrid : Panel, IDataSourceWidget
 	{
 		public static readonly ScriptEvent OnRowStyle = new ScriptEvent("rowStyle", "index,row");
 
@@ -66,261 +66,100 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnDelete = new ScriptEvent("onDelete", "id");
 
-		public IList<IList<DataGridColumn>> Columns
-		{
-			get;
-			set;
-		}
+		public IList<IList<DataGridColumn>> Columns { get; set; }
 
-		public IList<DataGridColumn> FrozenColumns
-		{
-			get;
-			set;
-		}
+		public IList<IList<DataGridColumn>> FrozenColumns { get; set; }
 
-		public IList<LinkButton> Toolbar
-		{
-			get;
-			set;
-		}
+		public IList<LinkButton> Toolbar { get; set; }
 
-		public bool? FitColumns
-		{
-			get;
-			set;
-		}
+		public bool? FitColumns { get; set; }
 
-		public Resize? ResizeHandle
-		{
-			get;
-			set;
-		}
+		public Resize? ResizeHandle { get; set; }
 
-		public int? ResizeEdge
-		{
-			get;
-			set;
-		}
+		public int? ResizeEdge { get; set; }
 
-		public bool? AutoRowHeight
-		{
-			get;
-			set;
-		}
+		public bool? AutoRowHeight { get; set; }
 
-		public bool? Striped
-		{
-			get;
-			set;
-		}
+		public bool? Striped { get; set; }
 
-		public bool? Nowrap
-		{
-			get;
-			set;
-		}
+		public bool? Nowrap { get; set; }
 
-		public string IdField
-		{
-			get;
-			set;
-		}
+		public string IdField { get; set; }
 
-		public string LoadMsg
-		{
-			get;
-			set;
-		}
+		public string LoadMsg { get; set; }
 
-		public string EmptyMsg
-		{
-			get;
-			set;
-		}
+		public string EmptyMsg { get; set; }
 
-		public bool? Pagination
-		{
-			get;
-			set;
-		}
+		public bool? Pagination { get; set; }
 
-		public bool? Rownumbers
-		{
-			get;
-			set;
-		}
+		public bool? Rownumbers { get; set; }
 
-		public bool? SingleSelect
-		{
-			get;
-			set;
-		}
+		public bool? SingleSelect { get; set; }
 
-		public bool? CtrlSelect
-		{
-			get;
-			set;
-		}
+		public bool? CtrlSelect { get; set; }
 
-		public bool? CheckOnSelect
-		{
-			get;
-			set;
-		}
+		public bool? CheckOnSelect { get; set; }
 
-		public bool? SelectOnCheck
-		{
-			get;
-			set;
-		}
+		public bool? SelectOnCheck { get; set; }
 
-		public bool? ScrollOnSelect
-		{
-			get;
-			set;
-		}
+		public bool? ScrollOnSelect { get; set; }
 
-		public Position? PagePosition
-		{
-			get;
-			set;
-		}
+		public Position? PagePosition { get; set; }
 
-		public int? PageNumber
-		{
-			get;
-			set;
-		}
+		public int? PageNumber { get; set; }
 
-		public int? PageSize
-		{
-			get;
-			set;
-		}
+		public int? PageSize { get; set; }
 
-		public IList<int> PageList
-		{
-			get;
-			set;
-		}
+		public IList<int> PageList { get; set; }
 
-		public string SortName
-		{
-			get;
-			set;
-		}
+		public string SortName { get; set; }
 
-		public Order? SortOrder
-		{
-			get;
-			set;
-		}
+		public Order? SortOrder { get; set; }
 
-		public bool? MultiSort
-		{
-			get;
-			set;
-		}
+		public bool? MultiSort { get; set; }
 
-		public bool? RemoteSort
-		{
-			get;
-			set;
-		}
+		public bool? RemoteSort { get; set; }
 
-		public bool? ShowHeader
-		{
-			get;
-			set;
-		}
+		public bool? ShowHeader { get; set; }
 
-		public bool? ShowFooter
-		{
-			get;
-			set;
-		}
+		public bool? ShowFooter { get; set; }
 
-		public int? ScrollbarSize
-		{
-			get;
-			set;
-		}
+		public int? ScrollbarSize { get; set; }
 
-		public int? RownumberWidth
-		{
-			get;
-			set;
-		}
+		public int? RownumberWidth { get; set; }
 
-		public int? EditorHeight
-		{
-			get;
-			set;
-		}
+		public int? EditorHeight { get; set; }
 
-		public bool CheckBox
-		{
-			get;
-			set;
-		}
+		public bool CheckBox { get; set; }
 
-		public string EditUrl
-		{
-			get;
-			set;
-		}
+		public string EditUrl { get; set; }
 
-		public int? EditWidth
-		{
-			get;
-			set;
-		}
+		public int? EditWidth { get; set; }
 
-		public int? EditHeight
-		{
-			get;
-			set;
-		}
+		public int? EditHeight { get; set; }
 
-		public string DelApi
-		{
-			get;
-			set;
-		}
+		public string DelApi { get; set; }
 
-		public string DelDs
-		{
-			get;
-			set;
-		}
+		public string DelDs { get; set; }
 
-		public string DelTip
-		{
-			get;
-			set;
-		}
+		public string DelTip { get; set; }
 
-		public bool? Export
-		{
-			get;
-			set;
-		}
+		public bool? Export { get; set; }
 
-		public DataSource DataSource
-		{
-			get;
-			set;
-		}
+        public bool Sortable { get; set; }
+
+		public DataSource DataSource { get; set; }
 
 		public DataGrid(WidgetFactory ace)
 			: base(ace)
 		{
 			base.Widget = "datagrid";
 			Columns = new List<IList<DataGridColumn>>();
-			FrozenColumns = new List<DataGridColumn>();
+			FrozenColumns = new List<IList<DataGridColumn>>();
 			Toolbar = new List<LinkButton>();
 			PageList = new List<int>();
 			DataSource = new DataSource(this);
+            Sortable = true;
 			FitColumns = true;
 			Striped = true;
 			base.Fit = true;

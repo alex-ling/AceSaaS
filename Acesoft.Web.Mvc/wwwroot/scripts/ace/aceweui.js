@@ -1,37 +1,4 @@
-﻿(function($) {
-    // form serialize
-    $.fn.serializeObject = function() {
-        "use strict";
-        var data = this.serializeArray();
-        $('.aceui-checkbox:not(:checked)').filter(function() {
-            return this.name && !this.disabled;
-        }).map(function() {
-            return { name: this.name, value: 0 };
-        }).each(function() {
-            data.push(this);
-        });
-        var rv = {};
-        $.each(data, function(i, ele) {
-            var p = rv[ele.name];
-            if (typeof (p) != 'undefined' && p != null) {
-                if ($.isArray(p)) {
-                    if (ele.value) p.push(ele.value);
-                }
-                else {
-                    if (p && ele.value) rv[ele.name] = [p, ele.value];
-                    else if (p) rv[ele.name] = [p];
-                    else if (ele.value) rv[ele.name] = [ele.value];
-                    else rv[ele.name] = null;
-                }
-            } else {
-                rv[ele.name] = ele.value;
-            }
-        });
-        return rv;
-    };
-})(jQuery);
-
-// $.fn.uploadbox: Use Plupload.
+﻿// $.fn.uploadbox: Use Plupload.
 (function ($) {
     function create(target) {
         var id = target.id, owner = $(target).parent();

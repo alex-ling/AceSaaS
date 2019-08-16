@@ -53,28 +53,41 @@ namespace Acesoft.Rbac.Services
                 })
             );
         }
+
+        public Rbac_User GetByRefCode(string refcode)
+        {
+            return Session.QueryFirst<Rbac_User>(
+                new RequestContext("rbac", "get_user_by_refcode")
+                .SetParam(new
+                {
+                    refcode
+                })
+            );
+        }
         #endregion
 
         #region query
-        public Rbac_User QueryById(long id)
+        public Rbac_User QueryById(long id, string authId)
         {
             return Session.QueryMultiple<Rbac_User>(
                 new RequestContext("rbac", "query_user_by_id")
                 .SetParam(new
                 {
-                    id
+                    id,
+                    authId
                 }),
                 reader => GetUser(reader)
             );
         }
 
-        public Rbac_User QueryByUserName(string userName)
+        public Rbac_User QueryByUserName(string userName, string authId = "none")
         {
             return Session.QueryMultiple<Rbac_User>(
                 new RequestContext("rbac", "query_user_by_username")
                 .SetParam(new
                 {
-                    userName
+                    userName,
+                    authId
                 }),
                 reader => GetUser(reader)
             );
@@ -91,6 +104,52 @@ namespace Acesoft.Rbac.Services
                 }),
                 reader => GetUser(reader)
             );
+        }
+        #endregion
+
+        #region check
+        public Rbac_User CheckUser(string userName, string password)
+        {
+            int tryTimes = 0, lockMinutes = 60;
+            var user = QueryByUserName(userName);
+
+            Check.Assert(user == null, "登录名不存在");
+            Check.Require(user.Enabled, "用户已被停用，禁止登录");
+            Check.Assert(tryTimes > 0 && user.TryTimes == tryTimes, $"密码错误超限，禁止登录{lockMinutes}分钟");
+
+            // Set try times to ZERO when after lock minutes
+            if (tryTimes > 0 && user.DLogin.HasValue && user.DLogin.Value.AddMinutes(lockMinutes) < DateTime.Now)
+            {
+                user.TryTimes = 0;
+            }
+
+            // Check password
+            if (user.Password != CryptoHelper.ComputeMD5(user.HashId, password))
+            {
+                if (tryTimes > 0)
+                {
+                    int hasTimes = tryTimes - ++user.TryTimes;
+                    Check.Assert(hasTimes <= 0,
+                        $"密码错误，帐号将锁定{lockMinutes}分钟",
+                        $"密码错误，还有{hasTimes}次尝试机会");
+                }
+                else
+                {
+                    throw new AceException("密码错误");
+                }
+            }
+            else
+            {
+                user.TryTimes = 0;
+            }
+
+            // Check having role
+            Check.Assert(user.LoginName != "root" && user.Rbac_UAs.Count == 0, "用户无任何角色权限");
+
+            // update login date and ip
+            UpdateLogin(user);
+
+            return user;
         }
         #endregion
 
@@ -143,63 +202,21 @@ namespace Acesoft.Rbac.Services
         }
         #endregion
 
-        #region login
-        public Rbac_User Login(string userName, string password, int tryTimes = 0, int lockMinutes = 60)
+        #region update
+        public void UpdateAuth(Rbac_User user, long appId, string authId, string authType)
         {
-            var user = QueryByUserName(userName);
-
-            Check.Assert(user == null, "登录名不存在");
-            Check.Require(user.Enabled, "用户已被停用，禁止登录");
-            Check.Assert(tryTimes > 0 && user.TryTimes == tryTimes, $"密码错误超限，禁止登录{lockMinutes}分钟");
-
-            // Set try times to ZERO when after lock minutes
-            if (tryTimes > 0 && user.DLogin.HasValue && user.DLogin.Value.AddMinutes(lockMinutes) < DateTime.Now)
-            {
-                user.TryTimes = 0;
-            }
-
-            // Check password
-            if (user.Password != CryptoHelper.ComputeMD5(user.HashId, password))
-            {
-                if (tryTimes > 0)
-                {
-                    int hasTimes = tryTimes - ++user.TryTimes;
-                    Check.Assert(hasTimes <= 0,
-                        $"密码错误，帐号将锁定{lockMinutes}分钟",
-                        $"密码错误，还有{hasTimes}次尝试机会");
-                }
-                else
-                {
-                    throw new AceException("密码错误");
-                }
-            }
-            else
-            {
-                user.TryTimes = 0;
-            }
-
-            // Check having role
-            Check.Assert(user.LoginName != "root" && user.Rbac_UAs.Count == 0, "用户无任何角色权限");
-
-            // update login date and ip
-            UpdateLogin(user);
-
-            return user;
-        }
-
-        public Rbac_Auth UpdateAuth(long userId, long appId, string authId, string authType)
-        {
-            return Session.QueryFirst<Rbac_Auth>(
+            var auth = Session.QueryFirst<Rbac_Auth>(
                 new RequestContext("rbac", "exec_user_auth")
                 .SetParam(new
                 {
                     newid = App.IdWorker.NextId(),
-                    userId,
+                    userId = user.Id,
                     appId,
                     authType,
                     authId
                 })
             );
+            user.Rbac_Auths.Add(auth);
         }
 
         public void UpdateLogin(Rbac_User user)
@@ -210,6 +227,7 @@ namespace Acesoft.Rbac.Services
         }
         #endregion
 
+        #region private
         private Rbac_User GetUser(GridReader reader)
         {
             var user = reader.Read<Rbac_User>(true).SingleOrDefault();
@@ -221,5 +239,6 @@ namespace Acesoft.Rbac.Services
             }
             return user;
         }
+        #endregion
     }
 }

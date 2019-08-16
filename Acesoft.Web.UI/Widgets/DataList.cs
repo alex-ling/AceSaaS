@@ -10,29 +10,13 @@ namespace Acesoft.Web.UI.Widgets
 
 		public static readonly ScriptEvent OnGroupFormatter = new ScriptEvent("groupFormatter", "value,rows");
 
-		public bool? Lines
-		{
-			get;
-			set;
-		}
+		public bool? Lines { get; set; }
 
-		public string ValueField
-		{
-			get;
-			set;
-		}
+		public string ValueField { get; set; }
 
-		public string TextField
-		{
-			get;
-			set;
-		}
+		public string TextField { get; set; }
 
-		public string GroupField
-		{
-			get;
-			set;
-		}
+		public string GroupField { get; set; }
 
 		public DataList(WidgetFactory ace)
 			: base(ace)

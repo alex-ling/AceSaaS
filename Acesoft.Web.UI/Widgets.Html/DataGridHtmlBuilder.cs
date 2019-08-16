@@ -16,18 +16,31 @@ namespace Acesoft.Web.UI.Widgets.Html
 			base.PreBuild();
 			if (base.Component.CheckBox)
 			{
-				int count = base.Component.Columns.Count;
-				DataGridColumn dataGridColumn = new DataGridColumn(base.Component.Ace)
+                var cols = Component.FrozenColumns.Count > 0 ? 
+                    Component.FrozenColumns : Component.Columns;
+				int count = cols.Count;
+				var colCk = new DataGridColumn(base.Component.Ace)
 				{
 					Field = "ck",
-					Checkbox = new bool?(true)
+					Checkbox = true
 				};
 				if (count > 1)
 				{
-					dataGridColumn.Rowspan = count;
+					colCk.Rowspan = count;
 				}
-				base.Component.Columns[0].Insert(0, dataGridColumn);
+                cols[0].Insert(0, colCk);
 			}
+            if (!base.Component.Sortable)
+            {
+                this.Component.FrozenColumns.Each(row =>
+                {
+                    row.Each(col => col.Sortable = false);
+                });
+                this.Component.Columns.Each(row =>
+                {
+                    row.Each(col => col.Sortable = false);
+                });
+            }
 			if (base.Component.EditUrl.HasValue())
 			{
 				base.Options["editUrl"] = base.Component.EditUrl;
@@ -60,15 +73,15 @@ namespace Acesoft.Web.UI.Widgets.Html
 			{
 				base.Options["export"] = base.Component.Export;
 			}
-			if (Enumerable.Any<IList<DataGridColumn>>((IEnumerable<IList<DataGridColumn>>)base.Component.Columns))
+			if (base.Component.Columns.Any())
 			{
 				base.Options["columns"] = base.Component.Columns;
 			}
-			if (Enumerable.Any<DataGridColumn>((IEnumerable<DataGridColumn>)base.Component.FrozenColumns))
+			if (base.Component.FrozenColumns.Any())
 			{
 				base.Options["frozenColumns"] = base.Component.FrozenColumns;
 			}
-			if (Enumerable.Any<LinkButton>((IEnumerable<LinkButton>)base.Component.Toolbar))
+			if (base.Component.Toolbar.Any())
 			{
 				base.Options["toolbar"] = base.Component.Toolbar;
 			}
@@ -148,7 +161,7 @@ namespace Acesoft.Web.UI.Widgets.Html
 			{
 				base.Options["pageSize"] = base.Component.PageSize;
 			}
-			if (Enumerable.Any<int>((IEnumerable<int>)base.Component.PageList))
+			if (base.Component.PageList.Any())
 			{
 				base.Options["pageList"] = base.Component.PageList;
 			}

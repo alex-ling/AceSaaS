@@ -1,0 +1,15 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@inject Tenant Tenant
+@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "生成报名链接";
+
+    var appId = App.GetQuery("appid", "");
+    var url = App.GetQuery("url", "");
+    url = $"/plat/account/login?appid={appId}&returnUrl={HttpUtility.UrlEncode(url)}";
+    url = App.GetWebPath(url, true);
+}
+<div style="margin:15px">
+    @Ace.TextArea().Width("100%").Height(300).Value(url).Disabled()
+</div>

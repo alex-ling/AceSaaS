@@ -1,0 +1,55 @@
+﻿@model Acesoft.Web.UI.RazorPages.WebPageBase
+@inject IConfigService ConfigService
+@{ 
+    var cfg = ConfigService.GetConfig(1);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Html.Raw(ViewData["Title"])</title>
+    <meta name="description" content="@Html.Raw(cfg["sys_description"])">
+    <meta name="keywords" content="@Html.Raw(cfg["sys_keywords"])"><environment include="Development">
+    <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" href="~/scripts/easyui/themes/color.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/icon.css" />
+    <link rel="stylesheet" href="~/scripts/kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="~/scripts/ace/css/aceui.css" />
+    <link rel="stylesheet" href="~/content/site.css" />
+    <link rel="stylesheet" href="~/content/back.css" /></environment><environment exclude="Development">
+    <link rel="stylesheet" href="~/scripts/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/scripts/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" href="~/scripts/easyui/themes/color.css" />
+    <link rel="stylesheet" href="~/scripts/easyui/themes/icon.css">
+    <link rel="stylesheet" href="~/scripts/kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="~/scripts/ace/css/aceui.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/content/back.min.css" asp-append-version="true" /></environment>
+</head>
+<body>
+@RenderBody()<environment include="Development">
+<script src="~/scripts/jquery/dist/jquery.js"></script>
+<script src="~/scripts/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/scripts/plupload/js/plupload.full.min.js"></script>
+<script src="~/scripts/easyui/jquery.easyui.min.js"></script>
+<script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
+<script src="~/scripts/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/scripts/signalr/dist/browser/signalr.js"></script>
+<script src="~/scripts/ace/aceui-easyuiex.js"></script>
+<script src="~/scripts/ace/aceui.js"></script>
+<script src="~/scripts/ace/aceui-upload.js"></script>
+<script src="~/scripts/ace/ace.js"></script></environment><environment exclude="Development">
+<script src="~/scripts/jquery/dist/jquery.min.js"></script>
+<script src="~/scripts/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/scripts/plupload/js/plupload.full.min.js"></script>
+<script src="~/scripts/easyui/jquery.easyui.min.js"></script>
+<script src="~/scripts/easyui/locale/easyui-lang-zh_cn.js"></script>
+<script src="~/scripts/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/scripts/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/scripts/ace/js/ace.min.js" asp-append-version="true"></script></environment>
+@Model.Ace.RenderInitScripts(true)@RenderSection("startup", false)
+@await Html.PartialAsync("_views/baidu")
+</body>
+</html>

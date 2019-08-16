@@ -5,6 +5,9 @@ using System.Text;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Acesoft.Config;
@@ -12,6 +15,7 @@ using Acesoft.Web.Modules;
 using Acesoft.Web.Multitenancy;
 using Acesoft.Web.Mvc;
 using Acesoft.Platform;
+using Acesoft.Rbac;
 
 namespace Acesoft.Web
 {
@@ -37,7 +41,7 @@ namespace Acesoft.Web
             services.AddSingleton(mvcBuilder);
 
             // add Modules
-            AddModules(services, mvcBuilder);
+            AddModules(services);
 
             // add tentans
             AddMultitenancyCore<R>(services);
@@ -48,7 +52,7 @@ namespace Acesoft.Web
             return services;
         }
 
-        public static IServiceCollection AddModules(this IServiceCollection services, IMvcBuilder mvcBuilder)
+        public static IServiceCollection AddModules(this IServiceCollection services)
         {
             // load internal/core modules
             ModuleLoader.LoadInternalModules();
@@ -64,8 +68,23 @@ namespace Acesoft.Web
 
         private static IMvcBuilder AddDefaultServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            // 引入HttpClient
+            services.AddHttpClient();
+
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRouting();
+
+            // Add compression
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+            });
 
             // AddMvc
             return services.AddMvc(opts =>
@@ -79,6 +98,7 @@ namespace Acesoft.Web
             {
                 // 此处可添加外部views目录
                 //opts.FileProviders.Add(new PhysicalFileProvider(""));
+                opts.AllowRecompilingViewsOnFileChange = true;
             })
             .AddRazorPagesOptions(opts =>
             {
@@ -88,6 +108,7 @@ namespace Acesoft.Web
             {
                 opts.SerializerSettings.Converters.Add(new LongConverter());
                 opts.SerializerSettings.Converters.Add(new TreeConverter());
+                opts.SerializerSettings.Converters.Add(new TreeNodeConverter());
                 opts.SerializerSettings.Converters.Add(new GridConverter());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Latest);

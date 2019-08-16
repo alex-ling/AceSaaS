@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using System.Net.Http;
+using Acesoft.Util;
 
 namespace Acesoft.Rbac
 {
@@ -31,19 +32,46 @@ namespace Acesoft.Rbac
         public bool IsAdmin => User.LoginName == "admin";
         public string InRoles => $"({User.Rbac_UAs.Join(ua => ua.Role_Id)})";
         public IList<long> Roles => User.Rbac_UAs.Select(ua => ua.Role_Id).ToList();
-        public IDictionary<string, object> Params => User.Rbac_Params.ToDictionary(p => p.Name, p => (object)p.Value)
-            .Merge(new Dictionary<string, object>
+
+        private IDictionary<string, object> @params;
+        public IDictionary<string, object> Params
+        {
+            get
             {
-                { "userid" , user.Id },
-                { "loginname", user.LoginName },
-                { "username", user.UserName },
-                { "refcode", user.RefCode },
-                { "nickname", user.NickName },
-                { "scaleid", user.Scale_Id },
-                { "inroles", InRoles },
-                { "roleids", Roles }
-            });
-        public IDictionary<string, string> Auths => User.Rbac_Auths.ToDictionary(a => a.AuthType, a => a.AuthId);
+                if (@params == null)
+                {
+                    @params = User.Rbac_Params.ToDictionary(p => p.Name, p => (object)p.Value);
+
+                    @params.Add("userid", user.Id);
+                    @params.Add("loginname", user.LoginName);
+                    @params.Add("username", user.UserName);
+                    @params.Add("refcode", user.RefCode);
+                    @params.Add("nickname", user.NickName);
+                    @params.Add("scaleid", user.Scale_Id);
+                    @params.Add("inroles", InRoles);
+                    @params.Add("roleids", Roles);
+
+                    if (Auths.ContainsKey("wechat"))
+                    {
+                        @params.Add("appid", auths["wechat"].App_Id);
+                    }
+                }
+                return @params;
+            }
+        }
+
+        private IDictionary<string, Rbac_Auth> auths;
+        public IDictionary<string, Rbac_Auth> Auths
+        {
+            get
+            {
+                if (auths == null)
+                {
+                    auths = User.Rbac_Auths.ToDictionary(a => a.AuthType);
+                }
+                return auths;
+            }
+        }
 
         public Rbac_User User
         {
@@ -73,20 +101,19 @@ namespace Acesoft.Rbac
 
         public Task Login(string userName, string password, bool persistent)
         {
-            return Login(userService.Login(userName, password), persistent);
+            var user = userService.CheckUser(userName, password);
+            return Login(user, persistent);
         }
 
-        public Task Login(long appId, string authId, bool persistent)
-        {
-            return Login(userService.QueryByAuth(appId, authId), persistent);
-        }
-
-        private Task Login(Rbac_User user, bool persistent)
+        public Task Login(Rbac_User user, bool persistent)
         {
             this.user = user;
 
-            logger.LogDebug($"Login with the user \"{user.Id}:{user.LoginName}\"");
-            var ticket = Membership.AuthenticationTicket(user.HashId, user.LoginName, persistent);
+            var userName = user.LoginName ?? user.Mobile;
+            var authId = user.Rbac_Auths.FirstOrDefault()?.AuthId ?? "none";
+            var ticket = Membership.AuthenticationTicket(user.HashId, userName, authId, persistent);
+
+            logger.LogDebug($"Login with the user \"{user.Id}:{userName}\"");
             return Context.SignInAsync(ticket.AuthenticationScheme, ticket.Principal, ticket.Properties);
         }
 
@@ -95,15 +122,20 @@ namespace Acesoft.Rbac
             logger.LogDebug($"Get token begin with UserName \"{userName}\"");
 
             var settings = App.AppConfig.Settings;
-            var oauthServer = settings.GetValue<string>("oauth.server");
+            var oauthServer = settings.GetValue("oauth.server", App.GetWebRoot(true));
             var oauthClient = settings.GetValue<string>("oauth.client");
             var oauthSecret = settings.GetValue<string>("oauth.secret");
             var oauthScope = settings.GetValue<string>("oauth.scope");
+            logger.LogDebug($"Request OAuth server \"{oauthServer}\" with Scope \"{oauthScope}\"");
 
             // https://identitymodel.readthedocs.io/en/latest/client/discovery.html
             var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync(oauthServer);
-            Check.Assert(disco.IsError, $"OAuth认证服务器不能访问");
+            var disco = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = oauthServer,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+            Check.Assert(disco.IsError, disco.Error);
 
             // https://identitymodel.readthedocs.io/en/latest/client/token.html#requesting-a-token-using-the-password-grant-type
             var token = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
@@ -116,7 +148,7 @@ namespace Acesoft.Rbac
                 UserName = userName,
                 Password = password
             });
-            Check.Assert(token.IsError, token.ErrorDescription);
+            Check.Assert(token.IsError, token.ErrorDescription ?? token.Exception?.GetMessage());
 
             logger.LogDebug("Get token end with: " + oauthServer + ", SUCCESS");
             return new Token
@@ -129,23 +161,52 @@ namespace Acesoft.Rbac
             };
         }
 
-        public void UpdateAuth(long appId, string authId, string authType, bool needSaveUser)
+        public async Task<Token> RefreshToken(string refreshToken)
         {
-            if (needSaveUser)
-            {
-                userService.Update(user);
-            }
+            logger.LogDebug($"Refresh token begin with \"{refreshToken}\"");
 
-            var auth = userService.UpdateAuth(user.Id, appId, authId, authType);
-            if (!Auths.ContainsKey(authType))
+            var settings = App.AppConfig.Settings;
+            var oauthServer = settings.GetValue("oauth.server", App.GetWebRoot(true));
+            var oauthClient = settings.GetValue<string>("oauth.client");
+            var oauthSecret = settings.GetValue<string>("oauth.secret");
+            var oauthScope = settings.GetValue<string>("oauth.scope");
+            logger.LogDebug($"Request OAuth server \"{oauthServer}\" with Scope \"{oauthScope}\"");
+
+            // https://identitymodel.readthedocs.io/en/latest/client/discovery.html
+            var client = new HttpClient();
+            var disco = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
-                user.Rbac_Auths.Add(auth);
-            }
+                Address = oauthServer,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+            Check.Assert(disco.IsError, disco.Error);
+
+            // https://identitymodel.readthedocs.io/en/latest/client/token.html#requesting-a-token-using-the-password-grant-type
+            var token = await client.RequestRefreshTokenAsync(new RefreshTokenRequest
+            {
+                // "/connect/token"
+                Address = disco.TokenEndpoint,
+                ClientId = oauthClient,
+                ClientSecret = oauthSecret,
+                Scope = oauthScope,
+                RefreshToken = refreshToken
+            });
+            Check.Assert(token.IsError, token.ErrorDescription ?? "RefreshToken已失效");
+
+            logger.LogDebug("Get token end with: " + oauthServer + ", SUCCESS");
+            return new Token
+            {
+                Access_token = token.AccessToken,
+                Refresh_token = token.RefreshToken,
+                Token_type = token.TokenType,
+                Expires_in = token.ExpiresIn,
+                Created = DateTime.Now
+            };
         }
 
         public void Logout()
         {
-            user = userService.QueryByUserName("guest");
+            user = userService.QueryByUserName("guest", "none");
         }
 
         public bool IsInRole(long roleId) => Roles.Contains(roleId);

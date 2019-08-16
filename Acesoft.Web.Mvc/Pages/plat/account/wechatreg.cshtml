@@ -1,63 +1,66 @@
 ﻿@page
 @inherits Acesoft.Web.UI.RazorPages.WebPageBase
-@{ 
-    ViewData["Title"] = "微信用户注册";
+@inject IConfigService ConfigService
+@{
+    Layout = "_shared/wepage";
+    ViewData["Title"] = "微信注册";
 
     var appId = App.GetQuery<string>("appid");
     var openId = App.GetQuery<string>("openid");
     var redirectUrl = App.GetQuery("redirect_uri", "/wechat");
+    var cfg = ConfigService.GetConfig(1);
+    var type = Guid.NewGuid().ToString("N");
+    var validModel = false;
 }
-<div class="ph15 pb20">
+<div class="ph30">
     <div class="pt30 text-c">
-        <img src="~/images/logo.jpg" />
+        <img src="@cfg["sys_logo"]" style="height:80px" />
     </div>
     <div class="pt20 text-c ft12 cr-a lh20">
-        <div class="pb15 cr-7" style="font-size:18px">微信用户注册</div>
-        <div>注册成功后，将自动绑定微信身份，帐户可用于环都新风APP登录</div>
+        <div class="pb15 cr-5 ft20">微信用户绑定注册(自动绑定微信身份)</div>
+        <div class="ft16">注册成功后，帐户可用于@(Html.Raw(cfg["sys_name"]))网站登录</div>
     </div>
-@{
-    Ace.Form().Id("reg").Ajax(a => a.DataSource("user.regist").RouteQuery("appid").HttpPost("auth", "welogin")).Content(
+    @{
+        Ace.Form().Id("reg").Ajax(a => a.DataSource("rbac.regist").RouteQuery("appid").HttpPost("wechat", "welogin")).Content(
         @<div class="pt10">
             <div class="pt15">
                 @Ace.TextBox().Name("mobile").Required().ValidType("length[11,11]").Prompt("11位手机号码").Width("100%").Height(40).TipPosition(Position.bottom)
             </div>
-            <div class="pt15 pr">
-                <div class="pa" style="left:0;right:210px">
-                    @Ace.TextBox().Id("code").Required().ValidType("length[5,5]").Prompt("5位右侧图形验证码").Width("100%").Height(40).TipPosition(Position.bottom)
+            @if (validModel)
+            {
+                <div class="pt15 pr">
+                    <div class="pa" style="left:0;right:210px">
+                        @Ace.TextBox().Id("code").Required().ValidType("length[5,5]").Prompt("5位右侧图形验证码").Width("100%").Height(40).TipPosition(Position.bottom)
+                    </div>
+                    <div class="fr">
+                        <img id="vimg" src="/api/draw/getvalidimage" onclick="onRefresh(this)" class="hand" />
+                        @Ace.LinkButton().Name("btnc").Css("c1").Text("发送验证码").Width(120).Height(40).Events(e => e.OnClick("onCode"))
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="fr">
-                    <img id="vimg" src="/api/draw/getvalidimage" onclick="onRefresh(this)" class="hand" />
-                    @Ace.LinkButton().Name("btnc").Text("发送验证码").Width(120).Height(40).Events(e => e.OnClick("onCode"))
+                <div class="pt15">
+                    @Ace.TextBox().Name("valid_code").Required().ValidType("length[6,6]").Prompt("6位手机短信验证码").Width("100%").Height(40).TipPosition(Position.bottom)
                 </div>
-                <div class="clear"></div>
-            </div>
-            <div class="pt15">                
-                @Ace.TextBox().Name("valid_code").Required().ValidType("length[6,6]").Prompt("6位手机短信验证码").Width("100%").Height(40).TipPosition(Position.bottom)
-            </div>
+            }
             <div class="pt15">
                 @Ace.PasswordBox().Name("password").Required().Prompt("请输入4-20位密码").ValidType("length[4,20]").Width("100%").Height(40).TipPosition(Position.bottom)
             </div>
             <div class="pt15">
                 @Ace.PasswordBox().Id("pwd").Required().ValidType("equals['#password']").Prompt("请再次输入密码").Width("100%").Height(40).TipPosition(Position.bottom)
             </div>
-            <div class="pt30">
+            <div class="pt20">
                 @Ace.HiddenBox().Name("regtype").Value("1")
                 @Ace.HiddenBox().Name("clientid").Value("208078593874460672")
                 @Ace.HiddenBox().Name("openid").Value(openId)
                 <a class="btn btn-lg btn-primary" style="width:100%" onclick="onReg()">绑定注册</a>
             </div>
         </div>
-    ).Render();
-}
+        ).Render();
+    }
 </div>
 <script>
     function onRefresh(ele) {
-        $(ele).attr('src', AX.opts.root + 'api/draw/getvalidimage?d=' + Math.random());
-    }
-    function onSuccess() {
-        $.messager.alert('提示', '<h4 class="cr">注册成功！</h4><h5>请返回登录页面进行登录！</h5>', 'info', function () {
-            AX.login();
-        });
+        $(ele).attr('src', AX.opts.root + 'api/draw/getvalidimage?type=@(type)&d=' + Math.random());
     }
     var count = 60, sb = false;
     function getCode() {
@@ -88,7 +91,7 @@
             $("#btnc").linkbutton("disable");
             $("#btnc").find('.l-btn-text').text("正在发送…");
             AX.ajax({
-                url: AX.api({ api: 'msg/getsms', ds: 'user.regist' }),
+                url: AX.api({ api: 'cloud/getsms', ds: 'rbac.regist' }),
                 data: { mobile: $('#mobile').val(), code: $('#code').val() },
                 type: 'get',
                 error: function (xhr) {

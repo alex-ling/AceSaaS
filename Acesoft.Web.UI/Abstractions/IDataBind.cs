@@ -9,6 +9,6 @@ namespace Acesoft.Web.UI
 
 	public interface IDataBind<T> : IDataBind
 	{
-		T Data { get; set; }
+		T Model { get; set; }
 	}
 }

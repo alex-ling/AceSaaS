@@ -2,14 +2,14 @@
 @inherits Acesoft.Web.UI.RazorPages.WebPage
 @{
     ViewData["Title"] = "安全中心 > 手机绑定";
-    Layout = "_shared/body";
+    Layout = "_shared/back";
 
     var user = Ace.AC.User;
 }
 @section toolbar {
-    <button class="btn btn-default btn-xs ml20" data-cmd="back">
+    <a class="btn btn-default btn-xs ml20" href="@Ace.GetAppUrl("user/safe/index", "nav")">
         <span class="fa fa-chevron-left"></span> 返回
-    </button>
+    </a>
 }
 <div class="alert alert-info">请输入新的手机号，点击[获取验证码]后查看短信验证码，在15分钟内录入并提交！</div>
 @{

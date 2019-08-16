@@ -8,6 +8,8 @@ namespace Acesoft
 {
     public static class DateExtensions
     {
+        public const string CN_Weeks = "一二三四五六日";
+
         public static string ToDateStr(this DateTime dt)
         {
             return dt.ToStr("yyyy-MM-dd");
@@ -47,6 +49,11 @@ namespace Acesoft
         {
             var w = (int)dt.DayOfWeek;
             return w > 0 ? (w - 1) : 6;
+        }
+
+        public static string GetChinaWeekCN(this DateTime dt)
+        {
+            return CN_Weeks[dt.GetChinaWeek()].ToString();
         }
 
         public static long ToUnix(this DateTime dt)

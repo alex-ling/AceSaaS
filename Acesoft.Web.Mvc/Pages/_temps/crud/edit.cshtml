@@ -1,0 +1,71 @@
+﻿@{
+    var table = Model.Table.Split('_')[1].ToLower();
+}@@page
+@@inherits Acesoft.Web.UI.RazorPages.WebPage
+@@{
+    Layout = "_shared/edit";
+    ViewData["Title"] = "编辑";
+
+    Ace.View().Id("view").Ajax(ds => ds.DataSource("@Model.Table.Replace("_", ".")").Form(new
+    {
+@foreach (var f in Model.Fields.SkipLast(1))
+{
+    var field = f.Field.ToLower();
+    if (field != "id" && field != "dcreate" && field != "dupdate")
+    {
+        <c>@field = "",</c>
+    }
+}
+        @Model.Fields.Last().Field.ToLower() = ""
+    }).HttpSave()).Content(
+        @@<div class="container-fluid">
+        @foreach (var f in Model.Fields)
+        {
+            var field = f.Field.ToLower();
+            if (f.Type == Acesoft.Platform.FieldType.datetime)
+            {
+            <div class="row">
+                <div class="col-xs-2 text-r">@f.Name：</div>
+                <div class="col-xs-6">@@Ace.DateBox().Name("@field").Width("100%")</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            }
+            else if (f.Type == Acesoft.Platform.FieldType.dict)
+            {
+            <div class="row">
+                <div class="col-xs-2 text-r">@f.Name：</div>
+                <div class="col-xs-6">@@Ace.ComboBox().Name("@field").Width("100%").Ajax(ds => ds.Dict("@f.Ref").HttpGet())</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            }
+            else if (f.Type == Acesoft.Platform.FieldType.attach)
+            {
+            <div class="row">
+                <div class="col-xs-2 text-r">@f.Name：</div>
+                <div class="col-xs-6">
+                    @@(Ace.UploadBox().Name("@field").Width("100%").Max(5).Filters(f =>
+                    {
+                        f.max_file_size = "500kb";
+                        f.mime_types.Add(new MineType
+                        {
+                            title = "文件",
+                            extensions = "*"
+                        });
+                    }).Dir("uploads/"))
+                </div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            }
+            else if (field != "id" && field != "dcreate" && field != "dupdate")
+            {
+            <div class="row">
+                <div class="col-xs-2 text-r">@f.Name：</div>
+                <div class="col-xs-6">@@Ace.TextBox().Name("@field").Width("100%")</div>
+                <div class="col-xs-4 text-warning"></div>
+            </div>
+            }
+        }
+            @@Html.AntiForgeryToken()
+        </div>
+    ).Render();
+}

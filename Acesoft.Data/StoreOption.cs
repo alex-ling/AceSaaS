@@ -10,7 +10,7 @@ namespace Acesoft.Data
         public StoreOption()
         {
             IsolationLevel = IsolationLevel.ReadCommitted;
-            AutoCreateSchema = true;
+            AutoCreateSchema = false;
             SessionPoolSize = 16;
             QueryGatingEnabled = true;
         }

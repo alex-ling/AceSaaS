@@ -4,12 +4,10 @@ using System.Text;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Caching.Distributed;
 using Acesoft.Cache;
 using Acesoft.Rbac;
 using Acesoft.Web.Mvc;
 using Acesoft.Util;
-using Newtonsoft.Json.Linq;
 
 namespace Acesoft.Web.Cloud.Controllers
 {
@@ -33,7 +31,7 @@ namespace Acesoft.Web.Cloud.Controllers
             return Ok(result);
         }
 
-        [HttpGet, MultiAuthorize, Action("删除文件")]
+        [HttpDelete, MultiAuthorize, Action("删除文件")]
         public IActionResult DelOssFile(string bucket, string key)
         {
             cloudService.GetOssService().DeleteFile(bucket, key);
@@ -71,7 +69,7 @@ namespace Acesoft.Web.Cloud.Controllers
                 }
             }
 
-            var rndStr = RandomHelper.GetRandomNumberString(6);
+            var rndStr = RandomHelper.GetRandomNumber(6);
             var key = "sms_" + mobile;
             var keySending = "sms_sending_" + mobile;
             if (App.Cache.GetString(keySending) != null)
@@ -131,7 +129,7 @@ namespace Acesoft.Web.Cloud.Controllers
                 }
             }
 
-            var rndStr = RandomHelper.GetRandomNumberString(6);
+            var rndStr = RandomHelper.GetRandomNumber(6);
             var key = "mail_" + mailto;
             var keySending = "mail-send-" + mailto;
             if (App.Cache.GetString(keySending) != null)
@@ -177,7 +175,7 @@ namespace Acesoft.Web.Cloud.Controllers
 
         private string GetValidCode(string type, bool clear = true)
         {
-            var key = "valid_img_" + type;
+            var key = "img_" + type;
             var result = App.Cache.GetString(key);
             if (clear)
             {

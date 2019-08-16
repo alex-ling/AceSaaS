@@ -8,23 +8,11 @@ namespace Acesoft.Web.UI.Widgets
 	{
 		public static readonly ScriptEvent OnClick = new ScriptEvent("onClick", "");
 
-		public string IconCls
-		{
-			get;
-			set;
-		}
+		public string IconCls { get; set; }
 
-		public string Href
-		{
-			get;
-			set;
-		}
+		public string Href { get; set; }
 
-		public bool? Disabled
-		{
-			get;
-			set;
-		}
+		public bool? Disabled { get; set; }
 
 		public MenuItem(WidgetFactory ace, Menu menu)
 			: base(ace, menu)

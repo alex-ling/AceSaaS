@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Redis;
 using Acesoft.Config;
+using CSRedis;
 
 namespace Acesoft.Cache
 {
@@ -19,12 +22,21 @@ namespace Acesoft.Cache
             });
 
             // 添加分布式缓存配置文件
-            if (cacheConfig.EnabledDistributedRedisCache)
+            if (cacheConfig.EnabledDistributedCache)
             {
-                services.AddDistributedRedisCache(opts =>
+                services.AddSingleton<IDistributedCache>(sp =>
                 {
-                    opts.Configuration = cacheConfig.RedisCacheServer;
-                    opts.InstanceName = cacheConfig.RedisCacheInstance;
+                    // https://github.com/2881099/Microsoft.Extensions.Caching.CSRedis
+                    CSRedisClient csClient;
+                    if (!cacheConfig.EnabledCluster)
+                    {
+                        csClient = new CSRedisClient(cacheConfig.ConnectionString);
+                    }
+                    else
+                    {
+                        csClient = new CSRedisClient(connectionString: null, sentinels: cacheConfig.ConnectionStrings);
+                    }
+                    return new CSRedisCache(csClient);
                 });
             }
             else

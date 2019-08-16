@@ -1,0 +1,33 @@
+﻿@page
+@inherits Acesoft.Web.UI.RazorPages.WebPage
+@{
+    ViewData["Title"] = "系统日志";
+    Layout = "_shared/back";
+
+    Ace.Layout().Fit().Items(layout =>
+    {
+        layout.Add().Border().Region(Region.north).Height(44).Controls(ctls =>
+        {
+            Ace.Search().Id("search").AppendTo(ctls).For("grid").Button(false).Controls(query =>
+            {
+                Ace.Label().AppendTo(query).Text("请至少保留1周日志文件");
+            })
+            .Tools(tools =>
+            {
+                Ace.Button().AppendTo(tools).Text("删除").IconCls("fa fa-remove").Click("AX.gridDel('#grid')");
+            });
+        });
+        layout.Add().Border(false).Region(Region.center).Controls(ctls =>
+        {
+            Ace.DataGrid().Id("grid").AppendTo(ctls).Pagination(false).Delete("log/delete")
+            .Ajax(ds => ds.Controller("log").HttpGet()).Columns(c =>
+            {
+                c.Add().Field("date").Title("日期").Width(10).Format("date:yyyy-MM-dd");
+                c.Add().Field("id").Title("日志").Width(10);
+                c.Add().Field("size").Title("大小").Width(10).Format("size");
+                c.Add().Field("url").Title("下载").Width(20).Format("link:{url}");
+                c.Add().Field("action").Title("操作").Format("button");
+            });
+        });
+    }).Render();
+}

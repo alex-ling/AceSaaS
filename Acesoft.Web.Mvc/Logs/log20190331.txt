@@ -1,0 +1,122 @@
+2019-03-31 12:01:04.464 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-31 12:01:06.500 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-31 12:01:06.595 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-03-31 12:01:06.623 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-31 12:01:06.635 +08:00 [DBG] Found module hr with type: Acesoft.Web.HR.Startup.
+2019-03-31 12:01:06.635 +08:00 [DBG] Found mvc application part: Acesoft.Web.HR.
+2019-03-31 12:01:06.642 +08:00 [DBG] Found module shop with type: Acesoft.Web.Shop.Startup.
+2019-03-31 12:01:06.642 +08:00 [DBG] Found mvc application part: Acesoft.Web.Shop.
+2019-03-31 12:01:06.642 +08:00 [DBG] Starting initialize TenantsHost from config.
+2019-03-31 12:01:06.732 +08:00 [DBG] Load Tenant with name "default" successful.
+2019-03-31 12:01:06.733 +08:00 [DBG] Done initialize tentants.
+2019-03-31 12:01:06.733 +08:00 [DBG] Resolving Tenant using "Acesoft.Web.Multitenancy.DefaultTenantResolver".
+2019-03-31 12:01:06.740 +08:00 [DBG] Tenant not present in cache with key "localhost:5000". Attempting to resolve.
+2019-03-31 12:01:06.744 +08:00 [DBG] Resolved Tenant "default" with request: localhost:5000.
+2019-03-31 12:01:06.746 +08:00 [DBG] Tenant "default" resolved. Caching with keys "localhost:5000".
+2019-03-31 12:01:06.754 +08:00 [DBG] Start getting TenantContext from TenantsHost.
+2019-03-31 12:01:06.758 +08:00 [DBG] Getting TenantContext successful and set to HttpContext.
+2019-03-31 12:01:06.892 +08:00 [INF] Executing endpoint 'Page: /Index'
+2019-03-31 12:01:11.254 +08:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing page /Index
+2019-03-31 12:01:11.275 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2019-03-31 12:01:11.275 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2019-03-31 12:01:11.891 +08:00 [DBG] Store has initlialized with database "default"
+2019-03-31 12:01:11.892 +08:00 [DBG] Open new session with database "default"
+2019-03-31 12:01:22.034 +08:00 [DBG] Not found "Rbac" schema from "default" store
+2019-03-31 12:01:22.034 +08:00 [DBG] Begin creating schemas for "default" store
+2019-03-31 12:01:22.034 +08:00 [DBG] Creating schema for "Acesoft.Platform.Schema.PlatformSchema"
+2019-03-31 12:01:22.037 +08:00 [DBG] Dispose session with database "default"
+2019-03-31 12:01:22.041 +08:00 [INF] Executed page /Index in 10784.107ms
+2019-03-31 12:01:22.042 +08:00 [INF] Executed endpoint 'Page: /Index'
+2019-03-31 12:01:22.044 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Data.SqlClient.SqlException (0x80131904): 无法打开登录所请求的数据库 "acecms"。登录失败。
+用户 'sa' 登录失败。
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Acesoft.Data.Session.BeginTransaction(IsolationLevel il) in D:\acecms\src\Acesoft.Data\Session.cs:line 43
+   at Acesoft.Platform.Schema.PlatformSchema.DropSchema(ISession session) in D:\acecms\src\Acesoft.Platform\Schema\PlatformSchema.cs:line 138
+   at Acesoft.Data.Sql.SchemaCreator.CreateSchema(ISession session) in D:\acecms\src\Acesoft.Data\Sql\SchemaCreator.cs:line 29
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_0(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 36
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitSingleton(SingletonCallSite singletonCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Acesoft.Web.DataAccess.ServiceCollectionExtensions.<>c.<AddDataAccess>b__0_1(IServiceProvider sp) in D:\acecms\src\Acesoft.Web\DataAccess\ServiceCollectionExtensions.cs:line 46
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Acesoft.Data.ServiceBase.get_Session() in D:\acecms\src\Acesoft.Data\Respository\ServiceBase.cs:line 11
+   at Acesoft.Platform.Services.ConfigService.GetConfig(Int64 cfgId) in D:\acecms\src\Acesoft.Platform\Services\ConfigService.cs:line 14
+   at Acesoft.Web.Mvc.Pages._shared.Pages__shared_page.ExecuteAsync() in D:\acecms\src\Acesoft.Web.Mvc\Pages\_shared\page.cshtml:line 4
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Acesoft.Web.Multitenancy.TenantRouterMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantRouterMiddleware.cs:line 40
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 50
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 29
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 84
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:8cb5510e-b57e-4992-ac28-e5e8829c52ca
+Error Number:4060,State:1,Class:11
+2019-03-31 12:01:22.317 +08:00 [INF] Request finished in 15820.5309ms 500 text/html; charset=utf-8
+2019-03-31 12:07:12.732 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-31 12:07:14.606 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-31 12:07:14.667 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-03-31 12:07:14.695 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.
+2019-03-31 12:07:14.713 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.IO.FileNotFoundException: Could not load file or assembly 'D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules\Acesoft.Web.Cloud\Acesoft.Web.Cloud.dll'. 系统找不到指定的文件。
+File name: 'D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules\Acesoft.Web.Cloud\Acesoft.Web.Cloud.dll'
+   at System.Runtime.Loader.AssemblyLoadContext.LoadFromPath(IntPtr ptrNativeAssemblyLoadContext, String ilPath, String niPath, ObjectHandleOnStack retAssembly)
+   at System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(String assemblyPath)
+   at System.Reflection.Assembly.LoadFrom(String assemblyFile)
+   at Acesoft.Web.Modules.ModulesHost.Initialize() in D:\acecms\src\Acesoft.Web\Modules\ModulesHost.cs:line 42
+   at Acesoft.Web.Multitenancy.TenantsHost.Initialize() in D:\acecms\src\Acesoft.Web\Multitenancy\Host\TenantsHost.cs:line 41
+   at Acesoft.Web.Multitenancy.TenantContainerMiddleware.Invoke(HttpContext context, ITenantResolver tenantResolver) in D:\acecms\src\Acesoft.Web\Multitenancy\Middleware\TenantContainerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 29
+   at Acesoft.Web.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in D:\acecms\src\Acesoft.Web\Middleware\ExceptionMiddleware.cs:line 84
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+
+
+2019-03-31 12:07:14.889 +08:00 [INF] Request finished in 288.0814ms 500 text/html; charset=utf-8
+2019-03-31 12:07:51.428 +08:00 [INF] User profile is available. Using 'C:\Users\lsanm\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-03-31 12:07:54.941 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/  
+2019-03-31 12:07:55.093 +08:00 [INF] Cookie was not authenticated. Failure message: Unprotect ticket failed
+2019-03-31 12:07:55.192 +08:00 [DBG] Start loading modules from D:\acecms\src\Acesoft.Web.Mvc\bin\Debug\netcoreapp2.2\Modules.

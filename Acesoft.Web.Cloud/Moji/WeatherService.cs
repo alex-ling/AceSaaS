@@ -10,10 +10,11 @@ namespace Acesoft.Web.Cloud.Moji
 	{
 		private const string Api = "http://basiccity.market.alicloudapi.com";
 		private const string FreeApi = "http://apifreelat.market.alicloudapi.com";
-		private static readonly ConcurrentDictionary<string, AqiResult> cache = new ConcurrentDictionary<string, AqiResult>();
 		private Dictionary<string, string> headers = new Dictionary<string, string>();
 
-		public string AppCode { get; private set; }
+        private static readonly ConcurrentDictionary<string, AqiResult> cache = new ConcurrentDictionary<string, AqiResult>();
+
+        public string AppCode { get; private set; }
         public int RefreshMinutes { get; private set; }
 
         public WeatherService(string appCode, int refreshMinutes)
@@ -25,21 +26,26 @@ namespace Acesoft.Web.Cloud.Moji
 
 		public WeaResult GetWea(string lng, string lat)
 		{
-			string url = "http://apifreelat.market.alicloudapi.com/whapi/json/aliweather/briefcondition";
-			string postData = "lat=" + lat + "&lon=" + lng + "&token=a231972c3e7ba6b33d8ec71fd4774f5e";
-			return HttpHelper.HttpPost(url, postData, headers, "application/x-www-form-urlencoded").FromJson()["data"].ToObject<WeaResult>();
+			var url = $"{FreeApi}/whapi/json/aliweather/briefcondition";
+			var postData = "lat=" + lat + "&lon=" + lng + "&token=a231972c3e7ba6b33d8ec71fd4774f5e";
+            var result = HttpHelper.HttpPost(url, postData, headers, HttpHelper.ContentTypeForm);
+            return SerializeHelper.FromJson(result)["data"].ToObject<WeaResult>();
 		}
 
 		public WeaResult GetWea(string cityId)
 		{
-			string postData = "cityId=" + cityId + "&token=46e13b7aab9bb77ee3358c3b672a2ae4";
-			return HttpHelper.HttpPost("http://basiccity.market.alicloudapi.com/whapi/json/alicityweather/briefcondition", postData, headers, "application/x-www-form-urlencoded").FromJson()["data"].ToObject<WeaResult>();
+            var url = $"{Api}/whapi/json/alicityweather/briefcondition";
+            var postData = "cityId=" + cityId + "&token=46e13b7aab9bb77ee3358c3b672a2ae4";
+            var result = HttpHelper.HttpPost(url, postData, headers, HttpHelper.ContentTypeForm);
+            return SerializeHelper.FromJson(result)["data"].ToObject<WeaResult>();
 		}
 
 		private WeaAqi GetAqi(string cityId)
 		{
-			string postData = "cityId=" + cityId + "&token=8b36edf8e3444047812be3a59d27bab9";
-			return HttpHelper.HttpPost("http://basiccity.market.alicloudapi.com/whapi/json/alicityweather/aqi", postData, headers, "application/x-www-form-urlencoded").FromJson()["data"]["aqi"].ToObject<WeaAqi>();
+            var url = $"{Api}/whapi/json/alicityweather/aqi";
+            var postData = "cityId=" + cityId + "&token=8b36edf8e3444047812be3a59d27bab9";
+            var result = HttpHelper.HttpPost(url, postData, headers, HttpHelper.ContentTypeForm);
+            return SerializeHelper.FromJson(result)["data"]["aqi"].ToObject<WeaAqi>();
 		}
 
 		public AqiResult GetWeaAqi(string lng, string lat)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 using Microsoft.AspNetCore.Html;
@@ -10,6 +11,12 @@ namespace Acesoft.Web.UI
 {
 	public static class Extensions
 	{
+        public static IHtmlContent AppendTo(this IHtmlContent component, IList<IHtmlContent> controls)
+        {
+            controls.Add(component);
+            return component;
+        }
+
 		public static string ToHtml(this IHtmlContent component)
 		{
 			if (component == null)

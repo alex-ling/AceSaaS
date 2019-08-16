@@ -37,19 +37,13 @@ namespace Acesoft.Util
             return (T)FromBinary(data);
         }
 
-        public static byte[] ToJsonBytes(object obj)
-        {
-            using (var ms = new MemoryStream())
-            {
-                var jx = new DataContractJsonSerializer(obj.GetType());
-                jx.WriteObject(ms, obj);
-                return ms.ToArray();
-            }
-        }
-
         public static string ToJson(object obj, JsonSerializerSettings settings = null)
         {
-            return JsonConvert.SerializeObject(obj, Formatting.None, settings);
+            if (settings != null)
+            {
+                return JsonConvert.SerializeObject(obj, settings);
+            }
+            return JsonConvert.SerializeObject(obj, new LongConverter());
         }
 
         public static JObject FromJson(string json, JsonSerializerSettings settings = null)
@@ -60,6 +54,16 @@ namespace Acesoft.Util
         public static T FromJson<T>(string json, JsonSerializerSettings settings = null)
         {
             return (T)JsonConvert.DeserializeObject<T>(json, settings);
+        }
+
+        public static byte[] ToJsonBytes(object obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var jx = new DataContractJsonSerializer(obj.GetType());
+                jx.WriteObject(ms, obj);
+                return ms.ToArray();
+            }
         }
 
         public static T FromJson<T>(byte[] data)

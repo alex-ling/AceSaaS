@@ -1,0 +1,7 @@
+﻿sc create AcesoftIotService binpath=\"{ExePath}\" displayname= \"{DisplayName}\" start= auto
+sc description AcesoftIotService "{Description}"
+sc delete AcesoftIotService
+
+AcesoftIotService
+Acesoft Iot Service
+Acesoft Iot Service is a cloud TCP/IP access gateway for responding to smart devices
