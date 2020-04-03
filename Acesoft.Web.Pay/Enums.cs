@@ -14,9 +14,18 @@ namespace Acesoft.Web.Pay
         JDPay = 6
     }
 
-    public enum OrderStatus : int
+    public enum OrderState : int
     {
         Pending = 1,
-        Paidup = 2
+        Paidup = 2,
+        Closed = 3,
+        Reversed = 4,
+        Refunded = 5
+    }
+
+    public enum RefundState : int
+    {
+        Refunding = 1,
+        Refunded = 2
     }
 }

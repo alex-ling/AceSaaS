@@ -2,7 +2,7 @@
   "Serilog": {
     "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File", "Serilog.Sinks.Async" ],
     "MinimumLevel": {
-      "Default": "Warning",
+      "Default": "Debug",
       "Override": {
         "Acesoft": "Debug",
         "Microsoft": "Information",

@@ -23,15 +23,19 @@ namespace Acesoft.Web.UI.Widgets.Fluent
 			return this;
 		}
 
-		public virtual KindEditorBuilder Items(List<string> items)
+		public virtual KindEditorBuilder Items(Action<List<string>> itemsAction)
 		{
-			base.Component._Items = items;
+            var items = new List<string>();
+            itemsAction(items);
+            base.Component._Items = items;
 			return this;
 		}
 
-		public virtual KindEditorBuilder NoDisableItems(List<string> noDisableItems)
+		public virtual KindEditorBuilder NoDisableItems(Action<List<string>> itemsAction)
 		{
-			base.Component._NoDisableItems = noDisableItems;
+            var items = new List<string>();
+            itemsAction(items);
+            base.Component._NoDisableItems = items;
 			return this;
 		}
 

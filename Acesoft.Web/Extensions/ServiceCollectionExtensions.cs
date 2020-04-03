@@ -75,7 +75,7 @@ namespace Acesoft.Web
             });
 
             // 引入HttpClient
-            services.AddHttpClient();
+            //services.AddHttpClient();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRouting();
@@ -87,6 +87,7 @@ namespace Acesoft.Web
             });
 
             // AddMvc
+            var webpageRoutes = App.AppConfig.Settings.GetValue("webpage.routes", "");
             return services.AddMvc(opts =>
             {
                 // 改为ExceptionMiddleware处理
@@ -103,6 +104,13 @@ namespace Acesoft.Web
             .AddRazorPagesOptions(opts =>
             {
                 // 此处设置RazorPages
+                // 匹配所有未知Url，包含定制动态页面
+                //opts.Conventions.AddPageRoute("/desktop", "{*url}");
+                // {*url}反斜杠编码，{**url}反斜杠不编码{text?}是否存在
+                webpageRoutes.Split<string>(',').Each(page =>
+                {
+                    opts.Conventions.AddPageRoute("/desktop", $"/{page}/{{**url}}");
+                });
             })
             .AddJsonOptions(opts =>
             {

@@ -143,7 +143,7 @@ namespace Acesoft
                     return query[0].ToObject<T>();
                 }
             }
-            throw new AceException($"Cannot get query name with [{name}] from request url.");
+            throw new AceException($"Cannot get query value with [{name}]");
         }
 
         public static T GetParam<T>(string name, T defaultValue)
@@ -163,6 +163,19 @@ namespace Acesoft
                 }
             }
             return defaultValue;
+        }
+
+        public static T GetForm<T>(string name)
+        {
+            if (Context != null)
+            {
+                var query = Context.Request.Form[name];
+                if (query.Count > 0 && query[0].HasValue())
+                {
+                    return query[0].ToObject<T>();
+                }
+            }
+            throw new AceException($"Cannot get form value with [{name}]");
         }
 
         public static T GetForm<T>(string name, T defaultValue)

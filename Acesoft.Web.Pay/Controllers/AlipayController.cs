@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Acesoft.Rbac;
 using Acesoft.Web.Mvc;
 using Acesoft.Web.Pay.Models;
+using Essensoft.AspNetCore.Payment.Alipay;
 
 namespace Acesoft.Web.Pay.Controllers
 {
@@ -40,10 +41,15 @@ namespace Acesoft.Web.Pay.Controllers
             return Content(res.ResponseBody, "text/html", Encoding.UTF8);
         }
 
-        [HttpGet, MultiAuthorize, Action("支付通知")]
-        public async Task<IActionResult> GetReturn(long orderId)
+        [HttpGet, Action("支付通知")]
+        public async Task<IActionResult> Notify(long orderId)
         {
-            return Ok(await alipayService.Notify(orderId));
+            if (await alipayService.Notify(orderId))
+            {
+                return AlipayNotifyResult.Success;
+            }
+
+            return NoContent();
         }
     }
 }

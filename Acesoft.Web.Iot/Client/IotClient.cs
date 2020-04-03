@@ -17,6 +17,7 @@ namespace Acesoft.Web.IoT.Client
     public class IotClient : IIotClient
     {
         private readonly ConcurrentDictionary<string, IotContext> actions;
+
         private readonly ILogger<IotClient> logger;
         private readonly Tenant tenant;
         private readonly IotAccess access;

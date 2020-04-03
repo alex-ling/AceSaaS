@@ -38,6 +38,7 @@ namespace Acesoft.Data
         T QueryFirst<T>(string sql, object param = null);
         dynamic QuerySingle(string sql, object param = null);
         T QuerySingle<T>(string sql, object param = null);
+        IDictionary<string, IEnumerable<dynamic>> QueryMultiple(string sql, string keys, object param = null);
         GridReader QueryMultiple(string sql, object param = null);
         GridResponse<dynamic> QueryPage(PageParam param);
         GridResponse<T> QueryPage<T>(PageParam param);

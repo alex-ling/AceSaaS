@@ -57,18 +57,24 @@ namespace Acesoft.Data.SqlMapper
                             ctx.DapperParams.Add(query.Key, val);
                             ctx.Params.Add(query.Key, val);
                         }
+                        else if (query.Value == "fs")
+                        {
+                            var val = App.GetForm<string>(query.Key);
+                            ctx.DapperParams.Add(query.Key, val);
+                            ctx.Params.Add(query.Key, val);
+                        }
                         else if (query.Value == "ac")
                         {
                             var val = ctx.ExtraParams[query.Key];
                             ctx.DapperParams.Add(query.Key, val);
                             ctx.Params.Add(query.Key, val);
                         }
-                        //else
-                        //{
-                        //    var val = query.Value;
-                        //    ctx.DapperParams.Add(query.Key, val);
-                        //    ctx.Params.Add(query.Key, val);
-                        //}
+                        else
+                        {
+                            var val = query.Value;
+                            ctx.DapperParams.Add(query.Key, val);
+                            ctx.Params.Add(query.Key, val);
+                        }
                     }
                 }
             }
@@ -167,8 +173,9 @@ namespace Acesoft.Data.SqlMapper
                         // e__表示编辑列
                         sb.Append($"{dialect.QuoteForColumnName(key.Substring(3))} as {key.Substring(3)}, ");
                     }
-                    else
+                    else if (!key.StartsWith("p__"))
                     {
+                        // p__参数列之外
                         sb.Append($"{dialect.QuoteForColumnName(key)}, ");
                     }
                 }
@@ -216,7 +223,7 @@ namespace Acesoft.Data.SqlMapper
                     // 提交的值为空时不插入
                     continue;
                 }
-                if (key == "id" || key.StartsWith("r__") || key.StartsWith("e__"))
+                if (key == "id" || key.StartsWith("r__") || key.StartsWith("e__") || key.StartsWith("p__"))
                 {
                     // r__表示只读列，e__表示编辑列
                     continue;
@@ -251,15 +258,15 @@ namespace Acesoft.Data.SqlMapper
 
             foreach (var key in ctx.DapperParams.ParameterNames)
             {
-                if (key == "id" || key.StartsWith("r__"))
+                if (key == "id" || key.StartsWith("r__") || key.StartsWith("p__"))
                 {
-                    // r__表示只读列
+                    // r__表示只读列，p__表示参数列
                     continue;
                 }
 
                 var obj = ctx.DapperParams.Get<object>(key);
                 var field = key;
-                if (key.StartsWith("a__"))
+                if (key.StartsWith("a__") || key.StartsWith("e__"))
                 {
                     // a__表示数组
                     field = field.Substring(3);

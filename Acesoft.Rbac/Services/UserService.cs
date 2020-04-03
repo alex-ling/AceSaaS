@@ -64,6 +64,18 @@ namespace Acesoft.Rbac.Services
                 })
             );
         }
+
+        public Rbac_User GetByAuth(long appId, string authId)
+        {
+            return Session.QueryFirst<Rbac_User>(
+                new RequestContext("rbac", "get_user_by_authid")
+                .SetParam(new
+                {
+                    appId,
+                    authId
+                })
+            );
+        }
         #endregion
 
         #region query
@@ -96,7 +108,7 @@ namespace Acesoft.Rbac.Services
         public Rbac_User QueryByAuth(long appId, string authId)
         {
             return Session.QueryMultiple<Rbac_User>(
-                new RequestContext("rbac", "get_user_by_authid")
+                new RequestContext("rbac", "query_user_by_authid")
                 .SetParam(new
                 {
                     appId,

@@ -2,37 +2,22 @@
   "ace": {
     "servers": {
       "iot": {
+        "apiServerIp": "127.0.0.1",
+        "apiServerPort": 9578,
         "serverIp": "127.0.0.1",
-        "serverPort": 9578,
-        "cmdTimeout": 600,
+        "serverPort": 7341,
+        "cmdTimeout": 2000,
         "autoConnect": true,
         "reconnectFail": true,
         "reconnectClose": true,
         "connectInterval": 500,
-        "webSocketUrl": "ws://47.95.12.239:4502/",
+        "webSocketUrl": "ws://39.98.70.141:4502/",
         "webSocketUserName": "root",
         "webSocketPassword": "root&12345"
       }
     },
     "settings": {
-    }
-  },
-  "xile": {
-    "servers": {
-      "iot": {
-        "serverIp": "127.0.0.1",
-        "serverPort": 9578,
-        "cmdTimeout": 600,
-        "autoConnect": true,
-        "reconnectFail": true,
-        "reconnectClose": true,
-        "connectInterval": 500,
-        "webSocketUrl": "ws://47.95.12.239:4502/",
-        "webSocketUserName": "root",
-        "webSocketPassword": "root&12345"
-      }
-    },
-    "settings": {
+      "clientId": ""
     }
   }
 }

@@ -8,6 +8,15 @@ namespace Acesoft
 {
     public static class CollExtensions
     {
+        public static T GetValue<T>(this Array array, int index, T defaultValue = default(T))
+        {
+            if (array.Length <= index)
+            {
+                return defaultValue;
+            }
+            return array.GetValue(index).ToObject<T>();
+        }
+
         public static void Each<T>(this IEnumerable<T> list, Action<T> action)
         {
             foreach (var item in list)

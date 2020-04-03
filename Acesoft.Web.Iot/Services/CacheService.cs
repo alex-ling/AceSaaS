@@ -164,6 +164,11 @@ namespace Acesoft.Web.IoT.Services
             return cmds;
         }
 
+        public void RemoveMac(string sbno)
+        {
+            App.Cache.Remove($"iot_mac_{sbno}");
+        }
+
         public void RemoveData(string mac)
         {
             App.Cache.Remove($"iot_data_{mac}");

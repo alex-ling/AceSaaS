@@ -112,6 +112,9 @@ namespace Acesoft.Platform.Office
 
 		private void ReplaceRange(ICell r, DataRow row, int index = 1)
 		{
+			// 合并单元格此时为空
+			if (r == null) return;
+
 			if (r.StringCellValue != null && row != null)
 			{
 				r.SetCellValue(TagFactory.ReplaceTag(r.StringCellValue, row, index));

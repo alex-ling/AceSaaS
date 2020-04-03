@@ -25,7 +25,6 @@ namespace Acesoft.Rbac.Entity
         public string Password { get; set; }
         public string Creator { get; set; }
         public string RefCode { get; set; }
-        public string WeUnionId { get; set; }
         public UserType UserType { get; set; }
         public RegType RegType { get; set; }
         public bool Enabled { get; set; }
@@ -38,7 +37,7 @@ namespace Acesoft.Rbac.Entity
         public DateTime? BirthDate { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
-        public string County { get; set; }
+        public string Country { get; set; }
 
         public DateTime DCreate { get; set; }
         public DateTime? DUpdate { get; set; }
@@ -51,5 +50,8 @@ namespace Acesoft.Rbac.Entity
         public int TryTimes { get; set; }
 
         public string Remark { get; set; }
+
+        // ADD.BGN.2019-08-25 for wechat unionid.
+        public string UnionId { get; set; }
     }
 }

@@ -47,12 +47,22 @@ namespace Acesoft.Web.UI.Ajax
             return Load<long>(sqlFullId, requestId);
         }
 
+        public virtual DataSourceBuilder Load(string sqlFullId, Action<dynamic> action, string requestId = "id")
+        {
+            return Load<long>(sqlFullId, action, requestId);
+        }
+
         public virtual DataSourceBuilder Load<T>(string sqlFullId, string requestId = "id", T defaultId = default(T))
         {
             return Load(sqlFullId, new { id = App.GetQuery(requestId, defaultId) });
         }
 
-        public virtual DataSourceBuilder Load(string sqlFullId, object param)
+        public virtual DataSourceBuilder Load<T>(string sqlFullId, Action<dynamic> action, string requestId = "id", T defaultId = default(T))
+        {
+            return Load(sqlFullId, new { id = App.GetQuery(requestId, defaultId) }, action);
+        }
+
+        public virtual DataSourceBuilder Load(string sqlFullId, object param, Action<dynamic> action = null)
         {
             JsonObject.RouteValues["ds"] = sqlFullId;
 
@@ -60,7 +70,9 @@ namespace Acesoft.Web.UI.Ajax
                 .SetCmdType(CmdType.select)
                 .SetParam(param)
                 .SetExtraParam(JsonObject.Widget.Ace.AC.Params);
-            JsonObject.FormData = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
+            var fd = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
+            action?.Invoke(fd);
+            JsonObject.FormData = fd;
             JsonObject.IsEdit = true;
             return this;
         }
@@ -77,7 +89,7 @@ namespace Acesoft.Web.UI.Ajax
             return this;
         }
 
-        public virtual DataSourceBuilder Form(object data)
+        public virtual DataSourceBuilder Form(object data, Action<dynamic> action = null)
 		{
 			string query = App.GetQuery("id", "");
 			if (query.HasValue())
@@ -95,7 +107,9 @@ namespace Acesoft.Web.UI.Ajax
                     {
                         id = query
                     });
-				JsonObject.FormData = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
+                var fd = JsonObject.Widget.Ace.Session.QueryFirst(ctx);
+                action?.Invoke(fd);
+                JsonObject.FormData = fd;
 				JsonObject.IsEdit = true;
 			}
 			if (JsonObject.FormData == null)

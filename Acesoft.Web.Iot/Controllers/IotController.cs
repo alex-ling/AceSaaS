@@ -94,9 +94,12 @@ namespace Acesoft.Web.IoT.Controllers
         {
             CheckDataSourceParameter();
 
+            var param = data.ToDictionary();
+            var appInstanceId = param.GetValue("id", App.IdWorker.NextId());
+            param["id"] = appInstanceId;
             var ctx = new RequestContext(SqlScope, SqlId)
                 .SetCmdType(CmdType.insert)
-                .SetParam(data.ToDictionary());
+                .SetParam(param);
             if (await AppCtx.Session.ExecuteAsync(ctx) > 0)
             {
                 // update cache for device.
@@ -134,19 +137,24 @@ namespace Acesoft.Web.IoT.Controllers
         {
             CheckDataSourceParameter();
 
-            var ids = id.Split();
-            foreach (var mac in ids)
+            foreach (var sbno in id.Split(','))
             {
+                var mac = cacheService.GetMac(sbno);
+
+                // 按照mac删除
                 var ctx = new RequestContext(SqlScope, SqlId)
                     .SetCmdType(CmdType.delete)
                     .SetParam(new
                     {
                         id = mac
                     });
+
+                // 删除成功
                 if (await AppCtx.Session.ExecuteAsync(ctx) > 0)
                 {
                     cacheService.RemoveData(mac);
                     cacheService.RemoveDevice(mac);
+                    cacheService.RemoveMac(sbno);
                 }
             }
 
@@ -172,14 +180,14 @@ namespace Acesoft.Web.IoT.Controllers
         [HttpGet, MultiAuthorize, DataSource, Action("刷新缓存")]
         public IActionResult RefreshDevice(string macs)
         {
-            macs.Split().Each(mac => cacheService.RemoveDevice(mac));
+            macs.Split(',').Each(mac => cacheService.RemoveDevice(mac));
             return Ok(null);
         }
 
         [HttpGet, MultiAuthorize, DataSource, Action("刷新缓存")]
         public IActionResult RefreshData(string macs)
         {
-            macs.Split().Each(mac => cacheService.RemoveData(mac));
+            macs.Split(',').Each(mac => cacheService.RemoveData(mac));
             return Ok(null);
         }
         #endregion
@@ -192,6 +200,7 @@ namespace Acesoft.Web.IoT.Controllers
             var file = form.Files["file"];
             var proId = App.GetForm("productid", "");
             var sbno = App.GetForm("sbno", "");
+            var cpxh = App.GetForm("cpxh", "");
 
             using (var stream = file.OpenReadStream())
             {
@@ -212,12 +221,14 @@ namespace Acesoft.Web.IoT.Controllers
                         .SetCmdType(CmdType.insert)
                         .SetParam(new
                         {
+                            id = App.IdWorker.NextId(),
                             product_id = proId,
                             user_id = AppCtx.AC.User.Id,
                             sbno,
                             mac,
-                            rkrq = DateTime.Now.ToDateStr(),
-                            sbzt = "0"
+                            cpxh,
+                            dregist = DateTime.Now.ToDateStr(),
+                            state = "0"
                         });
 
                         success += AppCtx.Session.Execute(ctx);
@@ -231,21 +242,6 @@ namespace Acesoft.Web.IoT.Controllers
 				macs,
 				success
 			});
-        }
-
-        private int RegistMac(object param)
-        {
-            try
-            {
-                var ctx = new RequestContext("iot", "device")
-                    .SetCmdType(CmdType.insert)
-                    .SetParam(param);
-                return AppCtx.Session.Execute(ctx);
-            }
-            catch
-            {
-                return 0;
-            }
         }
         #endregion
 
@@ -468,8 +464,7 @@ namespace Acesoft.Web.IoT.Controllers
         [HttpDelete, MultiAuthorize, Action("恢复出厂")]
         public IActionResult Reset(string id)
         {
-            var ids = id.Split();
-            foreach (var mac in ids)
+            foreach (var mac in id.Split(','))
             {
                 iotService.Reset(mac);
                 cacheService.RemoveData(mac);

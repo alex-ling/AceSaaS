@@ -296,7 +296,7 @@ $.extend($.fn.datagrid.defaults, {
         dg.datagrid('getPanel').find('.easyui-tooltip').tooltip();
 
         // merged cells.
-        var fields = dg.datagrid('getColumnFields', true).concat(dg.datagrid('getColumnFields')), rs = [];
+        var prevCs = 0, fields = dg.datagrid('getColumnFields', true).concat(dg.datagrid('getColumnFields')), rs = [];
         for (var c = 0; c < fields.length; c++) {
             var col = fields[c];
             rs.push([]);
@@ -304,12 +304,12 @@ $.extend($.fn.datagrid.defaults, {
                 var cur = data.rows[0][col], row = 0, rowspan = 1;
                 var prevRs = 0, ix = 0;
                 if (c > 0) {
-                    prevRs = rs[c - 1][ix++];
+                    prevRs = rs[prevCs][ix++];
                 }
                 for (var r = 1; r < data.rows.length; r++) {
                     if (cur != data.rows[r][col] || (r == prevRs)) {
                         if (r == prevRs) {
-                            prevRs += rs[c - 1][ix++];
+                            prevRs += rs[prevCs][ix++];
                         }
                         cur = data.rows[r][col];
                         if (rowspan > 1) {
@@ -330,6 +330,7 @@ $.extend($.fn.datagrid.defaults, {
                     dg.datagrid('mergeCells', { index: row, field: col, rowspan: rowspan });
                     rs[c].push(rowspan);
                 }
+                prevCs = c;
             }
         }
 

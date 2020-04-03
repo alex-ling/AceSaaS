@@ -9,24 +9,24 @@ namespace Acesoft.Cache
 {
     public static class CacheExtensions
     {
-        public static T GetOrAdd<T>(this IDistributedCache cache, string key, Func<string, T> addFunc)
+        public static T GetOrAdd<T>(this IDistributedCache cache, string key, Func<string, T> addFunc, Action<DistributedCacheEntryOptions> options = null)
         {
             var result = cache.Get<T>(key);
             if (result == null)
             {
                 result = addFunc(key);
-                cache.Set(key, result);
+                cache.Set(key, result, options);
             }
             return result;
         }
 
-        public static string GetOrAdd(this IDistributedCache cache, string key, Func<string, string> addFunc)
+        public static string GetOrAdd(this IDistributedCache cache, string key, Func<string, string> addFunc, Action<DistributedCacheEntryOptions> options = null)
         {
             var result = cache.GetString(key);
             if (result == null)
             {
                 result = addFunc(key);
-                cache.SetString(key, result);
+                cache.SetString(key, result, options);
             }
             return result;
         }

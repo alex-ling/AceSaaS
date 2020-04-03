@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\AlipayViewModels.cs" />
+    <Compile Remove="Models\WepayViewModels.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Essensoft.AspNetCore.Payment.Alipay" Version="2.4.3" />
     <PackageReference Include="Essensoft.AspNetCore.Payment.UnionPay" Version="2.4.3" />
     <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="2.4.3" />

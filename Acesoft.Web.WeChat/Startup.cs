@@ -25,6 +25,7 @@ namespace Acesoft.Web.WeChat
             services.AddSingleton<IWeChatContainer, WeChatContainer>();
 
             // regist services.
+            services.AddSingleton<IWechatService, WechatService>();
             services.AddSingleton<IAppService, AppService>();
             services.AddSingleton<IMediaService, MediaService>();
             services.AddSingleton<IMenuService, MenuService>();

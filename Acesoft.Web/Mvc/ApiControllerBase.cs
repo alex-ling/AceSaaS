@@ -19,8 +19,13 @@ namespace Acesoft.Web
 
         public ApiControllerBase()
         {
-            AppCtx = App.Context.RequestServices.GetService<IApplicationContext>();
+            AppCtx = this.GetService<IApplicationContext>();
             SqlMapper = MapperContainer.Instance.GetSqlMapper(AppCtx.Session);
+        }
+
+        public T GetService<T>()
+        {
+            return App.Context.RequestServices.GetService<T>();
         }
 
         protected void CheckDataSourceParameter()

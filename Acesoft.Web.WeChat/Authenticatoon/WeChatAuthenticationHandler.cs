@@ -1,7 +1,9 @@
-﻿using System.Text.Encodings.Web;
+﻿using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 using Acesoft.Rbac;
+using Acesoft.Util;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -26,12 +28,19 @@ namespace Acesoft.Web.WeChat.Authenticatoon
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            string token = Request.Headers["wechat_token"];
-            if (token.HasValue() && SessionContainer.GetSession(token) != null)
+            string tokens = Request.Headers["Authorization"];
+            if (tokens.HasValue() && tokens.Split(' ').First() == "Wechat")
             {
-                // check right for later.
-                var ticket = Membership.AuthenticationTicket(token, "", "", true, Scheme.Name);
-                return await Task.FromResult(AuthenticateResult.Success(ticket));
+                var items = tokens.Split(' ').Last().Split('-');
+
+                // weopen直接验证通过，weapp检查会话是否超时
+                if (items[1] == CryptoHelper.ComputeMD5("WEOPEN", items[0]) 
+                    || SessionContainer.GetSession(items[1]) != null)
+                {
+                    // check right for later.
+                    var ticket = Membership.AuthenticationTicket(items[0], "", "", true, Scheme.Name);
+                    return await Task.FromResult(AuthenticateResult.Success(ticket));
+                }
             }
 
             return await Task.FromResult(AuthenticateResult.NoResult());

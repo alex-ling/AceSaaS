@@ -2,13 +2,13 @@
   "accesses": {
     "aliyunoss": {
       "endpoint": "oss-cn-beijing.aliyuncs.com",
-      "accessKeyId": "LTAIwYP4daI9blue",
-      "accessKeySecret": "NZkfQvDIHuj5lloVmytr6bmQrmILPs"
+      "accessKeyId": "xxx",
+      "accessKeySecret": "xxx"
     },
     "aliyunsms": {
       "endpoint": "cn-beijing",
-      "accessKeyId": "LTAIwYP4daI9blue",
-      "accessKeySecret": "NZkfQvDIHuj5lloVmytr6bmQrmILPs"
+      "accessKeyId": "xxx",
+      "accessKeySecret": "xxx"
     }
   },
   "mailconfigs": {
@@ -20,7 +20,7 @@
   },
   "settings": {
     "mojiweather": {
-      "appcode": "2d5ed303a5e14d8caf17e0c1ffcdc576",
+      "appcode": "xxx",
       "refreshMinutes": 120
     }
   }

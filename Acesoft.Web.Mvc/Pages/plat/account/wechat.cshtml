@@ -12,13 +12,14 @@
     var external = redirectUrl.StartsWith("http");
     var regUrl = $"/plat/account/wechatreg?appid={appId}";
     var cfg = ConfigService.GetConfig(1);
+    var autoCreateBindUser = true;
 
-    if (Ace.AC.TryWechatAutoLogin(external, out openId))
+    if (Ace.AC.TryWechatAutoLogin(external, autoCreateBindUser, out openId))
     {
         // 外部系统，附加OpenId参数
         if (external)
         {
-            redirectUrl = UrlHelper.Append(redirectUrl, "OpenID", openId);
+            redirectUrl = UrlHelper.Append(redirectUrl, Membership.Auth_OpenID, openId);
         }
 
         // 跳转到登录前页面
@@ -31,12 +32,6 @@
             // 绑定本地用户或注册
             needBindUser = true;
             regUrl += $"&openid={openId}&redirect_uri={HttpUtility.UrlEncode(redirectUrl)}";
-
-            // 外部系统，附加OpenId参数
-            if (external)
-            {
-                redirectUrl = UrlHelper.Append(redirectUrl, Membership.Auth_OpenID, openId);
-            }
         }
         else
         {

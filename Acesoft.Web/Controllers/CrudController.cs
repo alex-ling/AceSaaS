@@ -143,6 +143,23 @@ namespace Acesoft.Web.Controllers
             return Json(grid);
         }
 
+        [HttpGet, MultiAuthorize, DataSource, Action("查询Grid")]
+        public IActionResult Query()
+        {
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetCmdType(CmdType.query)
+                .SetExtraParam(AppCtx.AC.Params);
+            var data = AppCtx.Session.QueryDataTable(ctx);
+
+            return Json(new GridResponse
+            {
+                Data = data,
+                PageCount = 1,
+                Total = data.Rows.Count,
+                Map = SqlMap
+            });
+        }
+
         [HttpGet, MultiAuthorize, DataSource, Action("查询List")]
         public IActionResult List()
         {

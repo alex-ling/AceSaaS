@@ -11,17 +11,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Acesoft.Config;
 using Acesoft.Web.Pay.Services;
 using Acesoft.Web.Multitenancy;
+using Microsoft.Extensions.Http;
 
 namespace Acesoft.Web.Pay
 {
     public class Startup : StartupBase
     {
+        public override int Order => -1;
+
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IOrderService, OrderService>();
-            services.AddSingleton<IAlipayService, AlipayService>();
-            services.AddSingleton<IWepayService, WepayService>();
-
             //引入HttpClient API证书的使用(仅QPay / WeChatPay的部分API使用到)
             //services.AddHttpClient("qpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
             //{
@@ -90,6 +89,11 @@ namespace Acesoft.Web.Pay
             {
                 opt.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
             });
+
+            // add services
+            services.AddSingleton<IOrderService, OrderService>();
+            services.AddSingleton<IAlipayService, AlipayService>();
+            services.AddSingleton<IWepayService, WepayService>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)

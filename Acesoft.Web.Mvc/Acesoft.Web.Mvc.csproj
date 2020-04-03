@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.Security.CAS" Version="2.0.5" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
@@ -28,6 +29,7 @@
     <ProjectReference Include="..\Acesoft.Web.Cloud\Acesoft.Web.Cloud.csproj" />
     <ProjectReference Include="..\Acesoft.Web.Iot\Acesoft.Web.IoT.csproj" />
     <ProjectReference Include="..\Acesoft.Web.Pay\Acesoft.Web.Pay.csproj" />
+    <ProjectReference Include="..\Acesoft.Web.Portal\Acesoft.Web.Portal.csproj" />
     <ProjectReference Include="..\Acesoft.Web.UI\Acesoft.Web.UI.csproj" />
     <ProjectReference Include="..\Acesoft.Web.WeChat\Acesoft.Web.WeChat.csproj" />
     <ProjectReference Include="..\Acesoft.Web\Acesoft.Web.csproj" />

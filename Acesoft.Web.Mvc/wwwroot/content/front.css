@@ -241,8 +241,9 @@ a:hover {
 }
 
 .ax-sidebar .nav-title {
-    height: 35px;
-    line-height: 35px;
+    display: block;
+    height: 32px;
+    line-height: 32px;
     color: #999;
     position: relative;
     cursor: pointer;
@@ -250,6 +251,11 @@ a:hover {
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
     padding-left: 1.6em;
+}
+
+.ax-sidebar .nav-title.active {
+    background-color: #09c;
+    color: #fff;
 }
 
 .ax-sidebar .nav-collapse ul {
@@ -320,8 +326,8 @@ a:hover {
 .ax-sidebar .nav-item a {
     display: block;
     width: 100%;
-    height: 35px;
-    line-height: 35px;
+    height: 32px;
+    line-height: 32px;
     color: #555;
     overflow: hidden;
 }
@@ -588,12 +594,12 @@ a:hover {
 }
 
 .ct-wrap .ct-title {
-    padding: 18px 15px;
-    min-height: 70px;
+    padding: 15px;
+    min-height: 63px;
     border-bottom: 1px solid #ddd;
 }
 
-.ct-wrap .ct-title h5, .ct-item .ct-title h6 {
+.ct-wrap .ct-title h4, .ct-wrap .ct-title h5, .ct-item .ct-title h6 {
     display: inline-block;
     text-indent: 8px;
     border-left: 2px solid #88b7e0;
@@ -613,7 +619,7 @@ a:hover {
 }
 
 .ct-body .ct-title {
-    padding: 18px 15px;
+    padding: 15px;
 }
 
 .ax-content .ct-gray {

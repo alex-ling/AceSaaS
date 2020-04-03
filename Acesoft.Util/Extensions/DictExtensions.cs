@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Text;
+using System.Linq;
 
 using Acesoft.Util;
 
@@ -9,6 +9,15 @@ namespace Acesoft
 {
     public static class DictExtensions
     {
+        public static IDictionary<string, string> ToDictionary(this string str, string key, char s = ',', char k = '=')
+        {
+            if (!str.HasValue())
+            {
+                return new Dictionary<string, string>();
+            }
+            return str.Split(s).ToDictionary(item => item.Split(k)[0] + ":" + key, item => item.Split(k)[1]);
+        }
+
         public static T GetValue<T>(this NameValueCollection dict, string key)
         {
             var val = dict[key];
@@ -43,6 +52,15 @@ namespace Acesoft
             return dict[key].ToObject<T>();
         }
 
+        public static string GetNullValue(this IDictionary<string, string> dict, string key)
+        {
+            if (!dict.ContainsKey(key))
+            {
+                return null;
+            }
+            return dict[key];
+        }
+
         public static T GetValue<T>(this IDictionary<string, object> dict, string key)
         {
             Check.Require(dict.ContainsKey(key), $"字典中不包含查询项{key}");
@@ -74,7 +92,16 @@ namespace Acesoft
             }
             return dict[key];
         }
-        
+
+        public static T GetAdded<T>(this IDictionary<string, T> dict, string key, T defaultValue)
+        {
+            if (!dict.ContainsKey(key))
+            {
+                dict[key] = defaultValue;
+            }
+            return dict[key];
+        }
+
         public static IDictionary<string, object> AppendValue(this IDictionary<string, object> dict, string key, object value, string separator = ",")
         {
             dict[key] = !dict.ContainsKey(key) ? value.ToString() : (dict[key] + separator + value);

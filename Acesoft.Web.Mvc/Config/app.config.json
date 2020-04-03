@@ -1,12 +1,12 @@
 {
   "settings": {
-    "oauth.certpath": "config/acecms.pfx",
+    "oauth.certpath": "config/aceplat.pfx",
     "oauth.certpwd": "123456",
-    "oauth.server": "http://localhost:5000/",
+    "oauth.server": "",
     "oauth.https": false,
     "oauth.client": "aceclient",
     "oauth.secret": "Us1e3cv5rsMet4pv",
-    "oauth.scope": "api",
+    "oauth.scope": "api offline_access",
 
     "auth.loginurl": "/plat/account/login",
     "auth.logouturl": "/plat/account/logout",

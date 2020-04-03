@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 using Acesoft.Data;
 using Acesoft.Rbac;
 using Acesoft.Web.UI.Charts;
@@ -7,6 +10,7 @@ using Acesoft.Web.UI.Widgets.Fluent;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Acesoft.Web.UI
@@ -17,15 +21,17 @@ namespace Acesoft.Web.UI
 		public HttpContext Context { get; }
         public Acesoft.Data.ISession Session => AppCtx.Session;
         public IAccessControl AC => AppCtx.AC;
+		public IDictionary<string, object> ViewData { get; }
 
-		public RazorPageBase Page { get; }
+		public PageBase Page { get; }
         public string AppName { get; }
         public string Path { get; }
         public bool RenderAuthOptions { get; set; }
 
-        public WidgetFactory(RazorPageBase page)
+        public WidgetFactory(PageBase page)
 		{
 			Page = page;
+			ViewData = new Dictionary<string, object>();
 
             Context = App.Context;
             AppCtx = Context.RequestServices.GetService<IApplicationContext>();
@@ -34,6 +40,15 @@ namespace Acesoft.Web.UI
 			Path = text.Substring(0, text.LastIndexOf('/') + 1);
 			AppName = App.Context.Request.GetAppName();
 		}
+
+        public WidgetFactory(string url)
+        {
+            Context = App.Context;
+            AppCtx = Context.RequestServices.GetService<IApplicationContext>();
+
+            Path = "/";
+            AppName = url.Split('/')[1];
+        }
 
 		public virtual AccordionBuilder Accordion()
 		{
@@ -173,6 +188,11 @@ namespace Acesoft.Web.UI
         public virtual LinkButtonBuilder LinkButton()
 		{
 			return new LinkButtonBuilder(new LinkButton(this));
+        }
+
+        public virtual ListBoxBuilder ListBox()
+        {
+            return new ListBoxBuilder(new ListBox(this));
         }
 
         public virtual IHtmlNode LiteralNode(string html)

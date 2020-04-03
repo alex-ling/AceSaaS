@@ -54,6 +54,7 @@ namespace Acesoft.Rbac
                     if (Auths.ContainsKey("wechat"))
                     {
                         @params.Add("appid", auths["wechat"].App_Id);
+                        @params.Add("openid", auths["wechat"].AuthId);
                     }
                 }
                 return @params;

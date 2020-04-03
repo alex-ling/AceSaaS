@@ -7,7 +7,10 @@ namespace Acesoft.Rbac
     public enum UserType : int
     {
         User = 0,
-        Customer = 1,
-        Admin = 2
+        Admin = 1,
+        Type2 = 2,
+        Type3 = 3,
+        Type4 = 4,
+        Type5 = 5
     }
 }

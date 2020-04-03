@@ -10,6 +10,21 @@ namespace Acesoft.Data
     {
         public const string REG_Tag = @"(?<=\{)([^\;\|\{\}]{0,}\|){0,2}[^\;\|\{\}]{0,}(?=\})";
 
+        public static string ReplaceTag(string str, IDictionary<string, object> dataRow, int rowIndex)
+        {
+            if (!str.HasValue())
+            {
+                return str;
+            }
+
+            RegexHelper.Matchs(str, REG_Tag, m =>
+            {
+                str = str.Replace($"{{{m.Value}}}", ToTagString(dataRow, m.Value, rowIndex));
+            });
+
+            return str;
+        }
+
         public static string ReplaceTag(string str, DataRow dataRow, int rowIndex)
         {
             if (!str.HasValue())
@@ -23,6 +38,11 @@ namespace Acesoft.Data
             });
 
             return str;
+        }
+
+        public static string ToTagString(IDictionary<string, object> dataRow, string expression, int rowIndex)
+        {
+            return new DataTag(dataRow, expression, rowIndex).Output();
         }
 
         public static string ToTagString(DataRow dataRow, string expression, int rowIndex)

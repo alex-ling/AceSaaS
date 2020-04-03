@@ -32,6 +32,7 @@ namespace Acesoft.Data.SqlMapper
         T QueryFirst<T>(ISession s, RequestContext ctx);
         dynamic QuerySingle(ISession s, RequestContext ctx);
         T QuerySingle<T>(ISession s, RequestContext ctx);
+        IDictionary<string, IEnumerable<dynamic>> QueryMultiple(ISession s, RequestContext ctx);
         T QueryMultiple<T>(ISession s, RequestContext ctx, Func<GridReader, T> func);
         DataTable QueryDataTable(ISession s, RequestContext ctx);
         DataSet QueryDataSet(ISession s, RequestContext ctx);

@@ -12,7 +12,7 @@ body {
     line-height: 50px;
     font-size: 1.5em;
 }
-.btn.fa,.btn.fa:hover,.btn.fa:focus,.btn.fa:visited,.white,.white:hover,.white:focus,.white:visited {
+.weui-btn:hover,.btn.fa,.btn.fa:hover,.btn.fa:focus,.btn.fa:visited,.white,.white:hover,.white:focus,.white:visited {
     color: #fff
 }
 

@@ -27,6 +27,15 @@ namespace Acesoft
             return defaultValue;
         }
 
+        public static T GetValue<T>(this JObject json, string key, Func<string, T> func, T defaultValue = default(T))
+        {
+            if (json[key] != null && json[key].Value<string>() != "")
+            {
+                return func(json[key].Value<string>());
+            }
+            return defaultValue;
+        }
+
         public static IDictionary<string, object> ToDictionary(this JObject json)
         {
             var dict = json.ToObject<Dictionary<string, object>>();

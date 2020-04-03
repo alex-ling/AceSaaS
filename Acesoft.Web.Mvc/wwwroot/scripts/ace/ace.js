@@ -216,6 +216,13 @@
             if (typeof onLoad == 'function') onLoad(data);
             ax._loading = false;
         },
+        formExport: function (url, d) {
+            var form = $(ax.format('<form action="{0}" method="post"></form>', url));
+            d && $.each(d, function (k, v) {
+                form.append($(ax.format('<input type="hidden" name="{0}" value="{1}">', k, v)));
+            });
+            $(form).appendTo('body').submit().remove();
+        },
         // combo.
         selShow: function () {
             var c = $(this), opts = c.combo('options'), url = opts.url;
@@ -240,6 +247,18 @@
                     vBox.textbox('setValue', val);
                     tBox.textbox('setValue', txt);
                     if (opts.onChange) opts.onChange.call(c, val, txt);
+                } else {
+                    return true;
+                }
+            }, opts.dialogWidth || ax.opts.w, opts.dialogHeight || ax.opts.h);
+            return false;
+        },
+        lstShow: function () {
+            var c = $(this), opts = c.listbox('options');
+            var url = ax.aurl(opts.url, 'multi', '1');
+            ax.dialog('请选择', ax.aurl(url, 'val', c.val()), function (vals) {
+                if (!opts.onSelect || opts.onSelect.call(c, vals) != false) {
+                    c.listbox('setValues', vals);
                 } else {
                     return true;
                 }
@@ -334,8 +353,8 @@
             else new Function(ax.format('event_{0}_{1}("{2}","{3}");', gid.substr(1), act, gid, id))();
         },
         gridFmt: function (v, rd, ri) {
-            if (v == null || v === '') return v;
             var fmt = this.format.split(':')[0];
+            if ((v === null || v === '') && fmt != 'link') return v;
             var exp = this.format.substr(this.format.indexOf(':') + 1);
             switch (fmt) {
                 case 'date':
@@ -348,37 +367,35 @@
                 case 'link':
                     var href = ax.objstr(exp, rd);
                     if (href.substr(0, 1) == ',') href = href.substr(1);
-                    if (v.substr(0, 1) == ',') v = v.substr(1);
-                    if (v != '') {
-                        var items = href.replace(/=,/g, '=').split('|');
-                        if (items.length > 1) {
-                            var rv = v;
-                            for (var i = 0; i < items.length; i++) {
-                                var arr = items[i].split('=');
-                                if (arr[1] && arr[1] != 'null') {
-                                    var hrefs = arr[1].split(',');
-                                    if (hrefs.length > 1) {
-                                        for (var j = 0; j < hrefs.length; j++) {
-                                            rv += ' <a target="_blank" href="' + hrefs[j] + '">' + arr[0] + (j + 1).toString() + '</a>';
-                                        }
-                                    }
-                                    else {
-                                        rv += ' <a target="_blank" href="' + arr[1] + '">' + arr[0] + '</a>';
+                    if (v && v.substr(0, 1) == ',') v = v.substr(1);
+                    var items = href.replace(/=,/g, '=').split('|');
+                    if (items.length > 1) {
+                        var rv = v || '';
+                        for (var i = 0; i < items.length; i++) {
+                            var arr = items[i].split('=');
+                            if (arr[1] && arr[1] != 'null') {
+                                var hrefs = arr[1].split(',');
+                                if (hrefs.length > 1) {
+                                    for (var j = 0; j < hrefs.length; j++) {
+                                        rv += ' <a href="' + hrefs[j] + '">' + arr[0] + (j + 1).toString() + '</a>';
                                     }
                                 }
+                                else {
+                                    rv += ' <a href="' + arr[1] + '">' + arr[0] + '</a>';
+                                }
                             }
-                            return rv;
                         }
-                        else {
-                            return '<a target="_blank" href="' + href + '">' + v + '</a>';
-                        }
+                        return rv;
+                    }
+                    else {
+                        return '<a target="_blank" href="' + href + '">' + v + '</a>';
                     }
                     return v;
                 case 'href':
                     if (v.substr(0, 1) == ',') v = v.substr(1);
                     var its = exp.split('|');
                     if (its.length > 1) {
-                        return '<a target="_blank" href="' + AX.format(its[1], v) + '">' + its[0] + '</a>';
+                        return '<a href="' + AX.format(its[1], v) + '">' + its[0] + '</a>';
                     }
                     return '<a target="_blank" href="' + v + '">' + exp + '</a>';
                 case 'icon':

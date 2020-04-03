@@ -7,12 +7,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication;
-using Acesoft.Web.Multitenancy;
-using Acesoft.Config;
-using Acesoft.Rbac;
-using Acesoft.Web.Middleware;
+using AspNetCore.Security.CAS;
 using Acesoft.Web.WeChat.Authenticatoon;
+using Acesoft.Rbac;
 
 namespace Acesoft.Web.Mvc
 {
@@ -36,11 +33,11 @@ namespace Acesoft.Web.Mvc
 
             // Add Cors
             services.AddCors(opts => {
-                opts.AddPolicy("all", p => p
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials()
+                opts.AddPolicy("AllCorsPolicy", b => b
                     .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    //.AllowCredentials()
                 );
             });
 
@@ -49,7 +46,7 @@ namespace Acesoft.Web.Mvc
 
             // add authentication
             var settings = App.AppConfig.Settings;
-            services.AddAuthentication(Membership.Auth_Cookie)
+            var builder = services.AddAuthentication(Membership.Auth_Cookie)
             .AddCookie(Membership.Auth_Cookie, opts =>
             {
                 // Web local auth
@@ -68,6 +65,16 @@ namespace Acesoft.Web.Mvc
                 opts.ApiName = settings.GetValue("oauth.apiscope", "api");
             })
             .AddWechat();
+
+            // CAS SSO¼¯³É
+            if (settings.GetValue("sso.casenabled", false))
+            {
+                builder.AddCAS(opts =>
+                {
+                    opts.CasServerUrlBase = settings.GetValue("sso.serverurl", "");
+                    opts.SignInScheme = Membership.Auth_Cookie;
+                });
+            }
 
             // set AppConfig for null to auto refresh
             App.SetAppConfig();
@@ -92,7 +99,7 @@ namespace Acesoft.Web.Mvc
             app.UseAuthentication();
 
             // Use Cors
-            app.UseCors("all");
+            app.UseCors("AllCorsPolicy");
 
             // Use SaaS middleware.
             app.UseMultitenancy();

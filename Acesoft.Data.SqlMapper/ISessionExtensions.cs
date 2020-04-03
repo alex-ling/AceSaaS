@@ -23,6 +23,12 @@ namespace Acesoft.Data
             return s.GetSqlMap(items[0], items[1]);
         }
 
+        public static void FlushCache(this ISession s, string sqlFullId)
+        {
+            var mapper = MapperContainer.Instance.GetSqlMapper(s);
+            mapper.CacheManager.Flush(sqlFullId);
+        }
+
         #region execute
         public static int Execute(this ISession s, RequestContext ctx)
         {
@@ -108,6 +114,12 @@ namespace Acesoft.Data
         {
             var mapper = MapperContainer.Instance.GetSqlMapper(s);
             return mapper.QuerySingle<T>(s, ctx);
+        }
+
+        public static IDictionary<string, IEnumerable<dynamic>> QueryMultiple(this ISession s, RequestContext ctx)
+        {
+            var mapper = MapperContainer.Instance.GetSqlMapper(s);
+            return mapper.QueryMultiple(s, ctx);
         }
 
         public static T QueryMultiple<T>(this ISession s, RequestContext ctx, Func<GridReader, T> func)

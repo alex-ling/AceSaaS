@@ -17,6 +17,7 @@ namespace Acesoft.Rbac
         Rbac_User GetByMobile(string mobile);
         Rbac_User GetByMail(string mail);
         Rbac_User GetByRefCode(string refcode);
+        Rbac_User GetByAuth(long appId, string authId);
 
         Rbac_User CheckUser(string userName, string password);
         void UpdateLogin(Rbac_User user);

@@ -39,6 +39,12 @@ namespace Acesoft.IotNet.Iot
             return $"EEEEEEEE";
         }
 
+		private bool CheckDevice(string mac)
+		{
+			var device = App.Cache.Get<object>($"iot_device_{mac}");
+			return device != null;
+		}
+
 		private void IotServer_NewRequestReceived(IotSession session, IotRequest req)
 		{
 			logger.Debug($"IoT-Rece: {session.RemoteEndPoint} {req.Device.Mac}-{req.SessionId} {req.Command}");
@@ -68,7 +74,7 @@ namespace Acesoft.IotNet.Iot
 						    request = CreateErrorSession(req);
 						    break;
 					    }
-					    if (!req.CheckValid())
+					    if (!req.CheckValid()/* && !CheckDevice(req.Device.Mac)*/)
 					    {
 						    request = req.ErrorDevice();
 						    break;

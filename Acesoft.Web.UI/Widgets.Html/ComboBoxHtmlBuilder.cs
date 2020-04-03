@@ -13,17 +13,18 @@ namespace Acesoft.Web.UI.Widgets.Html
 		protected override void PreBuild()
 		{
 			base.PreBuild();
+
 			if (base.Component.ValueField.HasValue())
 			{
-				base.Options["ValueField"] = base.Component.ValueField;
+				base.Options["valueField"] = base.Component.ValueField;
 			}
 			if (base.Component.TextField.HasValue())
 			{
-				base.Options["TextField"] = base.Component.TextField;
+				base.Options["textField"] = base.Component.TextField;
 			}
 			if (base.Component.GroupField.HasValue())
 			{
-				base.Options["GroupField"] = base.Component.GroupField;
+				base.Options["groupField"] = base.Component.GroupField;
 			}
 			if (Enumerable.Any<ComboItem>((IEnumerable<ComboItem>)base.Component.Data))
 			{

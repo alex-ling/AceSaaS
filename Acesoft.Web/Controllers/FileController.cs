@@ -240,7 +240,7 @@ namespace Acesoft.Web.Controllers
             {
                 formFile = form.Files[0];
             }
-            var fileName = DateTime.Now.ToDHMSF() + "_" + formFile.FileName;
+            var fileName = DateTime.Now.ToDHMSF() + "_" + Path.GetFileName(formFile.FileName);
             FileHelper.Write(path + fileName, formFile.OpenReadStream());
 
             if (dir.HasValue())
@@ -406,7 +406,7 @@ namespace Acesoft.Web.Controllers
         {
             var dir = new DirectoryInfo(App.GetLocalPath(path));
             var root = new TreeNode();
-            root.Id = App.GetQuery("rootid", dir.Name);
+            root.Id = App.GetQuery("rootid", path);
             root.Text = App.GetQuery("rootname", dir.Name);
             root.IconCls = App.GetQuery("rooticon", "");
 

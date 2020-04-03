@@ -117,14 +117,14 @@ namespace Acesoft.Web.UI
             return new HtmlString(sb.ToString());
         }
 
-        public static string GetAttachSrc(this WidgetFactory ace, string attachs)
+        public static string GetAttachSrc(this WidgetFactory ace, string attachs, bool fullPath = false)
         {
             if (!attachs.HasValue())
             {
                 return "#";
             }
 
-            return App.GetWebPath(attachs.Trim(',').Split(',').First());
+            return App.GetWebPath(attachs.Trim(',').Split(',').First(), fullPath);
         }
 
         public static HtmlString HtmlForAttach(this WidgetFactory ace, string attachs, string cls = "lh20")
@@ -222,6 +222,19 @@ namespace Acesoft.Web.UI
             return text.LeftOfBytes(size) + "бн";
         }
         #endregion
+
+        public static string GetUrl(this WidgetFactory ace, string url, params string[] appendQueries)
+        {
+            foreach (var query in appendQueries)
+            {
+                var value = App.GetQuery(query, "");
+                if (value.HasValue())
+                {
+                    url = UrlHelper.Append(url, query, value);
+                }
+            }
+            return url;
+        }
 
         public static string GetAppUrl(this WidgetFactory ace, string url, params string[] appendQueries)
         {

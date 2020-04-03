@@ -9,9 +9,13 @@ namespace Acesoft
 {
     public static class HttpRequestExtensions
     {
-        public static string GetUrl(this HttpRequest req)
+        public static string GetUrl(this HttpRequest req, bool pathOnly = false)
         {
-            return $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
+            if (!pathOnly)
+            {
+                return $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
+            }
+            return $"{req.PathBase}{req.Path}{req.QueryString}";
         }
 
         public static string GetPath(this HttpRequest req)

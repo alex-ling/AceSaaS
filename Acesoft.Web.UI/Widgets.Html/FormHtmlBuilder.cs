@@ -12,6 +12,7 @@ namespace Acesoft.Web.UI.Widgets.Html
 		protected override void PreBuild()
 		{
 			base.PreBuild();
+
 			if (base.Component.Novalidate.HasValue)
 			{
 				base.Options["novalidate"] = base.Component.Novalidate;

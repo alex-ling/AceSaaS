@@ -4,20 +4,31 @@ using System.Text;
 using System.Threading.Tasks;
 using Acesoft.Rbac;
 using Acesoft.Rbac.Entity;
+using Acesoft.Util;
 using Acesoft.Util.Helper;
 using Acesoft.Web.WeChat.Entity;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
+
 using Senparc.Weixin.BrowserUtility;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.Containers;
 using Senparc.Weixin.MP.Helpers;
+using Senparc.Weixin.WxOpen.Containers;
+using Senparc.Weixin.WxOpen.Helpers;
 
 namespace Acesoft.Web.WeChat
 {
     public static class AccessControlExtensions
     {
-        public static bool TryWechatAutoLogin(this IAccessControl ac, bool external, out string openId)
+        #region wechat
+        public static string GetWeopenToken(this IAccessControl ac)
+        {
+            return $"{ac.User.HashId}-{CryptoHelper.ComputeMD5("WEOPEN", ac.User.HashId)}";
+        }
+
+        public static bool TryWechatAutoLogin(this IAccessControl ac, bool external, bool autoCreate, out string openId)
         {
             var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
 
@@ -43,6 +54,14 @@ namespace Acesoft.Web.WeChat
                     ac.Login(user, true).Wait();
                     return true;
                 }
+                else if (autoCreate)
+                {
+                    var wechatService = ac.Context.RequestServices.GetService<IWechatService>();
+                    var userInfo = UserApi.Info(app.AppId, openId);
+                    user = wechatService.WeopenRegist(app, userInfo, null);
+                    ac.Login(user, true).Wait();
+                    return true;
+                }
                 return false;
             }
 
@@ -60,6 +79,10 @@ namespace Acesoft.Web.WeChat
             {
                 user.NickName = userInfoJson.nickname;
                 user.Photo = userInfoJson.headimgurl;
+                user.Province = userInfoJson.province;
+                user.City = userInfoJson.city;
+                user.Country = userInfoJson.country;
+                user.UnionId = userInfoJson.unionid;
                 userService.Update(user);
             }
 
@@ -135,5 +158,54 @@ namespace Acesoft.Web.WeChat
                 Signature = signature
             };
         }
+        #endregion
+
+        #region weapp
+        public static string TryWeappAutoLogin(this IAccessControl ac, JObject data, out string errMsg)
+        {
+            errMsg = null;
+
+            var app = ac.Context.RequestServices.GetService<IWeChatContainer>().GetApp();
+            var session = data.GetValue("sessionid", key => SessionContainer.GetSession(key));
+            if (session == null)
+            {
+                // session未建立，通过code登录换取session
+                var result = WeChatApi.WxLogin(app, data.GetValue("code", ""));
+                if (result.ErrorCodeValue == 0)
+                {
+                    // success，成功时更新session
+                    session = SessionContainer.UpdateSession(null, result.openid, result.session_key, result.unionid);
+                }
+                else
+                {
+                    errMsg = result.errmsg;
+                }
+            }
+
+            if (session != null)
+            {
+                // 根据OpenID自动登录
+                var service = ac.Context.RequestServices.GetService<IUserService>();
+                var user = service.GetByAuth(app.Id, session.OpenId);
+                
+                if (user == null)
+                {
+                    // OpenID对应的用户不存在，解密客户端数据
+                    var cryptedData = data.GetValue("encryptedData", "");
+                    var iv = data.GetValue("iv", "");
+                    var userInfo = EncryptHelper.DecodeUserInfoBySessionId(session.Key, cryptedData, iv);
+
+                    // 自动创建用户
+                    var mobile = data.GetValue<string>("mobile");
+                    var wechatService = ac.Context.RequestServices.GetService<IWechatService>();
+                    user = wechatService.WeappRegist(app, userInfo, mobile);
+                }
+
+                return $"{user.HashId}-{session.SessionKey}";
+            }
+
+            return null;
+        }
+        #endregion
     }
 }

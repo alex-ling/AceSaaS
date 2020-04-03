@@ -17,6 +17,7 @@ namespace Acesoft.Web.IoT
         IotDevice GetDevice(string mac);
         IDictionary<string, IotParam> GetParams(string cpno);
         IDictionary<string, IotCmd> GetCmds(string cpno);
+        void RemoveMac(string sbno);
         void RemoveData(string mac);
         void RemoveDevice(string mac);
         void RemoveParams(string cpno);

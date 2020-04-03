@@ -7,7 +7,7 @@ namespace Acesoft.Data
 {
     public interface IDataTag
     {
-        DataRow DataRow { get; }
+        object DataRow { get; }
         string Expression { get; }
         int RowIndex { get; }
 

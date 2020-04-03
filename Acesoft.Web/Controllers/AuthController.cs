@@ -20,25 +20,21 @@ namespace Acesoft.Web.Controllers
         private readonly IUserService userService;
         private readonly IScaleService scaleService;
         private readonly IUAService uAService;
+        private readonly IUOService uOService;
         private readonly IRoleService roleService;
         private readonly IPAService pAService;
         private readonly IObjectService objectService;
 
-        public AuthController(ILogger<AuthController> logger, 
-            IUserService userService,
-            IScaleService scaleService,
-            IUAService uAService,
-            IRoleService roleService,
-            IPAService pAService,
-            IObjectService objectService)
+        public AuthController(ILogger<AuthController> logger)
         {
             this.logger = logger;
-            this.userService = userService;
-            this.scaleService = scaleService;
-            this.uAService = uAService;
-            this.roleService = roleService;
-            this.pAService = pAService;
-            this.objectService = objectService;
+            this.userService = GetService<IUserService>();
+            this.scaleService = GetService<IScaleService>();
+            this.uAService = GetService<IUAService>();
+            this.uOService = GetService<IUOService>();
+            this.roleService = GetService<IRoleService>();
+            this.pAService = GetService<IPAService>();
+            this.objectService = GetService<IObjectService>();
         }
 
         #region login
@@ -409,7 +405,7 @@ namespace Acesoft.Web.Controllers
             }
             if (data["County"] != null)
             {
-                user.County = data.GetValue<string>("County");
+                user.Country = data.GetValue<string>("County");
             }
             userService.Update(user);
 
@@ -432,7 +428,7 @@ namespace Acesoft.Web.Controllers
         #endregion
 
         #region role
-        [HttpPost, MultiAuthorize, Action("用户授权")]
+        [HttpPost, MultiAuthorize, Action("用户分配")]
         public IActionResult PostUA(long userId, [FromBody]JObject data)
         {
             var roleIds = data["roles"].Value<string>();
@@ -463,6 +459,19 @@ namespace Acesoft.Web.Controllers
         public IActionResult DelObj(string id)
         {
             objectService.Delete(id);
+            return Ok(null);
+        }
+        #endregion
+
+        #region uo
+        [HttpPost, MultiAuthorize, Action("用户授权")]
+        public IActionResult PostUO(long userId, [FromBody]JObject data)
+        {
+            var type = data["type"].Value<string>();
+            var refIds = data["refids"].Value<string>();
+            uOService.Save(userId, type, refIds);
+
+            SqlMapper.CacheManager.Flush("rbac.user");
             return Ok(null);
         }
         #endregion

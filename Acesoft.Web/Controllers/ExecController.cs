@@ -124,5 +124,18 @@ namespace Acesoft.Web.Controllers
 
 			return Ok(result);
 		}
-	}
+
+        [HttpPost, MultiAuthorize, DataSource, Action("获取查询")]
+        public IActionResult ExecQuerys([FromBody]JObject data)
+        {
+            CheckDataSourceParameter();
+
+            var ctx = new RequestContext(SqlScope, SqlId)
+                .SetParam(GetParam(data))
+                .SetExtraParam(AppCtx.AC.Params);
+            var result = AppCtx.Session.QueryMultiple(ctx);
+
+            return Ok(result);
+        }
+    }
 }

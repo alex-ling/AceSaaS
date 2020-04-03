@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
+using System.Threading.Tasks;
+using Acesoft.Web.Pay.Entity;
 using Acesoft.Web.Pay.Models;
-using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 
 namespace Acesoft.Web.Pay
 {
     public interface IWepayService
     {
-        Task<WeChatPayMicroPayResponse> MicroPay(PayRequest request);
-        Task<WeChatPayDictionary> PubPay(PayRequest request);
-        Task<WeChatPayUnifiedOrderResponse> QrCodePay(PayRequest request);
-        Task<WeChatPayDictionary> AppPay(PayRequest request);
-        Task<WeChatPayUnifiedOrderResponse> H5Pay(PayRequest request);
-        Task<WeChatPayDictionary> LiteAppPay(PayRequest request);
+        IOrderService OrderService { get; }
 
-        Task<WeChatPayOrderQueryResponse> OrderQuery(string order_sn);
-        Task<WeChatPayRiskGetPublicKeyResponse> GetPublicKey();
+        Task<OrderResult> MicroPay(PayRequest request);
+        Task<PayResult> PubPay(PayRequest request);
+        Task<PayQrResult> QrCodePay(PayRequest request);
+        Task<PayResult> AppPay(PayRequest request);
+        Task<PayWebResult> H5Pay(PayRequest request);
+        Task<PayResult> LiteAppPay(PayRequest request);
+
+        Task<bool> Notify(long orderId);
+        Task<OrderResult> Close(Pay_Order order);
+        Task<OrderResult> Reverse(Pay_Order order);
+        Task<RefundResult> Refund(PayRequest request);
+        Task<bool> RefundNotify(long orderId);
+        Task<OrderResult> Query(Pay_Order order);
+        Task<PayPublicKey> GetPublicKey();
     }
 }

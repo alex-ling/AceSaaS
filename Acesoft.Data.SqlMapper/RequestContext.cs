@@ -72,7 +72,7 @@ namespace Acesoft.Data
             Scope = scope;
             SqlId = sqlId;
             
-            DapperParams = new DynamicParameters();
+            DapperParams = new DynamicParameters { RemoveUnused = false };
             Params = new Dictionary<string, object>();
             ExtraParams = new Dictionary<string, object>();
             CmdType = CmdType.sql;

@@ -22,13 +22,13 @@ namespace Acesoft.Web.WeChat
 	[Route("api/[controller]/[action]")]
 	public class WeChatController : AuthController
 	{
-        private ILogger<WeChatController> logger;
-        private IAppService appService;
-        private IMenuService menuService;
-        private IMediaService mediaService;
-        private INewsService newsService;
-        private IActivityService activityService;
-        private IVoteService voteService;
+        private readonly ILogger<WeChatController> logger;
+        private readonly IAppService appService;
+        private readonly IMenuService menuService;
+        private readonly IMediaService mediaService;
+        private readonly INewsService newsService;
+        private readonly IActivityService activityService;
+        private readonly IVoteService voteService;
         private Wx_App app;
 
 		public WeChatController(
@@ -39,14 +39,8 @@ namespace Acesoft.Web.WeChat
             IMediaService mediaService,
             INewsService newsService,
             IActivityService activityService,
-            IVoteService voteService,
-            IUserService userService,
-            IScaleService scaleService,
-            IUAService uAService,
-            IRoleService roleService,
-            IPAService pAService,
-            IObjectService objectService) 
-            : base(logger, userService, scaleService, uAService, roleService, pAService, objectService)
+            IVoteService voteService) 
+            : base(logger)
 		{
             this.logger = logger;
             this.app = container.GetApp();
@@ -71,6 +65,7 @@ namespace Acesoft.Web.WeChat
         {
             if (data.GetValue<string>("regtype").HasValue())
             {
+                // 自动创建用户
                 base.PostUser(data);
             }
 

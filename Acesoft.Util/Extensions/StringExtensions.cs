@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Acesoft
 {
@@ -157,6 +158,51 @@ namespace Acesoft
             Check.Require(lentgh <= sb.Length, "移除的长度不能超过总长度");
 
             return sb.Remove(last ? (sb.Length - lentgh) : 0, lentgh);
+        }
+
+        public static bool IsDigit(this string str)
+        {
+            if ((str == null) || (str.Length == 0))
+            {
+                return false;
+            }
+            if (((str[0] != '+') && (str[0] != '-')) && !char.IsNumber(str[0]))
+            {
+                return false;
+            }
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (!char.IsDigit(str[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool IsFloat(this string str)
+        {
+            return (((str != null) && !("" == str)) && Regex.IsMatch(str, @"^[\d]+(\.?[\d]+)?$"));
+        }
+
+        public static bool IsNumber(string str)
+        {
+            if ((str == null) || (str.Length == 0))
+            {
+                return false;
+            }
+            if (((str[0] != '+') && (str[0] != '-')) && !char.IsNumber(str[0]))
+            {
+                return false;
+            }
+            for (int i = 1; i < str.Length; i++)
+            {
+                if (!char.IsNumber(str[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

@@ -11,13 +11,13 @@ namespace Acesoft.Web.Pay.Controllers
 {
     [ApiExplorerSettings(GroupName = "plat")]
     [Route("api/[controller]/[action]")]
-    public class WepayController : ApiControllerBase
+    public class UnionpayController : ApiControllerBase
     {
-        private readonly IWepayService wepayService;
+        private readonly IUnionpayService unionpayService;
 
-        public WepayController(IWepayService wepayService)
+        public UnionpayController(IUnionpayService unionpayService)
         {
-            this.wepayService = wepayService;
+            this.unionpayService = unionpayService;
         }
     }
 }

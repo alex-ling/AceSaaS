@@ -196,7 +196,14 @@ namespace Acesoft.Data.SqlMapper
 
                         // 拼接查询条件
                         hasFilterParamValue = hasFilterParam;
-                        q += $" and ({string.Format(query.Value, queryValue.Split(','))})";
+                        if (query.Key.StartsWith("in"))
+                        {
+                            q += $" and ({string.Format(query.Value, queryValue)})";
+                        }
+                        else
+                        {
+                            q += $" and ({string.Format(query.Value, queryValue.Split(','))})";
+                        }
                     }
                 }
             }
@@ -259,10 +266,11 @@ namespace Acesoft.Data.SqlMapper
             #endregion
 
             #region 处理上下文变量
-            if (ctx.ExtraParams != null && param.Where.HasValue())
+            if (ctx.ExtraParams != null)
             {
-                //param.Table = param.Table.Replace(ctx.ExtraParams);
+                param.Table = param.Table.Replace(ctx.ExtraParams);
                 param.Where = param.Where.Replace(ctx.ExtraParams);
+                param.Columns = param.Columns.Replace(ctx.ExtraParams);
             }
             param.Where = param.Where.Replace(ctx.Params);
             #endregion
@@ -349,6 +357,24 @@ namespace Acesoft.Data.SqlMapper
                 {
                     return func(reader);
                 }
+            });
+        }
+
+        public IDictionary<string, IEnumerable<dynamic>> QueryMultiple(ISession s, RequestContext ctx)
+        {
+            return DoRequest(s, ctx, (sql) =>
+            {
+                var map = GetSqlMap(ctx);
+                var results = new Dictionary<string, IEnumerable<dynamic>>();
+                var datasets = map.Params.GetValue("datasets").Split(',');
+                using (var reader = s.QueryMultiple(sql, ctx.DapperParams))
+                {
+                    foreach (var ds in datasets)
+                    {
+                        results.Add(ds, reader.Read());
+                    }
+                }
+                return results;
             });
         }
 

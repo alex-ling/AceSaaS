@@ -19,11 +19,13 @@ namespace Acesoft.Web
             // add data access for every Tenant.
             services.AddDataAccess();
 
+            // regist application context.
             services.AddSingleton<IApplicationContext, ApplicationContext>();
         }
 
         public override void Configure(IApplicationBuilder app, IRouteBuilder routes, IServiceProvider services)
         {
+            //routes.MapRoute()
         }
     }
 }

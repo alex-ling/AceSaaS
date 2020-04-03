@@ -165,6 +165,17 @@ namespace Acesoft.Data
             return Connection.QuerySingle<T>(sql, param, Transaction);
         }
 
+        public IDictionary<string, IEnumerable<dynamic>> QueryMultiple(string sql, string keys, object param = null)
+        {
+            var results = new Dictionary<string, IEnumerable<dynamic>>();
+            var reader = Connection.QueryMultiple(sql, param, Transaction);
+            foreach (var key in keys.Split(','))
+            {
+                results.Add(key, reader.Read());
+            }
+            return results;
+        }
+
         public GridReader QueryMultiple(string sql, object param = null)
         {
             return Connection.QueryMultiple(sql, param, Transaction);

@@ -8,6 +8,7 @@ namespace Acesoft.Web.UI
 		public int PageSize { get; set; } = 10;
 		public int PageNumber { get; set; } = 1;
 		public int PageCount { get; set; }
+        public string Url { get; set; }
 
         public void Load(GridResponse res)
 		{

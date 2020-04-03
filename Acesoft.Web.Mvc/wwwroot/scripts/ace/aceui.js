@@ -3,7 +3,7 @@
     // 定义aceui及selector[.aceui-widget]转化方法
     $.aceui = {
         auto: true,
-        plugins: ['uploadbox', 'kindeditor', 'navigation', 'echart', 'iframe', 'addressbox', ['selectbox', 'combo'], 'player'],
+        plugins: ['uploadbox', 'kindeditor', 'navigation', 'echart', 'iframe', 'addressbox', 'listbox', ['selectbox', 'combo'], 'player'],
         parse: function (context) {
             for (var i = 0; i < $.aceui.plugins.length; i++) {
                 var name = $.aceui.plugins[i], ctor = name;
@@ -300,9 +300,8 @@
 // $.fn.echart: Use ECharts.
 (function ($) {
     function load(target) {
-        var state = $.data(target, 'echart');
-        var chart = echarts.init(target);
-        var opts = state.options;
+        var opts = $.data(target, 'echart').options;
+        opts.chart = echarts.init(target);
         if (opts.url) {
             AX.ajax({
                 type: opts.type,
@@ -319,7 +318,7 @@
                     else {
                         o.series.data = data.value;
                     }
-                    chart.setOption(o);
+                    opts.chart.setOption(o);
                 }
             });
         }
@@ -346,6 +345,9 @@
     $.fn.echart.methods = {
         options: function (jq) {
             return $.data(jq[0], 'echart').options;
+        },
+        chart: function (jq) {
+            return $.data(jq[0], 'echart').options.chart;
         },
         reload: function (jq) {
             return jq.each(function () {
@@ -411,7 +413,7 @@
         uploadJson: '/api/file/upload',
         fileManagerJson: '/api/file/getkind',
         filePostName: 'file',
-        items: ['fullscreen', 'source', '|', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', 'emoticons', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'image', 'link', 'table', 'wordpaste'],
+        items: ['fullscreen', 'source', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', 'emoticons', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'image', 'link', 'table', 'wordpaste'],
         cssData: '.ke-content p {text-indent:2em;line-height:150%;padding:0.2em 0;}',
         filterMode: false
     };
@@ -538,5 +540,69 @@
         asyncUrl: "/json/china-city.json", //异步加载url，data数据将无效
         btnConfig: [], //面板下方展示的自定义按钮组，格式见后面说明。默认不传
         data: "" //┌──未指定isAsync的时候以data为准，一次性加载所有数据
+    };
+})(jQuery);
+
+// $.fn.listbox.
+(function ($) {
+    function load(target) {
+        var opts = $.data(target, 'listbox').options;
+        opts.list = $(AX.format('<div class="pb5" style="width:100%;min-height:{0}px"><div>'
+            + '<div class="fl">已选择{1}列表</div>'
+            + '<div class="fr"><a class="btn btn-default btn-sm" href="javascript:;">请选择{1}</a></div>'
+            + '<div class="clear"></div></div>',
+            opts.height, opts.prompt)).insertAfter(target);
+        opts.list.find('.btn').click(function () {
+            AX.lstShow.apply(target);
+        });
+    }
+
+    $.fn.listbox = function (options, param) {
+        if (typeof options == 'string') {
+            return $.fn.listbox.methods[options](this, param);
+        }
+
+        options = options || {};
+        return this.each(function () {
+            var state = $.data(this, 'listbox');
+            if (state) {
+                $.extend(state.options, options);
+            } else {
+                state = $.data(this, 'listbox', {
+                    options: $.extend({}, $.fn.listbox.defaults, $.parser.parseOptions(this), options)
+                });
+            }
+            load(this);
+        });
+    };
+
+    $.fn.listbox.methods = {
+        options: function (jq) {
+            return $.data(jq[0], 'listbox').options;
+        },
+        setValues: function (jq, vals) {
+            return jq.each(function () {
+                var ids = '', opts = $.data(this, 'listbox').options;
+                opts.list.find('.file').remove();
+                for (var i = 0; i < vals.length; i++) {
+                    var id = vals[i].id, name = vals[i].name, url = vals[i].url.substr(1);
+                    url = (url.substr(0, 4) == 'http' ? '' : AX.opts.root) + url;
+                    opts.list.append(AX.format(
+                        '<div id="{0}" class="file"><div class="fl"><a href="{1}">{2}</a></div>'
+                        + '<div class="fr"><a class="del" href="javascript:;">删除</a></div>'
+                        + '<div class="clear"></div></div>', id, url, name)
+                    ).find('.del').click(function () {
+                        var fid = $(this).closest('.file').attr('id');
+                        jq.val(jq.val().replace(',' + fid, '').replace(fid + ',', '').replace(fid, ''));
+                        $(this).closest('.file').remove();
+                    });
+                    ids = ids.length ? (ids + ',' + id) : id;
+                }
+                jq.val(ids);
+            });
+        }
+    };
+
+    $.fn.listbox.defaults = {
     };
 })(jQuery);

@@ -31,6 +31,7 @@ namespace Acesoft.Rbac
             services.AddSingleton<IPAService, PAService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUAService, UAService>();
+            services.AddSingleton<IUOService, UOService>();
             services.AddSingleton<IScaleService, ScaleService>();
 
             // regist AccessControl to DI for requtest scope
