@@ -70,3 +70,5 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     app.UseMultitenancy();
 }
 ```
+## NETCORE3.1
+长期更新版本参见 [AcePlat](https://github.com/alex-ling/aceplat)
