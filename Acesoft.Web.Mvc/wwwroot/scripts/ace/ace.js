@@ -387,7 +387,7 @@
                         }
                         return rv;
                     }
-                    else {
+                    else if (v && href != 'null') {
                         return '<a target="_blank" href="' + href + '">' + v + '</a>';
                     }
                     return v;

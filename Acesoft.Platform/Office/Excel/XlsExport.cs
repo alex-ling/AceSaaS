@@ -117,7 +117,12 @@ namespace Acesoft.Platform.Office
 
 			if (r.StringCellValue != null && row != null)
 			{
+				var numeric = r.StringCellValue.IndexOf("|num") > 0;
 				r.SetCellValue(TagFactory.ReplaceTag(r.StringCellValue, row, index));
+				if (numeric && r.StringCellValue.HasValue())
+				{
+					r.SetCellValue(double.Parse(r.StringCellValue));
+				}
 			}
             else if (r.StringCellValue != null)
             {

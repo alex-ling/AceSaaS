@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AspNetCore.Security.CAS;
+//using AspNetCore.Security.CAS;
 using Acesoft.Web.WeChat.Authenticatoon;
 using Acesoft.Rbac;
 
@@ -67,14 +67,14 @@ namespace Acesoft.Web.Mvc
             .AddWechat();
 
             // CAS SSO¼¯³É
-            if (settings.GetValue("sso.casenabled", false))
+            /*if (settings.GetValue("sso.casenabled", false))
             {
                 builder.AddCAS(opts =>
                 {
                     opts.CasServerUrlBase = settings.GetValue("sso.serverurl", "");
                     opts.SignInScheme = Membership.Auth_Cookie;
                 });
-            }
+            }*/
 
             // set AppConfig for null to auto refresh
             App.SetAppConfig();

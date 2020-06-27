@@ -585,12 +585,21 @@
                 var ids = '', opts = $.data(this, 'listbox').options;
                 opts.list.find('.file').remove();
                 for (var i = 0; i < vals.length; i++) {
-                    var id = vals[i].id, name = vals[i].name, url = vals[i].url.substr(1);
-                    url = (url.substr(0, 4) == 'http' ? '' : AX.opts.root) + url;
+                    var id = vals[i].id, name = vals[i].name;
+                    var links = '', urls = vals[i].url.substr(1).split(',');
+                    for (var k = 0; k < urls.length; k++) {
+                        var url = (urls[k].substr(0, 4) == 'http' ? '' : AX.opts.root) + urls[k];
+                        if (k == 0) {
+                            links += AX.format('<a href="{0}" target="_blank">{1}</a>', url, name + (urls.length > 1 ? '1' : ''));
+                        }
+                        else {
+                            links += AX.format('&nbsp;<a href="{0}" target="_blank">{1}</a>', url, k + 1);
+                        }
+                    }
                     opts.list.append(AX.format(
-                        '<div id="{0}" class="file"><div class="fl"><a href="{1}">{2}</a></div>'
+                        '<div id="{0}" class="file"><div class="fl">{1}</div>'
                         + '<div class="fr"><a class="del" href="javascript:;">删除</a></div>'
-                        + '<div class="clear"></div></div>', id, url, name)
+                        + '<div class="clear"></div></div>', id, links)
                     ).find('.del').click(function () {
                         var fid = $(this).closest('.file').attr('id');
                         jq.val(jq.val().replace(',' + fid, '').replace(fid + ',', '').replace(fid, ''));

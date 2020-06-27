@@ -104,7 +104,7 @@ namespace Acesoft.Web.IoT.Services
             );
 
             // load params & cmds from cache.
-            var cpno = device.Sbno.Substring(0, 4);
+            var cpno = device.Cpno;
             device.Params = GetParams(cpno);
             device.Cmds = GetCmds(cpno);
 

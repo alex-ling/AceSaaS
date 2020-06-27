@@ -9,7 +9,7 @@ namespace Acesoft.Web.Cloud.Moji
 	public class WeatherService : IWeatherService
 	{
 		private const string Api = "http://basiccity.market.alicloudapi.com";
-		private const string FreeApi = "http://apifreelat.market.alicloudapi.com";
+		private const string FreeApi = "http://aliv1.data.moji.com";
 		private Dictionary<string, string> headers = new Dictionary<string, string>();
 
         private static readonly ConcurrentDictionary<string, AqiResult> cache = new ConcurrentDictionary<string, AqiResult>();
@@ -26,7 +26,7 @@ namespace Acesoft.Web.Cloud.Moji
 
 		public WeaResult GetWea(string lng, string lat)
 		{
-			var url = $"{FreeApi}/whapi/json/aliweather/briefcondition";
+			var url = $"{FreeApi}/whapi/json/aliweather/aqi";
 			var postData = "lat=" + lat + "&lon=" + lng + "&token=a231972c3e7ba6b33d8ec71fd4774f5e";
             var result = HttpHelper.HttpPost(url, postData, headers, HttpHelper.ContentTypeForm);
             return SerializeHelper.FromJson(result)["data"].ToObject<WeaResult>();

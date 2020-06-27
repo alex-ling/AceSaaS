@@ -10,6 +10,7 @@ namespace Acesoft.Util
 {
     public class HttpHelper
     {
+        public const string ContentTypeText = "text/xml";
         public const string ContentTypeJson = "application/json";
         public const string ContentTypeForm = "application/x-www-form-urlencoded";
         public const string ContentTypeFile = "multipart/form-data";
